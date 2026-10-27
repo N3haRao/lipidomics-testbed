@@ -1,0 +1,13 @@
+animal_id,genotype,sex,slide,position_on_slide,run_order,imzml_lip_neg,imzml_lip_pos,imzml_met_neg
+cKO-413,Control,Female,E,Top,1,slide_e_lip_neg.imzML,slide_e_lip_pos.imzML,slide_e_met_neg.imzML
+cKO-414,Mutant,Female,E,Bottom,1,slide_e_lip_neg.imzML,slide_e_lip_pos.imzML,slide_e_met_neg.imzML
+cKO-419,Control,Female,F,Top,2,slide_f_lip_neg.imzML,slide_f_lip_pos.imzML,slide_f_met_neg.imzML
+cKO-406,Mutant,Female,F,Bottom,2,slide_f_lip_neg.imzML,slide_f_lip_pos.imzML,slide_f_met_neg.imzML
+cKO-434,Control,Female,G,Top,3,slide_g_lip_neg.imzML,slide_g_lip_pos.imzML,slide_g_met_neg.imzML
+cKO-435,Mutant,Female,G,Bottom,3,slide_g_lip_neg.imzML,slide_g_lip_pos.imzML,slide_g_met_neg.imzML
+cKO-422,Control,Male,I,Top,4,slide_i_lip_neg.imzML,slide_i_lip_pos.imzML,slide_i_met_neg.imzML
+cKO-421,Mutant,Male,I,Bottom,4,slide_i_lip_neg.imzML,slide_i_lip_pos.imzML,slide_i_met_neg.imzML
+cKO-424,Control,Male,J,Top,4,slide_j_lip_neg.imzML,slide_j_lip_pos.imzML,slide_j_met_neg.imzML
+cKO-423,Mutant,Male,J,Bottom,4,slide_j_lip_neg.imzML,slide_j_lip_pos.imzML,slide_j_met_neg.imzML
+cKO-420,Control,Male,K,Top,4,slide_k_lip_neg.imzML,slide_k_lip_pos.imzML,slide_k_met_neg.imzML
+cKO-418,Mutant,Male,K,Bottom,4,slide_k_lip_neg.imzML,slide_k_lip_pos.imzML,slide_k_met_neg.imzML

@@ -1,0 +1,48 @@
+# Rules to generate sum-composition lipids (e.g. "SM 36:1;O2") with exact formulas.
+#
+# Each class has one ANCHOR species with a known formula. Every other composition in the
+# class is the anchor plus/minus CH2 units (chain length) and minus H2 per extra double bond.
+# That's exact for sum compositions, so we never have to type in a mass.
+#
+#   anchor / anchor_c / anchor_db : formula of e.g. PC 34:1, and its 34 and 1
+#   c_range, db_range             : which totals to generate
+#   oxygen: {O2: 0, O3: 1}        : sphingolipid hydroxylation states (O3 = anchor + 1 O)
+#   ether: true                   : also generate O- species (one ester O swapped for 2 H)
+#   tag                           : hypothesis class tag used in 05/09 (null = untargeted)
+#   fixed_chains: true            : only the listed compositions (e.g. lyso-SM is d18:1 mostly)
+#
+# GalCer and GlcCer have the same formula, they're one class here: HexCer.
+# BMP and PG have the same formula too, so the class is called "BMP/PG".
+
+classes:
+  PC:      {anchor: "C42H82NO8P",  anchor_c: 34, anchor_db: 1, c_range: [26, 46], db_range: [0, 12], ether: true,  tag: null}
+  PE:      {anchor: "C43H78NO8P",  anchor_c: 38, anchor_db: 4, c_range: [28, 46], db_range: [0, 12], ether: true,  tag: null}
+  PS:      {anchor: "C46H78NO10P", anchor_c: 40, anchor_db: 6, c_range: [30, 46], db_range: [0, 12], ether: false, tag: null}
+  PI:      {anchor: "C47H83O13P",  anchor_c: 38, anchor_db: 4, c_range: [30, 44], db_range: [0, 10], ether: false, tag: null}
+  PA:      {anchor: "C37H71O8P",   anchor_c: 34, anchor_db: 1, c_range: [28, 44], db_range: [0, 10], ether: false, tag: null}
+  BMP/PG:  {anchor: "C40H77O10P",  anchor_c: 34, anchor_db: 1, c_range: [28, 46], db_range: [0, 12], ether: false, tag: BMP_PG}
+  LPC:     {anchor: "C24H50NO7P",  anchor_c: 16, anchor_db: 0, c_range: [14, 24], db_range: [0, 6],  ether: true,  tag: null}
+  LPE:     {anchor: "C23H48NO7P",  anchor_c: 18, anchor_db: 0, c_range: [14, 24], db_range: [0, 6],  ether: true,  tag: null}
+  LPI:     {anchor: "C27H53O12P",  anchor_c: 18, anchor_db: 0, c_range: [14, 24], db_range: [0, 6],  ether: false, tag: null}
+  LPS:     {anchor: "C24H48NO9P",  anchor_c: 18, anchor_db: 0, c_range: [14, 24], db_range: [0, 6],  ether: false, tag: null}
+  SM:      {anchor: "C41H83N2O6P", anchor_c: 36, anchor_db: 1, c_range: [30, 46], db_range: [0, 4],  oxygen: {O2: 0, O3: 1}, tag: SM}
+  Cer:     {anchor: "C36H71NO3",   anchor_c: 36, anchor_db: 1, c_range: [30, 46], db_range: [0, 4],  oxygen: {O2: 0, O3: 1}, tag: Cer}
+  HexCer:  {anchor: "C42H81NO8",   anchor_c: 36, anchor_db: 1, c_range: [30, 46], db_range: [0, 4],  oxygen: {O2: 0, O3: 1}, tag: HexCer}
+  Hex2Cer: {anchor: "C48H91NO13",  anchor_c: 36, anchor_db: 1, c_range: [30, 46], db_range: [0, 4],  oxygen: {O2: 0, O3: 1}, tag: Hex2Cer}
+  SHexCer: {anchor: "C42H81NO11S", anchor_c: 36, anchor_db: 1, c_range: [30, 46], db_range: [0, 4],  oxygen: {O2: 0, O3: 1}, tag: SHexCer}
+  GM3:     {anchor: "C59H108N2O21", anchor_c: 36, anchor_db: 1, c_range: [32, 42], db_range: [0, 3], oxygen: {O2: 0}, tag: GM3}
+  GM2:     {anchor: "C67H121N3O26", anchor_c: 36, anchor_db: 1, c_range: [32, 42], db_range: [0, 3], oxygen: {O2: 0}, tag: GM2}
+  GM1:     {anchor: "C73H131N3O31", anchor_c: 36, anchor_db: 1, c_range: [32, 42], db_range: [0, 3], oxygen: {O2: 0}, tag: GM1}
+  GD1:     {anchor: "C84H148N4O39", anchor_c: 36, anchor_db: 1, c_range: [32, 42], db_range: [0, 3], oxygen: {O2: 0}, tag: null}
+  LSM:     {anchor: "C23H49N2O5P", anchor_c: 18, anchor_db: 1, c_range: [16, 20], db_range: [0, 2],  oxygen: {O2: 0}, tag: LSM}
+  DG:      {anchor: "C39H74O5",    anchor_c: 36, anchor_db: 1, c_range: [28, 44], db_range: [0, 10], ether: false, tag: null}
+  TG:      {anchor: "C55H102O6",   anchor_c: 52, anchor_db: 2, c_range: [42, 60], db_range: [0, 12], ether: false, tag: null}
+  CE:      {anchor: "C45H78O2",    anchor_c: 18, anchor_db: 1, c_range: [14, 24], db_range: [0, 6],  ether: false, tag: ST}
+  FA:      {anchor: "C22H32O2",    anchor_c: 22, anchor_db: 6, c_range: [12, 26], db_range: [0, 6],  ether: false, tag: null}
+
+# Single species that don't follow the chain rules
+fixed:
+  - {name: "Cholesterol",          formula: "C27H46O",   tag: ST}
+  - {name: "Cholesterol sulfate",  formula: "C27H46O4S", tag: ST}
+  - {name: "Desmosterol",          formula: "C27H44O",   tag: ST}
+  - {name: "24-Hydroxycholesterol", formula: "C27H46O2", tag: ST}

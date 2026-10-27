@@ -1,0 +1,15 @@
+# Optional extras. The pipeline runs without them; each one has a fallback.
+#
+# harmonypy: batch-corrected embedding for PLOTS only (06, normalization.embedding_batch_correction: harmony).
+#   Without it: no Harmony embedding, nothing else changes.
+harmonypy==0.0.10
+#
+# jupyterlab: to open the review notebooks in notebooks/. VS Code works too.
+jupyterlab==4.6.4
+#
+# uMAIA (cross-slide normalization, 06) is NOT listed here on purpose: it needs JAX and an older
+# numpy (<2), which clashes with this environment. Same as in the CAJAL tutorial, give it its own
+# conda env following https://github.com/lamanno-epfl/uMAIA, then in that env run
+#   pip install -e .   (from this repo)
+# and run 06 there with normalization.umaia.enabled: true. If uMAIA can't be imported, 06 logs it
+# and carries on with TIC/RMS/median only.

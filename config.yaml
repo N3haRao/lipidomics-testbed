@@ -1,0 +1,160 @@
+# config.yaml: every path and parameter for the pipeline lives here.
+# The scripts never hard-code any of this, so to run on another machine you copy this file
+# and change the `paths:` block. Paths can contain spaces, they are handled with pathlib.
+#
+# `null` usually means "work it out from the data or from an earlier phase". The log of
+# each phase says what value it ended up using.
+
+project:
+  name: "CLN3_MALDI_MSI"
+  mutant_label: "CLN3 KO"            # how the Mutant group is called in figures and tables
+  control_label: "Control"
+  genotypes: {control: "Control", mutant: "Mutant"}   # values used in the sample sheet
+
+paths:
+  data_root: "/Users/neharao/Desktop/Brain - Pilar - Spatial"
+  imzml_subdir: "imzML files for biostats"
+  output_root: "/Users/neharao/cln3_msi_outputs"      # everything the pipeline writes goes here
+  cache_root: null                   # null means <output_root>/cache (LIPID MAPS, HMDB, atlas)
+  sample_sheet: "metadata/sample_sheet.csv"           # relative paths are relative to the repo
+
+modes:
+  run: [lip_neg, lip_pos, met_neg]   # which modes phases 03 to 10 loop over
+  definitions:
+    lip_neg: {folder: "Lipid Negative",      polarity: negative, analyte: lipid,      expected_mz: [300, 2000]}
+    lip_pos: {folder: "Lipid Positive",      polarity: positive, analyte: lipid,      expected_mz: [300, 2000]}
+    met_neg: {folder: "Metabolite Negative", polarity: negative, analyte: metabolite, expected_mz: [50, 750]}
+  file_regex: '^slide_(?P<slide>[a-z])_(?P<analyte>lip|met)_(?P<pol>neg|pos)\.imzML$'
+
+acquisition:                         # what we were told. pixel_size_um and matrix_formula are used;
+                                     # the rest is for the record (and to flag header mismatches).
+  pixel_size_um: 50
+  section_thickness_um: 10
+  matrix: "DAN"
+  matrix_formula: "C10H10N2"         # 1,5-diaminonaphthalene
+  bregma_mm: [-1.58, -2.18]
+
+runtime:
+  spectra_chunk: 2000                # spectra read per batch when streaming an .ibd
+  log_memory_every: 10000            # write a memory line to the log every N spectra
+  seed: 0
+
+qc:
+  slide: "E"                         # phase 02 runs on this slide...
+  mode: "lip_neg"                    # ...and this mode
+  calibrant_search_ppm: 50           # wide window to FIND each calibrant; the error is then measured
+  calibrant_min_snr: 10
+  ppm_floor: 2.0                     # suggested tolerances never go below this
+  bin_ppm: 2.0                       # bin width for mean spectra of processed (non-continuous) data
+  n_resolution_spectra: 20           # high-TIC single spectra used to measure peak widths
+  tissue:
+    signal: "nonmatrix_tic"          # nonmatrix_tic (TIC minus DAN ions) or tic
+    smooth_sigma_px: 1.0
+    min_object_px: 100
+    close_radius_px: 2               # joins pieces of a section that got cut apart
+    erode_edge_px: 1                 # pixels on the tissue edge are left out of statistics
+  sections:
+    n_expected: 2
+    top_is_low_row_index: true       # imzML y=1 is the top of the slide as imaged
+    flip_slides: []                  # e.g. ["J"] if one slide turns out reversed
+    manual_split_row: {}             # e.g. {E: 85} to force the split at image row 85
+  gradient:
+    n_bins_y: 20
+    flag_ratio: 2.0                  # 09 flags a hit if |log2FC| < flag_ratio x |gradient-predicted log2 ratio|
+
+peaks:
+  centroid: "auto"                   # auto | always | never. auto picks peaks only if spectra are profile
+  snr: 5                             # peak SNR on the per-section mean spectrum
+  noise_window: 401                  # points in the rolling-median noise estimate
+  integration_fwhm_factor: 1.0       # profile data: integrate +- this x FWHM around each peak
+  align_ppm: null                    # null means derived from 02/03 mass accuracy
+  recalibrate_per_slide: true        # shift each slide by its median calibrant ppm error (from 03)
+  min_section_fraction: 0.5          # keep a peak if it is picked in at least this fraction of sections
+  min_pixel_fraction: 0.01           # and present (>0) in at least this fraction of tissue pixels of those sections
+  max_peaks: 2000                    # safety cap, strongest peaks kept
+
+annotation:
+  ppm_tolerance: null                # null means use the 02/03 suggestion, otherwise a number
+  ppm_fallback: 5
+  adducts:
+    negative: ["[M-H]-"]
+    positive: ["[M+H]+", "[M+Na]+", "[M+K]+"]
+    # extra adducts only for some classes; matches made with these are labelled as such
+    class_specific:
+      negative:
+        GM1: ["[M-2H]2-"]
+        GM2: ["[M-2H]2-"]
+        GM3: ["[M-2H]2-"]
+        GD1: ["[M-2H]2-"]
+        PC: ["[M+Cl]-", "[M-CH3]-"]
+      positive:
+        ST: ["[M+H-H2O]+"]
+  lipidmaps_filter: true             # keep only compositions whose formula exists in the cached LMSD
+  metabolite_db: "hmdb"              # hmdb (cached in 00) or curated (reference/metabolites_curated.csv)
+  max_candidates_reported: 5
+
+normalization:
+  methods: [tic, rms, median]
+  for_stats: "tic"                   # decided up front; statistics only ever use this layer
+  umaia: {enabled: false, num_steps: 2000}   # needs the optional uMAIA env
+  embedding_batch_correction: "none" # none | harmony. Only for plots, never for statistics
+
+registration:
+  atlas_source: "brainglobe"         # brainglobe, or a path to an .npz atlas (the synthetic test uses that)
+  atlas_name: "allen_mouse_25um"
+  bregma_ccf_ap_mm: 5.40             # approximate AP position of bregma in CCF; CCF has no real bregma
+  ap_search_bregma_mm: [-1.30, -2.50]
+  ap_step_mm: 0.10
+  try_rotations_deg: [0, 180]
+  optical_tiffs: {E: null, F: null, G: null, I: null, J: null, K: null}
+  tiff_um_per_px: null
+  # Each mode is registered on its own (we don't know yet if the three modes were acquired on
+  # the very same sections). Guide image per mode: auto = strongest annotated sulfatide, else
+  # HexCer, else the first principal component of the lipid images. Or give an m/z.
+  guide_ion: {lip_neg: auto, lip_pos: auto, met_neg: auto}
+  bspline_grid_mm: 1.0
+  bspline_iterations: 100
+  min_dice: 0.80                     # sections below this fall back to lipid WM/GM masks only
+  regions:                           # region name -> Allen acronyms (all descendants included)
+    white_matter: ["fiber tracts"]
+    corpus_callosum: ["ccb", "ccs"]
+    cortex: ["Isocortex"]
+    hippocampus: ["HPF"]
+    thalamus: ["TH"]
+
+explore:
+  mode: null                         # null means every mode in modes.run
+  morans_i: {k_neighbors: 6, n_perm: 199, min_I: 0.3, min_section_fraction: 0.5}   # smallest possible p = 1/(n_perm+1)
+  nmf: {k: "auto", k_grid: [4, 6, 8, 10, 12], pixel_subsample: 50000, max_iter: 400}
+  territories: {resolution: 0.5, k_neighbors: 15, pixel_subsample: 30000}   # Leiden; KMeans if leidenalg is missing
+
+differential:
+  min_pixels_per_unit: 20
+  run_mixedlm: true                  # the mixed-model check (slow-ish: one fit per lipid and region)
+  fdr_alpha: 0.05
+  run_territories: true
+  # stats use log2 of the per-animal means; a pseudocount (half the smallest positive mean) is
+  # added only for lipids where some animal's mean is exactly 0
+
+hypotheses:                          # direction expected in CLN3 KO vs Control
+  accumulated: [LSM, Cer, HexCer, Hex2Cer, GM1, GM2, GM3, SM, SHexCer]
+  depleted: [SM, SHexCer]            # specific myelin species; SM and SHexCer appear in both lists on purpose
+  secondary: [BMP_PG, GPD, ST]
+
+scils_crosscheck:
+  enabled: false
+  files:                             # relative to data_root
+    lip_neg: "export_All_Lip_Neg.xlsx"
+    lip_pos: "export_All_Lip_Pos..csv"
+    met_neg: "export_All_Met_Neg.csv"
+  match_ppm: 10
+  preview_rows: 20
+
+downloads:                           # only used by 00_setup.py --download
+  lipidmaps_url: "https://www.lipidmaps.org/files/?file=LMSD&ext=sdf.zip"
+  hmdb_url: "https://hmdb.ca/system/downloads/current/structures.zip"
+  timeout_s: 600
+
+report:
+  top_n_hits: 12
+  cmap: "viridis"

@@ -1,0 +1,14 @@
+# conda / mamba environment for the CLN3 MALDI-MSI pipeline.
+#   mamba env create -f environment.yml
+#   conda activate cln3-msi
+#   pip install -e .
+# Everything Python-side is pinned in requirements.txt (pip wheels exist for macOS arm64,
+# macOS x86_64 and Linux for all of them, so there's nothing to compile).
+name: cln3-msi
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+      - -r requirements.txt
