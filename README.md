@@ -89,7 +89,7 @@ Open `config.yaml`. The things to check:
 
 | key | what |
 |---|---|
-| `paths.data_root` | `"/Users/neharao/Desktop/Brain - Pilar - Spatial"` (keep the quotes, there are spaces) |
+| `paths.data_root` | `"/Users/neharao/Desktop/BRAIN - PILAR - SPATIAL"` (keep the quotes and the upper case, there are spaces) |
 | `paths.output_root` | where outputs go. Must not be inside `data_root` |
 | `modes.run` | which modes to process: `[lip_neg, lip_pos, met_neg]` |
 | `qc.slide`, `qc.mode` | the slide/mode phase 02 looks at first (default E, lip_neg) |
@@ -98,6 +98,22 @@ Open `config.yaml`. The things to check:
 | `normalization.for_stats` | `tic` (decided up front; don't change it after seeing 09) |
 | `registration.optical_tiffs` | per-slide TIFF path, relative to `data_root`, once Pilar sends them |
 | `scils_crosscheck.enabled` | `true` to compare with the SCiLS exports |
+
+### What's in the data folder, and what the pipeline uses
+
+Only `imzML files for biostats/` is read (36 files: 6 slides x 3 modes, `.imzML` + `.ibd` each,
+all present). Everything else is ignored by the preliminary analysis:
+
+| item | what it is | used? |
+|---|---|---|
+| `imzML files for biostats/` | SCiLS export of slides E-K, the main input | **yes** |
+| `raw lip neg/`, `raw lip pos/`, `raw met neg/` | one SCiLS project per slide (`.slx` + `.sbd`); the optical scans live in here | no (SCiLS-only format). Source for the TIFF exports, if we ask |
+| `*.slx/*.sbd` at the top and in `Female Data - Pilar analysis/` | Pilar's combined SCiLS projects | no |
+| `*.srd` (e.g. `CC-Ctrl-All.srd`) | SCiLS region definitions (hand-drawn regions such as corpus callosum) | no; could serve as manual ROIs later if exported as spot lists |
+| `*.mca` | SCiLS feature (m/z interval) lists | no |
+| `export_All_*.csv/.xlsx` | SCiLS intensity exports | only by the optional 04b cross-check (off) |
+| `Results_CLN3_Analysis*/`, `PC 38.1 - depleted.png`, `.Rhistory`, `.RDataTmp` | Pilar's results and R session | no |
+| `09SEP26/` | a later, separate **cerebellum** slide Z (raw Bruker `.d` folders, method files, its own TIFF) | no. Only tells us the instrument is probably a Bruker timsTOF (fleX) |
 
 ## 4. Run
 

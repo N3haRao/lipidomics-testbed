@@ -143,7 +143,7 @@ def test_output_inside_data_root_is_refused(tmp_path):
     data = tmp_path / "data root"
     data.mkdir()
     cfg = (REPO / "config.yaml").read_text()
-    cfg = cfg.replace('"/Users/neharao/Desktop/Brain - Pilar - Spatial"', f'"{data}"')
+    cfg = cfg.replace('data_root: "/Users/neharao/Desktop/BRAIN - PILAR - SPATIAL"', f'data_root: "{data}"')
     cfg = cfg.replace('"/Users/neharao/cln3_msi_outputs"', f'"{data / "outputs"}"')
     p = tmp_path / "c.yaml"
     p.write_text(cfg.replace('sample_sheet: "metadata/sample_sheet.csv"', f'sample_sheet: "{REPO / "metadata" / "sample_sheet.csv"}"'))

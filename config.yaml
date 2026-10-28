@@ -12,7 +12,15 @@ project:
   genotypes: {control: "Control", mutant: "Mutant"}   # values used in the sample sheet
 
 paths:
-  data_root: "/Users/neharao/Desktop/Brain - Pilar - Spatial"
+  # The folder that CONTAINS "imzML files for biostats". On the shared drive it's called
+  # "BRAIN - PILAR - SPATIAL". Examples (pick the one for the machine you run on):
+  #   Mac, copied to the Desktop:   "/Users/neharao/Desktop/BRAIN - PILAR - SPATIAL"
+  #   Mac, straight from the drive: "/Volumes/<drive name>/BRAIN - PILAR - SPATIAL"
+  #   Windows:                      "D:/BRAIN - PILAR - SPATIAL"   (forward slashes are fine)
+  # Only the imzML subfolder is read (plus the SCiLS exports if scils_crosscheck is on).
+  # Nothing is ever written here. Keep the exact upper case: the Mac doesn't care, a Linux/HPC
+  # filesystem does.
+  data_root: "/Users/neharao/Desktop/BRAIN - PILAR - SPATIAL"
   imzml_subdir: "imzML files for biostats"
   output_root: "/Users/neharao/cln3_msi_outputs"      # everything the pipeline writes goes here
   cache_root: null                   # null means <output_root>/cache (LIPID MAPS, HMDB, atlas)
@@ -33,6 +41,11 @@ acquisition:                         # what we were told. pixel_size_um and matr
   matrix: "DAN"
   matrix_formula: "C10H10N2"         # 1,5-diaminonaphthalene
   bregma_mm: [-1.58, -2.18]
+  # Instrument, inferred from the Bruker method files Pilar shared for a later cerebellum run
+  # (09SEP26/.../microTOFQImpacTemAcquisition.method, analysis.tdf): a Bruker timsTOF (fleX),
+  # i.e. a QTOF. Not confirmed for slides E-K; 01/02 log what the imzML headers and the peak
+  # widths actually say.
+  instrument_expected: "Bruker timsTOF fleX (QTOF), to confirm"
 
 runtime:
   spectra_chunk: 2000                # spectra read per batch when streaming an .ibd
@@ -75,7 +88,7 @@ peaks:
 
 annotation:
   ppm_tolerance: null                # null means use the 02/03 suggestion, otherwise a number
-  ppm_fallback: 5
+  ppm_fallback: 10                   # only used if 02/03 can't measure it; QTOF-ish default
   adducts:
     negative: ["[M-H]-"]
     positive: ["[M+H]+", "[M+Na]+", "[M+K]+"]
@@ -106,6 +119,9 @@ registration:
   ap_search_bregma_mm: [-1.30, -2.50]
   ap_step_mm: 0.10
   try_rotations_deg: [0, 180]
+  # No optical scans of slides E-K were in the share (they sit inside the SCiLS projects).
+  # Don't use 09SEP26/Pilar_cerebellum_slide_Z001.tif: that's a different slide (cerebellum).
+  # If Pilar exports them, put the paths here (relative to data_root) and the um per pixel.
   optical_tiffs: {E: null, F: null, G: null, I: null, J: null, K: null}
   tiff_um_per_px: null
   # Each mode is registered on its own (we don't know yet if the three modes were acquired on
@@ -141,6 +157,7 @@ hypotheses:                          # direction expected in CLN3 KO vs Control
   depleted: [SM, SHexCer]            # specific myelin species; SM and SHexCer appear in both lists on purpose
   secondary: [BMP_PG, GPD, ST]
 
+# Comparison with the SCiLS exports in the data folder. Off for the preliminary analysis.
 scils_crosscheck:
   enabled: false
   files:                             # relative to data_root

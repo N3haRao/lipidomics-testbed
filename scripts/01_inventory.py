@@ -180,6 +180,7 @@ def main():
                 "mz_min", "mz_max", "median_spacing_ppm", "pixel_size_x_um"]
         S.table(df[[c for c in cols if c in df]])
         S.h("Instrument / software as written in the headers")
+        S.p(f"Expected from the config: {ctx.get('acquisition.instrument_expected', 'not given')}")
         for _, r in df.iterrows():
             S.p(f"- **{r['file']}**: instrument: {r.get('instrument_params') or 'none listed'}; "
                 f"software: {r.get('software') or 'none'}; processing: {r.get('data_processing') or 'none'}")
