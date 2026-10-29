@@ -1,0 +1,46 @@
+# Config for the synthetic end-to-end test. It inherits everything from config.yaml and
+# only changes what differs. Relative paths are relative to THIS file (the repo root).
+inherit: config.yaml
+
+paths:
+  data_root: "synthetic_data/Brain - Pilar - Spatial (synthetic)"
+  output_root: "synthetic_data/outputs"
+  cache_root: "synthetic_data/cache"
+
+modes:
+  definitions:   # the synthetic files cover narrower m/z ranges to stay small
+    lip_neg: {expected_mz: [600, 950]}
+    lip_pos: {expected_mz: [300, 1000]}
+    met_neg: {expected_mz: [100, 500]}
+
+qc:
+  tissue: {min_object_px: 30}
+
+registration:
+  atlas_source: "synthetic_data/synthetic_atlas.npz"
+  bregma_ccf_ap_mm: 0.0
+  ap_search_bregma_mm: [-0.3, -0.7]
+  ap_step_mm: 0.1
+  optical_tiffs: {E: "optical_slide_E.tif"}    # relative to data_root
+  tiff_um_per_px: 10
+  bspline_grid_mm: 0.5
+  bspline_iterations: 30
+  min_dice: 0.7
+  regions:
+    white_matter: ["fiber tracts"]
+    corpus_callosum: ["ccb", "ccs"]
+    cortex: ["Isocortex"]
+    hippocampus: ["HPF"]
+    thalamus: ["TH"]
+
+explore:
+  morans_i: {n_perm: 19, min_I: 0.2}
+  nmf: {k_grid: [3, 4, 6], pixel_subsample: 5000, max_iter: 200}
+  territories: {pixel_subsample: 5000}
+
+scils_crosscheck:
+  enabled: true
+  files:
+    lip_neg: "export_All_Lip_Neg.csv"
+    lip_pos: "export_All_Lip_Pos.xlsx"
+    met_neg: null
