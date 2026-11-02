@@ -39,7 +39,12 @@ set -u
 # ---- 2. environment ---------------------------------------------------------------------
 if [[ ! -x "$ENV_PREFIX/bin/python" ]]; then
   echo "== creating the env in $ENV_PREFIX (5-15 min, first time only)"
-  conda env create -p "$ENV_PREFIX" -f environment.yml
+  # Only conda-forge (--override-channels): a shared Anaconda install may otherwise try the
+  # "defaults" channels and stop to ask for their terms of service. Python packages come
+  # from requirements.txt via pip, same pins as environment.yml.
+  conda create -y -p "$ENV_PREFIX" --override-channels -c conda-forge python=3.11 pip
+  set +u; conda activate "$ENV_PREFIX"; set -u
+  pip install -r requirements.txt
 fi
 set +u; conda activate "$ENV_PREFIX"; set -u
 pip install -q -e .
