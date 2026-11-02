@@ -6,9 +6,9 @@
 #SBATCH --mem=32G
 #SBATCH --time=04:00:00
 set -euo pipefail
-set +u   # module / conda activate scripts don't like `set -u`
+set +eu  # a stray warning in the env file (e.g. "module: command not found") must not kill the job
 source "${CLN3_ENV_FILE:?CLN3_ENV_FILE not set}"
-set -u
+set -eu
 cd "$CLN3_REPO"
 export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-4}" OPENBLAS_NUM_THREADS="${SLURM_CPUS_PER_TASK:-4}" MKL_NUM_THREADS="${SLURM_CPUS_PER_TASK:-4}"
 echo "phase ${PHASE} mode ${MODE:-all} on $(hostname), $(date)"
