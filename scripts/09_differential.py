@@ -75,6 +75,21 @@ def main():
         obs, var = a.obs, a.var
         iso = var.get("is_isotope", pd.Series(False, index=var.index)).fillna(False).astype(bool).to_numpy()
         test_cols = np.flatnonzero(~iso)
+        family = D.get("untargeted_peaks", "annotated_or_structured")
+        if family != "all":
+            annotated = var.get("annotation", pd.Series("", index=var.index)).fillna("").astype(str) != ""
+            mp = ctx.output_root / "results" / "08_explore" / mode / "morans_i.csv"
+            structured = pd.Series(False, index=var.index)
+            if mp.exists():
+                mor = pd.read_csv(mp)
+                structured = var.index.isin(mor.loc[mor["selected"], "peak"])
+            else:
+                S.warn("no 08 Moran's I results: the untargeted family is the annotated peaks only", log)
+            keep = (~iso) & (annotated.to_numpy() | np.asarray(structured))
+            log.info(f"{mode}: untargeted family = {int(keep.sum())} peaks "
+                     f"({int((annotated & ~pd.Series(iso, index=var.index)).sum())} annotated, "
+                     f"{int(np.asarray(structured).sum())} spatially structured) of {int((~iso).sum())} non-isotope peaks")
+            test_cols = np.flatnonzero(keep)
         X = np.asarray(a.X[:, test_cols], dtype=np.float64)
         peaks = var.index[test_cols]
         core = obs["core"].to_numpy().astype(bool)
@@ -83,7 +98,13 @@ def main():
         rp = ctx.out("processed", mode, "regions.parquet", mkdir=False)
         if rp.exists():
             reg = pd.read_parquet(rp).loc[obs.index]
+            atlas_cols = [c for c in reg.columns if c.startswith("region_")
+                          and c not in ("region_whole_section", "region_wm_lipid", "region_gm_lipid")]
+            have_atlas = any(reg[c].any() for c in atlas_cols)
             for c in [c for c in reg.columns if c.startswith("region_")]:
+                if c in ("region_wm_lipid", "region_gm_lipid") and have_atlas \
+                        and D.get("lipid_wm_gm", "fallback_only") == "fallback_only":
+                    continue
                 units[("region", c.replace("region_", ""))] = reg[c].to_numpy().astype(bool)
         else:
             S.warn("no regions.parquet (run 07): only whole sections are tested", log)
@@ -110,7 +131,8 @@ def main():
                 continue
             c = stats.pseudocount(means)
             log2 = np.log2(means + c)
-            res = stats.paired_tests(log2, animals, ctl, mut, run_mixed=bool(D.get("run_mixedlm", True)))
+            res = stats.paired_tests(log2, animals, ctl, mut, run_mixed=bool(D.get("run_mixedlm", False)),
+                                     min_pairs=int(D.get("min_pairs", 5)))
             res.insert(0, "unit", name)
             res.insert(0, "unit_kind", kind)
             res["median_pixels_per_animal"] = float(npx.median())
@@ -176,7 +198,8 @@ def main():
         S.fig(fig, "volcano_regions.png")
 
         # hypothesis classes: forest plot in whole section + white matter
-        hyp = R[R["targeted"] & R.unit.isin(["whole_section", "white_matter", "wm_lipid", "corpus_callosum"])]
+        hyp = R[R["targeted"] & R.unit.isin(["whole_section", "white_matter", "corpus_callosum"])
+                & R["p_ttest"].notna()].sort_values(["unit", "lipid_class", "mz"] if "lipid_class" in R else ["unit"])
         if len(hyp):
             fig, ax = plt.subplots(figsize=(7, 0.3 * len(hyp) + 1.5))
             yl = hyp["label"].astype(str) + "  [" + hyp["unit"] + "]"
@@ -200,7 +223,8 @@ def main():
             f"{g_med:.3f}" + ("" if np.isfinite(g_med) else " (not available)") +
             f". Hits with the same sign and |log2FC| < {flag_ratio:g}x that are flagged `could_be_position`.")
         show = ["unit", "label", "hypothesis", "log2fc", "ci_low", "ci_high", "p_ttest", "q_targeted",
-                "p_wilcoxon", "p_mixedlm", "n_pairs_up", "matches_hypothesis", "could_be_position", "ambiguous"]
+                "p_wilcoxon", "p_mixedlm", "n_pairs", "n_pairs_up", "matches_hypothesis", "could_be_position",
+                "ambiguous"]
         show = [c for c in show if c in R]
         S.h("1. Hypothesis classes (targeted, BH within region over tagged peaks)")
         T = R[R["targeted"]].sort_values(["p_ttest"])

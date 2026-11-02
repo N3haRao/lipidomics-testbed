@@ -81,7 +81,8 @@ def top_hits_images(ctx, mode: str, R: pd.DataFrame, S: Summary, n: int, log) ->
     a = read_h5ad(p)
     obs = a.obs
     # best unit per peak, targeted hits first, then the rest by p
-    best = R.sort_values("p_ttest").drop_duplicates("peak")
+    # anatomical regions only (territories can exist on few slides), tested rows only
+    best = R[(R["unit_kind"] == "region") & R["p_ttest"].notna()].sort_values("p_ttest").drop_duplicates("peak")
     hits = pd.concat([best[best["targeted"] & best["significant"]], best[~best["targeted"] & best["significant"]],
                       best[~best["significant"]]]).drop_duplicates("peak").head(n)
     if hits.empty:
@@ -188,9 +189,9 @@ def main():
         out.append("<h3>Differential: hypothesis classes</h3>")
         if R is not None:
             show = [c for c in ("unit", "label", "hypothesis", "log2fc", "ci_low", "ci_high", "p_ttest", "q_targeted",
-                                "p_wilcoxon", "matches_hypothesis", "could_be_position", "ambiguous") if c in R]
+                                "p_wilcoxon", "n_pairs", "matches_hypothesis", "could_be_position", "ambiguous") if c in R]
             T = R[R["targeted"] & R["unit"].isin(["whole_section", "white_matter", "corpus_callosum", "wm_lipid",
-                                                   "gm_lipid", "cortex", "hippocampus", "thalamus"])]
+                                                   "gm_lipid", "cortex", "hippocampus", "thalamus"]) & R["p_ttest"].notna()]
             out.append(table_html(T.sort_values("p_ttest")[show], 40))
             out.append(img_tag(fig("09_differential", "forest_hypothesis.png"), "75%"))
             out.append("<h3>Differential: untargeted, top per region</h3>")

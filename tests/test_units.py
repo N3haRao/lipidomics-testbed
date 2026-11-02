@@ -228,3 +228,29 @@ def test_auto_keeps_otsu_with_plenty_of_glass():
     m, _, how = tissue.tissue_mask(img, 0, 10, 0, "auto")
     assert how == "otsu"
     assert ((m & (top | bot)).sum() / (top | bot).sum()) > 0.95
+
+
+def test_sm_in_negative_mode_is_m_minus_ch3_not_odd_chain():
+    # the real-data trap: "SM 35:1 [M-H]-" has exactly the formula of SM 36:1 [M-CH3]-
+    import yaml
+    from cln3msi import annotate
+    cfg = yaml.safe_load((REPO / "config.yaml").read_text())["annotation"]["adducts"]
+    lib = annotate.build_lipid_library()
+    ions = annotate.ion_table(lib, "negative", cfg)
+    assert not ((ions.lipid_class == "SM") & (ions.adduct == "[M-H]-")).any()
+    peaks = pd.DataFrame({"mz": [chem.ion_mz("C41H83N2O6P", "[M-CH3]-")]})
+    hit = annotate.match_peaks(peaks, ions, 2.0, False, 5).iloc[0]
+    assert hit["annotation"] == "SM 36:1;O2" and hit["adduct"] == "[M-CH3]-", hit.to_dict()
+    pos = annotate.ion_table(lib, "positive", cfg)
+    assert not (pos.lipid_class == "SHexCer").any()
+
+
+def test_paired_tests_need_min_pairs():
+    from cln3msi import stats as st
+    animals = pd.DataFrame({"slide": list("AABBCC"), "genotype": ["Control", "Mutant"] * 3,
+                            "sex": ["F"] * 6}, index=[f"a{i}" for i in range(6)])
+    log2 = pd.DataFrame({"p1": [1.0, 2.0, 1.1, 2.1, 0.9, 1.9]}, index=animals.index)
+    r = st.paired_tests(log2, animals, "Control", "Mutant", min_pairs=5).iloc[0]
+    assert np.isnan(r["p_ttest"]) and r["n_pairs"] == 3 and abs(r["log2fc"] - 1.0) < 1e-9
+    r = st.paired_tests(log2, animals, "Control", "Mutant", min_pairs=3).iloc[0]
+    assert r["p_ttest"] < 0.01

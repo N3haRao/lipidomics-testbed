@@ -46,7 +46,7 @@ def pseudocount(means: pd.DataFrame) -> np.ndarray:
 
 
 def paired_tests(log2: pd.DataFrame, animals: pd.DataFrame, control: str, mutant: str,
-                 run_mixed: bool = True) -> pd.DataFrame:
+                 run_mixed: bool = False, min_pairs: int = 2) -> pd.DataFrame:
     """log2: animals x peaks. animals: index animal_id with columns slide, genotype, sex."""
     info = animals.loc[log2.index]
     slides = sorted(info["slide"].unique())
@@ -65,7 +65,7 @@ def paired_tests(log2: pd.DataFrame, animals: pd.DataFrame, control: str, mutant
         d = d[ok]
         n = len(d)
         rec = {"peak": peak, "n_pairs": n}
-        if n >= 2:
+        if n >= max(2, min_pairs):
             m, sd = d.mean(), d.std(ddof=1)
             se = sd / np.sqrt(n)
             tcrit = stats.t.ppf(0.975, n - 1)
@@ -84,8 +84,10 @@ def paired_tests(log2: pd.DataFrame, animals: pd.DataFrame, control: str, mutant
                 for g in np.unique(s_ok):
                     rec[f"log2fc_{g}"] = float(d[s_ok == g].mean())
         else:
-            rec.update(log2fc=np.nan, ci_low=np.nan, ci_high=np.nan, p_ttest=np.nan, p_wilcoxon=np.nan)
-        if run_mixed and n >= 3:
+            # too few pairs to test: report the effect, no p-value
+            rec.update(log2fc=float(d.mean()) if n else np.nan, ci_low=np.nan, ci_high=np.nan,
+                       p_ttest=np.nan, p_wilcoxon=np.nan, n_pairs_up=int((d > 0).sum()))
+        if run_mixed and n >= max(3, min_pairs):
             rec["p_mixedlm"] = mixedlm_p(log2[peak], info, mutant)
         out.append(rec)
     res = pd.DataFrame(out)
