@@ -1,0 +1,10 @@
+# Config for the HPC (Ada). Inherits everything from config.yaml and only moves the folders.
+# CLN3_WORK is set by the job scripts in bin/hpc/ (from HPC_WORK in bin/hpc/settings.sh).
+#
+#   ${CLN3_WORK}/data/imzML files for biostats/...   <- uploaded from the Mac by upload_to_hpc.sh
+#   ${CLN3_WORK}/outputs/                            <- everything the pipeline writes
+inherit: config.yaml
+
+paths:
+  data_root: "${CLN3_WORK}/data"
+  output_root: "${CLN3_WORK}/outputs"

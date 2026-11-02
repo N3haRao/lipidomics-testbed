@@ -199,11 +199,33 @@ python scripts/00_setup.py --config config.yaml \
 
 ---
 
-## HPC
+## HPC (Ada, SLURM)
 
-Skipped for now as agreed. When we get there: 00 (downloads), 01 and 10 are fine on a login node;
-03, 04, 06, 07, 08 should be batch jobs (03/04 stream ~40 GB of .ibd; 06-08 hold the full matrix).
-The scripts already take `--config` and `--mode`, so a job is one line per mode.
+Everything is driven from the Mac terminal by the scripts in `bin/hpc/`:
+
+| script | runs on | does |
+|---|---|---|
+| `settings.sh` | (edit once) | your Ada login, work folder, partition/account, local data path |
+| `upload_to_hpc.sh` | Mac | rsync the code + `imzML files for biostats` (~40 GB, resumable) |
+| `start_on_hpc.sh` | Mac | ssh in, run `hpc_setup.sh`, then `submit_all.sh` |
+| `hpc_setup.sh` | Ada login node | conda (module or Miniforge), env, unit tests, phase 00 + downloads |
+| `submit_all.sh` | Ada login node | submits 01 → 02, and per mode 03 → 09 as dependent jobs, then 10 |
+| `job_phase.sbatch` | Ada compute node | one phase (4 cores, 32 GB by default) |
+| `status.sh` / `fetch_results.sh` | Mac | queue + progress / copy summaries, figures, report back |
+
+```bash
+cd ~/path/to/lipidomics-testbed
+nano bin/hpc/settings.sh                 # fill in HPC_USER, HPC_HOST, HPC_WORK (+ partition if needed)
+bash bin/hpc/upload_to_hpc.sh            # code + data
+bash bin/hpc/start_on_hpc.sh             # setup + submit everything
+bash bin/hpc/status.sh                   # any time
+bash bin/hpc/fetch_results.sh            # when jobs are done -> ~/cln3_msi_outputs_from_ada
+```
+
+On Ada the layout is `HPC_WORK/{repo,data,outputs,envs,slurm_logs}`, and `config.hpc.yaml` points
+at it through `${CLN3_WORK}`. Edit code and config on the Mac and re-run
+`upload_to_hpc.sh --code` (the upload mirrors the repo, so edits made directly on Ada get
+overwritten). To rerun from a phase: `FROM=05 bash bin/hpc/start_on_hpc.sh`.
 
 ## Troubleshooting
 
