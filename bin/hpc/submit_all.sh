@@ -12,6 +12,7 @@
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
 source "$HERE/settings.sh"
+HPC_WORK="${HPC_WORK:-$HOME/cln3_msi}"   # empty in settings.sh = ~/cln3_msi
 export CLN3_ENV_FILE="$HPC_WORK/cln3_env.sh"
 [[ -f "$CLN3_ENV_FILE" ]] || { echo "run bin/hpc/hpc_setup.sh first"; exit 2; }
 command -v sbatch >/dev/null || { echo "sbatch not found: is Ada a SLURM cluster?"; exit 2; }

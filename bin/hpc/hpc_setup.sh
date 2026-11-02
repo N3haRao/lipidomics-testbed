@@ -9,6 +9,7 @@ set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
 REPO="$(cd "$HERE/../.." && pwd)"
 source "$HERE/settings.sh"
+HPC_WORK="${HPC_WORK:-$HOME/cln3_msi}"   # empty in settings.sh = ~/cln3_msi
 export CLN3_WORK="$HPC_WORK"
 ENV_PREFIX="$HPC_WORK/envs/cln3-msi"
 cd "$REPO"

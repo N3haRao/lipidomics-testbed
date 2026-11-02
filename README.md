@@ -201,6 +201,8 @@ python scripts/00_setup.py --config config.yaml \
 
 ## HPC (Ada, SLURM)
 
+**Step-by-step guide with every command, including the ssh login: [`docs/ADA_RUN_GUIDE.md`](docs/ADA_RUN_GUIDE.md).**
+
 Everything is driven from the Mac terminal by the scripts in `bin/hpc/`:
 
 | script | runs on | does |
@@ -215,7 +217,7 @@ Everything is driven from the Mac terminal by the scripts in `bin/hpc/`:
 
 ```bash
 cd ~/path/to/lipidomics-testbed
-nano bin/hpc/settings.sh                 # fill in HPC_USER, HPC_HOST, HPC_WORK (+ partition if needed)
+nano bin/hpc/settings.sh                 # already set for nehar@ada.nri.bcm.edu; change HPC_WORK / partition if needed
 bash bin/hpc/upload_to_hpc.sh            # code + data
 bash bin/hpc/start_on_hpc.sh             # setup + submit everything
 bash bin/hpc/status.sh                   # any time
