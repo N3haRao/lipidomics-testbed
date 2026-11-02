@@ -9,6 +9,7 @@ accident.
 from __future__ import annotations
 
 import json
+import os
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -32,8 +33,17 @@ class ConfigError(RuntimeError):
 
 
 def _resolve(p: str | Path, base: Path) -> Path:
-    """Expand ~ and make relative paths relative to `base` (the repo, or the config file)."""
-    p = Path(str(p)).expanduser()
+    """Expand ~ and $VARIABLES, make relative paths relative to `base` (the repo or the config file).
+
+    $VARIABLES let one config work on a cluster where the work folder is only known at run
+    time, e.g. data_root: "${CLN3_WORK}/data" (config.hpc.yaml does that).
+    """
+    raw = str(p)
+    s = os.path.expandvars(raw)
+    if "$" in s:
+        raise ConfigError(f"path '{raw}' uses an environment variable that isn't set "
+                          f"(e.g. export CLN3_WORK=/path/to/work before running)")
+    p = Path(s).expanduser()
     return p if p.is_absolute() else (base / p).resolve()
 
 
