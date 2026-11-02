@@ -13,7 +13,7 @@ comments, you don't type them.
 | SLURM | one partition `defq` (the default), one machine, no time limit, so nothing to set |
 | Conda | shared Anaconda at `/home/anaconda/bin/conda`; our env lives in `~/cln3_msi/envs/cln3-msi` |
 | Internet | yes (downloads work) |
-| Code on the Mac | `/Users/neharao/Downloads/lipidomics-testbed` |
+| Code on the Mac | `/Users/neharao/Downloads/lipidomics-testbed-main` (unzipped GitHub download) |
 | Data on the Mac | `/Users/neharao/Desktop/BRAIN - PILAR - SPATIAL` (same folder as "Brain - Pilar - Spatial") |
 
 `bin/hpc/settings.sh` is already set up for all of this, so you don't need to edit it.
@@ -68,6 +68,23 @@ bash bin/hpc/hpc_setup.sh          # want "20 passed" and "== setup OK" at the e
 
 It warns "Data folder check failed" until the data is uploaded in step 4. That's expected.
 
+### Step 1b. HMDB, the metabolite database (optional)
+
+HMDB's website refuses automatic downloads from Ada ("HTTP Error 403"). Without HMDB the
+metabolite mode uses the small curated list in the repo; the lipid modes use LIPID MAPS and
+aren't affected. To add HMDB anyway:
+
+1. In your Mac's browser go to https://hmdb.ca/downloads, find the metabolite structures file (SDF; labelled something like "Metabolite Structures")
+   (SDF), and download `structures.zip` (it lands in Downloads).
+2. Copy it to Ada and load it, from the Mac Terminal:
+
+```bash
+scp ~/Downloads/structures.zip nehar@ada.nri.bcm.edu:~/cln3_msi/
+ssh nehar@ada.nri.bcm.edu "source ~/cln3_msi/cln3_env.sh && cd ~/cln3_msi/repo && python scripts/00_setup.py --config config.hpc.yaml --hmdb-file ~/cln3_msi/structures.zip | tail -n 5"
+```
+
+The summary should now list `hmdb: ... entries with formulas cached`.
+
 ### Step 2. On Ada: how big is the machine? (optional, 5 seconds)
 
 ```bash
@@ -86,17 +103,15 @@ This runs the whole pipeline as a real SLURM job on small fake data, to prove th
 before the big upload.
 
 ```bash
-mkdir -p ~/cln3_msi/slurm_logs
-sbatch --job-name=cln3_test --cpus-per-task=2 --mem=8G --time=00:45:00 \
-  --output=$HOME/cln3_msi/slurm_logs/test_%j.out \
-  --wrap "source $HOME/cln3_msi/cln3_env.sh && cd $HOME/cln3_msi/repo && bash bin/run_synthetic_test.sh"
+cd ~/cln3_msi/repo
+sbatch --output=$HOME/cln3_msi/slurm_logs/test_%j.out bin/hpc/job_test.sbatch
 squeue -u nehar          # PD = waiting, R = running; when it's gone from the list, it finished
 ```
 
 When `squeue -u nehar` no longer lists it:
 
 ```bash
-tail -n 25 ~/cln3_msi/slurm_logs/test_*.out      # want the last line: "19/19 checks passed"
+tail -n 25 $(ls -t ~/cln3_msi/slurm_logs/test_*.out | head -1)      # want the last line: "19/19 checks passed"
 exit                                            # leave Ada, back to the Mac
 ```
 
@@ -105,10 +120,12 @@ If it doesn't say 19/19, send me that log and stop here.
 ### Step 4. Mac: get the latest code and upload the data (the long one)
 
 ```bash
-cd /Users/neharao/Downloads/lipidomics-testbed
-git pull
+cd /Users/neharao/Downloads/lipidomics-testbed-main
 bash bin/hpc/upload_to_hpc.sh
 ```
+
+(If I've told you there's a newer version of the code, first replace the folder as described in
+"Getting a newer version of the code" below.)
 
 * **First** it prints `Local data: 36 imzML/ibd files (expected 36)` and the free space on Ada.
 * **Then** it uploads the code (seconds), then the data with a progress line per file (~40 GB).
@@ -141,7 +158,7 @@ modes have to queue, see step 2).
 ### Step 6. Mac: check progress (any time)
 
 ```bash
-cd /Users/neharao/Downloads/lipidomics-testbed
+cd /Users/neharao/Downloads/lipidomics-testbed-main
 bash bin/hpc/status.sh
 ```
 
@@ -166,7 +183,7 @@ scancel -u nehar                                                         # stop 
 ### Step 7. Mac: get the results
 
 ```bash
-cd /Users/neharao/Downloads/lipidomics-testbed
+cd /Users/neharao/Downloads/lipidomics-testbed-main
 bash bin/hpc/fetch_results.sh
 open ~/cln3_msi_outputs_from_ada/report/report.html
 ```
@@ -190,8 +207,8 @@ This copies the summaries, figures, tables, logs and the report to
 ## Later: after I change the code, or to rerun part of it
 
 ```bash
-cd /Users/neharao/Downloads/lipidomics-testbed
-git pull                                  # my changes
+# first get the newer code onto the Mac (see "Getting a newer version of the code" below), then:
+cd /Users/neharao/Downloads/lipidomics-testbed-main
 bash bin/hpc/upload_to_hpc.sh --code      # code only; the data is already on Ada
 FROM=05 bash bin/hpc/start_on_hpc.sh      # rerun from phase 05, reusing 01-04
 ```
@@ -202,14 +219,27 @@ the report.
 Edit `config.yaml` **on the Mac**, then upload with `--code`. The upload makes Ada's copy
 identical to the Mac's, so edits made directly on Ada get overwritten.
 
+## Getting a newer version of the code (ZIP download, no git needed)
+
+1. On GitHub, open https://github.com/N3haRao/lipidomics-testbed, make sure the branch menu
+   says `main`, then Code > Download ZIP.
+2. In Finder, delete (or rename) the old `Downloads/lipidomics-testbed-main` folder and unzip
+   the new one in its place. It unzips to the same name.
+3. Upload the code:
+
+```bash
+cd /Users/neharao/Downloads/lipidomics-testbed-main
+bash bin/hpc/upload_to_hpc.sh --code
+```
+
+Your settings are part of the code (`bin/hpc/settings.sh`, `config.yaml`). If you changed
+anything there, make the same change again in the new folder before uploading.
+
 ## From scratch (for a new computer or a fresh start)
 
 ```bash
-# Mac
-cd /Users/neharao/Downloads
-git clone https://github.com/N3haRao/lipidomics-testbed.git     # login: N3haRao + a GitHub personal access token
-cd lipidomics-testbed
-git checkout claude/hopeful-ride-f4pcg6
+# Mac: download the ZIP as above into Downloads and unzip it, then
+cd /Users/neharao/Downloads/lipidomics-testbed-main
 bash bin/hpc/upload_to_hpc.sh --code
 
 # Ada
@@ -247,17 +277,14 @@ ssh-copy-id nehar@ada.nri.bcm.edu                                 # Ada password
 # ---- on Ada (you're here now) ----
 ls ~/cln3_msi/cln3_env.sh ~/cln3_msi/outputs/cache
 nproc; free -g | head -2
-mkdir -p ~/cln3_msi/slurm_logs
-sbatch --job-name=cln3_test --cpus-per-task=2 --mem=8G --time=00:45:00 \
-  --output=$HOME/cln3_msi/slurm_logs/test_%j.out \
-  --wrap "source $HOME/cln3_msi/cln3_env.sh && cd $HOME/cln3_msi/repo && bash bin/run_synthetic_test.sh"
+cd ~/cln3_msi/repo
+sbatch --output=$HOME/cln3_msi/slurm_logs/test_%j.out bin/hpc/job_test.sbatch
 squeue -u nehar
-tail -n 25 ~/cln3_msi/slurm_logs/test_*.out
+tail -n 25 $(ls -t ~/cln3_msi/slurm_logs/test_*.out | head -1)
 exit
 
 # ---- on the Mac ----
-cd /Users/neharao/Downloads/lipidomics-testbed
-git pull
+cd /Users/neharao/Downloads/lipidomics-testbed-main
 bash bin/hpc/upload_to_hpc.sh
 bash bin/hpc/start_on_hpc.sh
 bash bin/hpc/status.sh

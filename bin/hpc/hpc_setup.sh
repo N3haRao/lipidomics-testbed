@@ -52,7 +52,7 @@ pip install -q -r requirements-optional.txt || echo "(optional packages failed, 
 
 cat > "$HPC_WORK/cln3_env.sh" <<ENVEOF
 # written by hpc_setup.sh; sourced by every SLURM job
-${CONDA_MODULE:+module load $CONDA_MODULE}
+${CONDA_MODULE:+command -v module >/dev/null 2>&1 && module load $CONDA_MODULE}
 source "$CONDA_SH"
 conda activate "$ENV_PREFIX"
 export CLN3_WORK="$HPC_WORK"
