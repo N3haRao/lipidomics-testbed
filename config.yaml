@@ -68,9 +68,16 @@ qc:
     erode_edge_px: 1                 # pixels on the tissue edge are left out of statistics
   sections:
     n_expected: 2
-    top_is_low_row_index: true       # imzML y=1 is the top of the slide as imaged
+    # Which way the two sections are separated in the image: auto, rows (one above the other)
+    # or cols (side by side). The real exports are 219 x 348 px, wider than tall: the slides
+    # were imaged rotated, so the sections sit side by side ("auto" detects that).
+    split_axis: auto
+    # true: the section with the smaller row/column index (upper one, or LEFT one when side by
+    # side) is the sample sheet's "Top" (= Control). false: the other way round.
+    # CHECK sections_<slide>.png against Pilar's layout before trusting the statistics.
+    top_is_low_index: true
     flip_slides: []                  # e.g. ["J"] if one slide turns out reversed
-    manual_split_row: {}             # e.g. {E: 85} to force the split at image row 85
+    manual_split: {}                 # e.g. {E: 170}: force the split at row/column 170 on slide E
   gradient:
     n_bins_y: 20
     flag_ratio: 2.0                  # 09 flags a hit if |log2FC| < flag_ratio x |gradient-predicted log2 ratio|
@@ -118,7 +125,7 @@ registration:
   bregma_ccf_ap_mm: 5.40             # approximate AP position of bregma in CCF; CCF has no real bregma
   ap_search_bregma_mm: [-1.30, -2.50]
   ap_step_mm: 0.10
-  try_rotations_deg: [0, 180]
+  try_rotations_deg: [0, 90, 180, 270]   # starting angles; slides were imaged rotated
   # No optical scans of slides E-K were in the share (they sit inside the SCiLS projects).
   # Don't use 09SEP26/Pilar_cerebellum_slide_Z001.tif: that's a different slide (cerebellum).
   # If Pilar exports them, put the paths here (relative to data_root) and the um per pixel.

@@ -5,13 +5,22 @@ The recipe:
      off-tissue pixels can be full of matrix signal and look "bright" in a plain TIC).
   2. log, smooth a little, Otsu threshold on the acquired pixels.
   3. Clean up: close small gaps, drop specks, fill holes.
-  4. Split into sections:
-       - if the config gives a manual split row for this slide, use it
+  4. Work out the split direction (qc.sections.split_axis): "rows" if the two sections sit
+     one above the other in the image, "cols" if they sit side by side. "auto" looks at the
+     two biggest pieces (or the shape of the tissue if it's one piece) and picks the
+     direction they're separated along.
+  5. Split into sections along that direction:
+       - if the config gives a manual split index for this slide, use it
        - if there are exactly 2 big pieces, those are the sections
-       - if there are more (a section broke apart), group pieces by vertical position
-       - if there's only 1 (sections touch), cut at the emptiest row in the middle
-  5. Name them by vertical position: the one higher up on the image is "Top"
-     (flip with qc.sections.top_is_low_row_index or per slide with qc.sections.flip_slides).
+       - if there are more (a section broke apart), group pieces by position
+       - if there's only 1 (sections touch), cut at the emptiest line in the middle
+  6. Name them: the section with the smaller index along the split direction (higher up for
+     rows, further left for cols) is "Top" by default. Flip with
+     qc.sections.top_is_low_index, or per slide with qc.sections.flip_slides.
+
+"Top" and "Bottom" are the sample sheet's names for the two positions on the slide. When the
+slide was imaged rotated, they show up as left/right in the image, so always check the
+labelled figure (sections_<slide>.png) against what Pilar says.
 """
 from __future__ import annotations
 
@@ -45,14 +54,33 @@ def tissue_mask(img: np.ndarray, smooth_sigma: float, min_object_px: int, close_
     return m, thr
 
 
-def split_sections(mask: np.ndarray, n_expected: int = 2, manual_split_row: int | None = None) -> tuple[np.ndarray, str]:
-    """Return (labels, how) with labels 0 = background, 1..n by increasing row (top first)."""
+def choose_axis(mask: np.ndarray, n_expected: int = 2) -> str:
+    """'rows' if the sections are stacked vertically in the image, 'cols' if side by side."""
+    lab = measure.label(mask, connectivity=2)
+    props = sorted(measure.regionprops(lab), key=lambda r: -r.area)
+    if not props:
+        return "rows"
+    big = [p for p in props if p.area >= 0.05 * props[0].area]
+    if len(big) >= n_expected:
+        # spread of the big pieces' centroids, area-weighted, in each direction
+        cy = np.array([p.centroid[0] for p in big])
+        cx = np.array([p.centroid[1] for p in big])
+        w = np.array([p.area for p in big], float)
+        sy = np.sqrt(np.average((cy - np.average(cy, weights=w)) ** 2, weights=w))
+        sx = np.sqrt(np.average((cx - np.average(cx, weights=w)) ** 2, weights=w))
+        return "rows" if sy >= sx else "cols"
+    r0, c0, r1, c1 = big[0].bbox            # one piece: cut across its longer side
+    return "rows" if (r1 - r0) >= (c1 - c0) else "cols"
+
+
+def _split_rows(mask: np.ndarray, n_expected: int, manual: int | None) -> tuple[np.ndarray, str]:
+    """Split along rows. Labels 1..n by increasing row (top first)."""
     labels = np.zeros(mask.shape, dtype=np.int8)
     rows = np.arange(mask.shape[0])[:, None]
-    if manual_split_row is not None:
-        labels[mask & (rows < manual_split_row)] = 1
-        labels[mask & (rows >= manual_split_row)] = 2
-        return labels, f"manual split at row {manual_split_row}"
+    if manual is not None:
+        labels[mask & (rows < manual)] = 1
+        labels[mask & (rows >= manual)] = 2
+        return labels, f"manual split at index {manual}"
 
     lab = measure.label(mask, connectivity=2)
     props = sorted(measure.regionprops(lab), key=lambda r: -r.area)
@@ -65,13 +93,13 @@ def split_sections(mask: np.ndarray, n_expected: int = 2, manual_split_row: int 
             groups = [[p] for p in big]
             how = f"{n_expected} connected pieces"
         else:
-            # A section broke into pieces. Sort the pieces by their row centroid and cut at
-            # the largest vertical gap, which is the space between the two sections.
+            # A section broke into pieces. Sort the pieces by position and cut at the
+            # largest gap, which is the space between the two sections.
             big.sort(key=lambda p: p.centroid[0])
             cy = np.array([p.centroid[0] for p in big])
             cut = int(np.argmax(np.diff(cy))) + 1
             groups = [big[:cut], big[cut:]]
-            how = f"{len(big)} pieces grouped by vertical position (cut after piece {cut})"
+            how = f"{len(big)} pieces grouped by position (cut after piece {cut})"
         groups.sort(key=lambda g: np.average([p.centroid[0] for p in g], weights=[p.area for p in g]))
         for k, g in enumerate(groups[:n_expected], start=1):
             for p in g:
@@ -79,7 +107,7 @@ def split_sections(mask: np.ndarray, n_expected: int = 2, manual_split_row: int 
         # small leftovers (< 5% of the largest piece) are left as background on purpose
         return labels, how
 
-    # Only one big piece: the two sections touch. Cut at the emptiest row in its middle half.
+    # Only one big piece: the two sections touch. Cut at the emptiest line in its middle half.
     p = big[0]
     r0, _, r1, _ = p.bbox
     profile = mask[r0:r1].sum(axis=1).astype(float)
@@ -88,13 +116,22 @@ def split_sections(mask: np.ndarray, n_expected: int = 2, manual_split_row: int 
     piece = lab == p.label
     labels[piece & (rows < cut)] = 1
     labels[piece & (rows >= cut)] = 2
-    return labels, f"one connected piece, cut at the emptiest row ({cut})"
+    return labels, f"one connected piece, cut at the emptiest line ({cut})"
 
 
-def assign_positions(labels: np.ndarray, top_is_low_row_index: bool, flip: bool) -> np.ndarray:
-    """Map labels 1/2 (by increasing row) to TOP/BOTTOM codes, honouring the config flips."""
+def split_sections(mask: np.ndarray, n_expected: int = 2, manual_split: int | None = None,
+                   axis: str = "rows") -> tuple[np.ndarray, str]:
+    """Return (labels, how): 0 background, 1..n by increasing index along `axis`."""
+    if axis == "cols":
+        lab, how = _split_rows(mask.T, n_expected, manual_split)
+        return lab.T.copy(), how
+    return _split_rows(mask, n_expected, manual_split)
+
+
+def assign_positions(labels: np.ndarray, top_is_low_index: bool, flip: bool) -> np.ndarray:
+    """Map labels 1/2 (by increasing index) to TOP/BOTTOM codes, honouring the config flips."""
     out = np.zeros_like(labels)
-    first_is_top = top_is_low_row_index != flip     # XOR: either switch turns it around
+    first_is_top = top_is_low_index != flip         # XOR: either switch turns it around
     out[labels == 1] = TOP if first_is_top else BOTTOM
     out[labels == 2] = BOTTOM if first_is_top else TOP
     return out
@@ -115,10 +152,16 @@ def segment_slide(signal_img: np.ndarray, slide: str, qc_cfg: dict) -> dict:
     t = qc_cfg["tissue"]
     s = qc_cfg["sections"]
     mask, thr = tissue_mask(signal_img, t["smooth_sigma_px"], t["min_object_px"], t["close_radius_px"])
-    manual = (s.get("manual_split_row") or {}).get(slide)
-    lab, how = split_sections(mask, s.get("n_expected", 2), manual)
-    pos = assign_positions(lab, s.get("top_is_low_row_index", True), slide in (s.get("flip_slides") or []))
+    axis = s.get("split_axis", "auto")
+    if axis not in ("rows", "cols"):
+        axis = choose_axis(mask, s.get("n_expected", 2))
+    # new key names, with the old ones still accepted
+    manual = (s.get("manual_split") or s.get("manual_split_row") or {}).get(slide)
+    top_low = s.get("top_is_low_index", s.get("top_is_low_row_index", True))
+    lab, how = split_sections(mask, s.get("n_expected", 2), manual, axis)
+    how = f"{how}, sections {'one above the other' if axis == 'rows' else 'side by side'}"
+    pos = assign_positions(lab, top_low, slide in (s.get("flip_slides") or []))
     core = eroded(pos, t.get("erode_edge_px", 0))
     n_found = len(np.unique(lab[lab > 0]))
     return {"mask": mask, "threshold_log": thr, "positions": pos, "core": core, "how": how,
-            "n_sections": n_found}
+            "n_sections": n_found, "axis": axis}

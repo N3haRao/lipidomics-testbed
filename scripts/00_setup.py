@@ -103,6 +103,8 @@ def main():
             S.p(f"cached {getattr(a, 'atlas_name', ctx.get('registration.atlas_name'))}: annotation {a.annotation.shape}, resolution {a.resolution} um, in `{d}`")
         except Exception as e:
             S.warn(f"atlas download failed: {e}. 07_register will fall back to lipid WM/GM masks.", log)
+    elif (ctx.cache_root / "atlas").is_dir() and any((ctx.cache_root / "atlas").iterdir()):
+        S.p(f"cached in `{ctx.cache_root / 'atlas'}`")
     else:
         S.p("not downloaded yet (run with --download). 07_register falls back to lipid WM/GM masks without it.")
 

@@ -108,7 +108,7 @@ def two_blobs(gap=6, touching=False):
 
 def qc_cfg(**sections):
     return {"tissue": {"smooth_sigma_px": 0, "min_object_px": 10, "close_radius_px": 0, "erode_edge_px": 1},
-            "sections": {"n_expected": 2, "top_is_low_row_index": True, "flip_slides": [], "manual_split_row": {},
+            "sections": {"n_expected": 2, "split_axis": "auto", "top_is_low_index": True, "flip_slides": [], "manual_split": {},
                          **sections}}
 
 
@@ -132,9 +132,34 @@ def test_touching_sections_are_cut():
     assert seg["n_sections"] == 2
 
 
+def test_side_by_side_sections():
+    # the real exports: wider than tall, two sections left and right
+    img, top, bot = two_blobs()
+    img, top, bot = img.T.copy(), top.T, bot.T
+    seg = tissue.segment_slide(img, "E", qc_cfg())
+    assert seg["axis"] == "cols" and seg["n_sections"] == 2
+    assert (seg["positions"][top] == tissue.TOP).mean() > 0.95      # left one = Top by default
+    seg = tissue.segment_slide(img, "E", qc_cfg(top_is_low_index=False))
+    assert (seg["positions"][top] == tissue.BOTTOM).mean() > 0.95
+
+
+def test_touching_side_by_side_are_cut():
+    img, _, _ = two_blobs(touching=True)
+    seg = tissue.segment_slide(img.T.copy(), "E", qc_cfg())
+    assert seg["axis"] == "cols" and seg["n_sections"] == 2
+
+
+def test_old_config_keys_still_work():
+    img, top, _ = two_blobs()
+    cfg = qc_cfg()
+    cfg["sections"] = {"n_expected": 2, "top_is_low_row_index": False, "flip_slides": [], "manual_split_row": {}}
+    seg = tissue.segment_slide(img, "E", cfg)
+    assert (seg["positions"][top] == tissue.BOTTOM).mean() > 0.95
+
+
 def test_manual_split():
     img, _, _ = two_blobs()
-    seg = tissue.segment_slide(img, "F", qc_cfg(manual_split_row={"F": 30}))
+    seg = tissue.segment_slide(img, "F", qc_cfg(manual_split={"F": 30}))
     assert "manual" in seg["how"]
 
 

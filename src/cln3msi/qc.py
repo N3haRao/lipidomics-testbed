@@ -116,7 +116,7 @@ def run_slide_qc(ctx, log, mode: str, slide: str, phase: str, sheet: pd.DataFram
     core_spec = core_img[yx] > 0
     if seg["n_sections"] != ctx.get("qc.sections.n_expected", 2) and S is not None:
         S.warn(f"slide {slide}: found {seg['n_sections']} sections instead of 2 ({seg['how']}). "
-               "Set qc.sections.manual_split_row for this slide if needed.", log)
+               "Set qc.sections.manual_split for this slide if needed.", log)
 
     sec_tab = sheet[sheet.slide == slide].set_index("position_on_slide")
     animal_of = {TOP: sec_tab.loc["Top", "animal_id"], BOTTOM: sec_tab.loc["Bottom", "animal_id"]}
@@ -124,7 +124,7 @@ def run_slide_qc(ctx, log, mode: str, slide: str, phase: str, sheet: pd.DataFram
 
     np.savez_compressed(ctx.out("processed", mode, "qc", f"sections_{slide}.npz"),
                         positions=pos_img, core=core_img, pos_spec=pos_spec, core_spec=core_spec,
-                        coords=r.coords, tic=tic, matrix=matrix_sum, mask=seg["mask"])
+                        coords=r.coords, tic=tic, matrix=matrix_sum, mask=seg["mask"], split_axis=seg["axis"])
 
     # ---- pass 2: mean spectra -------------------------------------------------------------
     labels = np.where(pos_spec == TOP, "Top", np.where(pos_spec == BOTTOM, "Bottom", "off")).astype(object)
@@ -196,11 +196,14 @@ def run_slide_qc(ctx, log, mode: str, slide: str, phase: str, sheet: pd.DataFram
         widths = pd.DataFrame(rows)
         res = spectra.fit_resolution(widths["mz"].to_numpy(), widths["fwhm"].to_numpy()) if len(widths) else res
 
-    # ---- gradient along y (the position confound check) --------------------------------
-    rows_spec = r.coords[:, 1].astype(float)
+    # ---- gradient between the two section positions (the position confound check) -------
+    # Measured along the direction that separates the sections: image rows if they sit one
+    # above the other, image columns if they sit side by side.
+    rows_spec = (r.coords[:, 1] if seg["axis"] == "rows" else r.coords[:, 0]).astype(float)
     c_top = float(np.mean(rows_spec[pos_spec == TOP])) if (pos_spec == TOP).any() else np.nan
     c_bot = float(np.mean(rows_spec[pos_spec == BOTTOM])) if (pos_spec == BOTTOM).any() else np.nan
-    grad = {"top_center_row": c_top, "bottom_center_row": c_bot, "n_off_pixels": int((pos_spec == 0).sum())}
+    grad = {"split_axis": seg["axis"], "top_center_row": c_top, "bottom_center_row": c_bot,
+            "n_off_pixels": int((pos_spec == 0).sum())}
     off = pos_spec == 0
     for name, vals in (("matrix_off", matrix_sum), ("tic_off", tic)):
         if off.sum() >= 20 and np.nanmax(vals[off]) > 0:
@@ -232,7 +235,7 @@ def run_slide_qc(ctx, log, mode: str, slide: str, phase: str, sheet: pd.DataFram
                           "median_matrix": float(np.median(matrix_sum[sel])) if sel.any() else np.nan})
     result = {"mode": mode, "slide": slide, "file": path.name, "n_spectra": r.n, "spectrum_type": stype,
               "storage": "continuous" if r.shares_mz_axis else "processed", "mz_min": lo, "mz_max": hi,
-              "section_split": seg["how"], "n_sections": seg["n_sections"],
+              "section_split": seg["how"], "n_sections": seg["n_sections"], "split_axis": seg["axis"],
               "tissue_threshold_log": seg["threshold_log"], "tissue_signal": signal_name,
               "n_off_tissue": int((pos_spec == 0).sum()),
               "mass_accuracy": {"n_calibrant_hits": int(len(good)), "median_ppm": med, "sd_ppm": sd,
@@ -266,7 +269,8 @@ def _figures(S, r, slide, tic, matrix_sum, nonmatrix, seg, animal_of, geno_of, a
     S.fig(fig, f"images_{slide}.png")
 
     # labelled sections: THE figure to check Top = Control, Bottom = Mutant
-    fig, ax = plt.subplots(figsize=(5, 6))
+    h, w = seg["positions"].shape
+    fig, ax = plt.subplots(figsize=(min(10, 6 * w / h), 6) if w > h else (5, 6))
     show = np.ma.masked_equal(seg["positions"].astype(float), 0)
     ax.imshow(np.log1p(r.to_image(nonmatrix)), cmap="Greys_r", interpolation="nearest")
     ax.imshow(show, cmap="coolwarm", alpha=0.45, vmin=1, vmax=2, interpolation="nearest")
@@ -277,7 +281,8 @@ def _figures(S, r, slide, tic, matrix_sum, nonmatrix, seg, animal_of, geno_of, a
                     ha="center", va="center", fontsize=10, weight="bold",
                     bbox=dict(facecolor="white", alpha=0.8, lw=0))
     ax.set_title(f"slide {slide}: section assignment ({seg['how']})\n"
-                 "image row 0 at the top; flip in config if this is wrong", fontsize=8)
+                 "image shown as stored in the imzML (row 0 at the top, column 0 on the left).\n"
+                 "Check the labels against Pilar's layout; flip in the config if they're swapped", fontsize=8)
     S.fig(fig, f"sections_{slide}.png")
 
     # mean spectra
@@ -313,7 +318,7 @@ def _figures(S, r, slide, tic, matrix_sum, nonmatrix, seg, animal_of, geno_of, a
         ax.set_title(f"slide {slide}: {res.get('analyzer_hint', '')}", fontsize=9)
         S.fig(fig, f"resolution_{slide}.png")
 
-    # y profiles: is there a top-to-bottom trend in the off-tissue matrix signal?
+    # profiles between the two section positions: is there a trend in the off-tissue matrix signal?
     fig, ax = plt.subplots(figsize=(6, 3.5))
     nb = int(ctx.get("qc.gradient.n_bins_y", 20))
     bins = np.linspace(rows_spec.min(), rows_spec.max() + 1, nb + 1)
@@ -325,8 +330,10 @@ def _figures(S, r, slide, tic, matrix_sum, nonmatrix, seg, animal_of, geno_of, a
         b = np.digitize(rows_spec[sel], bins) - 1
         med = [np.median(v[sel][b == k]) if (b == k).sum() >= 3 else np.nan for k in range(nb)]
         ax.plot(cen, np.log2(np.asarray(med) + 1), marker="o", ms=3, label=name)
-    ax.set_xlabel("image row (top -> bottom)"); ax.set_ylabel("log2 median intensity")  # noqa: E702
-    ax.set_title(f"slide {slide}: top-to-bottom profiles", fontsize=9)
+    which = "image row" if seg["axis"] == "rows" else "image column"
+    ax.set_xlabel(f"{which} (Top section side -> Bottom section side is the order shown in sections_{slide}.png)", fontsize=7)
+    ax.set_ylabel("log2 median intensity")
+    ax.set_title(f"slide {slide}: profiles along the {which}s (the direction separating the sections)", fontsize=9)
     ax.legend(fontsize=7, loc="upper right")
     S.fig(fig, f"y_profile_{slide}.png")
 

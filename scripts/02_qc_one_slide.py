@@ -46,8 +46,9 @@ def main():
           "storage": res["storage"], "m/z range": f"{res['mz_min']:.2f} to {res['mz_max']:.2f}",
           "off-tissue pixels": res["n_off_tissue"]})
     S.h("Sections")
-    S.p(f"Split: {res['section_split']}. Check `sections_{slide}.png`: the Top label should sit on the upper "
-        "section. If the image is upside down, set qc.sections.top_is_low_row_index or flip_slides.")
+    S.p(f"Split: {res['section_split']} (split_axis = {res['split_axis']}). Check `sections_{slide}.png`: "
+        "the Control animal must carry the 'Top' label. If Control and KO are swapped, set "
+        "qc.sections.top_is_low_index: false (all slides) or list the slide in flip_slides.")
     import pandas as pd
     S.table(pd.DataFrame(res["sections"]))
 

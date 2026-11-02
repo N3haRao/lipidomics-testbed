@@ -93,7 +93,7 @@ Open `config.yaml`. The things to check:
 | `paths.output_root` | where outputs go. Must not be inside `data_root` |
 | `modes.run` | which modes to process: `[lip_neg, lip_pos, met_neg]` |
 | `qc.slide`, `qc.mode` | the slide/mode phase 02 looks at first (default E, lip_neg) |
-| `qc.sections.*` | flip Top/Bottom if the image axis is reversed (`top_is_low_row_index`, `flip_slides`), or force a split row per slide (`manual_split_row`) |
+| `qc.sections.*` | split direction (`split_axis`: auto, rows or cols), which side is the sheet's Top (`top_is_low_index`, `flip_slides`), or a forced split line per slide (`manual_split`) |
 | `annotation.ppm_tolerance` | leave `null` to use the value measured in 02/03 |
 | `normalization.for_stats` | `tic` (decided up front; don't change it after seeing 09) |
 | `registration.optical_tiffs` | per-slide TIFF path, relative to `data_root`, once Pilar sends them |
@@ -234,8 +234,8 @@ overwritten). To rerun from a phase: `FROM=05 bash bin/hpc/start_on_hpc.sh`.
 * `CONFIG / DATA ERROR` with an expected layout printed: `paths.data_root` is wrong or a mode
   folder is missing. Paths with spaces must be quoted in YAML.
 * Wrong Top/Bottom: look at `figures/03_qc_all/<mode>/sections_all.png`, then use
-  `qc.sections.top_is_low_row_index: false` (all slides) or `flip_slides: [J]`.
-* Only one section found on a slide: set `qc.sections.manual_split_row: {E: <row>}`.
+  `qc.sections.top_is_low_index: false` (all slides) or `flip_slides: [J]`.
+* Only one section found on a slide: set `qc.sections.manual_split: {E: <row or column>}`.
 * Registration bad on some sections: check `overlays.png`; sections below `registration.min_dice`
   automatically get only the lipid WM/GM masks. A TIFF usually fixes it.
 * Send me the newest log from `<output_root>/logs/` with any error.
