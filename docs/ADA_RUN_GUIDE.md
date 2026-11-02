@@ -96,7 +96,7 @@ squeue -u nehar          # PD = waiting, R = running; when it's gone from the li
 When `squeue -u nehar` no longer lists it:
 
 ```bash
-tail -25 ~/cln3_msi/slurm_logs/test_*.out      # want the last line: "19/19 checks passed"
+tail -n 25 ~/cln3_msi/slurm_logs/test_*.out      # want the last line: "19/19 checks passed"
 exit                                            # leave Ada, back to the Mac
 ```
 
@@ -154,7 +154,7 @@ More detail **on Ada** (`ssh nehar@ada.nri.bcm.edu` first):
 squeue -u nehar                                                          # queued / running
 sacct -u nehar -S today --format=JobID,JobName%22,State,Elapsed,MaxRSS   # finished + how it went
 ls -t ~/cln3_msi/slurm_logs | head                                       # newest logs
-tail -50 ~/cln3_msi/slurm_logs/<log name>.out                            # read one
+tail -n 50 ~/cln3_msi/slurm_logs/<log name>.out                            # read one
 scancel -u nehar                                                         # stop everything (only if needed)
 ```
 
@@ -252,7 +252,7 @@ sbatch --job-name=cln3_test --cpus-per-task=2 --mem=8G --time=00:45:00 \
   --output=$HOME/cln3_msi/slurm_logs/test_%j.out \
   --wrap "source $HOME/cln3_msi/cln3_env.sh && cd $HOME/cln3_msi/repo && bash bin/run_synthetic_test.sh"
 squeue -u nehar
-tail -25 ~/cln3_msi/slurm_logs/test_*.out
+tail -n 25 ~/cln3_msi/slurm_logs/test_*.out
 exit
 
 # ---- on the Mac ----
