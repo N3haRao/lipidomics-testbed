@@ -1,207 +1,131 @@
 # Running the CLN3 MSI pipeline on Ada: every command, in order
 
-Everything below is typed in the **Mac Terminal** (Applications > Utilities > Terminal),
-unless a step says "on Ada". Copy one block at a time. Lines starting with `#` are comments,
-you don't need to type them.
+Commands are typed in the **Mac Terminal** unless a step says **on Ada**. You can tell where
+you are from the prompt: on Ada it looks like `nehar@ada:~$`. Lines starting with `#` are
+comments, you don't type them.
+
+## Ada, as checked on your account
 
 | | |
 |---|---|
-| Ada login | `nehar@ada.nri.bcm.edu` |
+| Login | `ssh nehar@ada.nri.bcm.edu` (BCM VPN if off campus) |
+| Work folder | `~/cln3_msi` = `/home/nehar/cln3_msi` (`/home` has 25 TB free, no personal quota shown) |
+| SLURM | one partition `defq` (the default), one machine, no time limit, so nothing to set |
+| Conda | shared Anaconda at `/home/anaconda/bin/conda`; our env lives in `~/cln3_msi/envs/cln3-msi` |
+| Internet | yes (downloads work) |
 | Code on the Mac | `/Users/neharao/Downloads/lipidomics-testbed` |
-| Data on the Mac | `/Users/neharao/Desktop/BRAIN - PILAR - SPATIAL` |
-| Work folder on Ada | `~/cln3_msi` by default (step 3 checks it's big enough) |
+| Data on the Mac | `/Users/neharao/Desktop/BRAIN - PILAR - SPATIAL` (same folder as "Brain - Pilar - Spatial") |
 
-## What gets uploaded to Ada
+`bin/hpc/settings.sh` is already set up for all of this, so you don't need to edit it.
 
-Only one folder: **`imzML files for biostats/`** (36 files, ~40 GB). It holds 6 slides
-(E, F, G, I, J, K) x 3 modes (Lipid Negative, Lipid Positive, Metabolite Negative), and each
-slide comes as an `.imzML` + `.ibd` pair.
+Layout on Ada:
 
-Everything else stays on the Mac. The analysis doesn't use it:
+```
+~/cln3_msi/
+  repo/                          the code (a mirror of the Mac folder; edit on the Mac, not here)
+  data/imzML files for biostats/ the data (36 files, ~40 GB)
+  envs/cln3-msi/                 the Python environment
+  cln3_env.sh                    loads the environment (every job uses it)
+  outputs/                       everything the pipeline writes (summaries/, figures/, report/, ...)
+  slurm_logs/                    one log per job
+```
 
-- the SCiLS projects (`.slx/.sbd`, `raw lip neg/`, `raw lip pos/`, `raw met neg/`, `Female Data - Pilar analysis/`)
-- the region and feature files (`.srd`, `.mca`)
-- the SCiLS exports (`export_All_*`)
+**Only `imzML files for biostats/` gets uploaded.** These all stay on the Mac and aren't used:
+
+- SCiLS projects (`.slx/.sbd`, `raw lip neg/pos`, `raw met neg/`, `Female Data - Pilar analysis/`)
+- the `.srd` and `.mca` files
+- the `export_All_*` files
 - Pilar's results (`Results_CLN3_Analysis*/`, `PC 38.1 - depleted.png`, `.Rhistory`, `.RDataTmp`)
-- the cerebellum run (`09SEP26/`)
-
-The upload script picks the right folder by itself.
+- the `09SEP26/` cerebellum run
 
 ---
 
-## Step 0. Before you start
+## Where you are now
 
-* **Off campus?** Connect to the BCM VPN first. Ada usually only accepts connections from
-  inside the BCM network.
-* **Keep the Mac awake.** The data upload in step 8 takes a while. The script prevents sleep,
-  but keep the laptop plugged in and don't close the lid.
+You have:
 
-## Step 1. Get the code into Downloads
+- uploaded the code: `~/cln3_msi/repo` exists on Ada
+- run the setup: the prompt shows `(cln3-msi)`
 
-```bash
-cd /Users/neharao/Downloads
-git clone https://github.com/N3haRao/lipidomics-testbed.git
-cd lipidomics-testbed
-git checkout claude/hopeful-ride-f4pcg6
-ls
-```
+Next come steps 1 to 7 below.
 
-You should see `README.md`, `bin`, `config.yaml`, `scripts`, `src` and other folders.
-
-* The repo is private, so git asks for a login. Username: `N3haRao`. Password: a GitHub
-  **personal access token**, not your GitHub password. You can make one at GitHub > Settings >
-  Developer settings > Personal access tokens. If you have the `gh` tool, run `gh auth login`
-  first instead.
-* No git at all? On GitHub, open the repo, switch to the branch
-  `claude/hopeful-ride-f4pcg6`, click Code > Download ZIP, unzip it into Downloads, and rename
-  the folder to `lipidomics-testbed`.
-
-## Step 2. First login to Ada
+### Step 1. On Ada: confirm the setup finished
 
 ```bash
-ssh nehar@ada.nri.bcm.edu
+ls ~/cln3_msi/cln3_env.sh                           # must exist
+ls ~/cln3_msi/outputs/cache                         # want: atlas  hmdb  lipidmaps
+grep -A6 "Reference databases" ~/cln3_msi/outputs/summaries/00_setup.md
 ```
 
-* The first time, it asks "Are you sure you want to continue connecting (yes/no)?". Type `yes`.
-* Then type your password. Nothing appears on screen while you type, that's normal. Press Enter.
-* The prompt changes to something like `[nehar@ada ~]$`. You are now **on Ada**.
-
-## Step 3. On Ada: look around (2 minutes)
-
-Paste this whole block. It only reads, it changes nothing:
-
-```bash
-hostname
-echo "home: $HOME"
-df -h ~                                   # free space in your home folder
-quota -s 2>/dev/null                      # your quota, if Ada uses quotas
-ls -d /scratch/$USER /scratch /storage* /project* /data* 2>/dev/null   # other big storage
-sinfo -s                                  # SLURM partitions (queues)
-module avail 2>&1 | grep -i -E "conda|mamba|python" | head
-which conda 2>/dev/null
-curl -sI https://github.com | head -1     # does Ada have internet? (want "HTTP/2 200")
-```
-
-Note down:
-
-1. **Space.** Is there ~60 GB free in your home folder (`Avail` column of `df -h ~`, or your
-   quota)? If not, find a bigger folder in the `ls -d` line (e.g. `/scratch/nehar`).
-2. **Partitions.** The names in the first column of `sinfo -s`. The one marked with `*` is
-   the default.
-3. **Conda module.** Any conda/miniforge/anaconda module listed?
-4. **Internet.** Did `curl` print `HTTP/... 200`?
-
-Then leave Ada:
-
-```bash
-exit
-```
-
-## Step 4. Back on the Mac: fill in the settings (only if step 3 needs it)
-
-```bash
-cd /Users/neharao/Downloads/lipidomics-testbed
-open -e bin/hpc/settings.sh        # opens in TextEdit; or: nano bin/hpc/settings.sh
-```
-
-Already filled in for you: `HPC_USER="nehar"`, `HPC_HOST="ada.nri.bcm.edu"` and the Mac data
-path. Change only what step 3 told you:
-
-| if step 3 showed... | set |
-|---|---|
-| home folder has < 60 GB free | `HPC_WORK="/scratch/nehar/cln3_msi"` (or whichever big folder you found) |
-| you must pick a partition (no `*` default) | `SLURM_PARTITION="name"` |
-| a conda module exists | `CONDA_MODULE="miniforge3"` (the exact name from `module avail`) |
-| Ada asks for an account/project when submitting jobs | `SLURM_ACCOUNT="..."` |
-
-Save and close. In the rest of this guide, **`~/cln3_msi` means your `HPC_WORK`** if you
-changed it.
-
-## Step 5 (optional, recommended). Log in without typing the password every time
-
-```bash
-ls ~/.ssh/id_ed25519.pub 2>/dev/null || ssh-keygen -t ed25519      # press Enter 3 times
-ssh-copy-id nehar@ada.nri.bcm.edu                                   # your Ada password, once
-ssh nehar@ada.nri.bcm.edu "echo key login works"                    # should not ask anymore
-```
-
-If `ssh-copy-id` is refused, Ada doesn't allow keys. That's fine, skip this step. The
-scripts reuse one connection, so you only type the password once per script run anyway.
-
-## Step 6. Upload the code only (small, seconds)
-
-```bash
-cd /Users/neharao/Downloads/lipidomics-testbed
-bash bin/hpc/upload_to_hpc.sh --code
-```
-
-## Step 7. On Ada: build the software and test it on fake data
-
-```bash
-ssh nehar@ada.nri.bcm.edu
-```
-
-Then, **on Ada**:
+* If all three show up (the `grep` lists lipidmaps and hmdb as cached), go to step 2.
+* If something is missing, run the setup (again). It's safe to rerun and quick when things
+  are already there:
 
 ```bash
 cd ~/cln3_msi/repo
-bash bin/hpc/hpc_setup.sh
+bash bin/hpc/hpc_setup.sh          # want "20 passed" and "== setup OK" at the end
 ```
 
-This takes 5 to 15 minutes the first time. It:
+It warns "Data folder check failed" until the data is uploaded in step 4. That's expected.
 
-1. finds or installs conda
-2. builds the `cln3-msi` environment in `~/cln3_msi/envs`
-3. runs the unit tests (should say `20 passed`)
-4. downloads LIPID MAPS, HMDB and the Allen atlas
+### Step 2. On Ada: how big is the machine? (optional, 5 seconds)
 
-It warns "Data folder check failed" because the data isn't there yet. That's expected at
-this point. If it ends with `== setup OK`, continue.
+```bash
+nproc               # number of CPU cores
+free -g | head -2   # memory in GB ("total" column)
+```
 
-Still on Ada: run the end-to-end test on fake data as a real SLURM job (about 10 minutes).
-Add `-p <partition>` after `sbatch` if you set a partition in step 4.
+Each mode's job asks for 4 cores and 32 GB:
+
+* **At least 12 cores and ~100 GB:** all three modes run at the same time.
+* **Less than that:** the jobs queue and run one after another. Slower, but nothing to change.
+
+### Step 3. On Ada: end-to-end test on fake data (~10 min)
+
+This runs the whole pipeline as a real SLURM job on small fake data, to prove the setup works
+before the big upload.
 
 ```bash
 mkdir -p ~/cln3_msi/slurm_logs
 sbatch --job-name=cln3_test --cpus-per-task=2 --mem=8G --time=00:45:00 \
   --output=$HOME/cln3_msi/slurm_logs/test_%j.out \
   --wrap "source $HOME/cln3_msi/cln3_env.sh && cd $HOME/cln3_msi/repo && bash bin/run_synthetic_test.sh"
-squeue -u nehar                       # PD = waiting, R = running; empty = finished
+squeue -u nehar          # PD = waiting, R = running; when it's gone from the list, it finished
 ```
 
-When it's no longer listed in `squeue`:
+When `squeue -u nehar` no longer lists it:
 
 ```bash
-tail -25 ~/cln3_msi/slurm_logs/test_*.out      # want: "19/19 checks passed"
-exit                                            # back to the Mac
+tail -25 ~/cln3_msi/slurm_logs/test_*.out      # want the last line: "19/19 checks passed"
+exit                                            # leave Ada, back to the Mac
 ```
 
-## Step 8. Upload the data (the long one)
+If it doesn't say 19/19, send me that log and stop here.
 
-On the Mac:
+### Step 4. Mac: get the latest code and upload the data (the long one)
 
 ```bash
 cd /Users/neharao/Downloads/lipidomics-testbed
+git pull
 bash bin/hpc/upload_to_hpc.sh
 ```
 
-* It first prints `Local data: 36 imzML/ibd files (expected 36)`.
-* Then it shows a progress line per file (~40 GB in total).
-* It ends by printing what arrived on Ada. The first number must be **36**.
+* **First** it prints `Local data: 36 imzML/ibd files (expected 36)` and the free space on Ada.
+* **Then** it uploads the code (seconds), then the data with a progress line per file (~40 GB).
+* **At the end** it compares Ada with the Mac and prints `OK: all files arrived`.
+* **If it stops** (Ctrl+C, Wi-Fi drop, Mac asleep), run the same command again. It continues
+  where it stopped.
+* **Speed:** on the BCM network expect roughly 15 to 60 minutes; from home over VPN it can take
+  hours.
 
-If the connection drops or you stop it (Ctrl+C), run the same command again. It skips
-everything that's already complete and continues where it stopped.
-
-## Step 9. Start the analysis
-
-On the Mac:
+### Step 5. Mac: start the analysis
 
 ```bash
 bash bin/hpc/start_on_hpc.sh
 ```
 
-This logs in, re-checks the setup (fast now, and this time the data check should pass), and
-submits the jobs:
+This logs in, quickly re-checks the setup (the data check should now pass), and submits all
+the jobs. It prints one job number per line:
 
 ```
 01 inventory ─┬─ 02 QC slide E
@@ -210,38 +134,36 @@ submits the jobs:
               └─ met_neg: 03 → 04 → 05 → 06 → 07 → 08 → 09 ─┘
 ```
 
-It prints a job number for each. You can close the Terminal now: the jobs run on Ada on
-their own. Expect roughly 2 to 4 hours in total, longer if the queue is busy.
+Each job waits for the one before it and only runs if that one succeeded. You can close the
+Terminal: the jobs run on Ada on their own. Expect roughly 2 to 4 hours (longer if the three
+modes have to queue, see step 2).
 
-## Step 10. Check on it
-
-From the Mac, any time:
+### Step 6. Mac: check progress (any time)
 
 ```bash
 cd /Users/neharao/Downloads/lipidomics-testbed
 bash bin/hpc/status.sh
 ```
 
-It shows:
+It lists the jobs still queued or running, the phase summaries written so far, and the logs of
+any job that hit an error.
 
-* jobs still queued or running
-* the phase summaries written so far
-* the log files of any job that hit an error
-
-Or, if you prefer to look on Ada (after `ssh nehar@ada.nri.bcm.edu`):
+More detail **on Ada** (`ssh nehar@ada.nri.bcm.edu` first):
 
 ```bash
-squeue -u nehar                                                     # what's queued/running
-sacct -u nehar -S today --format=JobID,JobName%22,State,Elapsed,MaxRSS   # what finished, how it went
-ls -t ~/cln3_msi/slurm_logs | head                                  # newest job logs
-tail -50 ~/cln3_msi/slurm_logs/<name of a log>.out                  # read one
-scancel -u nehar                                                    # STOP everything (only if needed)
+squeue -u nehar                                                          # queued / running
+sacct -u nehar -S today --format=JobID,JobName%22,State,Elapsed,MaxRSS   # finished + how it went
+ls -t ~/cln3_msi/slurm_logs | head                                       # newest logs
+tail -50 ~/cln3_msi/slurm_logs/<log name>.out                            # read one
+scancel -u nehar                                                         # stop everything (only if needed)
 ```
 
-A job shown as `CANCELLED` or `DependencyNeverSatisfied` means an earlier job in its chain
-failed. Look at the log of the first `FAILED` one.
+* `COMPLETED` = fine.
+* `FAILED` = look at its log.
+* `CANCELLED` or `DependencyNeverSatisfied` = an earlier job in the same chain failed. Look for
+  the first `FAILED` one.
 
-## Step 11. Get the results onto the Mac
+### Step 7. Mac: get the results
 
 ```bash
 cd /Users/neharao/Downloads/lipidomics-testbed
@@ -249,71 +171,82 @@ bash bin/hpc/fetch_results.sh
 open ~/cln3_msi_outputs_from_ada/report/report.html
 ```
 
-This copies the summaries, figures, tables, logs and the report into
-`~/cln3_msi_outputs_from_ada`. It skips the big data tables, which stay on Ada.
+This copies the summaries, figures, tables, logs and the report to
+`~/cln3_msi_outputs_from_ada`. The big data tables stay on Ada.
 
-**What to send me first:**
+**Look at this first yourself:**
+`~/cln3_msi_outputs_from_ada/figures/03_qc_all/lip_neg/sections_all.png`. On every slide the
+**Control** animal should be on the **upper** section.
 
-* `~/cln3_msi_outputs_from_ada/summaries/01_inventory_*.md`
-* `~/cln3_msi_outputs_from_ada/summaries/02_qc_lip_neg.md`
-* `~/cln3_msi_outputs_from_ada/summaries/03_qc_all_*.md`
-* `~/cln3_msi_outputs_from_ada/figures/03_qc_all/lip_neg/sections_all.png`. Check this one
-  yourself first: on every slide, the **Control** animal should be on the **upper** section.
-* the `.out` log of any job that failed
+**Then send me:**
 
-## Step 12. Later: after I change the code, or to rerun part of it
+* `summaries/01_inventory_*.md`
+* `summaries/02_qc_lip_neg.md`
+* `summaries/03_qc_all_*.md`
+* the `.out` log of any failed job (in `~/cln3_msi_outputs_from_ada/slurm_logs/`)
+
+---
+
+## Later: after I change the code, or to rerun part of it
 
 ```bash
 cd /Users/neharao/Downloads/lipidomics-testbed
-git pull                                  # get my changes
-bash bin/hpc/upload_to_hpc.sh --code      # send them to Ada (the data is already there)
-FROM=05 bash bin/hpc/start_on_hpc.sh      # rerun from phase 05 on, reusing 01-04
+git pull                                  # my changes
+bash bin/hpc/upload_to_hpc.sh --code      # code only; the data is already on Ada
+FROM=05 bash bin/hpc/start_on_hpc.sh      # rerun from phase 05, reusing 01-04
 ```
 
-Use the phase number you need: `FROM=03` reruns almost everything, `FROM=09` only the
-statistics and the report.
+Use the phase you need: `FROM=03` reruns almost everything, `FROM=09` only the statistics and
+the report.
 
-Edit `config.yaml` **on the Mac**, then upload with `--code`. The upload mirrors the Mac copy,
-so anything edited directly on Ada gets overwritten.
+Edit `config.yaml` **on the Mac**, then upload with `--code`. The upload makes Ada's copy
+identical to the Mac's, so edits made directly on Ada get overwritten.
 
----
+## From scratch (for a new computer or a fresh start)
+
+```bash
+# Mac
+cd /Users/neharao/Downloads
+git clone https://github.com/N3haRao/lipidomics-testbed.git     # login: N3haRao + a GitHub personal access token
+cd lipidomics-testbed
+git checkout claude/hopeful-ride-f4pcg6
+bash bin/hpc/upload_to_hpc.sh --code
+
+# Ada
+ssh nehar@ada.nri.bcm.edu       # first time: type "yes" to the fingerprint question, then your password
+cd ~/cln3_msi/repo
+bash bin/hpc/hpc_setup.sh
+exit
+```
+
+Then steps 3 to 7 above.
+
+Optional, so you don't type the Ada password every time (Mac):
+
+```bash
+ls ~/.ssh/id_ed25519.pub 2>/dev/null || ssh-keygen -t ed25519    # press Enter 3 times
+ssh-copy-id nehar@ada.nri.bcm.edu                                 # Ada password, one last time
+```
 
 ## If something goes wrong
 
 | what you see | what to do |
 |---|---|
-| `ssh: connect to host ada.nri.bcm.edu ... timed out` | connect to the BCM VPN, try again |
-| `Permission denied (publickey,password)` | wrong password, or your Ada account isn't active yet: ask BCM HPC support |
-| `Not found: .../imzML files for biostats` | the data path in `bin/hpc/settings.sh` (`LOCAL_DATA_ROOT`) is wrong |
-| upload stops with `No space left on device` or `Disk quota exceeded` | home folder too small: set `HPC_WORK` to scratch (step 4), run step 6 onwards again |
-| `hpc_setup.sh` fails at `curl` / `conda env create` / downloads | Ada has no internet: tell me, we'll build the env on the Mac side and copy it over |
-| `sbatch: error: ... partition` or `... account` | set `SLURM_PARTITION` / `SLURM_ACCOUNT` in step 4, upload `--code`, rerun step 9 |
-| a job `TIMEOUT` | raise its limit in `bin/hpc/submit_all.sh` (the `TIME=` line), upload `--code`, rerun with `FROM=` that phase |
-| a job `OUT_OF_MEMORY` | change `--mem=32G` to `64G` in `bin/hpc/job_phase.sbatch`, upload `--code`, rerun with `FROM=` |
-| anything else | send me the `.out` log and the newest file from `~/cln3_msi_outputs_from_ada/logs/` |
+| `ssh: ... timed out` | connect to the BCM VPN, try again |
+| `Permission denied` on ssh | wrong password or account issue: BCM HPC support |
+| `Not found: .../imzML files for biostats` | `LOCAL_DATA_ROOT` in `bin/hpc/settings.sh` is wrong |
+| `hpc_setup.sh` stops at `conda create` or `pip install` | send me the last 30 lines |
+| the fake-data test isn't 19/19 | send me `~/cln3_msi/slurm_logs/test_*.out` |
+| a job ends in `TIMEOUT` | raise its value on the `TIME=` line of `bin/hpc/submit_all.sh`, upload `--code`, rerun with `FROM=` that phase |
+| a job ends in `OUT_OF_MEMORY` | change `--mem=32G` to `64G` in `bin/hpc/job_phase.sbatch`, upload `--code`, rerun with `FROM=` |
+| anything else | send me the job's `.out` log and the newest file in `~/cln3_msi_outputs_from_ada/logs/` |
 
----
-
-## All commands in one place (after steps 3 and 4 are done)
+## All remaining commands in one block
 
 ```bash
-# --- Mac: code ---
-cd /Users/neharao/Downloads
-git clone https://github.com/N3haRao/lipidomics-testbed.git
-cd lipidomics-testbed
-git checkout claude/hopeful-ride-f4pcg6
-
-# --- Mac: optional password-free login ---
-ssh-keygen -t ed25519
-ssh-copy-id nehar@ada.nri.bcm.edu
-
-# --- Mac: code to Ada ---
-bash bin/hpc/upload_to_hpc.sh --code
-
-# --- Ada: setup + fake-data test ---
-ssh nehar@ada.nri.bcm.edu
-cd ~/cln3_msi/repo
-bash bin/hpc/hpc_setup.sh
+# ---- on Ada (you're here now) ----
+ls ~/cln3_msi/cln3_env.sh ~/cln3_msi/outputs/cache
+nproc; free -g | head -2
 mkdir -p ~/cln3_msi/slurm_logs
 sbatch --job-name=cln3_test --cpus-per-task=2 --mem=8G --time=00:45:00 \
   --output=$HOME/cln3_msi/slurm_logs/test_%j.out \
@@ -322,8 +255,9 @@ squeue -u nehar
 tail -25 ~/cln3_msi/slurm_logs/test_*.out
 exit
 
-# --- Mac: data, start, follow, results ---
+# ---- on the Mac ----
 cd /Users/neharao/Downloads/lipidomics-testbed
+git pull
 bash bin/hpc/upload_to_hpc.sh
 bash bin/hpc/start_on_hpc.sh
 bash bin/hpc/status.sh
