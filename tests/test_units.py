@@ -185,3 +185,46 @@ def test_sample_sheet_validation_catches_two_controls():
     bad.loc[1, "genotype"] = "Control"         # slide E now has two Controls
     with pytest.raises(samples.SampleSheetError):
         samples.validate_sheet(bad, ctx)
+
+
+
+def raster_hugging_tissue():
+    """Like the real lip_neg exports: the raster barely extends past the tissue (a 2-pixel
+    glass margin), and inside each section the grey-matter core is much dimmer than the
+    bright white-matter rim. Plain Otsu then cuts grey matter away as "background"."""
+    from scipy import ndimage
+    rng = np.random.default_rng(0)
+    yy, xx = np.mgrid[0:50, 0:90]
+    secs, cores = [], []
+    for cx in (22, 67):
+        secs.append(((yy - 25) / 22) ** 2 + ((xx - cx) / 18) ** 2 <= 1)
+        cores.append(((yy - 25) / 17) ** 2 + ((xx - cx) / 13) ** 2 <= 1)
+    tissue_px = secs[0] | secs[1]
+    core = cores[0] | cores[1]
+    acquired = ndimage.binary_dilation(tissue_px, iterations=2)
+    img = np.full(xx.shape, np.nan)
+    img[acquired] = 5.0            # glass
+    img[tissue_px] = 400.0         # white-matter-rich rim
+    img[core] = 40.0               # dim grey-matter core, half of each section
+    gap = tissue_px & (np.abs(yy - 25) <= 3)                # the rim is broken: dim tissue reaches the edge
+    img[gap] = 40.0
+    img[acquired] *= rng.gamma(30, 1 / 30, acquired.sum())
+    return img, tissue_px
+
+
+def test_tissue_mask_when_raster_hugs_tissue():
+    img, truth = raster_hugging_tissue()
+    m_otsu, _, _ = tissue.tissue_mask(img, 0, 10, 0, "otsu")
+    m_auto, _, how = tissue.tissue_mask(img, 0, 10, 0, "auto")
+    recall_otsu = (m_otsu & truth).sum() / truth.sum()
+    recall_auto = (m_auto & truth).sum() / truth.sum()
+    assert recall_otsu < 0.9, f"test image doesn't reproduce the problem (otsu recall {recall_otsu:.2f})"
+    assert recall_auto > 0.95, (recall_auto, how)
+    assert (m_auto & ~truth).sum() / truth.sum() < 0.15      # and it doesn't swallow much glass
+
+
+def test_auto_keeps_otsu_with_plenty_of_glass():
+    img, top, bot = two_blobs()
+    m, _, how = tissue.tissue_mask(img, 0, 10, 0, "auto")
+    assert how == "otsu"
+    assert ((m & (top | bot)).sum() / (top | bot).sum()) > 0.95

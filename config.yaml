@@ -62,6 +62,8 @@ qc:
   n_resolution_spectra: 20           # high-TIC single spectra used to measure peak widths
   tissue:
     signal: "nonmatrix_tic"          # nonmatrix_tic (TIC minus DAN ions) or tic
+    threshold_method: "auto"         # auto | otsu | multiotsu | triangle (see tissue.py; auto fixes
+                                     # holes when the raster hugs the tissue, as in lip_neg)
     smooth_sigma_px: 1.0
     min_object_px: 100
     close_radius_px: 2               # joins pieces of a section that got cut apart
@@ -131,10 +133,14 @@ registration:
   # If Pilar exports them, put the paths here (relative to data_root) and the um per pixel.
   optical_tiffs: {E: null, F: null, G: null, I: null, J: null, K: null}
   tiff_um_per_px: null
-  # Each mode is registered on its own (we don't know yet if the three modes were acquired on
-  # the very same sections). Guide image per mode: auto = strongest annotated sulfatide, else
-  # HexCer, else the first principal component of the lipid images. Or give an m/z.
+  # Guide image per mode (used by the mode(s) that register themselves): auto = strongest
+  # annotated sulfatide, else HexCer, else the first principal component. Or give an m/z.
   guide_ion: {lip_neg: auto, lip_pos: auto, met_neg: auto}
+  # The three modes were exported on the SAME pixel grid per slide (identical pixel counts), so
+  # register once, on the mode with the clearest white-matter marker (sulfatides, lip_neg), and
+  # give the other modes the same per-pixel regions. 07 checks that the pixels really match
+  # (>= 90%) and registers a mode on its own if they don't. null = register every mode separately.
+  reuse_from: lip_neg
   bspline_grid_mm: 1.0
   bspline_iterations: 100
   min_dice: 0.80                     # sections below this fall back to lipid WM/GM masks only

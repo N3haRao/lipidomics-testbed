@@ -32,17 +32,7 @@ TOP, BOTTOM = 1, 2
 POSITION_NAME = {TOP: "Top", BOTTOM: "Bottom"}
 
 
-def tissue_mask(img: np.ndarray, smooth_sigma: float, min_object_px: int, close_radius: int) -> tuple[np.ndarray, float]:
-    """img: 2D signal, NaN where nothing was acquired. Returns (mask, threshold on log scale)."""
-    acquired = np.isfinite(img)
-    x = np.log1p(np.where(acquired, np.clip(img, 0, None), 0))
-    fill = np.nanmin(np.where(acquired, x, np.nan)) if acquired.any() else 0
-    x = np.where(acquired, x, fill)
-    if smooth_sigma > 0:
-        x = ndimage.gaussian_filter(x, smooth_sigma)
-    vals = x[acquired]
-    thr = float(filters.threshold_otsu(vals)) if np.ptp(vals) > 0 else float(vals.max())
-    m = (x > thr) & acquired
+def _clean(m: np.ndarray, acquired: np.ndarray, min_object_px: int, close_radius: int) -> np.ndarray:
     if close_radius > 0:
         m = morphology.binary_closing(m, morphology.disk(close_radius))
     # drop specks smaller than min_object_px (done by hand: the skimage API changed in 0.26)
@@ -50,8 +40,65 @@ def tissue_mask(img: np.ndarray, smooth_sigma: float, min_object_px: int, close_
     if n:
         sizes = np.bincount(lab.ravel())
         m = (sizes >= max(1, min_object_px))[lab] & (lab > 0)
-    m = ndimage.binary_fill_holes(m) & acquired
-    return m, thr
+    return ndimage.binary_fill_holes(m) & acquired
+
+
+def tissue_mask(img: np.ndarray, smooth_sigma: float, min_object_px: int, close_radius: int,
+                method: str = "auto") -> tuple[np.ndarray, float, str]:
+    """img: 2D signal, NaN where nothing was acquired. Returns (mask, log threshold, method used).
+
+    Why "auto": Otsu splits the pixels into the two most different groups. When there's a
+    good amount of empty glass, those groups are tissue vs glass, as intended. But when the
+    raster hugs the tissue (only a thin margin of glass), the two most different groups are
+    bright vs dim TISSUE, e.g. white matter vs grey matter in lipid negative mode, and whole
+    regions of tissue get thrown out as "background" (holes, rings).
+    So "auto" also tries a lower threshold (the lowest of a 3-group Otsu). If the extra pixels
+    it adds lie mostly INSIDE the sections (inside their convex outline, i.e. they fill the
+    holes), the lower threshold is the right one; if they lie outside, they're glass and plain
+    Otsu stays. Force one with qc.tissue.threshold_method: otsu | multiotsu | triangle.
+    """
+    acquired = np.isfinite(img)
+    x = np.log1p(np.where(acquired, np.clip(img, 0, None), 0))
+    fill = np.nanmin(np.where(acquired, x, np.nan)) if acquired.any() else 0
+    x = np.where(acquired, x, fill)
+    if smooth_sigma > 0:
+        x = ndimage.gaussian_filter(x, smooth_sigma)
+    vals = x[acquired]
+    if np.ptp(vals) == 0:
+        thr = float(vals.max())
+        return _clean((x > thr) & acquired, acquired, min_object_px, close_radius), thr, "constant"
+
+    def low_threshold() -> tuple[float, str]:
+        try:
+            return float(filters.threshold_multiotsu(vals, classes=3)[0]), "multiotsu"
+        except Exception:
+            return float(filters.threshold_triangle(vals)), "triangle"
+
+    if method == "otsu":
+        thr = float(filters.threshold_otsu(vals))
+        return _clean((x > thr) & acquired, acquired, min_object_px, close_radius), thr, "otsu"
+    if method == "multiotsu":
+        thr, used = low_threshold()
+        return _clean((x > thr) & acquired, acquired, min_object_px, close_radius), thr, used
+    if method == "triangle":
+        thr = float(filters.threshold_triangle(vals))
+        return _clean((x > thr) & acquired, acquired, min_object_px, close_radius), thr, "triangle"
+
+    # auto
+    t_otsu = float(filters.threshold_otsu(vals))
+    m_otsu = _clean((x > t_otsu) & acquired, acquired, min_object_px, close_radius)
+    t_low, low_name = low_threshold()
+    if not m_otsu.any() or t_low >= t_otsu:
+        return m_otsu, t_otsu, "otsu"
+    m_low = _clean((x > t_low) & acquired, acquired, min_object_px, close_radius)
+    added = m_low & ~m_otsu
+    if added.sum() < 0.05 * m_otsu.sum():
+        return m_otsu, t_otsu, "otsu"
+    hull = morphology.convex_hull_object(m_otsu, connectivity=2)
+    inside = float((added & hull).sum() / added.sum())
+    if inside > 0.6:
+        return m_low, t_low, f"auto: {low_name} (otsu left holes inside the tissue; {inside:.0%} of the extra pixels were inside the sections)"
+    return m_otsu, t_otsu, "otsu"
 
 
 def choose_axis(mask: np.ndarray, n_expected: int = 2) -> str:
@@ -151,7 +198,8 @@ def segment_slide(signal_img: np.ndarray, slide: str, qc_cfg: dict) -> dict:
     """Run the whole recipe for one slide with the qc: block of the config."""
     t = qc_cfg["tissue"]
     s = qc_cfg["sections"]
-    mask, thr = tissue_mask(signal_img, t["smooth_sigma_px"], t["min_object_px"], t["close_radius_px"])
+    mask, thr, method = tissue_mask(signal_img, t["smooth_sigma_px"], t["min_object_px"], t["close_radius_px"],
+                                    t.get("threshold_method", "auto"))
     axis = s.get("split_axis", "auto")
     if axis not in ("rows", "cols"):
         axis = choose_axis(mask, s.get("n_expected", 2))
@@ -164,4 +212,4 @@ def segment_slide(signal_img: np.ndarray, slide: str, qc_cfg: dict) -> dict:
     core = eroded(pos, t.get("erode_edge_px", 0))
     n_found = len(np.unique(lab[lab > 0]))
     return {"mask": mask, "threshold_log": thr, "positions": pos, "core": core, "how": how,
-            "n_sections": n_found, "axis": axis}
+            "n_sections": n_found, "axis": axis, "threshold_method": method}

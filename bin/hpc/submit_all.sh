@@ -48,12 +48,27 @@ fi
 if want 02; then
   j=$(submit 02 "" "$dep0"); echo "02 QC slide E         job $j"
 fi
+# If the other modes reuse one mode's registration (registration.reuse_from in the config),
+# that mode's chain goes first and the others' phase 07 also waits for its phase 07.
+REUSE=$( (set +eu; source "$CLN3_ENV_FILE" >/dev/null 2>&1; cd "$HERE/../.." && \
+  python -c "from cln3msi.config import load; print(load('config.hpc.yaml').get('registration.reuse_from') or '')") 2>/dev/null || true)
+ORDERED_MODES="$MODES"
+if [[ -n "$REUSE" && " $MODES " == *" $REUSE "* ]]; then
+  ORDERED_MODES="$REUSE $(echo " $MODES " | sed "s/ $REUSE / /")"
+  echo "(registration of $REUSE is reused by the other modes)"
+fi
+j07src=""
 last_ids=()
-for mode in $MODES; do
+for mode in $ORDERED_MODES; do
   dep="$dep0"
   for p in "${ORDER[@]}"; do
     want "$p" || continue
-    j=$(submit "$p" "$mode" "$dep"); echo "$p $mode              job $j"
+    d="$dep"
+    if [[ "$p" == "07" && -n "$j07src" && "$mode" != "$REUSE" ]]; then
+      d="${dep:+$dep:}$j07src"
+    fi
+    j=$(submit "$p" "$mode" "$d"); echo "$p $mode              job $j"
+    [[ "$p" == "07" && "$mode" == "$REUSE" ]] && j07src=$j
     dep=$j
   done
   [[ -n "$dep" ]] && last_ids+=("$dep")

@@ -237,6 +237,7 @@ def run_slide_qc(ctx, log, mode: str, slide: str, phase: str, sheet: pd.DataFram
               "storage": "continuous" if r.shares_mz_axis else "processed", "mz_min": lo, "mz_max": hi,
               "section_split": seg["how"], "n_sections": seg["n_sections"], "split_axis": seg["axis"],
               "tissue_threshold_log": seg["threshold_log"], "tissue_signal": signal_name,
+              "tissue_threshold_method": seg["threshold_method"],
               "n_off_tissue": int((pos_spec == 0).sum()),
               "mass_accuracy": {"n_calibrant_hits": int(len(good)), "median_ppm": med, "sd_ppm": sd,
                                 "mad_ppm": mad},
