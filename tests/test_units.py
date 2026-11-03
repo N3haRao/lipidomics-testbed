@@ -254,3 +254,62 @@ def test_paired_tests_need_min_pairs():
     assert np.isnan(r["p_ttest"]) and r["n_pairs"] == 3 and abs(r["log2fc"] - 1.0) < 1e-9
     r = st.paired_tests(log2, animals, "Control", "Mutant", min_pairs=3).iloc[0]
     assert r["p_ttest"] < 0.01
+
+
+def _fake_means(swap_slide=None, seed=0):
+    """6 slides x (Control, Mutant), 200 peaks; the Mutant has a shared effect profile.
+    swap_slide gets its two animals swapped, like a sample-sheet mix-up."""
+    rng = np.random.default_rng(seed)
+    slides = list("EFGIJK")
+    effect = rng.normal(0, 0.4, 200)
+    effect[0] = -1.0                      # p0 (a sulfatide in the class test) clearly down
+    base = rng.uniform(5, 9, 200)
+    rows, animals = [], []
+    for s in slides:
+        for g in ("Control", "Mutant"):
+            aid = f"{s}_{g}"
+            animals.append({"animal_id": aid, "slide": s, "genotype": g, "sex": "F" if s in "EFG" else "M"})
+            truly_mut = (g == "Mutant") != (s == swap_slide)
+            v = base + rng.normal(0, 0.1, 200) + (effect if truly_mut else 0)
+            for unit in ("whole_section", "white_matter"):
+                for k in range(200):
+                    rows.append({"unit": unit, "animal_id": aid, "peak": f"p{k}",
+                                 "mean_norm_intensity": 2 ** v[k], "n_pixels": 500})
+    return pd.DataFrame(rows), pd.DataFrame(animals).set_index("animal_id")
+
+
+def test_pair_check_flags_a_swapped_slide_and_only_that():
+    from cln3msi import classes
+    ML, animals = _fake_means(swap_slide="J")
+    _, T, flagged = classes.consistency(ML, animals, "Control", "Mutant", ["whole_section", "white_matter"], -0.3)
+    assert flagged == ["J"], T
+    ML, animals = _fake_means(swap_slide=None)
+    _, T, flagged = classes.consistency(ML, animals, "Control", "Mutant", ["whole_section", "white_matter"], -0.3)
+    assert flagged == [], T
+
+
+def test_class_totals_ratios_and_sensitivity():
+    from cln3msi import classes
+    ML, animals = _fake_means(swap_slide="J")
+    ann = pd.DataFrame({"peak_id": [f"p{k}" for k in range(6)],
+                        "annotation": ["SHexCer 42:2;O2", "SHexCer 42:1;O3", "HexCer 42:2;O2", "PE 38:4",
+                                       "PE 40:6", "PE 40:6"],
+                        "adduct": ["[M-H]-"] * 6, "lipid_class": ["SHexCer", "SHexCer", "HexCer", "PE", "PE", "PE"],
+                        "is_isotope": [False] * 5 + [True], "n_sections": [12] * 6,
+                        "candidate_tags": ["SHexCer", "SHexCer;BMP_PG", "HexCer", "", "", ""]})
+    ok = classes.usable_peaks(ann, 10, "tags")
+    assert list(ok["peak_id"]) == ["p0", "p2", "p3", "p4"]       # isotope and cross-tag ambiguous dropped
+    cls = {"Sulfatide": {"classes": ["SHexCer"]}, "HexCer": {"classes": ["HexCer"]}, "PE": {"classes": ["PE"]},
+           "Sulfatide 2-OH": {"classes": ["SHexCer"], "suffix": ";O3"}}
+    vals, mem = classes.totals(ML, ok, cls, [["Sulfatide", "HexCer"], ["Sulfatide 2-OH", "PE"]], ["whole_section"])
+    assert set(vals["feature"]) == {"Sulfatide", "HexCer", "PE", "Sulfatide / HexCer"}   # empty class skipped
+    R = classes.test_features(vals, animals, "Control", "Mutant", 5)
+    assert {"pair_E", "pair_J", "q_bh", "pct_change"} <= set(R.columns)
+    r = R[R.feature == "Sulfatide"].iloc[0]
+    assert np.sign(r["pair_J"]) == -np.sign(r["pair_E"])          # the swapped slide points the other way
+    X = classes.sensitivity(vals, animals, "Control", "Mutant", ["J"], 5).set_index("feature")
+    assert X.at["Sulfatide", "flipped_J_n_pairs_up"] in (0, 6)    # flipped: all six pairs agree
+    assert X.at["Sulfatide", "without_J_n_pairs"] == 5
+    assert classes.candidate_class("LPC O-16:2 [M+H]+") == "LPC"
+    assert classes.candidate_class("BMP/PG 36:1 [M-H]-") == "BMP/PG"
+    assert classes.candidate_class("Glycerol 3-phosphate [M-H]-") == "Glycerol 3-phosphate"

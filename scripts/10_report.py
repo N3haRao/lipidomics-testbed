@@ -135,6 +135,54 @@ CAVEATS = [
 ]
 
 
+def slide_check_box(ctx, modes) -> str:
+    """Top-of-report warning if 09 flagged a slide as a possible swap in any mode."""
+    rows = []
+    for mode in modes:
+        p = ctx.output_root / "results" / "09_differential" / mode / "pair_consistency.csv"
+        if p.exists():
+            t = pd.read_csv(p)
+            t.insert(0, "mode", mode)
+            rows.append(t)
+    if not rows:
+        return ""
+    T = pd.concat(rows, ignore_index=True)
+    flagged = sorted(set(T.loc[T["flagged"].astype(bool), "slide"]))
+    head = "<h2>Slide consistency check</h2>"
+    txt = ("Each slide's log2(Mutant/Control) over all tested peaks is its difference profile. With correct "
+           "labels the slides share the genotype effect, so profiles should correlate positively. Values are each "
+           "slide's median Spearman correlation with the other slides.")
+    if flagged:
+        n_modes = {s: int(T.loc[T["flagged"].astype(bool) & (T["slide"] == s), "mode"].nunique()) for s in flagged}
+        warn = ("<div class='caveat'><b>Possible label swap: slide(s) " + ", ".join(
+            f"{html.escape(str(s))} ({n} of {len(rows)} modes)" for s, n in n_modes.items()) +
+            ".</b> Their KO/Control difference is the mirror image of the other slides, which is what a swap "
+            "of the two sections (sample sheet, or slide loaded the other way round) would look like. Results "
+            "below use the sample sheet as it is. Check the sectioning/mounting records; only if they confirm "
+            "the swap, list the slide in <code>qc.sections.flip_slides</code> and rerun from 03. The class-test "
+            "CSVs have exploratory columns with the slide left out and flipped.</div>")
+    else:
+        warn = "<p>No slide flagged.</p>"
+    return head + f"<p class='small'>{txt}</p>" + warn + table_html(T, 40)
+
+
+def class_section(ctx, mode, fig) -> str:
+    p = ctx.output_root / "results" / "09_differential" / mode / "class_tests.csv"
+    if not p.exists():
+        return ""
+    R = pd.read_csv(p)
+    pair_cols = [c for c in R.columns if c.startswith("pair_")]
+    show = [c for c in ["unit", "feature", "kind", "n_species", "log2fc", "pct_change", "ci_low", "ci_high",
+                        "p_ttest", "p_wilcoxon", "q_bh", "n_pairs_up"] + pair_cols if c in R]
+    return ("<h3>Class totals and ratios (pre-specified)</h3><p class='small'>Species of a class added up per "
+            "animal and region; ratios within the same animal and region. One BH family per mode "
+            "(<code>q_bh</code>). pair_&lt;slide&gt; = that slide's log2(Mutant/Control).</p>"
+            + table_html(R.sort_values("p_ttest")[show], 25)
+            + img_tag(fig("09_differential", "class_tests_per_slide.png"), "85%")
+            + img_tag(fig("09_differential", "class_tests_forest.png"), "70%")
+            + img_tag(fig("09_differential", "pair_consistency.png"), "85%"))
+
+
 def main():
     t0 = time.time()
     ctx, log, modes, _ = cli.start("10_report", __doc__)
@@ -148,6 +196,7 @@ def main():
     out.append("<h2>Design</h2>")
     out.append(table_html(sheet[["animal_id", "genotype", "sex", "slide", "position_on_slide", "run_order"]], 20))
     out.append("<h2>Caveats</h2>" + "".join(f"<div class='caveat'>{c}</div>" for c in CAVEATS))
+    out.append(slide_check_box(ctx, modes))
 
     files = ctx.output_root / "metadata" / "files.csv"
     if files.exists():
@@ -194,6 +243,7 @@ def main():
                                                    "gm_lipid", "cortex", "hippocampus", "thalamus"]) & R["p_ttest"].notna()]
             out.append(table_html(T.sort_values("p_ttest")[show], 40))
             out.append(img_tag(fig("09_differential", "forest_hypothesis.png"), "75%"))
+            out.append(class_section(ctx, mode, fig))
             out.append("<h3>Differential: untargeted, top per region</h3>")
             U = R[R.unit_kind == "region"].sort_values("p_ttest").groupby("unit").head(5)
             out.append(table_html(U[[c if c != "q_targeted" else "q_all" for c in show]], 60))

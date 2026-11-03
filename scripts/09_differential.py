@@ -22,8 +22,16 @@ bottom of the slide was than the top in the off-tissue DAN signal. If a hit's lo
 the same sign and is less than qc.gradient.flag_ratio times that, it's flagged
 "could_be_position". It's a warning, not a correction.
 
-Writes results/09_differential/<mode>/differential.csv, per_animal_means.csv, volcanoes,
-summary (hypothesis classes first, then untargeted).
+Then, from the same per-animal means (see src/cln3msi/classes.py):
+  class tests        totals per lipid class and within-animal ratios (config class_tests),
+                     one BH family per mode
+  slide consistency  do the slides' KO/Control difference profiles agree? A slide that is
+                     the mirror image of the others is flagged as a possible label swap
+                     (config pair_check). A warning, never an automatic fix.
+
+Writes results/09_differential/<mode>/differential.csv, per_animal_means.csv,
+class_tests.csv, class_members.csv, pair_consistency.csv, pair_correlation_<unit>.csv,
+volcanoes and class/consistency figures, summary (hypothesis classes first, then untargeted).
 """
 from __future__ import annotations
 
@@ -36,7 +44,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from cln3msi import cli, stats  # noqa: E402
+from cln3msi import classes, cli, stats  # noqa: E402
 from cln3msi.util import read_h5ad  # noqa: E402
 from cln3msi.report import Summary, plt  # noqa: E402
 
@@ -54,6 +62,145 @@ def gradient_prediction(ctx, mode: str, obs: pd.DataFrame, mutant: str) -> tuple
     sign = pd.Series({s: (1.0 if mut_pos.get(s) == "Bottom" else -1.0) for s in g.index})
     pred = g[col] * sign
     return float(pred.median()), pred
+
+
+SLIDE_COLOURS = ["#c0392b", "#e67e22", "#d4ac0d", "#2874a6", "#7d3c98", "#17a589", "#7f8c8d", "#1abc9c"]
+
+
+def class_level(ctx, mode, ML, animals, ctl, mut, S, log):
+    """Class totals, ratios and the slide consistency check, from the per-animal means."""
+    C = ctx.cfg.get("class_tests", {}) or {}
+    PC = ctx.cfg.get("pair_check", {}) or {}
+    out = lambda name: ctx.out("results", "09_differential", mode, name)  # noqa: E731
+    min_pairs = int(ctx.cfg["differential"].get("min_pairs", 5))
+    alpha = float(ctx.cfg["differential"]["fdr_alpha"])
+
+    # ---- slide consistency first: the class summary refers to it --------------------------
+    flagged = []
+    if PC.get("enabled", True):
+        units = [u for u in PC.get("units", ["whole_section"]) if u in set(ML["unit"])]
+        mats, T, flagged = classes.consistency(ML, animals, ctl, mut, units, float(PC.get("flag_below", -0.3)),
+                                                  int(PC.get("min_peaks", 20)))
+        S.h("Slide consistency (do the KO/Control differences agree between slides?)")
+        if T.empty:
+            S.p(f"Not enough slides or peaks to check (needs 3 slides and pair_check.min_peaks = {int(PC.get('min_peaks', 20))} peaks).")
+        else:
+            T.to_csv(out("pair_consistency.csv"))
+            for u, M in mats.items():
+                M.to_csv(out(f"pair_correlation_{u}.csv"))
+            S.p("Spearman correlation, over all tested peaks, between the slides' log2(Mutant/Control) "
+                "profiles. With correct labels the slides share the genotype effect, so the correlations "
+                "should be positive or near 0. The table gives each slide's median correlation with the "
+                f"other slides; a slide is flagged when that is below {float(PC.get('flag_below', -0.3)):g} "
+                "in at least half of the regions checked.")
+            S.table(T.reset_index().round(3))
+            if flagged:
+                S.warn(f"slide(s) {', '.join(flagged)}: the KO/Control difference profile is the mirror image "
+                       "of the other slides. This looks like the two sections are swapped (sample sheet, or "
+                       "slide loaded the other way round). Check the sectioning/mounting records; only if they "
+                       "confirm it, add the slide to qc.sections.flip_slides and rerun from 03. Do not relabel "
+                       "because of this result alone.", log)
+            else:
+                S.p("No slide flagged.")
+            fig, axes = plt.subplots(1, len(mats), figsize=(3.3 * len(mats), 3.0), squeeze=False)
+            for ax, (u, M) in zip(axes[0], mats.items()):
+                im = ax.imshow(M.to_numpy(), cmap="RdBu_r", vmin=-1, vmax=1)
+                ax.set_xticks(range(len(M)), M.columns, fontsize=7)
+                ax.set_yticks(range(len(M)), M.index, fontsize=7)
+                for i in range(len(M)):
+                    for j in range(len(M)):
+                        ax.text(j, i, f"{M.iat[i, j]:.2f}", ha="center", va="center", fontsize=6)
+                ax.set_title(u, fontsize=8)
+            fig.colorbar(im, ax=axes[0].tolist(), shrink=0.8, label="Spearman r")
+            fig.suptitle(f"{mode}: do the slides' KO/Control differences agree?", fontsize=9)
+            S.fig(fig, "pair_consistency.png")
+
+    # ---- class and ratio tests --------------------------------------------------------------
+    if not C.get("enabled", True):
+        return
+    class_cfg = (C.get("classes") or {}).get(mode) or {}
+    ratio_cfg = (C.get("ratios") or {}).get(mode) or []
+    if not class_cfg:
+        log.info(f"{mode}: no class_tests.classes for this mode, class tests skipped")
+        return
+    ap = ctx.out("processed", mode, "annotations.csv", mkdir=False)
+    if not ap.exists():
+        S.warn("no annotations.csv (run 05): class tests skipped", log)
+        return
+    ann = classes.usable_peaks(pd.read_csv(ap), int(C.get("min_sections", 0)), C.get("ambiguity", "tags"))
+    regions = [u for u in C.get("regions", ["whole_section"]) if u in set(ML["unit"])]
+    vals, mem = classes.totals(ML, ann, class_cfg, ratio_cfg, regions)
+    if vals.empty:
+        S.warn("none of the configured classes were found among the tested peaks", log)
+        return
+    R = classes.test_features(vals, animals, ctl, mut, min_pairs)
+    if PC.get("sensitivity", True) and flagged:
+        R = R.merge(classes.sensitivity(vals, animals, ctl, mut, flagged, min_pairs), on=["unit", "feature"], how="left")
+    R.to_csv(out("class_tests.csv"), index=False)
+    mem.to_csv(out("class_members.csv"), index=False)
+    vals.to_csv(out("class_values_per_animal.csv"), index=False)
+
+    S.h("Class-level and ratio tests (pre-specified, one BH family for this mode)")
+    S.p(f"{len(R)} tests ({R['feature'].nunique()} classes/ratios x {R['unit'].nunique()} regions). "
+        f"Species per class are in class_members.csv. log2fc is the mean over slides of "
+        "log2(Mutant/Control); pair_<slide> columns show each slide on its own.")
+    pair_cols = [c for c in R.columns if c.startswith("pair_")]
+    show = ["unit", "feature", "kind", "n_species", "log2fc", "pct_change", "ci_low", "ci_high", "p_ttest",
+            "p_wilcoxon", "q_bh", "n_pairs_up", "n_pairs"] + pair_cols
+    S.table(R.sort_values("p_ttest")[[c for c in show if c in R]].round(4), max_rows=30)
+    S.kv({f"q < {alpha}": int((R["q_bh"] < alpha).sum()), "lowest q": float(R["q_bh"].min())})
+    if flagged:
+        tag = "+".join(flagged)
+        S.p(f"Sensitivity (exploratory, slide(s) {tag} flagged above): the CSV has extra columns with "
+            f"{tag} left out (`without_{tag}_*`) and flipped (`flipped_{tag}_*`). Use them to see how much "
+            "the flagged slide matters, not as the result: choosing the analysis after seeing the data "
+            "is circular. Only the records can decide whether the slide is swapped.")
+        fc = f"flipped_{tag}_p_ttest"
+        if fc in R:
+            S.table(R.sort_values(fc)[["unit", "feature", "log2fc", "p_ttest", f"flipped_{tag}_log2fc", fc,
+                                       f"flipped_{tag}_n_pairs_up", f"flipped_{tag}_q_bh", f"without_{tag}_p_ttest"]]
+                    .round(4), max_rows=15)
+
+    # dot plot: each slide's log2FC for a few chosen features, per region
+    feats = [f for f in ((C.get("plot_features") or {}).get(mode) or []) if f in set(R["feature"])]
+    if feats and pair_cols:
+        regs = [u for u in regions if u in set(R["unit"])]
+        fig, axes = plt.subplots(len(regs), 1, figsize=(1.3 * len(feats) + 2.5, 2.1 * len(regs)), squeeze=False, sharex=True)
+        slides = [c.replace("pair_", "") for c in pair_cols]
+        for ax, u in zip(axes[:, 0], regs):
+            sub = R[R["unit"] == u].set_index("feature")
+            for i, f in enumerate(feats):
+                if f not in sub.index:
+                    continue
+                for j, s in enumerate(slides):
+                    v = sub.at[f, f"pair_{s}"]
+                    mk = "D" if s in flagged else "o"
+                    ax.scatter(i + (j - (len(slides) - 1) / 2) * 0.09, v, s=22, marker=mk,
+                               color=SLIDE_COLOURS[j % len(SLIDE_COLOURS)], edgecolor="k" if s in flagged else "none",
+                               label=s if (i == 0 and u == regs[0]) else None, zorder=3)
+            ax.axhline(0, color="0.5", lw=0.7)
+            ax.set_ylabel(u.replace("_", " "), fontsize=7)
+        axes[-1, 0].set_xticks(range(len(feats)), feats, fontsize=7, rotation=20, ha="right")
+        fig.suptitle(f"{mode}: log2(Mutant/Control) per slide pair" +
+                     (f" (diamonds = flagged slide {', '.join(flagged)})" if flagged else ""), fontsize=8, y=0.995)
+        fig.legend(*axes[0, 0].get_legend_handles_labels(), fontsize=7,
+                   ncol=len(slides), loc="upper center", bbox_to_anchor=(0.5, 0.975), frameon=False)
+        fig.tight_layout(rect=(0, 0, 1, 0.95))
+        S.fig(fig, "class_tests_per_slide.png")
+
+    # forest plot for whole section + white matter
+    F = R[R["unit"].isin(["whole_section", "white_matter"]) & R["p_ttest"].notna()].sort_values(["unit", "kind", "feature"])
+    if len(F):
+        fig, ax = plt.subplots(figsize=(6.5, 0.24 * len(F) + 1.2))
+        yy = np.arange(len(F))
+        ax.errorbar(F["log2fc"], yy, xerr=[F["log2fc"] - F["ci_low"], F["ci_high"] - F["log2fc"]],
+                    fmt="o", ms=3, color="k", ecolor="0.6")
+        ax.set_yticks(yy, F["feature"] + "  [" + F["unit"] + "]", fontsize=6)
+        ax.axvline(0, color="k", lw=0.5)
+        ax.invert_yaxis()
+        ax.set_xlabel("log2(Mutant/Control), 95% CI over slide pairs")
+        ax.set_title(f"{mode}: class totals and ratios", fontsize=9)
+        S.fig(fig, "class_tests_forest.png")
 
 
 def main():
@@ -171,7 +318,8 @@ def main():
         R["significant"] = (np.where(R["targeted"], R["q_targeted"], R["q_all"]) < alpha)
         R = R.sort_values(["unit_kind", "unit", "p_ttest"])
         R.to_csv(ctx.out("results", "09_differential", mode, "differential.csv"), index=False)
-        pd.concat(means_long).to_csv(ctx.out("results", "09_differential", mode, "per_animal_means.csv"), index=False)
+        ML = pd.concat(means_long, ignore_index=True)
+        ML.to_csv(ctx.out("results", "09_differential", mode, "per_animal_means.csv"), index=False)
 
         # ---- volcanoes ------------------------------------------------------------------
         reg_units = [u for k, u in units if k == "region" and u in set(R.unit)]
@@ -249,6 +397,7 @@ def main():
             Sx = R[R.unit == "whole_section"].nsmallest(10, "p_sex_difference_exploratory")
             S.table(Sx[[c for c in ("label", "log2fc", "log2fc_Female", "log2fc_Male",
                                      "p_sex_difference_exploratory") if c in Sx]].round(4))
+        class_level(ctx, mode, ML, animals, ctl, mut, S, log)
         log.info(f"summary: {S.write()}")
     cli.finish(log, t0)
 

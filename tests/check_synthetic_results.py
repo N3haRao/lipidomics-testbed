@@ -73,6 +73,20 @@ def main():
     r = d[(d["unit"] == "whole_section") & (d["label"] == "PI 38:4 [M-H]-")].iloc[0]
     check("09 unchanged PI 38:4 stays small", abs(r["log2fc"]) < 0.25, f"log2FC {r['log2fc']:+.2f}")
 
+    # 09 class tests and slide consistency (labels are correct in the synthetic data)
+    for mode in ("lip_neg", "lip_pos", "met_neg"):
+        pc = R / "09_differential" / mode / "pair_consistency.csv"
+        ok = pc.exists() and not pd.read_csv(pc)["flagged"].astype(bool).any()
+        check(f"09 {mode} slide consistency: no slide flagged", ok, "" if pc.exists() else "not written")
+    ct = {m: pd.read_csv(R / "09_differential" / m / "class_tests.csv").set_index(["unit", "feature"])
+          for m in ("lip_neg", "met_neg")}
+    for mode, unit, feat, sign in [("lip_neg", "whole_section", "Cer", 1), ("lip_neg", "white_matter", "HexCer", 1),
+                                   ("lip_neg", "white_matter", "Sulfatide non-OH", -1),
+                                   ("met_neg", "whole_section", "GPI", 1)]:
+        r = ct[mode].loc[(unit, feat)]
+        check(f"09 class test {mode} {feat} {'up' if sign > 0 else 'down'} in {unit}",
+              r["log2fc"] * sign > 0.2 and r["q_bh"] < 0.05, f"log2FC {r['log2fc']:+.2f}, q {r['q_bh']:.1e}")
+
     report = ctx.output_root / "report" / "report.html"
     check("10 report written", report.exists() and report.stat().st_size > 100_000)
 

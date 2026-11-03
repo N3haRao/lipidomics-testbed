@@ -98,6 +98,8 @@ Open `config.yaml`. The things to check:
 | `normalization.for_stats` | `tic` (decided up front; don't change it after seeing 09) |
 | `registration.optical_tiffs` | per-slide TIFF path, relative to `data_root`, once Pilar sends them |
 | `scils_crosscheck.enabled` | `true` to compare with the SCiLS exports |
+| `class_tests.*` | which lipid classes are summed and which ratios are tested, per mode (set before looking at results) |
+| `pair_check.*` | slide consistency check: regions used, flag threshold, and whether to add exploratory left-out / flipped columns for a flagged slide |
 
 ### What's in the data folder, and what the pipeline uses
 
@@ -173,7 +175,7 @@ python scripts/00_setup.py --config config.yaml \
 | **06_normalize** | TIC, RMS, median (and uMAIA if available); slide effect before/after (partial R2 of slide on section means, PCA); X = TIC for stats; any batch-corrected embedding only in obsm for plots | `processed/<mode>/matrix_norm.h5ad`, `slide_effect_pca.png` |
 | **07_register** | per section: guide image (TIFF, else sulfatide/HexCer image, else PC1), AP search around Bregma -1.58 to -2.18, similarity -> affine -> B-spline (SimpleITK, mutual information), warped Allen labels, region masks, Dice QC, lipid WM/GM fallback | `processed/<mode>/regions.parquet`, `overlays.png`, `registration.csv` |
 | **08_explore** | Moran's I per section with permutations, seeded NMF on Control, Leiden territories on Control transferred to all pixels by kNN | `territories.parquet`, `morans_i.csv`, `nmf_programs.csv` |
-| **09_differential** | per-animal means per region / territory, log2, paired over slides: paired t (primary, with 95% CI), Wilcoxon, mixed model; BH within region (targeted and all); position flag; exploratory sex | `results/09_differential/<mode>/differential.csv`, volcanoes, forest plot |
+| **09_differential** | per-animal means per region / territory, log2, paired over slides: paired t (primary, with 95% CI), Wilcoxon; BH within region (targeted and all); position flag; exploratory sex. Then, from the same means: **class totals and ratios** (`class_tests`, one BH family per mode) and the **slide consistency check** (`pair_check`: a slide whose KO/Control difference is the mirror image of the others is flagged as a possible label swap) | `results/09_differential/<mode>/{differential,class_tests,pair_consistency}.csv`, volcanoes, forest plots, per-slide dot plot, correlation heatmap |
 | **10_report** | self-contained HTML with QC, overlays, tables, top-hit ion images (Control vs KO per slide, shared scale), volcanoes, caveats, all summaries | `report/report.html` |
 
 ### How the "don't assume" rules are handled
@@ -196,6 +198,9 @@ python scripts/00_setup.py --config config.yaml \
    (`could_be_position`). Not corrected, only reported.
 3. **Sex = run** (females runs 1-3, males run 4). Sex results are labelled exploratory.
 4. **Animal = unit.** All tests are on per-animal means, never on pixels.
+5. **Labels are checked, never changed by the code.** 09 compares the slides' KO/Control
+   difference profiles; a slide that runs opposite to the others is flagged as a possible swap.
+   Only the sectioning/mounting records can confirm it; then set `qc.sections.flip_slides`.
 
 ---
 

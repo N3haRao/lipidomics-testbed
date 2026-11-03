@@ -44,3 +44,6 @@ scils_crosscheck:
     lip_neg: "export_All_Lip_Neg.csv"
     lip_pos: "export_All_Lip_Pos.xlsx"
     met_neg: null
+
+# the synthetic data only has ~12 tested peaks per mode; low enough so the check still runs
+pair_check: {min_peaks: 8}

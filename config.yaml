@@ -199,6 +199,108 @@ differential:
   # stats use log2 of the per-animal means; a pseudocount (half the smallest positive mean) is
   # added only for lipids where some animal's mean is exactly 0
 
+# Class-level and ratio tests (run at the end of 09, from its per-animal means).
+# For each animal and region the species of a class are added up, then tested with the same
+# paired test as single peaks. Ratios are taken within the same animal and region, so TIC,
+# matrix coating and most of a left/right trend cancel. One BH family per mode over all
+# class and ratio tests. Set before looking at the genotype results; keep it that way.
+# A class entry: classes = lipid_class values from 05, names = exact annotations,
+# suffix = the annotation must end with it (";O3" = 2-hydroxylated). Entries missing in
+# a mode's annotations are just skipped.
+class_tests:
+  enabled: true
+  regions: [whole_section, white_matter, corpus_callosum, cortex, hippocampus, thalamus]
+  min_sections: 10                   # a species must be seen in at least this many sections
+  # which ambiguous peaks to leave out: tags = candidates with more than one hypothesis tag
+  # (e.g. SHexCer vs BMP_PG); classes = candidates from more than one lipid class (strict,
+  # drops many PC/PE and LPC/LPE overlaps); none = keep all
+  ambiguity: tags
+  classes:
+    lip_neg:
+      "Sulfatide": {classes: [SHexCer]}
+      "Sulfatide 2-OH": {classes: [SHexCer], suffix: ";O3"}
+      "Sulfatide non-OH": {classes: [SHexCer], suffix: ";O2"}
+      "HexCer": {classes: [HexCer]}
+      "Cer": {classes: [Cer]}
+      "SM": {classes: [SM]}
+      "GM1": {classes: [GM1]}
+      "GM2": {classes: [GM2]}
+      "GM3": {classes: [GM3]}
+      "GM2+GM3": {classes: [GM2, GM3]}
+      "GM all": {classes: [GM1, GM2, GM3]}
+      "BMP/PG": {classes: [BMP/PG]}
+      "BMP/PG 44:12": {names: ["BMP/PG 44:12"]}
+      "PE": {classes: [PE]}
+      "PI": {classes: [PI]}
+      "PS": {classes: [PS]}
+      "PE+PI+PS": {classes: [PE, PI, PS]}
+      "LPE": {classes: [LPE]}
+      "LPI": {classes: [LPI]}
+    lip_pos:
+      "HexCer": {classes: [HexCer]}
+      "Hex2Cer": {classes: [Hex2Cer]}
+      "SM": {classes: [SM]}
+      "PC": {classes: [PC]}
+      "PE": {classes: [PE]}
+      "Cholesterol": {classes: [Cholesterol]}
+      "LPC": {classes: [LPC]}
+    met_neg:
+      "GPD sum": {classes: [Glycerophosphodiester]}
+      "GPI": {names: [Glycerophosphoinositol]}
+      "GPE": {names: [Glycerophosphoethanolamine]}
+      "GPG": {names: [Glycerophosphoglycerol]}
+      "Glycerol 3-phosphate": {names: ["Glycerol 3-phosphate"]}
+      "N-acetylaspartate": {names: [N-acetylaspartate]}
+      "NAAG": {names: [N-acetylaspartylglutamate]}
+      "Phosphoethanolamine": {names: [Phosphoethanolamine]}
+      "Taurine": {names: [Taurine]}
+      "Glutamate": {names: [Glutamate]}
+      "GABA": {names: [GABA]}
+      "LPE": {classes: [LPE]}
+      "LPI": {classes: [LPI]}
+  ratios:                            # [numerator, denominator], names from the classes above
+    lip_neg:
+      - ["Sulfatide", "HexCer"]
+      - ["Sulfatide 2-OH", "Sulfatide non-OH"]
+      - ["Sulfatide", "PE+PI+PS"]
+      - ["HexCer", "Cer"]
+      - ["SM", "Cer"]
+      - ["GM2+GM3", "GM1"]
+      - ["GM3", "GM1"]
+      - ["BMP/PG", "PE+PI+PS"]
+      - ["BMP/PG 44:12", "PE+PI+PS"]
+      - ["LPE", "PE"]
+      - ["LPI", "PI"]
+    lip_pos:
+      - ["HexCer", "PC"]
+      - ["HexCer", "SM"]
+      - ["LPC", "PC"]
+    met_neg:
+      - ["GPE", "LPE"]
+      - ["GPI", "LPI"]
+      - ["GPE", "Phosphoethanolamine"]
+      - ["GPD sum", "N-acetylaspartate"]
+  # features shown in the per-slide dot plot (class or ratio names, per mode)
+  plot_features:
+    lip_neg: ["Sulfatide", "Sulfatide / PE+PI+PS", "HexCer", "Cer", "GM all", "BMP/PG"]
+    lip_pos: ["HexCer", "HexCer / PC", "SM", "LPC / PC"]
+    met_neg: ["GPI", "GPG", "GPE", "GPI / LPI"]
+
+# Do the slides agree? (end of 09) Each slide's log2(Mutant/Control) over all tested peaks is
+# its "difference profile". With correct labels the slides share the genotype effect, so the
+# profiles correlate positively, or at least not negatively. A slide whose profile is the
+# mirror image of the others may have its two sections swapped. This is only a warning:
+# never relabel a slide because of it. Check the sectioning/mounting records, and only if
+# they confirm a swap, list the slide in qc.sections.flip_slides and rerun from 03.
+pair_check:
+  enabled: true
+  units: [whole_section, white_matter, cortex]
+  flag_below: -0.3                   # flag a slide whose median correlation with the others is below this
+  min_peaks: 20                      # fewer tested peaks than this: correlations too noisy, check skipped
+  # redo the class tests with flagged slides left out and flipped, as extra columns
+  # (exploratory: choosing the analysis after seeing the data is circular)
+  sensitivity: true
+
 hypotheses:                          # direction expected in CLN3 KO vs Control
   accumulated: [LSM, Cer, HexCer, Hex2Cer, GM1, GM2, GM3, SM, SHexCer]
   depleted: [SM, SHexCer]            # specific myelin species; SM and SHexCer appear in both lists on purpose
