@@ -256,7 +256,9 @@ bash bin/hpc/fetch_results.sh            # when jobs are done -> ~/cln3_msi_outp
 ```
 
 On Ada the layout is `HPC_WORK/{repo,data,outputs,envs,slurm_logs}`, and `config.hpc.yaml` points
-at it through `${CLN3_WORK}`. Edit code and config on the Mac and re-run
+at it through `${CLN3_WORK}` (outputs) and `${CLN3_DATA}` (data, `HPC_DATA` in `settings.sh`,
+default `HPC_WORK/data`). A second user can read the data from another account's folder and
+write to their own: see "Running as another user" in `docs/ADA_RUN_GUIDE.md`. Edit code and config on the Mac and re-run
 `upload_to_hpc.sh --code` (the upload mirrors the repo, so edits made directly on Ada get
 overwritten). To rerun from a phase: `FROM=05 bash bin/hpc/start_on_hpc.sh`.
 

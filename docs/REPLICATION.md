@@ -111,7 +111,12 @@ paths:
 
 Nothing else needs changing to reproduce the analysis as run. All other settings are the
 decisions described in `METHODS.md`. For a cluster, `config.hpc.yaml` inherits `config.yaml`
-and only overrides the paths using `${CLN3_WORK}`.
+and only overrides the paths, using `${CLN3_DATA}` for the data and `${CLN3_WORK}` for the
+outputs (set from `HPC_DATA` and `HPC_WORK` in `bin/hpc/settings.sh`).
+
+On Ada, the data are at `/home/nehar/cln3_msi/data/imzML files for biostats/`. Another user
+can run the pipeline against that folder from their own account (read access needed, outputs
+in their own home); see "Running as another user" in [`ADA_RUN_GUIDE.md`](ADA_RUN_GUIDE.md).
 
 ## 6. Run the pipeline
 

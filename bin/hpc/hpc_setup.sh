@@ -11,6 +11,15 @@ REPO="$(cd "$HERE/../.." && pwd)"
 source "$HERE/settings.sh"
 HPC_WORK="${HPC_WORK:-$HOME/cln3_msi}"   # empty in settings.sh = ~/cln3_msi
 export CLN3_WORK="$HPC_WORK"
+export CLN3_DATA="${HPC_DATA:-$HPC_WORK/data}"      # empty in settings.sh = HPC_WORK/data
+mkdir -p "$HPC_WORK"
+if [[ ! -d "$CLN3_DATA/imzML files for biostats" ]]; then
+  echo "WARNING: no 'imzML files for biostats' folder in $CLN3_DATA"
+  echo "         (upload it with upload_to_hpc.sh, or set HPC_DATA in bin/hpc/settings.sh)"
+elif [[ ! -r "$CLN3_DATA/imzML files for biostats" ]]; then
+  echo "ERROR: $CLN3_DATA is not readable by $(whoami). Ask its owner for read access"
+  echo "       (docs/ADA_RUN_GUIDE.md, 'Running as another user')."; exit 2
+fi
 ENV_PREFIX="$HPC_WORK/envs/cln3-msi"
 cd "$REPO"
 
@@ -56,6 +65,7 @@ ${CONDA_MODULE:+command -v module >/dev/null 2>&1 && module load $CONDA_MODULE}
 source "$CONDA_SH"
 conda activate "$ENV_PREFIX"
 export CLN3_WORK="$HPC_WORK"
+export CLN3_DATA="$CLN3_DATA"
 export CLN3_REPO="$REPO"
 export MPLBACKEND=Agg
 ENVEOF

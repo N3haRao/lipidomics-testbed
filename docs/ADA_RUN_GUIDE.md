@@ -258,6 +258,78 @@ ls ~/.ssh/id_ed25519.pub 2>/dev/null || ssh-keygen -t ed25519    # press Enter 3
 ssh-copy-id nehar@ada.nri.bcm.edu                                 # Ada password, one last time
 ```
 
+## Running as another user (for example, a colleague replicating the analysis)
+
+A second person can run the whole pipeline under their own Ada account, reading the data
+straight from `/home/nehar/cln3_msi/data` (no second 40 GB copy) and writing everything to
+their own folder. The pipeline only ever reads the data folder.
+
+Where things are on Ada:
+
+| what | path |
+|---|---|
+| input data (the 36 imzML/ibd files) | `/home/nehar/cln3_msi/data/imzML files for biostats/` with subfolders `Lipid Negative/`, `Lipid Positive/`, `Metabolite Negative/` |
+| Neha's copy of the code | `/home/nehar/cln3_msi/repo/` |
+| Neha's outputs (report, tables, figures) | `/home/nehar/cln3_msi/outputs/` (report: `outputs/report/report.html`) |
+| Neha's Python environment | `/home/nehar/cln3_msi/envs/cln3-msi/` |
+
+**1. Neha gives read access (once, on Ada as nehar).** Replace `<user>` with the colleague's
+Ada username. If Ada supports access-control lists, this gives access to that one person only:
+
+```bash
+setfacl -m u:<user>:x /home/nehar /home/nehar/cln3_msi
+setfacl -R -m u:<user>:rX /home/nehar/cln3_msi/data /home/nehar/cln3_msi/outputs
+```
+
+If `setfacl` is not available, ask the Ada administrators to put both accounts in a shared
+group, then `chgrp -R <group>` and `chmod -R g+rX` those folders (plus `chmod g+x` on
+`/home/nehar` and `/home/nehar/cln3_msi`). Avoid `chmod o+r`: that would let every Ada user
+read unpublished data. Check from the colleague's account with
+`ls "/home/nehar/cln3_msi/data/imzML files for biostats/Lipid Negative" | head`.
+
+**2. The colleague gets the code (on Ada, in their own account).**
+
+```bash
+ssh <user>@ada.nri.bcm.edu
+mkdir -p ~/cln3_msi && cd ~/cln3_msi
+git clone https://github.com/N3haRao/lipidomics-testbed.git repo
+cd repo && git checkout claude/hopeful-ride-f4pcg6     # or the commit/branch to reproduce
+```
+
+Without git: `curl -L -o code.zip <ZIP link of the branch on GitHub>`, `unzip code.zip`, and
+rename the folder to `repo`.
+
+**3. Point the settings at the shared data.** In `bin/hpc/settings.sh` (open with `nano`):
+
+```bash
+HPC_USER="<user>"
+HPC_WORK=""                                   # = ~/cln3_msi in the colleague's home
+HPC_DATA="/home/nehar/cln3_msi/data"          # read-only use of Neha's data
+```
+
+**4. Set up and run (all on Ada).**
+
+```bash
+cd ~/cln3_msi/repo
+bash bin/hpc/hpc_setup.sh       # own conda env + reference downloads, first time 10-20 min; ends "== setup OK"
+bash bin/hpc/submit_all.sh      # submits every phase as SLURM jobs
+squeue -u <user>                # watch; empty = finished
+```
+
+The setup stops with a clear message if the data folder isn't readable yet. Outputs go to
+`~/cln3_msi/outputs/` of the colleague, so the two runs never overwrite each other. To check
+that the runs match, compare the Reproducibility section of the two reports: the same code
+fingerprint and config hash should give the same numbers.
+
+**5. Look at the report** from a Mac or PC:
+
+```bash
+scp <user>@ada.nri.bcm.edu:~/cln3_msi/outputs/report/report.html .
+```
+
+To only look at Neha's existing results without rerunning anything, step 1 is enough, then
+`scp <user>@ada.nri.bcm.edu:/home/nehar/cln3_msi/outputs/report/report.html .`
+
 ## If something goes wrong
 
 | what you see | what to do |

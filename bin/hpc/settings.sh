@@ -13,6 +13,12 @@ HPC_HOST="ada.nri.bcm.edu"
 # e.g. HPC_WORK="/scratch/nehar/cln3_msi"
 HPC_WORK=""
 
+# Where the imzML data sit on Ada (the folder that CONTAINS "imzML files for biostats").
+# Empty = HPC_WORK/data, which is where upload_to_hpc.sh puts it. A second user who reads
+# the data from someone else's folder sets it here, e.g. HPC_DATA="/home/nehar/cln3_msi/data"
+# (the data are only read, never written; see docs/ADA_RUN_GUIDE.md, "Running as another user").
+HPC_DATA=""
+
 # SLURM: leave empty to use the cluster defaults. Ask the HPC team / docs if unsure.
 SLURM_PARTITION=""          # e.g. "defq", "compute"
 SLURM_ACCOUNT=""            # only if Ada makes you charge jobs to an account / project
