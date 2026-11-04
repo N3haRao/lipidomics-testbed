@@ -17,6 +17,7 @@ import time
 import psutil
 
 from . import config as config_mod
+from . import provenance
 
 
 def memory_gb() -> float:
@@ -88,6 +89,13 @@ def start(phase: str, description: str, slide: bool = False, mode: bool = True,
     if modes:
         log.info(f"modes: {modes}")
     log.info(f"log file: {logfile}")
+    try:
+        rec = provenance.write(ctx, phase, modes)
+        log.info(f"code fingerprint {rec['code_fingerprint']}"
+                 + (f" | git {rec['git_commit']}" if rec["git_commit"] else "")
+                 + f" | config {rec['config_sha256']} | pipeline v{rec['pipeline_version']}")
+    except Exception as e:      # provenance must never stop a run
+        log.warning(f"could not write provenance record: {e}")
     log.mem("start")
     return ctx, log, modes, args
 

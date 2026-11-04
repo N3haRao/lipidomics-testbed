@@ -87,6 +87,15 @@ def main():
         check(f"09 class test {mode} {feat} {'up' if sign > 0 else 'down'} in {unit}",
               r["log2fc"] * sign > 0.2 and r["q_bh"] < 0.05, f"log2FC {r['log2fc']:+.2f}, q {r['q_bh']:.1e}")
 
+    # provenance: every phase recorded, all with the same code and config
+    from cln3msi import provenance
+    recs = [r for r in provenance.read_all(ctx) if r.get("phase") != "10_report"]
+    fps = {r["code_fingerprint"] for r in recs}
+    cfgs = {r["config_sha256"] for r in recs}
+    check("provenance recorded for phases 00 to 09, one code version and one config",
+          len({r["phase"] for r in recs}) >= 10 and len(fps) == 1 and len(cfgs) == 1,
+          f"{len(recs)} records, {len(fps)} code version(s), {len(cfgs)} config(s)")
+
     report = ctx.output_root / "report" / "report.html"
     check("10 report written", report.exists() and report.stat().st_size > 100_000)
 

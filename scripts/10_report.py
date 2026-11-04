@@ -22,7 +22,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from cln3msi import cli  # noqa: E402
+from cln3msi import cli, provenance  # noqa: E402
 from cln3msi.images import section_image  # noqa: E402
 from cln3msi.report import Summary, plt  # noqa: E402
 from cln3msi.util import read_h5ad  # noqa: E402
@@ -135,6 +135,37 @@ CAVEATS = [
 ]
 
 
+def provenance_section(ctx) -> str:
+    """Which code, config and packages produced these outputs (from metadata/provenance/)."""
+    recs = [r for r in provenance.read_all(ctx) if r.get("phase") != "10_report"]
+    if not recs:
+        return ""
+    T = pd.DataFrame([{"phase": r["phase"], "mode": r.get("mode") or "", "started": r.get("started"), "code_fingerprint": r.get("code_fingerprint"),
+                       "git_commit": (r.get("git_commit") or "")[:12], "config_sha256": r.get("config_sha256"),
+                       "sample_sheet_sha256": r.get("sample_sheet_sha256")} for r in recs]).sort_values(["phase", "mode"])
+    now = provenance.collect(ctx)
+    notes = []
+    if T["code_fingerprint"].nunique() > 1:
+        notes.append("The phases ran with <b>different code versions</b> (code_fingerprint differs). That is "
+                     "fine if only later phases changed; rerun from the earliest changed phase to be sure.")
+    if T["config_sha256"].nunique() > 1:
+        notes.append("The phases ran with <b>different configs</b> (config_sha256 differs). Check that no setting "
+                     "an earlier phase depends on was changed without rerunning it.")
+    if not notes:
+        notes.append("All phases ran with the same code and the same config.")
+    pk = now.get("packages", {})
+    pkg = ", ".join(f"{k} {v}" for k, v in pk.items() if v)
+    return ("<h2>Reproducibility</h2><p class='small'>Every phase records the code fingerprint (a hash of src/, "
+            "scripts/, reference/ and bin/, so it works for ZIP downloads too), the git commit if available, a hash "
+            "of the merged config and of the sample sheet. The merged config of each phase is saved next to it in "
+            "<code>metadata/provenance/</code>. To repeat this analysis, use code with the same fingerprint and the "
+            "saved config.</p>"
+            + "".join(f"<p>{n}</p>" for n in notes) + table_html(T, 20)
+            + f"<p class='small'>Report written with pipeline v{html.escape(now['pipeline_version'])}, code "
+              f"{html.escape(now['code_fingerprint'])}, Python {html.escape(now['python'])} on "
+              f"{html.escape(now['platform'])}. Packages: {html.escape(pkg)}.</p>")
+
+
 def slide_check_box(ctx, modes) -> str:
     """Top-of-report warning if 09 flagged a slide as a possible swap in any mode."""
     rows = []
@@ -197,6 +228,7 @@ def main():
     out.append(table_html(sheet[["animal_id", "genotype", "sex", "slide", "position_on_slide", "run_order"]], 20))
     out.append("<h2>Caveats</h2>" + "".join(f"<div class='caveat'>{c}</div>" for c in CAVEATS))
     out.append(slide_check_box(ctx, modes))
+    out.append(provenance_section(ctx))
 
     files = ctx.output_root / "metadata" / "files.csv"
     if files.exists():

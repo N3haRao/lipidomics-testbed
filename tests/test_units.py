@@ -187,6 +187,28 @@ def test_sample_sheet_validation_catches_two_controls():
         samples.validate_sheet(bad, ctx)
 
 
+def test_provenance_record(tmp_path):
+    from cln3msi import provenance
+    cfgp = tmp_path / "c.yaml"
+    cfgp.write_text(f'inherit: "{REPO / "config.test.yaml"}"\npaths: {{output_root: "{tmp_path / "out"}"}}\n')
+    ctx = load(cfgp)
+    fp = provenance.code_fingerprint()
+    assert len(fp) == 12 and fp == provenance.code_fingerprint()      # deterministic
+    rec = provenance.write(ctx, "09_differential", ["lip_neg", "met_neg"])
+    files = sorted(p.name for p in (tmp_path / "out" / "metadata" / "provenance").iterdir())
+    assert "09_differential_lip_neg.json" in files and "09_differential_met_neg_config.yaml" in files
+    assert rec["code_fingerprint"] == fp and rec["packages"].get("numpy")
+    assert {r["mode"] for r in provenance.read_all(ctx)} == {"lip_neg", "met_neg"}
+
+
+def test_sign_test_reported():
+    from cln3msi import stats as st
+    animals = pd.DataFrame({"slide": list("AABBCCDDEEFF"), "genotype": ["Control", "Mutant"] * 6,
+                            "sex": ["F"] * 12}, index=[f"a{i}" for i in range(12)])
+    log2 = pd.DataFrame({"p1": [1.0, 1.5, 1.0, 1.6, 1.0, 1.4, 1.0, 1.7, 1.0, 1.5, 1.0, 1.45]}, index=animals.index)
+    r = st.paired_tests(log2, animals, "Control", "Mutant", min_pairs=5).iloc[0]
+    assert abs(r["p_sign"] - 0.03125) < 1e-9 and r["n_pairs_up"] == 6   # 6 of 6 up: 2 x 0.5^6
+
 
 def raster_hugging_tissue():
     """Like the real lip_neg exports: the raster barely extends past the tissue (a 2-pixel

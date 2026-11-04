@@ -146,7 +146,7 @@ def class_level(ctx, mode, ML, animals, ctl, mut, S, log):
         "log2(Mutant/Control); pair_<slide> columns show each slide on its own.")
     pair_cols = [c for c in R.columns if c.startswith("pair_")]
     show = ["unit", "feature", "kind", "n_species", "log2fc", "pct_change", "ci_low", "ci_high", "p_ttest",
-            "p_wilcoxon", "q_bh", "n_pairs_up", "n_pairs"] + pair_cols
+            "p_wilcoxon", "p_sign", "q_bh", "n_pairs_up", "n_pairs", "p_sex_difference_exploratory"] + pair_cols
     S.table(R.sort_values("p_ttest")[[c for c in show if c in R]].round(4), max_rows=30)
     S.kv({f"q < {alpha}": int((R["q_bh"] < alpha).sum()), "lowest q": float(R["q_bh"].min())})
     if flagged:

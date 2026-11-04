@@ -11,7 +11,32 @@ the same code runs on the laptop and (later) as a SLURM job. A few notebooks are
 look at the figures.
 
 > Unpublished collaborator data. Nothing in this repo uploads anything. The only network access
-> is the one-time download in `00_setup.py --download` (LIPID MAPS, HMDB, Allen atlas).
+> is the one-time download in `00_setup.py --download` (LIPID MAPS, HMDB, Allen atlas). The
+> imaging data are not in this repository.
+
+## Documentation
+
+| document | for |
+|---|---|
+| [`docs/METHODS.md`](docs/METHODS.md) | study design, every processing step, and which statistical tests are used and why |
+| [`docs/REPLICATION.md`](docs/REPLICATION.md) | rerunning the analysis from the raw files, checking a rerun matches, which phase to rerun after a config change, and a guide to the result tables |
+| [`docs/ADA_RUN_GUIDE.md`](docs/ADA_RUN_GUIDE.md) | the same on the Ada cluster, every command from the ssh login on |
+| this README | repository layout, configuration keys, phase overview, troubleshooting |
+
+## Quick start
+
+```bash
+bash bin/setup_env.sh && conda activate cln3-msi     # environment (once)
+bash bin/run_synthetic_test.sh                        # check the install on fake data: 27/27 checks
+# set paths.data_root and paths.output_root in config.yaml, then:
+python scripts/00_setup.py --config config.yaml --download
+bash bin/run_all.sh config.yaml                       # phases 01 to 10
+open "<output_root>/report/report.html"
+```
+
+Every run records the code fingerprint, config hash and package versions in
+`<output_root>/metadata/provenance/`, and the report shows them, so a result can always be
+traced to the exact code and settings that produced it.
 
 ---
 
@@ -40,7 +65,8 @@ Outputs all go under `paths.output_root` (never inside the data folder; the conf
                      matrix_norm.h5ad (06), regions.parquet (07), territories.parquet (08)
   results/<phase>/<mode>/   tables (csv/json)
   figures/<phase>/<mode>/   png
-  summaries/<phase>_<mode>.md   <- the short text to paste back to me
+  summaries/<phase>_<mode>.md   <- short text summary of each phase, with warnings
+  metadata/provenance/          code fingerprint, config and package versions of every phase run
   logs/<phase>_<mode>_<time>.log  (includes memory use)
   cache/       LIPID MAPS, HMDB, Allen atlas
   report/report.html
@@ -66,8 +92,8 @@ Jupyter kernel called `cln3-msi`.
 CAJAL tutorial). If you want it, make a separate env following the uMAIA instructions
 (https://github.com/lamanno-epfl/uMAIA), run `pip install -e .` from this repo inside it, set
 `normalization.umaia.enabled: true`, and run phase 06 in that env. If uMAIA can't be imported,
-06 says so in the log and carries on with TIC/RMS/median only. (Untested here, since I couldn't
-install it in my test environment: send me the error if it fails.)
+06 says so in the log and carries on with TIC/RMS/median only. (The uMAIA route has not been
+tested; the analysis as run does not use it.)
 
 ## 2. Test on fake data first (no real data or internet needed)
 
@@ -79,7 +105,7 @@ bash bin/run_synthetic_test.sh
 This writes ~600 MB of fake imzML/ibd files to `synthetic_data/` (same folder names with spaces,
 same file names, 6 slides x 3 modes; each mode uses a different storage/spectrum type so every
 code branch runs), runs phases 00 to 10 with `config.test.yaml`, runs the unit tests, and checks
-that the planted effects were found (19 checks, e.g. "Cer up in KO", "sulfatide down in white
+that the planted effects were found (27 checks, e.g. "Cer up in KO", "sulfatide down in white
 matter", "slide G has the strongest gradient"). Takes ~5 minutes. `FRESH=1 bash bin/run_synthetic_test.sh`
 regenerates the fake data.
 
@@ -155,7 +181,7 @@ python scripts/00_setup.py --config config.yaml \
   --lipidmaps-file "$HOME/Downloads/LMSD.sdf.zip" --hmdb-file "$HOME/Downloads/structures.zip"
 ```
 
-**Suggested first pass:** run 00, 01 and 02, send me `summaries/01_inventory_*.md`,
+**Suggested first pass on new data:** run 00, 01 and 02, and check `summaries/01_inventory_*.md`,
 `summaries/02_qc_lip_neg.md` and the `figures/02_qc/lip_neg/*.png` (especially
 `sections_E.png` and `mean_spectrum_E.png`). Then we tune before the long phases.
 
@@ -243,7 +269,8 @@ overwritten). To rerun from a phase: `FROM=05 bash bin/hpc/start_on_hpc.sh`.
 * Only one section found on a slide: set `qc.sections.manual_split: {E: <row or column>}`.
 * Registration bad on some sections: check `overlays.png`; sections below `registration.min_dice`
   automatically get only the lipid WM/GM masks. A TIFF usually fixes it.
-* Send me the newest log from `<output_root>/logs/` with any error.
+* Any other error: the newest log in `<output_root>/logs/` has the full traceback and the
+  settings the phase used.
 
 ## Notebooks
 

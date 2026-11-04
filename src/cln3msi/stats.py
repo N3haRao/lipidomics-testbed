@@ -11,9 +11,19 @@ as pairs (each slide = one Control + one Mutant).
                                  possible two-sided p is 2/64 = 0.031, so it can't survive
                                  FDR across many lipids. It's there to spot t-tests driven
                                  by one weird pair, not to call hits.
-  mixed model                    log2 ~ genotype + (1 | slide). With 2 animals per slide this
-                                 is close to the paired t-test; a check that nothing odd
-                                 happens (e.g. a missing animal).
+  sign test (binomial)           counts pairs going up vs down, ignores the size of the change.
+                                 Same floor as the Wilcoxon (0.031 with 6 pairs). Reported
+                                 because "how many of the 6 pairs agree" is a natural question.
+  sex difference (exploratory)   Welch t-test of the female vs male pair differences, i.e. the
+                                 sex x genotype interaction. Sex itself cancels in the paired
+                                 difference (both animals on a slide are the same sex). Sex is
+                                 confounded with run here, so this is labelled exploratory.
+  mixed model                    log2 ~ genotype + (1 | slide). Off by default
+                                 (differential.run_mixedlm): with 2 animals per slide its
+                                 variance estimate collapses and the p-values are far too small.
+
+The paired t-test is exactly the fixed-block linear model log2 ~ genotype + slide, so
+"paired t-test" and "linear model with slide as a block" are the same analysis.
 """
 from __future__ import annotations
 
@@ -76,6 +86,9 @@ def paired_tests(log2: pd.DataFrame, animals: pd.DataFrame, control: str, mutant
                 rec["p_wilcoxon"] = float(stats.wilcoxon(d, method="exact").pvalue) if np.any(d != 0) else 1.0
             except Exception:
                 rec["p_wilcoxon"] = np.nan
+            # sign test (binomial): only counts how many pairs go up. Same floor as Wilcoxon.
+            nz = d[d != 0]
+            rec["p_sign"] = float(stats.binomtest(int((nz > 0).sum()), len(nz)).pvalue) if len(nz) else 1.0
             # exploratory: is the effect different in females vs males? (confounded with run!)
             s_ok = sex[ok]
             groups = [d[s_ok == g] for g in np.unique(s_ok)]
@@ -86,7 +99,7 @@ def paired_tests(log2: pd.DataFrame, animals: pd.DataFrame, control: str, mutant
         else:
             # too few pairs to test: report the effect, no p-value
             rec.update(log2fc=float(d.mean()) if n else np.nan, ci_low=np.nan, ci_high=np.nan,
-                       p_ttest=np.nan, p_wilcoxon=np.nan, n_pairs_up=int((d > 0).sum()))
+                       p_ttest=np.nan, p_wilcoxon=np.nan, p_sign=np.nan, n_pairs_up=int((d > 0).sum()))
         if run_mixed and n >= max(3, min_pairs):
             rec["p_mixedlm"] = mixedlm_p(log2[peak], info, mutant)
         out.append(rec)
