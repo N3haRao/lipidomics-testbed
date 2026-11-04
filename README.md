@@ -262,6 +262,33 @@ write to their own: see "Running as another user" in `docs/ADA_RUN_GUIDE.md`. Ed
 `upload_to_hpc.sh --code` (the upload mirrors the repo, so edits made directly on Ada get
 overwritten). To rerun from a phase: `FROM=05 bash bin/hpc/start_on_hpc.sh`.
 
+## Sensitivity run: slide J flipped, compared with the main run
+
+The main run uses the sample sheet as it is. To see how much the results depend on slide J's
+labels (requested while the sectioning records are being checked), the same analysis runs with
+J's two sections swapped, into its own output folder, and phase 11 lines the two runs up.
+
+On Ada, from the Mac (about the time of a full run; the main outputs are only read):
+
+```bash
+cd /Users/neharao/Downloads/lipidomics-testbed-claude-hopeful-ride-f4pcg6
+bash bin/hpc/upload_to_hpc.sh --code
+RUN=flipJ bash bin/hpc/start_on_hpc.sh      # config.hpc.flipJ.yaml -> ~/cln3_msi/outputs_flipJ, then phase 11
+RUN=flipJ bash bin/hpc/status.sh
+RUN=flipJ bash bin/hpc/fetch_results.sh     # -> ~/cln3_msi_outputs_from_ada_flipJ
+```
+
+On the Mac directly: `bash bin/run_all.sh config.flipJ.yaml`, then
+`python scripts/11_compare_runs.py --config config.flipJ.yaml --baseline config.yaml --labels main,flipJ`.
+
+Results: `summaries/11_compare_<mode>.md` and `results/11_compare/<mode>/` in the flipJ output
+folder (class tests, single peaks, slide consistency and counts, both runs side by side).
+For a like-for-like comparison, the main run should have been run with the same code: if the
+summary says the code differs, rerun the main run from 09 first (`FROM=09 bash bin/hpc/start_on_hpc.sh`).
+
+`config.test.flipJ.yaml` does the same on the synthetic data (whose labels are correct), as a
+check of the machinery: there, flipping J makes the slide consistency check flag J.
+
 ## Troubleshooting
 
 * `CONFIG / DATA ERROR` with an expected layout printed: `paths.data_root` is wrong or a mode

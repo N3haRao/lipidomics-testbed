@@ -21,6 +21,8 @@ elif [[ ! -r "$CLN3_DATA/imzML files for biostats" ]]; then
   echo "       (docs/ADA_RUN_GUIDE.md, 'Running as another user')."; exit 2
 fi
 ENV_PREFIX="$HPC_WORK/envs/cln3-msi"
+RUN="${RUN:-}"
+HPC_CONFIG="config.hpc${RUN:+.$RUN}.yaml"          # RUN=flipJ -> config.hpc.flipJ.yaml
 cd "$REPO"
 
 # ---- 1. conda ---------------------------------------------------------------------------
@@ -77,12 +79,12 @@ python -m pytest -q tests
 # ---- 4. phase 00 ------------------------------------------------------------------------
 if [[ -f "$HPC_WORK/outputs/cache/lipidmaps/lipidmaps.parquet" && -d "$HPC_WORK/outputs/cache/atlas" ]]; then
   echo "== reference data already cached; validating config only"
-  python scripts/00_setup.py --config config.hpc.yaml
+  python scripts/00_setup.py --config "$HPC_CONFIG"
 else
   echo "== phase 00 with downloads (LIPID MAPS, HMDB, Allen atlas)"
-  python scripts/00_setup.py --config config.hpc.yaml --download || {
+  python scripts/00_setup.py --config "$HPC_CONFIG" --download || {
     echo "00_setup failed. If a download was blocked, see the README (manual download + --lipidmaps-file)."
     exit 1; }
 fi
-grep -A4 -i "warnings" "$HPC_WORK/outputs/summaries/00_setup.md" || true
+grep -A4 -i "warnings" "$HPC_WORK/outputs${RUN:+_$RUN}/summaries/00_setup.md" || true
 echo "== setup OK"

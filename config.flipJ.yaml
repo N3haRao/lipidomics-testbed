@@ -1,0 +1,17 @@
+# Sensitivity run (Mac): the same analysis with slide J's two sections swapped, written to a
+# SEPARATE output folder so the main results stay as they are. Dr. Hari asked for this
+# comparison while Pilar checks the records; it doesn't replace the main run.
+#
+#   bash bin/run_all.sh config.flipJ.yaml
+#   python scripts/11_compare_runs.py --config config.flipJ.yaml --baseline config.yaml
+#
+# The reference databases and atlas are reused from the main run's cache (no new download).
+inherit: config.yaml
+
+paths:
+  output_root: "/Users/neharao/cln3_msi_outputs_flipJ"
+  cache_root: "/Users/neharao/cln3_msi_outputs/cache"
+
+qc:
+  sections:
+    flip_slides: ["J"]

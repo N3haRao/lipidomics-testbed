@@ -11,10 +11,13 @@ source "${CLN3_ENV_FILE:?CLN3_ENV_FILE not set}"
 set -eu
 cd "$CLN3_REPO"
 export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-4}" OPENBLAS_NUM_THREADS="${SLURM_CPUS_PER_TASK:-4}" MKL_NUM_THREADS="${SLURM_CPUS_PER_TASK:-4}"
-echo "phase ${PHASE} mode ${MODE:-all} on $(hostname), $(date)"
+echo "phase ${PHASE} mode ${MODE:-all} config ${CLN3_CONFIG:-config.hpc.yaml} on $(hostname), $(date)"
+CFG="${CLN3_CONFIG:-config.hpc.yaml}"
+# PHASE_ARGS: extra arguments, e.g. --baseline for phase 11 (word-split on purpose)
+# shellcheck disable=SC2086
 if [[ -n "${MODE:-}" ]]; then
-  bash bin/run_phase.sh "$PHASE" config.hpc.yaml --mode "$MODE"
+  bash bin/run_phase.sh "$PHASE" "$CFG" --mode "$MODE" ${PHASE_ARGS:-}
 else
-  bash bin/run_phase.sh "$PHASE" config.hpc.yaml
+  bash bin/run_phase.sh "$PHASE" "$CFG" ${PHASE_ARGS:-}
 fi
 echo "finished $(date)"

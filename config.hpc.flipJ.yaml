@@ -1,0 +1,17 @@
+# Sensitivity run (Ada): slide J's two sections swapped, in its own output folder
+# (~/cln3_msi/outputs_flipJ). Started from the Mac with
+#
+#   RUN=flipJ bash bin/hpc/start_on_hpc.sh
+#
+# which picks this file (config.hpc.<RUN>.yaml), submits every phase, and at the end runs
+# phase 11 to compare with the main run in ~/cln3_msi/outputs. The main outputs are only read.
+# Reference databases and atlas come from the main run's cache.
+inherit: config.hpc.yaml
+
+paths:
+  output_root: "${CLN3_WORK}/outputs_flipJ"
+  cache_root: "${CLN3_WORK}/outputs/cache"
+
+qc:
+  sections:
+    flip_slides: ["J"]

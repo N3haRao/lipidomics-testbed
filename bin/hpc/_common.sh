@@ -19,4 +19,8 @@ if [[ "$HPC_WORK" == *" "* ]]; then
   exit 2
 fi
 REMOTE_REPO="$HPC_WORK/repo"
-echo "Ada work folder: $HPC_WORK"
+# RUN=flipJ (or any tag) selects config.hpc.<RUN>.yaml and the output folder outputs_<RUN>,
+# so a sensitivity run never touches the main outputs. Empty = the main run.
+RUN="${RUN:-}"
+REMOTE_OUT="$HPC_WORK/outputs${RUN:+_$RUN}"
+echo "Ada work folder: $HPC_WORK${RUN:+   (run: $RUN, outputs: $REMOTE_OUT)}"

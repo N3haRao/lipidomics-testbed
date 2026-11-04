@@ -1,0 +1,10 @@
+# Synthetic test of the sensitivity-run machinery: the synthetic labels are correct, so
+# flipping slide J here should make the slide consistency check flag J, and phase 11 should
+# show J's pair reversed relative to the main synthetic run.
+inherit: config.test.yaml
+paths:
+  output_root: "synthetic_data/outputs_flipJ"
+  cache_root: "synthetic_data/cache"
+qc:
+  sections:
+    flip_slides: ["J"]
