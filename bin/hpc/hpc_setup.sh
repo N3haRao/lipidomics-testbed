@@ -39,7 +39,12 @@ set -u
 # ---- 2. environment ---------------------------------------------------------------------
 if [[ ! -x "$ENV_PREFIX/bin/python" ]]; then
   echo "== creating the env in $ENV_PREFIX (5-15 min, first time only)"
-  conda env create -p "$ENV_PREFIX" -f environment.yml
+  # Only conda-forge (--override-channels): a shared Anaconda install may otherwise try the
+  # "defaults" channels and stop to ask for their terms of service. Python packages come
+  # from requirements.txt via pip, same pins as environment.yml.
+  conda create -y -p "$ENV_PREFIX" --override-channels -c conda-forge python=3.11 pip
+  set +u; conda activate "$ENV_PREFIX"; set -u
+  pip install -r requirements.txt
 fi
 set +u; conda activate "$ENV_PREFIX"; set -u
 pip install -q -e .
@@ -47,7 +52,7 @@ pip install -q -r requirements-optional.txt || echo "(optional packages failed, 
 
 cat > "$HPC_WORK/cln3_env.sh" <<ENVEOF
 # written by hpc_setup.sh; sourced by every SLURM job
-${CONDA_MODULE:+module load $CONDA_MODULE}
+${CONDA_MODULE:+command -v module >/dev/null 2>&1 && module load $CONDA_MODULE}
 source "$CONDA_SH"
 conda activate "$ENV_PREFIX"
 export CLN3_WORK="$HPC_WORK"

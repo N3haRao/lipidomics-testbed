@@ -11,7 +11,32 @@ the same code runs on the laptop and (later) as a SLURM job. A few notebooks are
 look at the figures.
 
 > Unpublished collaborator data. Nothing in this repo uploads anything. The only network access
-> is the one-time download in `00_setup.py --download` (LIPID MAPS, HMDB, Allen atlas).
+> is the one-time download in `00_setup.py --download` (LIPID MAPS, HMDB, Allen atlas). The
+> imaging data are not in this repository.
+
+## Documentation
+
+| document | for |
+|---|---|
+| [`docs/METHODS.md`](docs/METHODS.md) | study design, every processing step, and which statistical tests are used and why |
+| [`docs/REPLICATION.md`](docs/REPLICATION.md) | rerunning the analysis from the raw files, checking a rerun matches, which phase to rerun after a config change, and a guide to the result tables |
+| [`docs/ADA_RUN_GUIDE.md`](docs/ADA_RUN_GUIDE.md) | the same on the Ada cluster, every command from the ssh login on |
+| this README | repository layout, configuration keys, phase overview, troubleshooting |
+
+## Quick start
+
+```bash
+bash bin/setup_env.sh && conda activate cln3-msi     # environment (once)
+bash bin/run_synthetic_test.sh                        # check the install on fake data: 27/27 checks
+# set paths.data_root and paths.output_root in config.yaml, then:
+python scripts/00_setup.py --config config.yaml --download
+bash bin/run_all.sh config.yaml                       # phases 01 to 10
+open "<output_root>/report/report.html"
+```
+
+Every run records the code fingerprint, config hash and package versions in
+`<output_root>/metadata/provenance/`, and the report shows them, so a result can always be
+traced to the exact code and settings that produced it.
 
 ---
 
@@ -40,7 +65,8 @@ Outputs all go under `paths.output_root` (never inside the data folder; the conf
                      matrix_norm.h5ad (06), regions.parquet (07), territories.parquet (08)
   results/<phase>/<mode>/   tables (csv/json)
   figures/<phase>/<mode>/   png
-  summaries/<phase>_<mode>.md   <- the short text to paste back to me
+  summaries/<phase>_<mode>.md   <- short text summary of each phase, with warnings
+  metadata/provenance/          code fingerprint, config and package versions of every phase run
   logs/<phase>_<mode>_<time>.log  (includes memory use)
   cache/       LIPID MAPS, HMDB, Allen atlas
   report/report.html
@@ -66,8 +92,8 @@ Jupyter kernel called `cln3-msi`.
 CAJAL tutorial). If you want it, make a separate env following the uMAIA instructions
 (https://github.com/lamanno-epfl/uMAIA), run `pip install -e .` from this repo inside it, set
 `normalization.umaia.enabled: true`, and run phase 06 in that env. If uMAIA can't be imported,
-06 says so in the log and carries on with TIC/RMS/median only. (Untested here, since I couldn't
-install it in my test environment: send me the error if it fails.)
+06 says so in the log and carries on with TIC/RMS/median only. (The uMAIA route has not been
+tested; the analysis as run does not use it.)
 
 ## 2. Test on fake data first (no real data or internet needed)
 
@@ -79,7 +105,7 @@ bash bin/run_synthetic_test.sh
 This writes ~600 MB of fake imzML/ibd files to `synthetic_data/` (same folder names with spaces,
 same file names, 6 slides x 3 modes; each mode uses a different storage/spectrum type so every
 code branch runs), runs phases 00 to 10 with `config.test.yaml`, runs the unit tests, and checks
-that the planted effects were found (19 checks, e.g. "Cer up in KO", "sulfatide down in white
+that the planted effects were found (27 checks, e.g. "Cer up in KO", "sulfatide down in white
 matter", "slide G has the strongest gradient"). Takes ~5 minutes. `FRESH=1 bash bin/run_synthetic_test.sh`
 regenerates the fake data.
 
@@ -93,11 +119,13 @@ Open `config.yaml`. The things to check:
 | `paths.output_root` | where outputs go. Must not be inside `data_root` |
 | `modes.run` | which modes to process: `[lip_neg, lip_pos, met_neg]` |
 | `qc.slide`, `qc.mode` | the slide/mode phase 02 looks at first (default E, lip_neg) |
-| `qc.sections.*` | flip Top/Bottom if the image axis is reversed (`top_is_low_row_index`, `flip_slides`), or force a split row per slide (`manual_split_row`) |
+| `qc.sections.*` | split direction (`split_axis`: auto, rows or cols), which side is the sheet's Top (`top_is_low_index`, `flip_slides`), or a forced split line per slide (`manual_split`) |
 | `annotation.ppm_tolerance` | leave `null` to use the value measured in 02/03 |
 | `normalization.for_stats` | `tic` (decided up front; don't change it after seeing 09) |
 | `registration.optical_tiffs` | per-slide TIFF path, relative to `data_root`, once Pilar sends them |
 | `scils_crosscheck.enabled` | `true` to compare with the SCiLS exports |
+| `class_tests.*` | which lipid classes are summed and which ratios are tested, per mode (set before looking at results) |
+| `pair_check.*` | slide consistency check: regions used, flag threshold, and whether to add exploratory left-out / flipped columns for a flagged slide |
 
 ### What's in the data folder, and what the pipeline uses
 
@@ -153,7 +181,7 @@ python scripts/00_setup.py --config config.yaml \
   --lipidmaps-file "$HOME/Downloads/LMSD.sdf.zip" --hmdb-file "$HOME/Downloads/structures.zip"
 ```
 
-**Suggested first pass:** run 00, 01 and 02, send me `summaries/01_inventory_*.md`,
+**Suggested first pass on new data:** run 00, 01 and 02, and check `summaries/01_inventory_*.md`,
 `summaries/02_qc_lip_neg.md` and the `figures/02_qc/lip_neg/*.png` (especially
 `sections_E.png` and `mean_spectrum_E.png`). Then we tune before the long phases.
 
@@ -173,7 +201,7 @@ python scripts/00_setup.py --config config.yaml \
 | **06_normalize** | TIC, RMS, median (and uMAIA if available); slide effect before/after (partial R2 of slide on section means, PCA); X = TIC for stats; any batch-corrected embedding only in obsm for plots | `processed/<mode>/matrix_norm.h5ad`, `slide_effect_pca.png` |
 | **07_register** | per section: guide image (TIFF, else sulfatide/HexCer image, else PC1), AP search around Bregma -1.58 to -2.18, similarity -> affine -> B-spline (SimpleITK, mutual information), warped Allen labels, region masks, Dice QC, lipid WM/GM fallback | `processed/<mode>/regions.parquet`, `overlays.png`, `registration.csv` |
 | **08_explore** | Moran's I per section with permutations, seeded NMF on Control, Leiden territories on Control transferred to all pixels by kNN | `territories.parquet`, `morans_i.csv`, `nmf_programs.csv` |
-| **09_differential** | per-animal means per region / territory, log2, paired over slides: paired t (primary, with 95% CI), Wilcoxon, mixed model; BH within region (targeted and all); position flag; exploratory sex | `results/09_differential/<mode>/differential.csv`, volcanoes, forest plot |
+| **09_differential** | per-animal means per region / territory, log2, paired over slides: paired t (primary, with 95% CI), Wilcoxon; BH within region (targeted and all); position flag; exploratory sex. Then, from the same means: **class totals and ratios** (`class_tests`, one BH family per mode) and the **slide consistency check** (`pair_check`: a slide whose KO/Control difference is the mirror image of the others is flagged as a possible label swap) | `results/09_differential/<mode>/{differential,class_tests,pair_consistency}.csv`, volcanoes, forest plots, per-slide dot plot, correlation heatmap |
 | **10_report** | self-contained HTML with QC, overlays, tables, top-hit ion images (Control vs KO per slide, shared scale), volcanoes, caveats, all summaries | `report/report.html` |
 
 ### How the "don't assume" rules are handled
@@ -196,6 +224,9 @@ python scripts/00_setup.py --config config.yaml \
    (`could_be_position`). Not corrected, only reported.
 3. **Sex = run** (females runs 1-3, males run 4). Sex results are labelled exploratory.
 4. **Animal = unit.** All tests are on per-animal means, never on pixels.
+5. **Labels are checked, never changed by the code.** 09 compares the slides' KO/Control
+   difference profiles; a slide that runs opposite to the others is flagged as a possible swap.
+   Only the sectioning/mounting records can confirm it; then set `qc.sections.flip_slides`.
 
 ---
 
@@ -234,11 +265,12 @@ overwritten). To rerun from a phase: `FROM=05 bash bin/hpc/start_on_hpc.sh`.
 * `CONFIG / DATA ERROR` with an expected layout printed: `paths.data_root` is wrong or a mode
   folder is missing. Paths with spaces must be quoted in YAML.
 * Wrong Top/Bottom: look at `figures/03_qc_all/<mode>/sections_all.png`, then use
-  `qc.sections.top_is_low_row_index: false` (all slides) or `flip_slides: [J]`.
-* Only one section found on a slide: set `qc.sections.manual_split_row: {E: <row>}`.
+  `qc.sections.top_is_low_index: false` (all slides) or `flip_slides: [J]`.
+* Only one section found on a slide: set `qc.sections.manual_split: {E: <row or column>}`.
 * Registration bad on some sections: check `overlays.png`; sections below `registration.min_dice`
   automatically get only the lipid WM/GM masks. A TIFF usually fixes it.
-* Send me the newest log from `<output_root>/logs/` with any error.
+* Any other error: the newest log in `<output_root>/logs/` has the full traceback and the
+  settings the phase used.
 
 ## Notebooks
 

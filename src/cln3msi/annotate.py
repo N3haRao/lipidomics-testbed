@@ -99,9 +99,12 @@ def ion_table(lib: pd.DataFrame, polarity: str, adducts_cfg: dict) -> pd.DataFra
     """Every (species, adduct) pair with its m/z. Class-specific adducts only for their class."""
     general = adducts_cfg[polarity]
     special = (adducts_cfg.get("class_specific") or {}).get(polarity) or {}
+    excluded = (adducts_cfg.get("excluded") or {}).get(polarity) or {}
     parts = []
     for a in general:
         t = lib.copy()
+        drop = [cls for cls, adds in excluded.items() if a in adds]
+        t = t[~t["lipid_class"].isin(drop)]
         t["adduct"] = a
         t["adduct_kind"] = "default"
         parts.append(t)
@@ -131,10 +134,10 @@ def match_peaks(peaks: pd.DataFrame, ions: pd.DataFrame, tol_ppm: float, use_lms
             # class-rule compositions not in LMSD are dropped; fixed/curated/HMDB entries stay
             cand = cand[(cand["in_lmsd"] != False) | (cand["source"] != "class_rules")]  # noqa: E712
         cand["ppm_error"] = (mz - cand["ion_mz"]) / cand["ion_mz"] * 1e6
-        # Ranking: default adducts first, then even chains for glycerolipids/sphingolipids
-        # (odd chains are rare in mammalian brain), then the smallest |ppm|.
+        # Ranking: even chains first for glycerolipids/sphingolipids (odd chains are rare in
+        # mammalian brain), then default adducts over class-specific ones, then smallest |ppm|.
         odd = cand["total_c"].fillna(0).astype(int) % 2 == 1
-        cand["rank_key"] = ((cand["adduct_kind"] != "default").astype(int) * 100
+        cand["rank_key"] = ((cand["adduct_kind"] != "default").astype(int) * 5
                             + odd.astype(int) * 10 + cand["ppm_error"].abs() / max(tol_ppm, 1e-9))
         cand = cand.sort_values("rank_key")
         if len(cand):

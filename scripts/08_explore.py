@@ -87,7 +87,15 @@ def main():
             S.warn(f"only {len(sel_peaks)} lipids pass the Moran filter; using the top 10 by median I instead", log)
             sel_peaks = agg["peak"].head(min(10, len(agg))).tolist()
         cols = [list(a.var_names[feats]).index(pk) for pk in sel_peaks]
-        V_all = X[:, cols]
+        V_all = X[:, cols].copy()
+        if E.get("per_slide_scaling", True):
+            # each lipid divided by its median on that slide (both sections pooled, so the
+            # Control vs KO difference within a slide is kept), to stop territories from
+            # simply sorting pixels by slide
+            for s_ in obs["slide"].unique():
+                rows_s = (obs["slide"] == s_).to_numpy()
+                med = np.median(V_all[rows_s], axis=0)
+                V_all[rows_s] /= np.where(med > 0, med, 1)
         is_ctl = (obs["genotype"] == ctl).to_numpy()
         lo = np.percentile(V_all[is_ctl], 0.5, axis=0)
         hi = np.percentile(V_all[is_ctl], 99.5, axis=0)

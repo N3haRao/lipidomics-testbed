@@ -146,7 +146,8 @@ def main():
         # ---- summary --------------------------------------------------------------------
         S.h("Slides")
         rows = [{"slide": s, "spectra": r["n_spectra"], "type": r["spectrum_type"], "storage": r["storage"],
-                 "split": r["section_split"], "off-tissue px": r["n_off_tissue"],
+                 "split": r["section_split"], "tissue threshold": r.get("tissue_threshold_method", ""),
+                 "off-tissue px": r["n_off_tissue"],
                  "median ppm": r["mass_accuracy"]["median_ppm"], "calibrants": r["mass_accuracy"]["n_calibrant_hits"],
                  "R median": r["resolution"].get("R_median", np.nan)} for s, r in results.items()]
         S.table(pd.DataFrame(rows))

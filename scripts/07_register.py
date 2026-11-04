@@ -87,6 +87,82 @@ def tiff_guide(ctx, slide: str, shape, log) -> np.ndarray | None:
     return img.astype(np.float32)
 
 
+def reuse_registration(ctx, log, S, mode: str, src: str, obs: pd.DataFrame, gvals: np.ndarray,
+                       gdesc: str, R: dict) -> bool:
+    """Copy another mode's per-pixel regions when both modes share the same pixel grid.
+
+    On these slides the three modes were exported on identical rasters (same pixel count and
+    coordinates per slide), so one good registration, from the mode with the clearest
+    white-matter marker, serves all three. Pixels are matched by (animal, x, y). If fewer
+    than 90% of this mode's pixels have a partner, we register this mode on its own instead.
+    Returns True if the regions were reused.
+    """
+    rp = ctx.output_root / "processed" / src / "regions.parquet"
+    if not rp.exists():
+        S.warn(f"registration.reuse_from = {src}, but {src} has no regions.parquet yet; "
+               "registering this mode on its own", log)
+        return False
+    src_reg = pd.read_parquet(rp)
+    matched = obs.index.isin(src_reg.index)
+    frac = float(matched.mean())
+    if frac < 0.9:
+        S.warn(f"only {frac:.0%} of the {mode} pixels exist in {src}: the pixel grids differ, "
+               "so this mode is registered on its own", log)
+        return False
+
+    regions = src_reg.reindex(obs.index)
+    for c in regions.columns:
+        if c.startswith("region_") or c == "registration_ok":
+            regions[c] = regions[c].astype("boolean").fillna(False).astype(bool)
+    regions["atlas_id"] = regions["atlas_id"].fillna(0).astype(np.int64)
+    regions["atlas_acronym"] = regions["atlas_acronym"].fillna("").astype(str)
+    regions["region_whole_section"] = True
+    regions.to_parquet(ctx.out("processed", mode, "regions.parquet"))
+
+    sp = ctx.output_root / "results" / "07_register" / src / "registration.csv"
+    reg = pd.read_csv(sp) if sp.exists() else pd.DataFrame()
+    if len(reg):
+        reg.insert(0, "reused_from", src)
+    reg.to_csv(ctx.out("results", "07_register", mode, "registration.csv"), index=False)
+
+    # overlays: this mode's guide image + the reused region outlines
+    names = [c for c in regions.columns if c.startswith("region_")
+             and c not in ("region_whole_section", "region_wm_lipid", "region_gm_lipid")]
+    keys = list(obs.groupby(["slide", "section"]).groups)
+    ncol = 4
+    nrow = int(np.ceil(len(keys) / ncol))
+    fig, axes = plt.subplots(nrow, ncol, figsize=(3.4 * ncol, 2.8 * nrow), squeeze=False)
+    colors = plt.get_cmap("tab10")
+    for ax, (slide, section) in zip(axes.ravel(), keys):
+        img, mask, box, _, _ = section_image(obs, gvals, slide, section, pad=4, fill=0)
+        g = np.zeros_like(img)
+        g[mask] = scaled01(img[mask])
+        ax.imshow(np.where(mask, g, np.nan), cmap="Greys_r", interpolation="nearest")
+        for k, name in enumerate(names):
+            m, *_ = section_image(obs, regions[name].to_numpy().astype(float), slide, section, pad=4, fill=0, box=box)
+            if np.nanmax(m) > 0:
+                ax.contour(m, levels=[0.5], colors=[colors(k)], linewidths=0.8)
+        ax.set_title(f"{slide} {section}", fontsize=8)
+        ax.set_xticks([]); ax.set_yticks([])  # noqa: E702
+    for ax in axes.ravel()[len(keys):]:
+        ax.axis("off")
+    handles = [plt.Line2D([], [], color=colors(k), label=n.replace("region_", "")) for k, n in enumerate(names)]
+    fig.legend(handles=handles, loc="lower center", ncol=min(len(handles), 7), fontsize=7)
+    fig.suptitle(f"{mode}: regions reused from {src}, drawn on {mode}'s own guide ({gdesc})", fontsize=9)
+    S.fig(fig, "overlays.png")
+
+    S.h("Settings")
+    S.kv({"regions": f"reused from {src} (registration.reuse_from)",
+          f"{mode} pixels with a partner in {src}": f"{frac:.1%}"})
+    S.h("Per section (copied from the source mode)")
+    S.table(reg.round(3))
+    cnt = regions.filter(like="region_").groupby(obs["animal_id"]).sum()
+    S.h("Pixels per region and animal")
+    S.table(cnt.reset_index())
+    log.info(f"{mode}: regions reused from {src} ({frac:.1%} of pixels matched)")
+    return True
+
+
 def main():
     t0 = time.time()
     ctx, log, modes, _ = cli.start("07_register", __doc__)
@@ -117,6 +193,10 @@ def main():
         how = guide_cfg.get(mode, "auto") if isinstance(guide_cfg, dict) else guide_cfg
         gvals, gdesc = choose_guide(a, how, log)
         log.info(f"{mode}: guide = {gdesc}")
+        src = R.get("reuse_from")
+        if src and src != mode and reuse_registration(ctx, log, S, mode, src, obs, gvals, gdesc, R):
+            log.info(f"summary: {S.write()}")
+            continue
 
         regions = pd.DataFrame(index=obs.index)
         regions["atlas_id"] = 0

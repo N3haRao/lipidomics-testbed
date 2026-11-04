@@ -22,7 +22,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from cln3msi import cli  # noqa: E402
+from cln3msi import cli, provenance  # noqa: E402
 from cln3msi.images import section_image  # noqa: E402
 from cln3msi.report import Summary, plt  # noqa: E402
 from cln3msi.util import read_h5ad  # noqa: E402
@@ -81,7 +81,8 @@ def top_hits_images(ctx, mode: str, R: pd.DataFrame, S: Summary, n: int, log) ->
     a = read_h5ad(p)
     obs = a.obs
     # best unit per peak, targeted hits first, then the rest by p
-    best = R.sort_values("p_ttest").drop_duplicates("peak")
+    # anatomical regions only (territories can exist on few slides), tested rows only
+    best = R[(R["unit_kind"] == "region") & R["p_ttest"].notna()].sort_values("p_ttest").drop_duplicates("peak")
     hits = pd.concat([best[best["targeted"] & best["significant"]], best[~best["targeted"] & best["significant"]],
                       best[~best["significant"]]]).drop_duplicates("peak").head(n)
     if hits.empty:
@@ -134,6 +135,85 @@ CAVEATS = [
 ]
 
 
+def provenance_section(ctx) -> str:
+    """Which code, config and packages produced these outputs (from metadata/provenance/)."""
+    recs = [r for r in provenance.read_all(ctx) if r.get("phase") != "10_report"]
+    if not recs:
+        return ""
+    T = pd.DataFrame([{"phase": r["phase"], "mode": r.get("mode") or "", "started": r.get("started"), "code_fingerprint": r.get("code_fingerprint"),
+                       "git_commit": (r.get("git_commit") or "")[:12], "config_sha256": r.get("config_sha256"),
+                       "sample_sheet_sha256": r.get("sample_sheet_sha256")} for r in recs]).sort_values(["phase", "mode"])
+    now = provenance.collect(ctx)
+    notes = []
+    if T["code_fingerprint"].nunique() > 1:
+        notes.append("The phases ran with <b>different code versions</b> (code_fingerprint differs). That is "
+                     "fine if only later phases changed; rerun from the earliest changed phase to be sure.")
+    if T["config_sha256"].nunique() > 1:
+        notes.append("The phases ran with <b>different configs</b> (config_sha256 differs). Check that no setting "
+                     "an earlier phase depends on was changed without rerunning it.")
+    if not notes:
+        notes.append("All phases ran with the same code and the same config.")
+    pk = now.get("packages", {})
+    pkg = ", ".join(f"{k} {v}" for k, v in pk.items() if v)
+    return ("<h2>Reproducibility</h2><p class='small'>Every phase records the code fingerprint (a hash of src/, "
+            "scripts/, reference/ and bin/, so it works for ZIP downloads too), the git commit if available, a hash "
+            "of the merged config and of the sample sheet. The merged config of each phase is saved next to it in "
+            "<code>metadata/provenance/</code>. To repeat this analysis, use code with the same fingerprint and the "
+            "saved config.</p>"
+            + "".join(f"<p>{n}</p>" for n in notes) + table_html(T, 20)
+            + f"<p class='small'>Report written with pipeline v{html.escape(now['pipeline_version'])}, code "
+              f"{html.escape(now['code_fingerprint'])}, Python {html.escape(now['python'])} on "
+              f"{html.escape(now['platform'])}. Packages: {html.escape(pkg)}.</p>")
+
+
+def slide_check_box(ctx, modes) -> str:
+    """Top-of-report warning if 09 flagged a slide as a possible swap in any mode."""
+    rows = []
+    for mode in modes:
+        p = ctx.output_root / "results" / "09_differential" / mode / "pair_consistency.csv"
+        if p.exists():
+            t = pd.read_csv(p)
+            t.insert(0, "mode", mode)
+            rows.append(t)
+    if not rows:
+        return ""
+    T = pd.concat(rows, ignore_index=True)
+    flagged = sorted(set(T.loc[T["flagged"].astype(bool), "slide"]))
+    head = "<h2>Slide consistency check</h2>"
+    txt = ("Each slide's log2(Mutant/Control) over all tested peaks is its difference profile. With correct "
+           "labels the slides share the genotype effect, so profiles should correlate positively. Values are each "
+           "slide's median Spearman correlation with the other slides.")
+    if flagged:
+        n_modes = {s: int(T.loc[T["flagged"].astype(bool) & (T["slide"] == s), "mode"].nunique()) for s in flagged}
+        warn = ("<div class='caveat'><b>Possible label swap: slide(s) " + ", ".join(
+            f"{html.escape(str(s))} ({n} of {len(rows)} modes)" for s, n in n_modes.items()) +
+            ".</b> Their KO/Control difference is the mirror image of the other slides, which is what a swap "
+            "of the two sections (sample sheet, or slide loaded the other way round) would look like. Results "
+            "below use the sample sheet as it is. Check the sectioning/mounting records; only if they confirm "
+            "the swap, list the slide in <code>qc.sections.flip_slides</code> and rerun from 03. The class-test "
+            "CSVs have exploratory columns with the slide left out and flipped.</div>")
+    else:
+        warn = "<p>No slide flagged.</p>"
+    return head + f"<p class='small'>{txt}</p>" + warn + table_html(T, 40)
+
+
+def class_section(ctx, mode, fig) -> str:
+    p = ctx.output_root / "results" / "09_differential" / mode / "class_tests.csv"
+    if not p.exists():
+        return ""
+    R = pd.read_csv(p)
+    pair_cols = [c for c in R.columns if c.startswith("pair_")]
+    show = [c for c in ["unit", "feature", "kind", "n_species", "log2fc", "pct_change", "ci_low", "ci_high",
+                        "p_ttest", "p_wilcoxon", "q_bh", "n_pairs_up"] + pair_cols if c in R]
+    return ("<h3>Class totals and ratios (pre-specified)</h3><p class='small'>Species of a class added up per "
+            "animal and region; ratios within the same animal and region. One BH family per mode "
+            "(<code>q_bh</code>). pair_&lt;slide&gt; = that slide's log2(Mutant/Control).</p>"
+            + table_html(R.sort_values("p_ttest")[show], 25)
+            + img_tag(fig("09_differential", "class_tests_per_slide.png"), "85%")
+            + img_tag(fig("09_differential", "class_tests_forest.png"), "70%")
+            + img_tag(fig("09_differential", "pair_consistency.png"), "85%"))
+
+
 def main():
     t0 = time.time()
     ctx, log, modes, _ = cli.start("10_report", __doc__)
@@ -147,6 +227,8 @@ def main():
     out.append("<h2>Design</h2>")
     out.append(table_html(sheet[["animal_id", "genotype", "sex", "slide", "position_on_slide", "run_order"]], 20))
     out.append("<h2>Caveats</h2>" + "".join(f"<div class='caveat'>{c}</div>" for c in CAVEATS))
+    out.append(slide_check_box(ctx, modes))
+    out.append(provenance_section(ctx))
 
     files = ctx.output_root / "metadata" / "files.csv"
     if files.exists():
@@ -188,11 +270,12 @@ def main():
         out.append("<h3>Differential: hypothesis classes</h3>")
         if R is not None:
             show = [c for c in ("unit", "label", "hypothesis", "log2fc", "ci_low", "ci_high", "p_ttest", "q_targeted",
-                                "p_wilcoxon", "matches_hypothesis", "could_be_position", "ambiguous") if c in R]
+                                "p_wilcoxon", "n_pairs", "matches_hypothesis", "could_be_position", "ambiguous") if c in R]
             T = R[R["targeted"] & R["unit"].isin(["whole_section", "white_matter", "corpus_callosum", "wm_lipid",
-                                                   "gm_lipid", "cortex", "hippocampus", "thalamus"])]
+                                                   "gm_lipid", "cortex", "hippocampus", "thalamus"]) & R["p_ttest"].notna()]
             out.append(table_html(T.sort_values("p_ttest")[show], 40))
             out.append(img_tag(fig("09_differential", "forest_hypothesis.png"), "75%"))
+            out.append(class_section(ctx, mode, fig))
             out.append("<h3>Differential: untargeted, top per region</h3>")
             U = R[R.unit_kind == "region"].sort_values("p_ttest").groupby("unit").head(5)
             out.append(table_html(U[[c if c != "q_targeted" else "q_all" for c in show]], 60))

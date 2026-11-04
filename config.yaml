@@ -62,15 +62,24 @@ qc:
   n_resolution_spectra: 20           # high-TIC single spectra used to measure peak widths
   tissue:
     signal: "nonmatrix_tic"          # nonmatrix_tic (TIC minus DAN ions) or tic
+    threshold_method: "auto"         # auto | otsu | multiotsu | triangle (see tissue.py; auto fixes
+                                     # holes when the raster hugs the tissue, as in lip_neg)
     smooth_sigma_px: 1.0
     min_object_px: 100
     close_radius_px: 2               # joins pieces of a section that got cut apart
     erode_edge_px: 1                 # pixels on the tissue edge are left out of statistics
   sections:
     n_expected: 2
-    top_is_low_row_index: true       # imzML y=1 is the top of the slide as imaged
+    # Which way the two sections are separated in the image: auto, rows (one above the other)
+    # or cols (side by side). The real exports are 219 x 348 px, wider than tall: the slides
+    # were imaged rotated, so the sections sit side by side ("auto" detects that).
+    split_axis: auto
+    # true: the section with the smaller row/column index (upper one, or LEFT one when side by
+    # side) is the sample sheet's "Top" (= Control). false: the other way round.
+    # CHECK sections_<slide>.png against Pilar's layout before trusting the statistics.
+    top_is_low_index: true
     flip_slides: []                  # e.g. ["J"] if one slide turns out reversed
-    manual_split_row: {}             # e.g. {E: 85} to force the split at image row 85
+    manual_split: {}                 # e.g. {E: 170}: force the split at row/column 170 on slide E
   gradient:
     n_bins_y: 20
     flag_ratio: 2.0                  # 09 flags a hit if |log2FC| < flag_ratio x |gradient-predicted log2 ratio|
@@ -99,9 +108,24 @@ annotation:
         GM2: ["[M-2H]2-"]
         GM3: ["[M-2H]2-"]
         GD1: ["[M-2H]2-"]
+        # choline lipids have no acidic proton: in negative mode they show up as [M-CH3]-
+        # (and [M+Cl]-), never as [M-H]-. Note SM 36:1 [M-CH3]- has exactly the formula of
+        # "SM 35:1 [M-H]-", so allowing [M-H]- here invents odd-chain SMs.
         PC: ["[M+Cl]-", "[M-CH3]-"]
+        SM: ["[M+Cl]-", "[M-CH3]-"]
+        LPC: ["[M+Cl]-", "[M-CH3]-"]
+        LSM: ["[M+Cl]-", "[M-CH3]-"]
       positive:
         ST: ["[M+H-H2O]+"]
+    # default adducts that a class can NOT form (chemistry), removed from the candidate list
+    excluded:
+      negative:
+        PC: ["[M-H]-"]
+        SM: ["[M-H]-"]
+        LPC: ["[M-H]-"]
+        LSM: ["[M-H]-"]
+      positive:
+        SHexCer: ["[M+H]+", "[M+Na]+", "[M+K]+"]   # sulfatides are anions; read them in negative mode
   lipidmaps_filter: true             # keep only compositions whose formula exists in the cached LMSD
   metabolite_db: "hmdb"              # hmdb (cached in 00) or curated (reference/metabolites_curated.csv)
   max_candidates_reported: 5
@@ -118,16 +142,20 @@ registration:
   bregma_ccf_ap_mm: 5.40             # approximate AP position of bregma in CCF; CCF has no real bregma
   ap_search_bregma_mm: [-1.30, -2.50]
   ap_step_mm: 0.10
-  try_rotations_deg: [0, 180]
+  try_rotations_deg: [0, 90, 180, 270]   # starting angles; slides were imaged rotated
   # No optical scans of slides E-K were in the share (they sit inside the SCiLS projects).
   # Don't use 09SEP26/Pilar_cerebellum_slide_Z001.tif: that's a different slide (cerebellum).
   # If Pilar exports them, put the paths here (relative to data_root) and the um per pixel.
   optical_tiffs: {E: null, F: null, G: null, I: null, J: null, K: null}
   tiff_um_per_px: null
-  # Each mode is registered on its own (we don't know yet if the three modes were acquired on
-  # the very same sections). Guide image per mode: auto = strongest annotated sulfatide, else
-  # HexCer, else the first principal component of the lipid images. Or give an m/z.
+  # Guide image per mode (used by the mode(s) that register themselves): auto = strongest
+  # annotated sulfatide, else HexCer, else the first principal component. Or give an m/z.
   guide_ion: {lip_neg: auto, lip_pos: auto, met_neg: auto}
+  # The three modes were exported on the SAME pixel grid per slide (identical pixel counts), so
+  # register once, on the mode with the clearest white-matter marker (sulfatides, lip_neg), and
+  # give the other modes the same per-pixel regions. 07 checks that the pixels really match
+  # (>= 90%) and registers a mode on its own if they don't. null = register every mode separately.
+  reuse_from: lip_neg
   bspline_grid_mm: 1.0
   bspline_iterations: 100
   min_dice: 0.80                     # sections below this fall back to lipid WM/GM masks only
@@ -143,14 +171,135 @@ explore:
   morans_i: {k_neighbors: 6, n_perm: 199, min_I: 0.3, min_section_fraction: 0.5}   # smallest possible p = 1/(n_perm+1)
   nmf: {k: "auto", k_grid: [4, 6, 8, 10, 12], pixel_subsample: 50000, max_iter: 400}
   territories: {resolution: 0.5, k_neighbors: 15, pixel_subsample: 30000}   # Leiden; KMeans if leidenalg is missing
+  # Divide each lipid by its per-slide median before NMF/territories, so the clustering follows
+  # anatomy rather than slide-to-slide intensity differences (the slide effect is large here:
+  # partial R2 ~0.93 in 06). Exploration only; statistics never use this.
+  per_slide_scaling: true
 
 differential:
   min_pixels_per_unit: 20
-  run_mixedlm: true                  # the mixed-model check (slow-ish: one fit per lipid and region)
+  # A lipid/region is only tested if at least this many slides have BOTH animals with enough
+  # pixels there. With fewer pairs a t-test can give tiny p-values from 2 or 3 numbers
+  # (it happened with territories that exist on only some slides).
+  min_pairs: 5
+  # The random-intercept model (statsmodels MixedLM) gave impossible p-values on the real data
+  # (1e-20 and smaller next to t-test p of 1e-3): with 2 animals per slide its variance
+  # estimate collapses. Off; the paired t-test is the analysis, Wilcoxon the sanity check.
+  run_mixedlm: false
   fdr_alpha: 0.05
   run_territories: true
+  # Which peaks enter the untargeted family (decided before looking at results):
+  #   annotated_or_structured = annotated (not isotopes) or spatially structured in 08 (Moran)
+  #   all                     = every non-isotope peak (~1500 of them, mostly noise, so the FDR
+  #                             correction gets very strict)
+  untargeted_peaks: annotated_or_structured
+  # The lipid-only white/grey split (07 fallback) is unstable; use it only if no atlas
+  # regions exist for this mode. "always" tests it anyway.
+  lipid_wm_gm: fallback_only
   # stats use log2 of the per-animal means; a pseudocount (half the smallest positive mean) is
   # added only for lipids where some animal's mean is exactly 0
+
+# Class-level and ratio tests (run at the end of 09, from its per-animal means).
+# For each animal and region the species of a class are added up, then tested with the same
+# paired test as single peaks. Ratios are taken within the same animal and region, so TIC,
+# matrix coating and most of a left/right trend cancel. One BH family per mode over all
+# class and ratio tests. Set before looking at the genotype results; keep it that way.
+# A class entry: classes = lipid_class values from 05, names = exact annotations,
+# suffix = the annotation must end with it (";O3" = 2-hydroxylated). Entries missing in
+# a mode's annotations are just skipped.
+class_tests:
+  enabled: true
+  regions: [whole_section, white_matter, corpus_callosum, cortex, hippocampus, thalamus]
+  min_sections: 10                   # a species must be seen in at least this many sections
+  # which ambiguous peaks to leave out: tags = candidates with more than one hypothesis tag
+  # (e.g. SHexCer vs BMP_PG); classes = candidates from more than one lipid class (strict,
+  # drops many PC/PE and LPC/LPE overlaps); none = keep all
+  ambiguity: tags
+  classes:
+    lip_neg:
+      "Sulfatide": {classes: [SHexCer]}
+      "Sulfatide 2-OH": {classes: [SHexCer], suffix: ";O3"}
+      "Sulfatide non-OH": {classes: [SHexCer], suffix: ";O2"}
+      "HexCer": {classes: [HexCer]}
+      "Cer": {classes: [Cer]}
+      "SM": {classes: [SM]}
+      "GM1": {classes: [GM1]}
+      "GM2": {classes: [GM2]}
+      "GM3": {classes: [GM3]}
+      "GM2+GM3": {classes: [GM2, GM3]}
+      "GM all": {classes: [GM1, GM2, GM3]}
+      "BMP/PG": {classes: [BMP/PG]}
+      "BMP/PG 44:12": {names: ["BMP/PG 44:12"]}
+      "PE": {classes: [PE]}
+      "PI": {classes: [PI]}
+      "PS": {classes: [PS]}
+      "PE+PI+PS": {classes: [PE, PI, PS]}
+      "LPE": {classes: [LPE]}
+      "LPI": {classes: [LPI]}
+    lip_pos:
+      "HexCer": {classes: [HexCer]}
+      "Hex2Cer": {classes: [Hex2Cer]}
+      "SM": {classes: [SM]}
+      "PC": {classes: [PC]}
+      "PE": {classes: [PE]}
+      "Cholesterol": {classes: [Cholesterol]}
+      "LPC": {classes: [LPC]}
+    met_neg:
+      "GPD sum": {classes: [Glycerophosphodiester]}
+      "GPI": {names: [Glycerophosphoinositol]}
+      "GPE": {names: [Glycerophosphoethanolamine]}
+      "GPG": {names: [Glycerophosphoglycerol]}
+      "Glycerol 3-phosphate": {names: ["Glycerol 3-phosphate"]}
+      "N-acetylaspartate": {names: [N-acetylaspartate]}
+      "NAAG": {names: [N-acetylaspartylglutamate]}
+      "Phosphoethanolamine": {names: [Phosphoethanolamine]}
+      "Taurine": {names: [Taurine]}
+      "Glutamate": {names: [Glutamate]}
+      "GABA": {names: [GABA]}
+      "LPE": {classes: [LPE]}
+      "LPI": {classes: [LPI]}
+  ratios:                            # [numerator, denominator], names from the classes above
+    lip_neg:
+      - ["Sulfatide", "HexCer"]
+      - ["Sulfatide 2-OH", "Sulfatide non-OH"]
+      - ["Sulfatide", "PE+PI+PS"]
+      - ["HexCer", "Cer"]
+      - ["SM", "Cer"]
+      - ["GM2+GM3", "GM1"]
+      - ["GM3", "GM1"]
+      - ["BMP/PG", "PE+PI+PS"]
+      - ["BMP/PG 44:12", "PE+PI+PS"]
+      - ["LPE", "PE"]
+      - ["LPI", "PI"]
+    lip_pos:
+      - ["HexCer", "PC"]
+      - ["HexCer", "SM"]
+      - ["LPC", "PC"]
+    met_neg:
+      - ["GPE", "LPE"]
+      - ["GPI", "LPI"]
+      - ["GPE", "Phosphoethanolamine"]
+      - ["GPD sum", "N-acetylaspartate"]
+  # features shown in the per-slide dot plot (class or ratio names, per mode)
+  plot_features:
+    lip_neg: ["Sulfatide", "Sulfatide / PE+PI+PS", "HexCer", "Cer", "GM all", "BMP/PG"]
+    lip_pos: ["HexCer", "HexCer / PC", "SM", "LPC / PC"]
+    met_neg: ["GPI", "GPG", "GPE", "GPI / LPI"]
+
+# Do the slides agree? (end of 09) Each slide's log2(Mutant/Control) over all tested peaks is
+# its "difference profile". With correct labels the slides share the genotype effect, so the
+# profiles correlate positively, or at least not negatively. A slide whose profile is the
+# mirror image of the others may have its two sections swapped. This is only a warning:
+# never relabel a slide because of it. Check the sectioning/mounting records, and only if
+# they confirm a swap, list the slide in qc.sections.flip_slides and rerun from 03.
+pair_check:
+  enabled: true
+  units: [whole_section, white_matter, cortex]
+  flag_below: -0.3                   # flag a slide whose median correlation with the others is below this
+  min_peaks: 20                      # fewer tested peaks than this: correlations too noisy, check skipped
+  # redo the class tests with flagged slides left out and flipped, as extra columns
+  # (exploratory: choosing the analysis after seeing the data is circular)
+  sensitivity: true
 
 hypotheses:                          # direction expected in CLN3 KO vs Control
   accumulated: [LSM, Cer, HexCer, Hex2Cer, GM1, GM2, GM3, SM, SHexCer]
