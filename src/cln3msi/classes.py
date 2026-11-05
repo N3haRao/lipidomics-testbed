@@ -129,14 +129,15 @@ def per_pair(values: pd.Series, animals: pd.DataFrame, control: str, mutant: str
 
 
 def test_features(vals: pd.DataFrame, animals: pd.DataFrame, control: str, mutant: str,
-                  min_pairs: int) -> pd.DataFrame:
-    """Paired tests for every (unit, feature), plus the per-slide log2FC as pair_<slide> columns."""
+                  min_pairs: int, offsets: pd.Series | None = None) -> pd.DataFrame:
+    """Paired tests for every (unit, feature), plus the per-slide log2FC as pair_<slide> columns.
+    offsets: per-slide gradient-predicted log2 ratio, for the gradient-corrected columns."""
     out = []
     for unit, g in vals.groupby("unit", sort=False):
         wide = g.pivot_table(index="animal_id", columns="feature", values="value")
         wide = wide.reindex(index=[i for i in wide.index if i in animals.index])
         log2 = np.log2(wide + stats.pseudocount(wide))
-        res = stats.paired_tests(log2, animals, control, mutant, min_pairs=min_pairs)
+        res = stats.paired_tests(log2, animals, control, mutant, min_pairs=min_pairs, offsets=offsets)
         res = res.rename(columns={"peak": "feature"})
         res.insert(0, "unit", unit)
         meta = g.drop_duplicates("feature").set_index("feature")[["kind", "n_species"]]

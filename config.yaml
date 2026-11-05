@@ -67,7 +67,9 @@ qc:
     smooth_sigma_px: 1.0
     min_object_px: 100
     close_radius_px: 2               # joins pieces of a section that got cut apart
-    erode_edge_px: 1                 # pixels on the tissue edge are left out of statistics
+    erode_edge_px: 3                 # pixels on the tissue edge are left out of statistics. Was 1;
+                                     # bright rims at the section edges (slides E, F) showed up among
+                                     # the top hits, so 3 px (150 um) are left out now
   sections:
     n_expected: 2
     # Which way the two sections are separated in the image: auto, rows (one above the other)
@@ -93,7 +95,13 @@ peaks:
   recalibrate_per_slide: true        # shift each slide by its median calibrant ppm error (from 03)
   min_section_fraction: 0.5          # keep a peak if it is picked in at least this fraction of sections
   min_pixel_fraction: 0.01           # and present (>0) in at least this fraction of tissue pixels of those sections
-  max_peaks: 2000                    # safety cap, strongest peaks kept
+  max_peaks: 4000                    # safety cap, strongest peaks kept. Was 2000, which all three modes
+                                     # hit; the untargeted test family is limited separately
+                                     # (differential.untargeted_peaks), so more peaks don't dilute it
+  # Peaks that are as strong on the bare glass as on the tissue are matrix (DAN clusters and
+  # adducts the known-ion list misses). Ratio = off-tissue / on-tissue mean signal in the peak's
+  # window, median over slides. Such peaks are moved out of the matrix like the DAN ions.
+  matrix_filter: {enabled: true, max_off_on_ratio: 0.5}
 
 annotation:
   ppm_tolerance: null                # null means use the 02/03 suggestion, otherwise a number
@@ -196,6 +204,22 @@ differential:
   # The lipid-only white/grey split (07 fallback) is unstable; use it only if no atlas
   # regions exist for this mode. "always" tests it anyway.
   lipid_wm_gm: fallback_only
+  # Which test decides significance for single peaks: "moderated" (empirical-Bayes moderated
+  # paired t, limma's approach: shares variance information across peaks, far more stable with
+  # 5 degrees of freedom per peak) or "ttest" (the plain paired t). Both are always reported.
+  single_peak_test: moderated
+  # Also test every result after subtracting each slide's technical log2 ratio predicted from
+  # the off-tissue position gradient (columns *_gradient_corrected). A sensitivity check.
+  gradient_corrected: true
+  # Class tests repeated with these normalizations (from the size factors 06 stores), as a check
+  # that conclusions don't hinge on TIC. Statistics stay on normalization.for_stats.
+  normalization_sensitivity: [median]
+  # A section's atlas region share far from the other sections (outside these multiples of the
+  # median) is reported as a possible registration problem.
+  region_fraction_flag: [0.6, 1.67]
+  # Sections to leave out of the atlas-region tests (whole section and territories keep them),
+  # as "slide:Top" or "slide:Bottom". Only for a registration that is clearly off in the overlays.
+  exclude_sections_from_regions: []
   # stats use log2 of the per-animal means; a pseudocount (half the smallest positive mean) is
   # added only for lipids where some animal's mean is exactly 0
 
@@ -280,6 +304,22 @@ class_tests:
       - ["GPI", "LPI"]
       - ["GPE", "Phosphoethanolamine"]
       - ["GPD sum", "N-acetylaspartate"]
+  # Primary endpoints: a short list named in advance from the hypotheses (myelin lipids in white
+  # matter; storage lipids and BMP across the section; glycerophosphodiesters from the CLN3
+  # literature). They get their own BH family (q_primary), the one with real power at n = 6.
+  # Format "region | class or ratio name". Everything else stays exploratory.
+  primary:
+    lip_neg:
+      - "white_matter | Sulfatide / PE+PI+PS"
+      - "white_matter | HexCer"
+      - "whole_section | Cer"
+      - "whole_section | GM all"
+      - "whole_section | BMP/PG"
+    lip_pos: []
+    met_neg:
+      - "whole_section | GPI"
+      - "whole_section | GPG"
+      - "whole_section | GPE"
   # features shown in the per-slide dot plot (class or ratio names, per mode)
   plot_features:
     lip_neg: ["Sulfatide", "Sulfatide / PE+PI+PS", "HexCer", "Cer", "GM all", "BMP/PG"]

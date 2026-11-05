@@ -135,13 +135,16 @@ def main():
         counts = []
         S.h("Class-level and ratio tests")
         if A is not None and B is not None:
-            cols = ["kind", "n_species", "log2fc", "ci_low", "ci_high", "p_ttest", "p_wilcoxon", "p_sign", "q_bh",
-                    "n_pairs_up", "n_pairs"]
+            cols = ["kind", "n_species", "primary", "log2fc", "ci_low", "ci_high", "p_ttest", "q_bh", "q_primary",
+                    "p_gradient_corrected", "n_pairs_up", "n_pairs"]
             T = side_by_side(A, B, ["unit", "feature"], cols, la, lb)
             T["delta_log2fc"] = T[f"log2fc__{lb}"] - T[f"log2fc__{la}"]
             T = T.sort_values(f"p_ttest__{lb}")
             T.to_csv(out("class_tests_compared.csv"), index=False)
             for lab, D in ((la, A), (lb, B)):
+                if "q_primary" in D and D["q_primary"].notna().any():
+                    counts.append({"run": lab, "family": "primary endpoints", "tests": int(D["q_primary"].notna().sum()),
+                                   f"q < {alpha}": int((D["q_primary"] < alpha).sum()), "lowest q": float(D["q_primary"].min())})
                 counts.append({"run": lab, "family": "class and ratio tests", "tests": int(D["p_ttest"].notna().sum()),
                                f"q < {alpha}": int((D["q_bh"] < alpha).sum()), "lowest q": float(D["q_bh"].min())})
             show = ["unit", "feature", f"log2fc__{la}", f"p_ttest__{la}", f"q_bh__{la}", f"n_pairs_up__{la}",
@@ -159,10 +162,11 @@ def main():
         S.h("Single-peak tests")
         if A is not None and B is not None:
             keys = ["unit_kind", "unit", "peak"]
-            cols = ["label", "targeted", "log2fc", "p_ttest", "q_targeted", "q_all", "significant", "n_pairs_up",
-                    "could_be_position"]
+            cols = ["label", "targeted", "log2fc", "p_ttest", "p_primary", "q_targeted", "q_all", "significant",
+                    "n_pairs_up", "could_be_position"]
             T = side_by_side(A, B, keys, cols, la, lb)
-            T = T.sort_values(f"p_ttest__{lb}")
+            pk = f"p_primary__{lb}" if f"p_primary__{lb}" in T else f"p_ttest__{lb}"
+            T = T.sort_values(pk)
             T.to_csv(out("differential_compared.csv"), index=False)
             for lab, D in ((la, A), (lb, B)):
                 sig = D["significant"].fillna(False).astype(bool)

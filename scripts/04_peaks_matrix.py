@@ -131,6 +131,32 @@ def main():
             cons.loc[close, "is_matrix"] = True
             cons.loc[close, "matrix_ion"] = m["name"]
 
+        # matrix-like peaks: as strong on the glass as on the tissue. The DAN list above only
+        # knows the main matrix ions; DAN also forms clusters and adducts that end up here.
+        MF = P.get("matrix_filter") or {}
+        cons["off_on_ratio"] = np.nan
+        cons["matrix_like"] = False
+        if MF.get("enabled", True):
+            ratios = []
+            for s in slides:
+                ms = np.load(ctx.out("processed", mode, "qc", f"meanspec_{s}.npz", mkdir=False))
+                if "off" not in ms:
+                    continue
+                f = 1 + offsets[s] * 1e-6
+                on = np.mean([ms[g] for g in ("Top", "Bottom") if g in ms], axis=0)
+                ws_on = spectra.window_sums(ms["axis"], on, lo * f, hi * f)
+                ws_off = spectra.window_sums(ms["axis"], ms["off"], lo * f, hi * f)
+                with np.errstate(all="ignore"):
+                    ratios.append(ws_off / np.where(ws_on > 0, ws_on, np.nan))
+            if ratios:
+                cons["off_on_ratio"] = np.nanmedian(np.vstack(ratios), axis=0)
+                thr = float(MF.get("max_off_on_ratio", 0.5))
+                cons["matrix_like"] = (cons["off_on_ratio"] >= thr) & ~cons["is_matrix"]
+                log.info(f"matrix filter: {int(cons['matrix_like'].sum())} peaks with off-tissue/on-tissue >= {thr:g} "
+                         "(besides the known DAN ions)")
+            else:
+                S.warn("no off-tissue mean spectra from 03: matrix filter skipped", log)
+
         # ---- 4. extraction --------------------------------------------------------------
         X_parts, obs_parts, present = [], [], {}
         chunk = int(ctx.get("runtime.spectra_chunk", 2000))
@@ -191,9 +217,10 @@ def main():
         keep = frac_ok >= float(P["min_section_fraction"])
         n_before = len(cons)
         if P.get("drop_matrix_peaks", True):
-            for j in np.flatnonzero(cons["is_matrix"].to_numpy()):
+            drop_m = (cons["is_matrix"] | cons["matrix_like"]).to_numpy()
+            for j in np.flatnonzero(drop_m):
                 obs[f"dan_{cons.loc[j, 'mz']:.4f}"] = X[:, j]
-            keep &= ~cons["is_matrix"].to_numpy()
+            keep &= ~drop_m
         cons_kept = cons[keep].reset_index(drop=True)
         X = X[:, keep]
         log.info(f"pixel filter + matrix removal: {n_before} -> {len(cons_kept)} peaks")
@@ -256,7 +283,12 @@ def main():
               "recalibration offsets (ppm)": ", ".join(f"{k} {v:+.2f}" for k, v in offsets.items()),
               "sections": n_sec, "aligned features": n_all,
               f"in >= {need} sections": n_before, "after pixel filter and matrix removal": len(var),
-              "matrix (DAN) peaks moved to obs": int(cons["is_matrix"].sum())})
+              "matrix (DAN) peaks moved to obs": int(cons["is_matrix"].sum()),
+              "matrix-like peaks moved to obs (off/on tissue ratio)": int(cons["matrix_like"].sum())})
+        if cons["matrix_like"].any():
+            S.p("Matrix-like peaks (as strong off tissue as on it, at least max_off_on_ratio), strongest first:")
+            S.table(cons[cons["matrix_like"]].nlargest(25, "median_height")[["mz", "off_on_ratio", "median_height",
+                                                                              "n_sections"]].round(4))
         S.h("Matrix")
         S.kv({"pixels": adata.n_obs, "peaks": adata.n_vars,
               "pixels per section (median)": int(obs.groupby(["slide", "section"]).size().median()),

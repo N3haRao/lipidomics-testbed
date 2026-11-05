@@ -67,7 +67,7 @@ def gradient_prediction(ctx, mode: str, obs: pd.DataFrame, mutant: str) -> tuple
 SLIDE_COLOURS = ["#c0392b", "#e67e22", "#d4ac0d", "#2874a6", "#7d3c98", "#17a589", "#7f8c8d", "#1abc9c"]
 
 
-def class_level(ctx, mode, ML, animals, ctl, mut, S, log):
+def class_level(ctx, mode, ML, animals, ctl, mut, S, log, offsets=None, ML_alt=None):
     """Class totals, ratios and the slide consistency check, from the per-animal means."""
     C = ctx.cfg.get("class_tests", {}) or {}
     PC = ctx.cfg.get("pair_check", {}) or {}
@@ -133,20 +133,50 @@ def class_level(ctx, mode, ML, animals, ctl, mut, S, log):
     if vals.empty:
         S.warn("none of the configured classes were found among the tested peaks", log)
         return
-    R = classes.test_features(vals, animals, ctl, mut, min_pairs)
+    use_off = offsets if ctx.cfg["differential"].get("gradient_corrected", True) else None
+    R = classes.test_features(vals, animals, ctl, mut, min_pairs, offsets=use_off)
+    # same class tests on another normalization (decided in advance: a check, not a choice)
+    for meth, MLa in (ML_alt or {}).items():
+        va, _ = classes.totals(MLa, ann, class_cfg, ratio_cfg, regions)
+        if va.empty:
+            continue
+        Ra = classes.test_features(va, animals, ctl, mut, min_pairs)[["unit", "feature", "log2fc", "p_ttest", "n_pairs_up"]]
+        Ra.columns = ["unit", "feature", f"log2fc_{meth}_norm", f"p_{meth}_norm", f"n_pairs_up_{meth}_norm"]
+        R = R.merge(Ra, on=["unit", "feature"], how="left")
+    # pre-specified primary endpoints: their own, small BH family
+    prim = {tuple(x.strip() for x in str(e).split("|", 1)) for e in ((C.get("primary") or {}).get(mode) or [])}
+    R["primary"] = [(u, f) in prim for u, f in zip(R["unit"], R["feature"])]
+    R["q_primary"] = np.nan
+    if R["primary"].any():
+        R.loc[R["primary"], "q_primary"] = stats.bh(R.loc[R["primary"], "p_ttest"])
+    missing = prim - set(zip(R["unit"], R["feature"]))
+    if missing:
+        S.warn(f"primary endpoints not found among the class tests: {sorted(missing)}", log)
     if PC.get("sensitivity", True) and flagged:
         R = R.merge(classes.sensitivity(vals, animals, ctl, mut, flagged, min_pairs), on=["unit", "feature"], how="left")
     R.to_csv(out("class_tests.csv"), index=False)
     mem.to_csv(out("class_members.csv"), index=False)
     vals.to_csv(out("class_values_per_animal.csv"), index=False)
 
+    if R["primary"].any():
+        S.h("Primary endpoints (pre-specified, their own BH family)")
+        S.p("A short list of class-level outcomes named in advance in config.yaml (class_tests.primary). "
+            "They are corrected only among themselves, so this is the family with real power at n = 6. "
+            "Effect and its interval first; q_primary is the bar for calling a result.")
+        pc = ["unit", "feature", "log2fc", "pct_change", "ci_low", "ci_high", "n_pairs_up", "n_pairs", "p_ttest",
+              "q_primary", "log2fc_gradient_corrected", "p_gradient_corrected"] + \
+             [c for c in R.columns if c.endswith("_norm") and c.startswith(("log2fc_", "p_"))] + \
+             ["log2fc_Female", "log2fc_Male", "I2_sex"]
+        S.table(R[R["primary"]][[c for c in pc if c in R]].round(4))
+        S.kv({f"primary endpoints with q < {alpha}": int((R["q_primary"] < alpha).sum()),
+              "primary endpoints tested": int(R["primary"].sum())})
     S.h("Class-level and ratio tests (pre-specified, one BH family for this mode)")
     S.p(f"{len(R)} tests ({R['feature'].nunique()} classes/ratios x {R['unit'].nunique()} regions). "
         f"Species per class are in class_members.csv. log2fc is the mean over slides of "
         "log2(Mutant/Control); pair_<slide> columns show each slide on its own.")
     pair_cols = [c for c in R.columns if c.startswith("pair_")]
-    show = ["unit", "feature", "kind", "n_species", "log2fc", "pct_change", "ci_low", "ci_high", "p_ttest",
-            "p_wilcoxon", "p_sign", "q_bh", "n_pairs_up", "n_pairs", "p_sex_difference_exploratory"] + pair_cols
+    show = ["unit", "feature", "kind", "n_species", "log2fc", "pct_change", "ci_low", "ci_high", "n_pairs_up",
+            "n_pairs", "p_ttest", "q_bh", "p_gradient_corrected", "I2_sex"] + pair_cols
     S.table(R.sort_values("p_ttest")[[c for c in show if c in R]].round(4), max_rows=30)
     S.kv({f"q < {alpha}": int((R["q_bh"] < alpha).sum()), "lowest q": float(R["q_bh"].min())})
     if flagged:
@@ -201,6 +231,39 @@ def class_level(ctx, mode, ML, animals, ctl, mut, S, log):
         ax.set_xlabel("log2(Mutant/Control), 95% CI over slide pairs")
         ax.set_title(f"{mode}: class totals and ratios", fontsize=9)
         S.fig(fig, "class_tests_forest.png")
+
+
+def region_qc(ctx, obs, units, core, animals, S, log):
+    """Per section: share of its pixels in each atlas region vs the median section. A region share
+    far from the others usually means the registration is off for that section. Warn, and leave
+    sections listed in differential.exclude_sections_from_regions (e.g. ["K:Top"]) out of the
+    atlas-region tests (whole section and territories keep them)."""
+    D = ctx.cfg["differential"]
+    lo, hi = D.get("region_fraction_flag", [0.6, 1.67])
+    rows = []
+    for (kind, name), m in units.items():
+        if kind != "region" or name == "whole_section":
+            continue
+        share = pd.Series(m & core).groupby(obs["animal_id"].to_numpy()).mean() / \
+            pd.Series(core).groupby(obs["animal_id"].to_numpy()).mean()
+        rel = share / share.median()
+        for aid, r in rel.items():
+            if np.isfinite(r) and (r < lo or r > hi):
+                rows.append({"animal_id": aid, "slide": animals.loc[aid, "slide"], "section": animals.loc[aid, "section"],
+                             "region": name, "share_of_section": round(float(share[aid]), 3),
+                             "vs_median_section": round(float(r), 2)})
+    if rows:
+        T = pd.DataFrame(rows)
+        S.warn(f"{len(T)} region/section combinations have a region share outside {lo}-{hi}x the median section "
+               "(possible registration problem; check the overlays). Listed under 'Region size check'.", log)
+        S.h("Region size check (atlas region share of each section vs the median section)")
+        S.table(T)
+    excl = [str(e) for e in (D.get("exclude_sections_from_regions") or [])]
+    ex_animals = [aid for aid in animals.index if f"{animals.loc[aid, 'slide']}:{animals.loc[aid, 'section']}" in excl]
+    if ex_animals:
+        S.p(f"Excluded from atlas-region tests (differential.exclude_sections_from_regions): {', '.join(excl)} "
+            f"= {', '.join(ex_animals)}. Their slide pairs have no value in those regions.")
+    return ex_animals, obs["animal_id"].isin(ex_animals).to_numpy()
 
 
 def main():
@@ -264,11 +327,20 @@ def main():
 
         animals = obs.drop_duplicates("animal_id").set_index("animal_id")[["slide", "genotype", "sex", "section"]]
         g_med, g_slide = gradient_prediction(ctx, mode, obs, mut)
+        excl_animals, excl_px = region_qc(ctx, obs, units, core, animals, S, log)
+        use_moderated = D.get("single_peak_test", "moderated") == "moderated"
+        offsets = g_slide if (D.get("gradient_corrected", True) and len(g_slide)) else None
+        alt_methods = [m for m in (D.get("normalization_sensitivity") or []) if f"size_factor_{m}" in obs
+                       and "size_factor_tic" in obs]
+        class_units = set((ctx.cfg.get("class_tests") or {}).get("regions") or [])
         log.info(f"{mode}: {len(peaks)} peaks x {len(units)} units; gradient-predicted log2(Mut/Ctl) = {g_med:.3f}")
 
         results, means_long = [], []
+        alt_long = {m: [] for m in alt_methods}
         for (kind, name), m in units.items():
             mask = m & core
+            if kind == "region" and name != "whole_section" and excl_px.any():
+                mask = mask & ~excl_px          # sections excluded from atlas regions (bad registration)
             if mask.sum() == 0:
                 continue
             means, npx = stats.per_animal_means(X, obs, mask, int(D["min_pixels_per_unit"]))
@@ -279,7 +351,8 @@ def main():
             c = stats.pseudocount(means)
             log2 = np.log2(means + c)
             res = stats.paired_tests(log2, animals, ctl, mut, run_mixed=bool(D.get("run_mixedlm", False)),
-                                     min_pairs=int(D.get("min_pairs", 5)))
+                                     min_pairs=int(D.get("min_pairs", 5)), moderated=use_moderated,
+                                     offsets=offsets)
             res.insert(0, "unit", name)
             res.insert(0, "unit_kind", kind)
             res["median_pixels_per_animal"] = float(npx.median())
@@ -289,6 +362,16 @@ def main():
             ml.insert(0, "unit", name)
             ml["n_pixels"] = ml["animal_id"].map(npx)
             means_long.append(ml)
+            # per-animal means under another normalization, for the class-test sensitivity check
+            if kind == "region" and name in class_units:
+                for meth in alt_methods:
+                    f = (obs["size_factor_tic"].to_numpy(float) / obs[f"size_factor_{meth}"].to_numpy(float))
+                    ma, _ = stats.per_animal_means(X * f[:, None], obs, mask, int(D["min_pixels_per_unit"]))
+                    ma.columns = peaks
+                    mla = ma.stack().rename("mean_norm_intensity").reset_index()
+                    mla.columns = ["animal_id", "peak", "mean_norm_intensity"]
+                    mla.insert(0, "unit", name)
+                    alt_long[meth].append(mla)
         if not results:
             S.warn("nothing could be tested", log)
             S.write()
@@ -298,13 +381,18 @@ def main():
                                 "ambiguous", "typeII_flag", "candidates") if c in var]
         R = R.join(var[ann_cols], on="peak")
         R["targeted"] = R.get("hypothesis", pd.Series("", index=R.index)).fillna("").astype(str) != ""
+        # the p-value that decides significance: the moderated t (default) or the plain paired t
+        R["p_primary"] = R["p_moderated"] if (use_moderated and "p_moderated" in R) else R["p_ttest"]
+        R["primary_test"] = "moderated t" if use_moderated else "paired t"
         R["q_all"] = np.nan
         R["q_targeted"] = np.nan
+        R["q_all_ttest"] = np.nan
         for _, idx in R.groupby("unit").groups.items():
-            R.loc[idx, "q_all"] = stats.bh(R.loc[idx, "p_ttest"])
+            R.loc[idx, "q_all"] = stats.bh(R.loc[idx, "p_primary"])
+            R.loc[idx, "q_all_ttest"] = stats.bh(R.loc[idx, "p_ttest"])
             t_idx = [i for i in idx if R.loc[i, "targeted"]]
             if t_idx:
-                R.loc[t_idx, "q_targeted"] = stats.bh(R.loc[t_idx, "p_ttest"])
+                R.loc[t_idx, "q_targeted"] = stats.bh(R.loc[t_idx, "p_primary"])
         exp_dir = R.get("hypothesis", pd.Series("", index=R.index)).fillna("")
         R["matches_hypothesis"] = np.where(exp_dir == "accumulated", R["log2fc"] > 0,
                                            np.where(exp_dir == "depleted", R["log2fc"] < 0,
@@ -316,7 +404,7 @@ def main():
         else:
             R["could_be_position"] = np.nan
         R["significant"] = (np.where(R["targeted"], R["q_targeted"], R["q_all"]) < alpha)
-        R = R.sort_values(["unit_kind", "unit", "p_ttest"])
+        R = R.sort_values(["unit_kind", "unit", "p_primary"])
         R.to_csv(ctx.out("results", "09_differential", mode, "differential.csv"), index=False)
         ML = pd.concat(means_long, ignore_index=True)
         ML.to_csv(ctx.out("results", "09_differential", mode, "per_animal_means.csv"), index=False)
@@ -329,16 +417,16 @@ def main():
         for ax, u in zip(axes.ravel(), reg_units):
             sub = R[R.unit == u]
             col = np.where(sub["significant"], np.where(sub["log2fc"] > 0, "tab:red", "tab:blue"), "0.7")
-            ax.scatter(sub["log2fc"], -np.log10(sub["p_ttest"].clip(lower=1e-300)), c=col, s=12,
+            ax.scatter(sub["log2fc"], -np.log10(sub["p_primary"].clip(lower=1e-300)), c=col, s=12,
                        edgecolor=np.where(sub["targeted"], "k", "none"), linewidth=0.5)
             if np.isfinite(g_med):
                 ax.axvspan(min(0, flag_ratio * g_med), max(0, flag_ratio * g_med), color="orange", alpha=0.15)
-            for _, r in sub[sub["significant"]].nsmallest(6, "p_ttest").iterrows():
-                ax.annotate(str(r.get("label", r["peak"]))[:22], (r["log2fc"], -np.log10(r["p_ttest"])), fontsize=5)
+            for _, r in sub[sub["significant"]].nsmallest(6, "p_primary").iterrows():
+                ax.annotate(str(r.get("label", r["peak"]))[:22], (r["log2fc"], -np.log10(r["p_primary"])), fontsize=5)
             ax.axvline(0, color="k", lw=0.5)
             ax.set_title(u, fontsize=9)
             ax.set_xlabel(f"log2FC ({ctx.cfg['project']['mutant_label']} / Control)", fontsize=7)
-            ax.set_ylabel("-log10 p (paired t)", fontsize=7)
+            ax.set_ylabel(f"-log10 p ({R['primary_test'].iloc[0]})", fontsize=7)
         for ax in axes.ravel()[len(reg_units):]:
             ax.axis("off")
         fig.suptitle(f"{mode}: volcano per region (black edge = hypothesis class, orange band = within "
@@ -370,19 +458,21 @@ def main():
         S.p(f"Position gradient: median predicted log2(Mutant/Control) from the off-tissue DAN trend = "
             f"{g_med:.3f}" + ("" if np.isfinite(g_med) else " (not available)") +
             f". Hits with the same sign and |log2FC| < {flag_ratio:g}x that are flagged `could_be_position`.")
-        show = ["unit", "label", "hypothesis", "log2fc", "ci_low", "ci_high", "p_ttest", "q_targeted",
-                "p_wilcoxon", "p_mixedlm", "n_pairs", "n_pairs_up", "matches_hypothesis", "could_be_position",
-                "ambiguous"]
+        # effect and interval first; Wilcoxon/sign stay in the CSV (their 0.031 floor makes them
+        # uninformative in a table with n = 6)
+        show = ["unit", "label", "hypothesis", "log2fc", "ci_low", "ci_high", "n_pairs_up", "n_pairs",
+                "p_primary", "q_targeted", "p_ttest", "p_gradient_corrected", "matches_hypothesis",
+                "could_be_position", "ambiguous"]
         show = [c for c in show if c in R]
         S.h("1. Hypothesis classes (targeted, BH within region over tagged peaks)")
-        T = R[R["targeted"]].sort_values(["p_ttest"])
+        T = R[R["targeted"]].sort_values(["p_primary"])
         S.table(T[show], max_rows=40)
         S.h("2. Untargeted: top hits per region (BH over all peaks in the region)")
-        U = R[R.unit_kind == "region"].sort_values("p_ttest").groupby("unit").head(5)
+        U = R[R.unit_kind == "region"].sort_values("p_primary").groupby("unit").head(5)
         S.table(U[[c if c != "q_targeted" else "q_all" for c in show]], max_rows=60)
         if (R.unit_kind == "territory").any():
             S.h("3. Territories: top hits")
-            Tt = R[R.unit_kind == "territory"].sort_values("p_ttest").head(15)
+            Tt = R[R.unit_kind == "territory"].sort_values("p_primary").head(15)
             S.table(Tt[[c if c != "q_targeted" else "q_all" for c in show]])
         S.h("Counts")
         sig = R[R["significant"]]
@@ -397,7 +487,8 @@ def main():
             Sx = R[R.unit == "whole_section"].nsmallest(10, "p_sex_difference_exploratory")
             S.table(Sx[[c for c in ("label", "log2fc", "log2fc_Female", "log2fc_Male",
                                      "p_sex_difference_exploratory") if c in Sx]].round(4))
-        class_level(ctx, mode, ML, animals, ctl, mut, S, log)
+        ML_alt = {m: pd.concat(v, ignore_index=True) for m, v in alt_long.items() if v}
+        class_level(ctx, mode, ML, animals, ctl, mut, S, log, offsets=offsets, ML_alt=ML_alt)
         log.info(f"summary: {S.write()}")
     cli.finish(log, t0)
 

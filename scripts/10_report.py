@@ -82,7 +82,8 @@ def top_hits_images(ctx, mode: str, R: pd.DataFrame, S: Summary, n: int, log) ->
     obs = a.obs
     # best unit per peak, targeted hits first, then the rest by p
     # anatomical regions only (territories can exist on few slides), tested rows only
-    best = R[(R["unit_kind"] == "region") & R["p_ttest"].notna()].sort_values("p_ttest").drop_duplicates("peak")
+    pcol = "p_primary" if "p_primary" in R else "p_ttest"
+    best = R[(R["unit_kind"] == "region") & R[pcol].notna()].sort_values(pcol).drop_duplicates("peak")
     hits = pd.concat([best[best["targeted"] & best["significant"]], best[~best["targeted"] & best["significant"]],
                       best[~best["significant"]]]).drop_duplicates("peak").head(n)
     if hits.empty:
@@ -204,8 +205,17 @@ def class_section(ctx, mode, fig) -> str:
     R = pd.read_csv(p)
     pair_cols = [c for c in R.columns if c.startswith("pair_")]
     show = [c for c in ["unit", "feature", "kind", "n_species", "log2fc", "pct_change", "ci_low", "ci_high",
-                        "p_ttest", "p_wilcoxon", "q_bh", "n_pairs_up"] + pair_cols if c in R]
-    return ("<h3>Class totals and ratios (pre-specified)</h3><p class='small'>Species of a class added up per "
+                        "n_pairs_up", "p_ttest", "q_bh", "p_gradient_corrected"] + pair_cols if c in R]
+    prim = ""
+    if "primary" in R and R["primary"].any():
+        pc = [c for c in ["unit", "feature", "log2fc", "pct_change", "ci_low", "ci_high", "n_pairs_up", "n_pairs",
+                          "p_ttest", "q_primary", "p_gradient_corrected", "p_median_norm", "log2fc_Female",
+                          "log2fc_Male", "I2_sex"] if c in R]
+        prim = ("<h3>Primary endpoints (pre-specified, own BH family)</h3><p class='small'>Named in advance in "
+                "config.yaml (class_tests.primary) and corrected only among themselves (<code>q_primary</code>). "
+                "Also shown: the same test after removing the position gradient, and with median normalization.</p>"
+                + table_html(R[R["primary"]][pc], 20))
+    return (prim + "<h3>Class totals and ratios (pre-specified)</h3><p class='small'>Species of a class added up per "
             "animal and region; ratios within the same animal and region. One BH family per mode "
             "(<code>q_bh</code>). pair_&lt;slide&gt; = that slide's log2(Mutant/Control).</p>"
             + table_html(R.sort_values("p_ttest")[show], 25)
@@ -269,15 +279,17 @@ def main():
         R = pd.read_csv(dpath) if dpath.exists() else None
         out.append("<h3>Differential: hypothesis classes</h3>")
         if R is not None:
-            show = [c for c in ("unit", "label", "hypothesis", "log2fc", "ci_low", "ci_high", "p_ttest", "q_targeted",
-                                "p_wilcoxon", "n_pairs", "matches_hypothesis", "could_be_position", "ambiguous") if c in R]
+            pcol = "p_primary" if "p_primary" in R else "p_ttest"
+            show = [c for c in ("unit", "label", "hypothesis", "log2fc", "ci_low", "ci_high", "n_pairs_up", "n_pairs",
+                                pcol, "q_targeted", "p_ttest", "p_gradient_corrected", "matches_hypothesis",
+                                "could_be_position", "ambiguous") if c in R]
             T = R[R["targeted"] & R["unit"].isin(["whole_section", "white_matter", "corpus_callosum", "wm_lipid",
-                                                   "gm_lipid", "cortex", "hippocampus", "thalamus"]) & R["p_ttest"].notna()]
-            out.append(table_html(T.sort_values("p_ttest")[show], 40))
+                                                   "gm_lipid", "cortex", "hippocampus", "thalamus"]) & R[pcol].notna()]
+            out.append(table_html(T.sort_values(pcol)[show], 40))
             out.append(img_tag(fig("09_differential", "forest_hypothesis.png"), "75%"))
             out.append(class_section(ctx, mode, fig))
             out.append("<h3>Differential: untargeted, top per region</h3>")
-            U = R[R.unit_kind == "region"].sort_values("p_ttest").groupby("unit").head(5)
+            U = R[R.unit_kind == "region"].sort_values(pcol).groupby("unit").head(5)
             out.append(table_html(U[[c if c != "q_targeted" else "q_all" for c in show]], 60))
             out.append(img_tag(fig("09_differential", "volcano_regions.png")))
             ti = top_hits_images(ctx, mode, R, S, int(ctx.get("report.top_n_hits", 12)), log)

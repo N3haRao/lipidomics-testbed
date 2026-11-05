@@ -335,3 +335,35 @@ def test_class_totals_ratios_and_sensitivity():
     assert classes.candidate_class("LPC O-16:2 [M+H]+") == "LPC"
     assert classes.candidate_class("BMP/PG 36:1 [M-H]-") == "BMP/PG"
     assert classes.candidate_class("Glycerol 3-phosphate [M-H]-") == "Glycerol 3-phosphate"
+
+
+def test_moderated_t_is_calibrated_and_more_powerful():
+    from scipy import stats as sps
+    from cln3msi import stats as st
+    rng = np.random.default_rng(3)
+    sd = np.exp(rng.normal(np.log(0.2), 0.3, 3000))
+    D = rng.normal(0, sd, (6, 3000))
+    m = st.moderated_t(D)
+    assert 0.03 < (m["p"] < 0.05).mean() < 0.07           # null p-values stay uniform
+    assert np.isfinite(m["d0"]) and m["d0"] > 1             # a real prior was estimated
+    D[:, :200] += 0.25
+    m = st.moderated_t(D)
+    pt = sps.ttest_1samp(D, 0).pvalue
+    assert (m["p"][:200] < 0.01).mean() > (pt[:200] < 0.01).mean()
+
+
+def test_gradient_correction_and_i2():
+    from cln3msi import stats as st
+    animals = pd.DataFrame({"slide": list("AABBCCDDEEFF"), "genotype": ["Control", "Mutant"] * 6,
+                            "sex": ["F"] * 6 + ["M"] * 6}, index=[f"a{i}" for i in range(12)])
+    # every pair differs by exactly the position offset: nothing should be left after correction
+    off = pd.Series({"A": 0.10, "B": 0.12, "C": 0.08, "D": 0.11, "E": 0.09, "F": 0.10})
+    v = []
+    for s in "ABCDEF":
+        v += [1.0, 1.0 + off[s]]
+    log2 = pd.DataFrame({"p1": v}, index=animals.index)
+    r = st.paired_tests(log2, animals, "Control", "Mutant", min_pairs=5, offsets=off).iloc[0]
+    assert r["log2fc"] > 0.09 and abs(r["log2fc_gradient_corrected"]) < 1e-9
+    assert np.isfinite(r["I2_sex"]) or np.isnan(r["I2_sex"])
+    g = [np.array([0.5, 0.55, 0.45]), np.array([0.0, 0.05, -0.05])]
+    assert st.i_squared(g) > 0.9 and st.i_squared([g[0], g[0] + 0.001]) < 0.1

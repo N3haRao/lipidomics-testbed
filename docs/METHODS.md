@@ -74,8 +74,8 @@ writes tables, figures and a short summary. Phases 03 to 09 run separately for e
   method "auto" uses Otsu's method, but switches to the lower class boundary of a three-class
   Otsu split when that fills holes inside the sections (this happens when the imaged area
   barely extends past the tissue, so that Otsu separates white from grey matter instead of
-  tissue from glass). One pixel at every tissue edge is excluded from statistics
-  (`erode_edge_px`), because edge pixels mix tissue and glass.
+  tissue from glass). Three pixels (150 µm) at every tissue edge are excluded from statistics
+  (`erode_edge_px`), because edge pixels mix tissue and glass and showed bright-rim artefacts.
 * **Section split.** The two largest tissue pieces are assigned to the two animals. The
   direction of the split (sections above each other or side by side) is detected from the
   data (`split_axis: auto`); for this dataset the sections are side by side. The left
@@ -100,10 +100,13 @@ writes tables, figures and a short summary. Phases 03 to 09 run separately for e
    all sections are grouped when they lie within the alignment tolerance.
 4. A consensus peak is kept if it was picked in at least half of the sections
    (`min_section_fraction` = 0.5) and is present in at least 1% of tissue pixels
-   (`min_pixel_fraction`). At most `max_peaks` = 2,000 peaks are kept, the strongest first.
+   (`min_pixel_fraction`). At most `max_peaks` = 4,000 peaks are kept, the strongest first.
 5. Every kept peak is integrated in every tissue pixel (sum of intensities inside the peak
    window), giving a pixels × peaks matrix per mode. DAN matrix peaks are moved out of the
-   matrix into separate columns, so they do not enter normalization or statistics.
+   matrix into separate columns, so they do not enter normalization or statistics. So are
+   *matrix-like* peaks: those whose signal on the bare glass is at least half their signal on the
+   tissue (median over slides; `peaks.matrix_filter`), which catches DAN clusters and adducts
+   that the list of known matrix ions misses.
 
 ### 3.3 Annotation (phase 05)
 
@@ -154,7 +157,10 @@ brainglobe) with SimpleITK:
    B-spline (1 mm control-point grid). The B-spline result is kept only if it does not reduce
    the overlap.
 4. **Quality.** The Dice coefficient between the tissue mask and the warped atlas outline
-   (0 = no overlap, 1 = perfect). Sections below `min_dice` = 0.8 do not get atlas regions.
+   (0 = no overlap, 1 = perfect). Sections below `min_dice` = 0.8 do not get atlas regions. Phase 09 also reports any section whose
+   share of an atlas region is outside 0.6 to 1.67 times the median section (a sign of a poor fit),
+   and sections listed in `differential.exclude_sections_from_regions` are left out of the
+   atlas-region tests.
 
 Warped atlas labels give each pixel an Allen structure. The regions used are white matter
 ("fiber tracts"), corpus callosum, isocortex, hippocampal formation and thalamus, each with all
@@ -226,7 +232,19 @@ alternative. With only two animals per slide, its slide-variance estimate collap
 reported implausibly small p-values (far below the paired t-test on the same numbers). It is
 off by default (`run_mixedlm: false`).
 
-### 4.3 Robustness checks reported next to every test
+### 4.3 Single peaks: the moderated t-test
+
+For single peaks, significance is decided by the **empirical-Bayes moderated paired t-test**
+(`single_peak_test: moderated`), the method behind limma. With 6 pairs, each peak's variance
+rests on only 5 degrees of freedom, so some peaks get very small variances by chance (false
+positives) and others very large ones. The moderated test estimates a common prior variance
+from all peaks in the region and shrinks each peak's variance towards it, adding d0 prior
+degrees of freedom (reported as `df_prior`). The test statistic is the paired t with the
+shrunken variance, on n − 1 + d0 degrees of freedom. On simulated null data it keeps the
+nominal false-positive rate, and it detects consistent effects more often than the plain paired
+t-test. The plain paired t (`p_ttest`, `q_all_ttest`) is always reported next to it.
+
+### 4.3b Robustness checks reported next to every test
 
 * **Exact Wilcoxon signed-rank test** on the 6 differences. It ranks the differences, so it
   does not assume normality and shows whether one extreme pair drives a t-test result. With
@@ -234,6 +252,11 @@ off by default (`run_mixedlm: false`).
   multiple-testing correction on its own; it is a check, not a test for calling hits.
 * **Sign test (binomial)**: how many of the pairs go up, compared with 50:50. It ignores the
   size of the changes and has the same floor of 0.031.
+* **Gradient-corrected test**: the same paired test after subtracting each slide's technical log2
+  ratio predicted from the off-tissue position gradient (`log2fc_gradient_corrected`,
+  `p_gradient_corrected`; Section 5.1).
+* **Normalization check** (class tests): the same tests with median instead of TIC
+  normalization (`*_median_norm` columns), from the size factors phase 06 stores.
 * **Number of pairs in the direction of the mean** (`n_pairs_up`) and every pair's own
   difference (`pair_<slide>` columns in the class tests).
 
@@ -247,7 +270,10 @@ all set before looking at results:
 * **single peaks, untargeted**: within each region, every tested peak. Tested peaks are those
   that are annotated or spatially structured (`untargeted_peaks: annotated_or_structured`), so
   that hundreds of unstructured noise peaks do not dilute the correction;
-* **class-level and ratio tests**: one family per mode (Section 4.5).
+* **class-level and ratio tests**: one family per mode (Section 4.5);
+* **primary endpoints**: a short list of class-level outcomes named in advance
+  (`class_tests.primary`), corrected only among themselves (`q_primary`). This is the family with
+  real power at n = 6; everything else is exploratory.
 
 ### 4.5 Class-level and ratio tests
 
@@ -271,7 +297,7 @@ the paired analysis is already adjusted for it, and sex cannot be added as a sep
 covariate. What can be asked is whether the genotype effect differs between the sexes (the sex
 × genotype interaction). This is tested as a Welch t-test of the 3 female pair differences
 against the 3 male ones (`p_sex_difference_exploratory`, with `log2fc_Female` and
-`log2fc_Male`). Because all females were run in runs 1 to 3 and all males in run 4, this is
+`log2fc_Male`), and summarized as I² (`I2_sex`, 0 = the sexes agree, near 1 = they clearly differ). Because all females were run in runs 1 to 3 and all males in run 4, this is
 equally a run × genotype comparison, and it is reported as exploratory only.
 
 ## 5. Quality checks for the design's weak points
@@ -287,7 +313,8 @@ statistical model can remove it from this design. Two measures limit the risk:
    log off-tissue matrix signal against position is fitted per slide, and converted into the
    log2 ratio that this trend alone would produce between the two section centres. In phase 09,
    a result with the same sign and less than `flag_ratio` = 2 times the median predicted ratio
-   is flagged `could_be_position`. This is a warning, not a correction.
+   is flagged `could_be_position`. This is a warning, not a correction. As a sensitivity check,
+   every test is also repeated after subtracting each slide's predicted ratio (Section 4.3b).
 2. **Ratios** (Section 4.5) cancel a trend that scales all signals in a pixel.
 
 ### 5.2 Sex and run

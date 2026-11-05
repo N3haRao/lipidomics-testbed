@@ -87,6 +87,17 @@ def main():
         check(f"09 class test {mode} {feat} {'up' if sign > 0 else 'down'} in {unit}",
               r["log2fc"] * sign > 0.2 and r["q_bh"] < 0.05, f"log2FC {r['log2fc']:+.2f}, q {r['q_bh']:.1e}")
 
+    # primary endpoints, moderated test, matrix filter
+    ct = pd.read_csv(R / "09_differential" / "lip_neg" / "class_tests.csv")
+    pr = ct[ct["primary"].astype(bool)] if "primary" in ct else ct.iloc[0:0]
+    check("09 primary endpoints have their own q (planted sulfatide/HexCer endpoints q < 0.05)",
+          len(pr) >= 2 and (pr["q_primary"] < 0.05).sum() >= 2, f"{len(pr)} primary, {int((pr['q_primary'] < 0.05).sum()) if len(pr) else 0} with q < 0.05")
+    d = pd.read_csv(R / "09_differential" / "lip_neg" / "differential.csv")
+    check("09 single peaks decided by the moderated t", "p_moderated" in d and (d["primary_test"] == "moderated t").all())
+    pk = pd.read_csv(ctx.output_root / "processed" / "lip_neg" / "peaks_all_candidates.csv")
+    check("04 matrix filter ran (off/on-tissue ratio per peak)", "off_on_ratio" in pk and pk["off_on_ratio"].notna().any(),
+          f"{int(pk['matrix_like'].sum()) if 'matrix_like' in pk else 0} matrix-like peaks")
+
     # provenance: every phase recorded, all with the same code and config
     from cln3msi import provenance
     recs = [r for r in provenance.read_all(ctx) if r.get("phase") != "10_report"]
