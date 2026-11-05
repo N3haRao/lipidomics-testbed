@@ -179,7 +179,7 @@ def main():
             r = scatter(S, reg[f"log2fc__{la}"].to_numpy(float), reg[f"log2fc__{lb}"].to_numpy(float), None, la, lb,
                         f"{mode}: single peaks, atlas regions", "differential_scatter.png", reg["unit"].to_numpy())
             S.p(f"Correlation of single-peak fold changes between the runs (atlas regions): r = {r:.2f}.")
-            either = T[T[f"significant__{la}"].fillna(False).astype(bool) | T[f"significant__{lb}"].fillna(False).astype(bool)]
+            either = T[T[f"significant__{la}"].eq(True) | T[f"significant__{lb}"].eq(True)]
             S.p(f"Significant in either run: {len(either)}.")
             S.table(either[[c for c in ["unit", f"label__{lb}", f"log2fc__{la}", f"q_all__{la}", f"log2fc__{lb}",
                                         f"q_all__{lb}", f"n_pairs_up__{lb}"] if c in either]].round(4), max_rows=30)
