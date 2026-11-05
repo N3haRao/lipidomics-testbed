@@ -96,7 +96,7 @@ def main():
     check("09 single peaks decided by the moderated t", "p_moderated" in d and (d["primary_test"] == "moderated t").all())
     pk = pd.read_csv(ctx.output_root / "processed" / "lip_neg" / "peaks_all_candidates.csv")
     check("04 matrix filter ran (off/on-tissue ratio per peak)", "off_on_ratio" in pk and pk["off_on_ratio"].notna().any(),
-          f"{int(pk['matrix_like'].sum()) if 'matrix_like' in pk else 0} matrix-like peaks")
+          f"{int(pk['matrix_like'].sum()) if 'matrix_like' in pk else 0} removed (filter off by default)")
 
     # provenance: every phase recorded, all with the same code and config
     from cln3msi import provenance

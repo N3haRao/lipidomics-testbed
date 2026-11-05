@@ -101,7 +101,12 @@ peaks:
   # Peaks that are as strong on the bare glass as on the tissue are matrix (DAN clusters and
   # adducts the known-ion list misses). Ratio = off-tissue / on-tissue mean signal in the peak's
   # window, median over slides. Such peaks are moved out of the matrix like the DAN ions.
-  matrix_filter: {enabled: true, max_off_on_ratio: 0.5}
+  # OFF: on the real data the off-tissue pixels sit right next to the tissue (the raster hugs
+  # it), so delocalized tissue lipids (PI 38:4, PE 38:4, DHA, ...) scored 0.6-0.95 and 3,292 of
+  # 4,000 lipid-negative peaks were removed, which also changed TIC normalization and broke the
+  # registration of slide E Control. off_on_ratio is still computed and saved in
+  # peaks_all_candidates.csv (and reported), so matrix-like peaks can be checked by hand.
+  matrix_filter: {enabled: false, max_off_on_ratio: 1.5}
 
 annotation:
   ppm_tolerance: null                # null means use the 02/03 suggestion, otherwise a number

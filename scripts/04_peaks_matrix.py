@@ -136,7 +136,7 @@ def main():
         MF = P.get("matrix_filter") or {}
         cons["off_on_ratio"] = np.nan
         cons["matrix_like"] = False
-        if MF.get("enabled", True):
+        if True:                       # always compute the ratio; only drop peaks if enabled
             ratios = []
             for s in slides:
                 ms = np.load(ctx.out("processed", mode, "qc", f"meanspec_{s}.npz", mkdir=False))
@@ -151,9 +151,9 @@ def main():
             if ratios:
                 cons["off_on_ratio"] = np.nanmedian(np.vstack(ratios), axis=0)
                 thr = float(MF.get("max_off_on_ratio", 0.5))
-                cons["matrix_like"] = (cons["off_on_ratio"] >= thr) & ~cons["is_matrix"]
-                log.info(f"matrix filter: {int(cons['matrix_like'].sum())} peaks with off-tissue/on-tissue >= {thr:g} "
-                         "(besides the known DAN ions)")
+                cons["matrix_like"] = (cons["off_on_ratio"] >= thr) & ~cons["is_matrix"] & bool(MF.get("enabled", False))
+                log.info(f"matrix filter {'on' if MF.get('enabled', False) else 'off (ratio reported only)'}: "
+                         f"{int(((cons['off_on_ratio'] >= thr) & ~cons['is_matrix']).sum())} peaks with off/on >= {thr:g}")
             else:
                 S.warn("no off-tissue mean spectra from 03: matrix filter skipped", log)
 
@@ -284,7 +284,9 @@ def main():
               "sections": n_sec, "aligned features": n_all,
               f"in >= {need} sections": n_before, "after pixel filter and matrix removal": len(var),
               "matrix (DAN) peaks moved to obs": int(cons["is_matrix"].sum()),
-              "matrix-like peaks moved to obs (off/on tissue ratio)": int(cons["matrix_like"].sum())})
+              "matrix-like peaks moved to obs (off/on tissue ratio)": int(cons["matrix_like"].sum()),
+              "peaks with off/on-tissue ratio >= 1 (not removed unless matrix_filter is on)":
+                  int((cons["off_on_ratio"] >= 1).sum())})
         if cons["matrix_like"].any():
             S.p("Matrix-like peaks (as strong off tissue as on it, at least max_off_on_ratio), strongest first:")
             S.table(cons[cons["matrix_like"]].nlargest(25, "median_height")[["mz", "off_on_ratio", "median_height",
