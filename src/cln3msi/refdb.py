@@ -26,6 +26,7 @@ import urllib.request
 import zipfile
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 
 from . import chem
@@ -123,7 +124,43 @@ def sdf_to_table(path: Path, log) -> pd.DataFrame:
     return df.dropna(subset=["neutral_mass"]).reset_index(drop=True)
 
 
+def swisslipids_to_table(path: Path, log) -> pd.DataFrame:
+    """SwissLipids lipids.tsv(.gz) -> one row per "Species" (sum composition, e.g. PC(34:1)).
+
+    SwissLipids gives the formula of the form present at pH 7.3 plus its charge; the neutral
+    formula is that formula with as many H added as the charge is negative (and removed if
+    positive). We check it against the file's own neutral exact mass. The finer levels
+    (molecular / structural / isomeric subspecies, ~770,000 rows) have the same formulas as
+    their species, so for MS1 annotation the ~10,000 species are all we need.
+    """
+    import re
+    cols = ["Lipid ID", "Level", "Name", "Abbreviation*", "Formula (pH7.3)", "Charge (pH7.3)",
+            "Exact Mass (neutral form)", "LIPID MAPS"]
+    d = pd.read_csv(path, sep="\t", usecols=cols, dtype=str, encoding="latin-1", quoting=3)
+    d = d[d["Level"] == "Species"].dropna(subset=["Formula (pH7.3)"])
+    rows = []
+    for _, r in d.iterrows():
+        try:
+            c = chem.parse_formula(r["Formula (pH7.3)"])
+            c["H"] += -int(float(r["Charge (pH7.3)"] or 0))
+            f = chem.format_formula(c)
+        except Exception:
+            continue
+        ab = str(r["Abbreviation*"] or r["Name"]).split(" | ")[0].strip()
+        m = re.match(r"^([A-Za-z0-9\-]+)\((.*)\)$", ab)
+        name = f"{m.group(1)} {m.group(2)}" if m else ab
+        rows.append({"id": r["Lipid ID"], "name": name, "abbreviation": ab,
+                     "db_class": m.group(1) if m else "", "formula": f,
+                     "mass_file": float(r["Exact Mass (neutral form)"]) if r["Exact Mass (neutral form)"] else np.nan})
+    df = pd.DataFrame(rows)
+    df["neutral_mass"] = [chem.mono_mass(f) for f in df["formula"]]
+    dev = (df["neutral_mass"] - df["mass_file"]).abs()
+    log.info(f"{path.name}: {len(df)} SwissLipids species; neutral mass vs the file's: median "
+             f"|diff| {dev.median():.5f} Da, {int((dev > 0.01).sum())} entries off by > 0.01 Da (dropped)")
+    return df[~(dev > 0.01)].drop(columns="mass_file").reset_index(drop=True)
+
+
 def cached_table(ctx, which: str) -> pd.DataFrame | None:
-    """Load the parsed cache for 'lipidmaps' or 'hmdb', or None if 00_setup hasn't made it."""
+    """Load the parsed cache for 'lipidmaps', 'hmdb' or 'swisslipids', or None if 00_setup hasn't made it."""
     p = ctx.cache_root / which / f"{which}.parquet"
     return pd.read_parquet(p) if p.exists() else None

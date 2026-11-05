@@ -118,6 +118,20 @@ candidate has an exact elemental formula. Compositions whose formula is absent f
 are removed. For the metabolite mode, HMDB (or the curated list in
 `reference/metabolites_curated.csv`) is added.
 
+The rules cover 37 classes plus a few fixed species: the main glycero- and sphingolipid classes,
+lyso forms, gangliosides (GM1, GM2, GM3, GD1, GD2, GD3, GT1), cardiolipins, PIP and PIP2,
+acylcarnitines, Hex3Cer, lyso-sulfatide, psychosine, sphingosine and S1P. Classes added after
+the first results carry a small ranking penalty, so on an exact-mass tie the established class
+wins (the other stays listed as a candidate). PE-ceramide and ceramide-1-phosphate are left out
+of the rules on purpose: they have exactly the formulas of sphingomyelin and ether-LPC species
+(for example PE-Cer 38:1 [M−H]⁻ = SM 36:1 [M−CH3]⁻), which are far more abundant in brain.
+
+**Second pass.** Peaks that the rules (and, in the metabolite mode, the curated list and HMDB)
+leave unnamed are matched against every LIPID MAPS structure and every SwissLipids species
+(`annotation.second_pass`), with the same adduct rules and a sanity range for chain lengths.
+These names are marked in `annotation_source`, are never tagged as hypothesis classes, and
+should be treated as leads.
+
 A peak matches a candidate if the ppm error of some (candidate, adduct) is within the
 tolerance from phase 03. Adducts follow ion chemistry:
 
@@ -366,7 +380,7 @@ justify setting `qc.sections.flip_slides`.
 
 Python 3.11 with the versions pinned in `requirements.txt` (numpy, scipy, pandas, anndata,
 pyimzML, lxml, scikit-image, scikit-learn, statsmodels, SimpleITK, brainglobe-atlasapi, igraph,
-leidenalg, matplotlib). Reference data: LIPID MAPS Structure Database and HMDB (downloaded and
+leidenalg, matplotlib). Reference data: LIPID MAPS Structure Database, HMDB and SwissLipids (downloaded and
 cached by phase 00), the Allen Mouse Brain CCF at 25 µm (`allen_mouse_25um` via brainglobe).
 Random steps (permutations, subsampling, NMF initialization) use `runtime.seed` = 0, so a rerun
 of the same code and config gives the same numbers.

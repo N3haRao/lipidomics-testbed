@@ -54,6 +54,13 @@ def main():
     if lmsd is None and A.get("lipidmaps_filter", True):
         log.warning("no LIPID MAPS cache (run 00_setup.py --download): compositions are NOT filtered by LMSD")
     lib_lip = annotate.build_lipid_library(lmsd, log)
+    ext_lib = None
+    if A.get("second_pass", True):
+        swiss = refdb.cached_table(ctx, "swisslipids")
+        ext_lib = annotate.build_extended_library(lmsd, swiss, log)
+        if ext_lib is None or not len(ext_lib):
+            log.warning("second pass on, but neither LIPID MAPS nor SwissLipids is cached: skipped")
+            ext_lib = None
 
     for mode in modes:
         S = Summary(ctx, "05_annotate", mode, f"Annotation, {mode}")
@@ -78,6 +85,21 @@ def main():
         peaks = var[["mz"]].copy()
         ann = annotate.match_peaks(peaks, ions, tol, bool(A.get("lipidmaps_filter", True)) and lmsd is not None,
                                    int(A.get("max_candidates_reported", 5)))
+        n_first = int((ann["annotation"] != "").sum())
+        n_second = 0
+        if ext_lib is not None:
+            # second pass: peaks the class rules / curated list / HMDB left unnamed, against all of
+            # LIPID MAPS and SwissLipids (no LMSD filter: these ARE database entries)
+            todo = ann.index[ann["annotation"] == ""]
+            if len(todo):
+                ext_ions = annotate.ion_table(ext_lib, d["polarity"], A["adducts"])
+                ann2 = annotate.match_peaks(peaks.loc[todo], ext_ions, tol, False,
+                                            int(A.get("max_candidates_reported", 5)))
+                hit = ann2.index[ann2["annotation"] != ""]
+                ann.loc[hit, ann2.columns] = ann2.loc[hit].to_numpy()
+                n_second = len(hit)
+        log.info(f"{mode}: {n_first} peaks named by the class rules"
+                 f"{'/curated list/HMDB' if d['analyte'] == 'metabolite' else ''}, {n_second} more by the second pass")
         iso = annotate.isotope_flags(var["mz"].to_numpy(), var["median_height"].to_numpy(), max(tol, 3.0))
         iso.index = var.index
         out = pd.concat([var[["mz", "median_height", "n_sections"]], ann, iso], axis=1)
@@ -123,6 +145,8 @@ def main():
         S.h("Settings")
         S.kv({"tolerance (ppm)": tol, "tolerance source": src, "adducts": ", ".join(A["adducts"][d["polarity"]]),
               "LIPID MAPS filter": "on" if (lmsd is not None and A.get("lipidmaps_filter", True)) else "off (no cache)",
+              "named by class rules / curated / HMDB": n_first,
+              "named by the second pass (all of LIPID MAPS + SwissLipids)": n_second,
               "candidate ions": len(ions)})
         S.h("Counts")
         S.kv({"peaks": len(out), "annotated (best match)": int((out["annotation"] != "").sum()),

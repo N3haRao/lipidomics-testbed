@@ -121,6 +121,10 @@ annotation:
         GM2: ["[M-2H]2-"]
         GM3: ["[M-2H]2-"]
         GD1: ["[M-2H]2-"]
+        GD2: ["[M-2H]2-"]
+        GD3: ["[M-2H]2-"]
+        GT1: ["[M-2H]2-"]
+        CL: ["[M-2H]2-"]
         # choline lipids have no acidic proton: in negative mode they show up as [M-CH3]-
         # (and [M+Cl]-), never as [M-H]-. Note SM 36:1 [M-CH3]- has exactly the formula of
         # "SM 35:1 [M-H]-", so allowing [M-H]- here invents odd-chain SMs.
@@ -137,9 +141,14 @@ annotation:
         SM: ["[M-H]-"]
         LPC: ["[M-H]-"]
         LSM: ["[M-H]-"]
+        CAR: ["[M-H]-"]                 # acylcarnitines are zwitterions; read them in positive mode
       positive:
         SHexCer: ["[M+H]+", "[M+Na]+", "[M+K]+"]   # sulfatides are anions; read them in negative mode
   lipidmaps_filter: true             # keep only compositions whose formula exists in the cached LMSD
+  # Second pass for peaks still unnamed: match against every LIPID MAPS structure and every
+  # SwissLipids species (both cached by 00_setup). Reaches classes the rules don't cover.
+  # These names are untagged (never in the hypothesis families) and marked in annotation_source.
+  second_pass: true
   metabolite_db: "hmdb"              # hmdb (cached in 00) or curated (reference/metabolites_curated.csv)
   max_candidates_reported: 5
 
@@ -370,6 +379,7 @@ scils_crosscheck:
 downloads:                           # only used by 00_setup.py --download
   lipidmaps_url: "https://www.lipidmaps.org/files/?file=LMSD&ext=sdf.zip"
   hmdb_url: "https://hmdb.ca/system/downloads/current/structures.zip"
+  swisslipids_url: "https://www.swisslipids.org/api/file.php?cas=download_files&file=lipids.tsv"
   timeout_s: 600
 
 report:

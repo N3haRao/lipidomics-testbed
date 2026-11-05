@@ -53,11 +53,12 @@ def build_lipid_library(lmsd: pd.DataFrame | None = None, log=None) -> pd.DataFr
                             f = chem.format_formula(cc)
                         rows.append({"name": composition_name(cls, c, db, ox, eth), "lipid_class": cls,
                                      "tag": d.get("tag"), "total_c": c, "total_db": db, "oxygen": ox,
-                                     "ether": eth, "formula": f, "source": "class_rules"})
+                                     "ether": eth, "formula": f, "source": "class_rules",
+                                     "rank_penalty": float(d.get("rank_penalty", 0))})
     for fx in spec.get("fixed", []):
         rows.append({"name": fx["name"], "lipid_class": fx["name"].split()[0], "tag": fx.get("tag"),
                      "total_c": None, "total_db": None, "oxygen": None, "ether": False,
-                     "formula": fx["formula"], "source": "fixed"})
+                     "formula": fx["formula"], "source": "fixed", "rank_penalty": float(fx.get("rank_penalty", 0))})
     lib = pd.DataFrame(rows)
     lib["neutral_mass"] = [chem.mono_mass(f) for f in lib["formula"]]
     lib["in_lmsd"] = np.nan
@@ -93,6 +94,74 @@ def build_metabolite_library(ctx, log) -> pd.DataFrame:
     cur["ether"] = False
     cur["in_lmsd"] = np.nan
     return cur
+
+
+SECOND_PASS_TWO_CHAIN = {"PA", "PC", "PE", "PG", "PI", "PS", "BMP", "DG", "PIP", "PIP2", "PIP3", "PGP", "SM", "Cer",
+                         "HexCer", "Hex2Cer", "SHexCer", "PE-Cer", "CerP", "DHDG", "MHDG"}
+SECOND_PASS_ONE_CHAIN = {"LPA", "LPC", "LPE", "LPG", "LPI", "LPS", "MG", "FA", "CAR"}
+CLASS_ALIASES = {"SulfoHexCer": "SHexCer", "SulfoHex2Cer": "SHex2Cer", "LysoSM": "LSM", "SPC": "LSM"}
+
+
+def _db_prefix(name: str) -> str:
+    """'PC 34:1' / 'PC(16:0/18:1(9Z))' / 'SulfoHexCer(d18:1/24:0)' -> 'PC' / 'PC' / 'SHexCer'."""
+    import re
+    m = re.match(r"^([A-Za-z][A-Za-z0-9\-]*)(?=[\s(])", str(name).strip())
+    p = m.group(1) if m else ""
+    return CLASS_ALIASES.get(p, p)
+
+
+def _chain_totals(name: str):
+    """Sum of all 'c:db' pairs in a name ('PC 16:0_18:1' -> 34, 1); (None, None) if there are none."""
+    import re
+    pairs = re.findall(r"(?<![\d.])(\d{1,2}):(\d{1,2})", str(name))
+    if not pairs:
+        return None, None
+    return sum(int(c) for c, _ in pairs), sum(int(d) for _, d in pairs)
+
+
+def build_extended_library(lmsd: pd.DataFrame | None, swiss: pd.DataFrame | None, log=None) -> pd.DataFrame:
+    """Second-pass library: every LIPID MAPS structure and every SwissLipids species.
+
+    Used only for peaks the class rules (and HMDB / the curated list) leave unnamed, so it can
+    reach classes and compositions the rules don't cover. The class is read from the name's
+    prefix (PC, SM, CL, ...), so the same adduct rules apply as in the first pass (e.g. no
+    [M-H]- for choline lipids). Entries are untagged: they never enter the hypothesis families.
+    """
+    parts = []
+    for df, src in ((lmsd, "LIPID MAPS"), (swiss, "SwissLipids")):
+        if df is None or not len(df):
+            continue
+        t = df.copy()
+        if src == "LIPID MAPS" and "abbreviation" in t:
+            # LMSD: the abbreviation ("PC 16:0_18:1") reads better than the common name
+            nm = t["abbreviation"].where(t["abbreviation"].fillna("").astype(str) != "", t["name"])
+        else:
+            nm = t["name"]          # SwissLipids: already converted to "PC 34:1" in refdb
+        t["name"] = nm.fillna("").astype(str).str.strip()
+        t = t[t["name"] != ""]
+        t["lipid_class"] = [_db_prefix(n) or str(c).split(" [")[0] for n, c in zip(t["name"], t.get("db_class", ""))]
+        tot = [_chain_totals(n) for n in t["name"]]
+        t["total_c"] = [x[0] for x in tot]
+        t["total_db"] = [x[1] for x in tot]
+        t["source"] = src
+        parts.append(t[["name", "formula", "lipid_class", "total_c", "total_db", "source", "neutral_mass"]])
+    if not parts:
+        return pd.DataFrame()
+    lib = pd.concat(parts, ignore_index=True).drop_duplicates(["name", "formula"])
+    # Databases list compositions that are possible but not plausible in brain tissue (e.g.
+    # "PA 20:1", a diacyl lipid with 20 carbons in total). Keep chain totals in a sane range.
+    two_chain = lib["lipid_class"].isin(SECOND_PASS_TWO_CHAIN)
+    one_chain = lib["lipid_class"].isin(SECOND_PASS_ONE_CHAIN)
+    c = pd.to_numeric(lib["total_c"], errors="coerce")
+    bad = (two_chain & (c < 26)) | (one_chain & ((c < 12) | (c > 24))) | (c > 90)
+    lib = lib[~bad.fillna(False)]
+    lib["tag"] = ""
+    lib["oxygen"] = None
+    lib["ether"] = False
+    lib["in_lmsd"] = np.nan
+    if log:
+        log.info(f"second-pass library: {len(lib)} entries ({', '.join(f'{k} {v}' for k, v in lib['source'].value_counts().items())})")
+    return lib
 
 
 def ion_table(lib: pd.DataFrame, polarity: str, adducts_cfg: dict) -> pd.DataFrame:
@@ -137,8 +206,9 @@ def match_peaks(peaks: pd.DataFrame, ions: pd.DataFrame, tol_ppm: float, use_lms
         # Ranking: even chains first for glycerolipids/sphingolipids (odd chains are rare in
         # mammalian brain), then default adducts over class-specific ones, then smallest |ppm|.
         odd = cand["total_c"].fillna(0).astype(int) % 2 == 1
+        pen = cand["rank_penalty"].fillna(0) if "rank_penalty" in cand else 0
         cand["rank_key"] = ((cand["adduct_kind"] != "default").astype(int) * 5
-                            + odd.astype(int) * 10 + cand["ppm_error"].abs() / max(tol_ppm, 1e-9))
+                            + odd.astype(int) * 10 + pen * 5 + cand["ppm_error"].abs() / max(tol_ppm, 1e-9))
         cand = cand.sort_values("rank_key")
         if len(cand):
             best = cand.iloc[0].copy()
@@ -157,11 +227,12 @@ def match_peaks(peaks: pd.DataFrame, ions: pd.DataFrame, tol_ppm: float, use_lms
                 "ambiguous": len(comps) > 1, "candidate_tags": ";".join(tags),
                 "candidates": " | ".join(names[:max_report]) + (" | ..." if len(names) > max_report else ""),
                 "total_c": best["total_c"], "total_db": best["total_db"],
+                "annotation_source": best.get("source", ""),
             })
         else:
             out.append({"annotation": "", "adduct": "", "formula": "", "lipid_class": "", "tag": "",
                         "ppm_error": np.nan, "n_candidates": 0, "ambiguous": False, "candidate_tags": "",
-                        "candidates": "", "total_c": None, "total_db": None})
+                        "candidates": "", "total_c": None, "total_db": None, "annotation_source": ""})
     return pd.DataFrame(out, index=peaks.index)
 
 

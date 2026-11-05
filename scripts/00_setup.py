@@ -28,6 +28,7 @@ def extra(p):
     p.add_argument("--download", action="store_true", help="download LIPID MAPS, HMDB and the Allen atlas")
     p.add_argument("--lipidmaps-file", default=None, help="already downloaded LMSD .sdf or .zip")
     p.add_argument("--hmdb-file", default=None, help="already downloaded HMDB structures .sdf or .zip")
+    p.add_argument("--swisslipids-file", default=None, help="already downloaded SwissLipids lipids.tsv or .tsv.gz")
     p.add_argument("--skip-atlas", action="store_true", help="don't touch the atlas")
 
 
@@ -36,8 +37,9 @@ def cache_db(ctx, log, which: str, local: str | None, url: str, download: bool, 
     if local:
         src = Path(local).expanduser()
     elif download:
-        src = ctx.cache(which, "raw_download" + (".zip" if url.lower().split("?")[0].endswith(".zip")
-                                                   or "zip" in url.lower() else ".sdf"))
+        ext = ".tsv.gz" if which == "swisslipids" else (".zip" if url.lower().split("?")[0].endswith(".zip")
+                                                          or "zip" in url.lower() else ".sdf")
+        src = ctx.cache(which, "raw_download" + ext)
         try:
             refdb.download(url, src, ctx.get("downloads.timeout_s", 600), log)
         except Exception as e:
@@ -50,7 +52,7 @@ def cache_db(ctx, log, which: str, local: str | None, url: str, download: bool, 
     else:
         S.p(f"- {which}: not cached yet (run with --download or --{which}-file)")
         return
-    df = refdb.sdf_to_table(src, log)
+    df = refdb.swisslipids_to_table(src, log) if which == "swisslipids" else refdb.sdf_to_table(src, log)
     df.to_parquet(target)
     S.p(f"- {which}: {len(df)} entries with formulas cached at `{target}` (from `{src.name}`)")
 
@@ -87,6 +89,7 @@ def main():
     S.h("Reference databases")
     cache_db(ctx, log, "lipidmaps", args.lipidmaps_file, ctx.get("downloads.lipidmaps_url"), args.download, S)
     cache_db(ctx, log, "hmdb", args.hmdb_file, ctx.get("downloads.hmdb_url"), args.download, S)
+    cache_db(ctx, log, "swisslipids", args.swisslipids_file, ctx.get("downloads.swisslipids_url"), args.download, S)
 
     S.h("Atlas")
     src = ctx.get("registration.atlas_source", "brainglobe")
