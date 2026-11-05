@@ -131,8 +131,9 @@ CAVEATS = [
     "suppression can differ between regions.",
     "<b>Registration is approximate.</b> The CCF has no true bregma; AP levels and region borders come from "
     "an automatic fit (check the overlays), and the KO brain may be atrophied.",
-    "<b>The KO line is still to be confirmed</b> (whole-body vs conditional; IDs start with cKO). Outputs say "
-    "'CLN3 KO' for now.",
+    "<b>Model:</b> whole-body CLN3 knockout made by the Ballabio lab (NRI) from embryonic stem cells on a "
+    "C57BL/6 background (the cKO- prefix is only the animal ID). Mice were 6 months old; CLN3 pathology is "
+    "progressive, so changes at this age may be small.",
 ]
 
 

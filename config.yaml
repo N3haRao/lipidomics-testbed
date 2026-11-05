@@ -252,6 +252,7 @@ class_tests:
       "HexCer": {classes: [HexCer]}
       "Cer": {classes: [Cer]}
       "SM": {classes: [SM]}
+      "LSM": {classes: [LSM]}             # lyso-sphingomyelin: reported to accumulate (Ballabio lab data)
       "GM1": {classes: [GM1]}
       "GM2": {classes: [GM2]}
       "GM3": {classes: [GM3]}
@@ -267,8 +268,9 @@ class_tests:
       "LPI": {classes: [LPI]}
     lip_pos:
       "HexCer": {classes: [HexCer]}
-      "Hex2Cer": {classes: [Hex2Cer]}
+      "Hex2Cer": {classes: [Hex2Cer]}    # dihexosylceramide; in brain mostly LacCer
       "SM": {classes: [SM]}
+      "LSM": {classes: [LSM]}
       "PC": {classes: [PC]}
       "PE": {classes: [PE]}
       "Cholesterol": {classes: [Cholesterol]}
@@ -287,6 +289,7 @@ class_tests:
       "GABA": {names: [GABA]}
       "LPE": {classes: [LPE]}
       "LPI": {classes: [LPI]}
+      "LSM": {classes: [LSM]}
   ratios:                            # [numerator, denominator], names from the classes above
     lip_neg:
       - ["Sulfatide", "HexCer"]
@@ -294,6 +297,7 @@ class_tests:
       - ["Sulfatide", "PE+PI+PS"]
       - ["HexCer", "Cer"]
       - ["SM", "Cer"]
+      - ["LSM", "SM"]
       - ["GM2+GM3", "GM1"]
       - ["GM3", "GM1"]
       - ["BMP/PG", "PE+PI+PS"]
@@ -304,6 +308,8 @@ class_tests:
       - ["HexCer", "PC"]
       - ["HexCer", "SM"]
       - ["LPC", "PC"]
+      - ["LSM", "SM"]
+      - ["Hex2Cer", "HexCer"]
     met_neg:
       - ["GPE", "LPE"]
       - ["GPI", "LPI"]
