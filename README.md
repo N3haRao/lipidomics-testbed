@@ -48,9 +48,11 @@ config.test.yaml         the synthetic test config (inherits config.yaml, overri
 environment.yml          conda env, Python 3.11 (pins in requirements.txt)
 requirements-optional.txt   harmonypy, jupyterlab (uMAIA: separate env, see below)
 metadata/sample_sheet.csv   the 12 animals + the imzML file name for each mode
-reference/               lipid class rules, adducts, calibrants, curated metabolites (all as formulas)
+reference/               lipid class rules, adducts, calibrants, curated metabolites (all as formulas);
+                         lamanno2026/ = mouse-brain lipid evidence from the Lipid Brain Atlas (Nature 2026)
 src/cln3msi/             the shared code the scripts import
-scripts/00_setup.py ... 10_report.py, 04b_scils_crosscheck.py, make_synthetic_data.py
+scripts/00_setup.py ... 11_compare_runs.py, 04b_scils_crosscheck.py, make_synthetic_data.py
+scripts/tools/           build_lamanno_reference.py (rebuilds reference/lamanno2026 from the supplements)
 notebooks/               review notebooks (they only read outputs, they never recompute)
 bin/                     setup_env.sh, run_phase.sh, run_all.sh, run_synthetic_test.sh
 tests/                   unit tests + the synthetic end-to-end check

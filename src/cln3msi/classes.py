@@ -102,7 +102,7 @@ def totals(means_long: pd.DataFrame, ann: pd.DataFrame, class_cfg: dict, ratio_c
             nsp[name] = len(ids)
             if unit == units[0]:
                 lab = m.set_index(peak_col).loc[ids]
-                mem.append({"feature": name, "n_species": len(ids),
+                mem.append({"feature": name, "n_species": len(ids), "peak_ids": list(ids),
                             "species": "; ".join((lab["annotation"].astype(str) + " " +
                                                   lab.get("adduct", pd.Series("", index=lab.index)).fillna("").astype(str)).str.strip())})
         for name, v in tot.items():
@@ -116,6 +116,51 @@ def totals(means_long: pd.DataFrame, ann: pd.DataFrame, class_cfg: dict, ratio_c
     vals = pd.concat(rows, ignore_index=True) if rows else pd.DataFrame(
         columns=["unit", "kind", "feature", "n_species", "animal_id", "value"])
     return vals, pd.DataFrame(mem)
+
+
+BACKBONE = re.compile(r"^(\S+)\s+(\d+:\d+;O\d)$")
+
+
+def reaction_ratios(means_long: pd.DataFrame, ann: pd.DataFrame, steps: list[dict],
+                    units: list[str]) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Product / precursor ratio per ceramide backbone, per animal and unit.
+
+    steps: [{product: HexCer, precursor: Cer, enzyme: ...}]. A backbone is the part of the name
+    after the class ('42:2;O2'); a ratio is made only where both 'HexCer 42:2;O2' and
+    'Cer 42:2;O2' are usable species. Several ions of one name (adducts) are summed.
+    Returns (values_long like totals(), pairs table: feature, product, precursor, enzyme)."""
+    peak_col = "peak_id" if "peak_id" in ann else ann.index.name or "index"
+    a = ann.reset_index() if peak_col not in ann else ann
+    by = {}
+    for pid, nm in zip(a[peak_col], a["annotation"].astype(str)):
+        m = BACKBONE.match(nm)
+        if m:
+            by.setdefault((m.group(1), m.group(2)), []).append(pid)
+    feats = []
+    for st in steps:
+        P, Q = str(st["product"]), str(st["precursor"])
+        for (cls, bb), ids in sorted(by.items()):
+            if cls == P and (Q, bb) in by:
+                feats.append({"feature": f"{P}/{Q} {bb}", "product": f"{P} {bb}", "precursor": f"{Q} {bb}",
+                              "enzyme": st.get("enzyme", ""), "_p": ids, "_q": by[(Q, bb)]})
+    rows = []
+    for unit in units:
+        sub = means_long[means_long["unit"] == unit]
+        if sub.empty or not feats:
+            continue
+        wide = sub.pivot_table(index="animal_id", columns="peak", values="mean_norm_intensity", aggfunc="sum")
+        for f in feats:
+            p_ids = [p for p in f["_p"] if p in wide.columns]
+            q_ids = [q for q in f["_q"] if q in wide.columns]
+            if not p_ids or not q_ids:
+                continue
+            v = wide[p_ids].sum(axis=1, min_count=1) / wide[q_ids].sum(axis=1, min_count=1).replace(0, np.nan)
+            rows.append(pd.DataFrame({"unit": unit, "kind": "reaction", "feature": f["feature"], "n_species": 2,
+                                      "animal_id": v.index, "value": v.to_numpy()}))
+    vals = pd.concat(rows, ignore_index=True) if rows else pd.DataFrame(
+        columns=["unit", "kind", "feature", "n_species", "animal_id", "value"])
+    pairs = pd.DataFrame([{k: v for k, v in f.items() if not k.startswith("_")} for f in feats])
+    return vals, pairs
 
 
 def per_pair(values: pd.Series, animals: pd.DataFrame, control: str, mutant: str) -> pd.Series:

@@ -15,7 +15,10 @@ mirror their monoisotopic peak).
 
 FDR (Benjamini-Hochberg) families, within each mode and unit:
   q_targeted   only the peaks tagged with a hypothesis class (Cer, HexCer, SHexCer, ...)
-  q_all        every tested peak (the untargeted view)
+  q_all        the untargeted view: with differential.untargeted_peaks = lamanno, only peaks
+               passing the Lipid Brain Atlas feature QC (src/cln3msi/featureqc.py); the rest
+               are tested and reported but get no q_all
+Every result also gets large_effect = |log2FC| >= differential.large_effect_log2fc.
 
 Position flag: Control is always on top. From 03 we know, per slide, how much brighter the
 bottom of the slide was than the top in the off-tissue DAN signal. If a hit's log2FC has
@@ -25,12 +28,15 @@ the same sign and is less than qc.gradient.flag_ratio times that, it's flagged
 Then, from the same per-animal means (see src/cln3msi/classes.py):
   class tests        totals per lipid class and within-animal ratios (config class_tests),
                      one BH family per mode
+  reaction ratios    product / precursor per ceramide backbone (config class_tests.reactions),
+                     their own BH family
   slide consistency  do the slides' KO/Control difference profiles agree? A slide that is
                      the mirror image of the others is flagged as a possible label swap
                      (config pair_check). A warning, never an automatic fix.
 
 Writes results/09_differential/<mode>/differential.csv, per_animal_means.csv,
-class_tests.csv, class_members.csv, pair_consistency.csv, pair_correlation_<unit>.csv,
+class_tests.csv, class_members.csv, reaction_tests.csv, feature_qc.csv, pair_consistency.csv,
+pair_correlation_<unit>.csv,
 volcanoes and class/consistency figures, summary (hypothesis classes first, then untargeted).
 """
 from __future__ import annotations
@@ -44,7 +50,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from cln3msi import classes, cli, stats  # noqa: E402
+from cln3msi import classes, cli, featureqc, stats  # noqa: E402
 from cln3msi.util import read_h5ad  # noqa: E402
 from cln3msi.report import Summary, plt  # noqa: E402
 
@@ -67,7 +73,7 @@ def gradient_prediction(ctx, mode: str, obs: pd.DataFrame, mutant: str) -> tuple
 SLIDE_COLOURS = ["#c0392b", "#e67e22", "#d4ac0d", "#2874a6", "#7d3c98", "#17a589", "#7f8c8d", "#1abc9c"]
 
 
-def class_level(ctx, mode, ML, animals, ctl, mut, S, log, offsets=None, ML_alt=None):
+def class_level(ctx, mode, ML, animals, ctl, mut, S, log, offsets=None, ML_alt=None, QC=None):
     """Class totals, ratios and the slide consistency check, from the per-animal means."""
     C = ctx.cfg.get("class_tests", {}) or {}
     PC = ctx.cfg.get("pair_check", {}) or {}
@@ -143,6 +149,28 @@ def class_level(ctx, mode, ML, animals, ctl, mut, S, log, offsets=None, ML_alt=N
         Ra = classes.test_features(va, animals, ctl, mut, min_pairs)[["unit", "feature", "log2fc", "p_ttest", "n_pairs_up"]]
         Ra.columns = ["unit", "feature", f"log2fc_{meth}_norm", f"p_{meth}_norm", f"n_pairs_up_{meth}_norm"]
         R = R.merge(Ra, on=["unit", "feature"], how="left")
+    # sensitivity: the same tests with only the species that pass the feature QC (decided in
+    # advance as a check; the primary analysis keeps the pre-specified class definitions)
+    if QC is not None and "qc_pass" in QC:
+        ok = set(QC.index[QC["qc_pass"]])
+        pid = ann["peak_id"] if "peak_id" in ann else ann.index
+        ann_qc = ann[pd.Series(pid, index=ann.index).isin(ok)]
+        vq, mq = classes.totals(ML, ann_qc, class_cfg, ratio_cfg, regions)
+        if not vq.empty:
+            Rq = classes.test_features(vq, animals, ctl, mut, min_pairs)[["unit", "feature", "log2fc", "p_ttest", "n_pairs_up"]]
+            Rq.columns = ["unit", "feature", "log2fc_featureqc", "p_featureqc", "n_pairs_up_featureqc"]
+            R = R.merge(Rq, on=["unit", "feature"], how="left")
+            if len(mq):
+                R = R.merge(mq[["feature", "n_species"]].rename(columns={"n_species": "n_species_featureqc"}),
+                            on="feature", how="left")
+    if "confidence_tier" in ann and len(mem):
+        pid = ann["peak_id"] if "peak_id" in ann else ann.index
+        tier = dict(zip(pid, ann["confidence_tier"].fillna("")))
+        mem["n_species_high_evidence"] = [sum(tier.get(p, "") == "high" for p in ids) for ids in mem["peak_ids"]] \
+            if "peak_ids" in mem else np.nan
+        R = R.merge(mem[["feature", "n_species_high_evidence"]], on="feature", how="left")
+    big = float(ctx.cfg["differential"].get("large_effect_log2fc", 0.2))
+    R["large_effect"] = R["log2fc"].abs() >= big
     # pre-specified primary endpoints: their own, small BH family
     prim = {tuple(x.strip() for x in str(e).split("|", 1)) for e in ((C.get("primary") or {}).get(mode) or [])}
     R["primary"] = [(u, f) in prim for u, f in zip(R["unit"], R["feature"])]
@@ -178,7 +206,18 @@ def class_level(ctx, mode, ML, animals, ctl, mut, S, log, offsets=None, ML_alt=N
     show = ["unit", "feature", "kind", "n_species", "log2fc", "pct_change", "ci_low", "ci_high", "n_pairs_up",
             "n_pairs", "p_ttest", "q_bh", "p_gradient_corrected", "I2_sex"] + pair_cols
     S.table(R.sort_values("p_ttest")[[c for c in show if c in R]].round(4), max_rows=30)
-    S.kv({f"q < {alpha}": int((R["q_bh"] < alpha).sum()), "lowest q": float(R["q_bh"].min())})
+    S.kv({f"q < {alpha}": int((R["q_bh"] < alpha).sum()),
+          f"q < {alpha} and |log2FC| >= {big:g}": int(((R["q_bh"] < alpha) & R["large_effect"]).sum()),
+          "lowest q": float(R["q_bh"].min())})
+    if "p_featureqc" in R:
+        S.h("Class tests with feature-QC species only (sensitivity)")
+        S.p("Same classes and ratios, built only from species that pass the Lipid Brain Atlas feature QC "
+            "(spatially structured, tissue over matrix, one adduct per lipid). A check of the class "
+            "results above, not a replacement: the class definitions were fixed in advance.")
+        cq = ["unit", "feature", "n_species", "n_species_featureqc", "log2fc", "p_ttest", "log2fc_featureqc",
+              "p_featureqc", "n_pairs_up_featureqc", "primary"]
+        S.table(R.sort_values("p_ttest")[[c for c in cq if c in R]].round(4), max_rows=25)
+    reaction_tests(ctx, mode, ML, ann, animals, ctl, mut, S, log, offsets=use_off)
     if flagged:
         tag = "+".join(flagged)
         S.p(f"Sensitivity (exploratory, slide(s) {tag} flagged above): the CSV has extra columns with "
@@ -233,6 +272,35 @@ def class_level(ctx, mode, ML, animals, ctl, mut, S, log, offsets=None, ML_alt=N
         S.fig(fig, "class_tests_forest.png")
 
 
+def reaction_tests(ctx, mode, ML, ann, animals, ctl, mut, S, log, offsets=None):
+    """Per-backbone precursor -> product ratios (class_tests.reactions), their own BH family."""
+    RC = (ctx.cfg.get("class_tests") or {}).get("reactions") or {}
+    steps = RC.get("steps") or []
+    if not steps:
+        return
+    regions = [u for u in RC.get("regions", ["whole_section"]) if u in set(ML["unit"])]
+    vals, pairs = classes.reaction_ratios(ML, ann, steps, regions)
+    S.h("Precursor -> product ratios per backbone (exploratory, own BH family)")
+    if vals.empty:
+        S.p("No backbone has both the precursor and the product among the usable species in this mode.")
+        return
+    min_pairs = int(ctx.cfg["differential"].get("min_pairs", 5))
+    R = classes.test_features(vals, animals, ctl, mut, min_pairs, offsets=offsets)
+    R = R.merge(pairs, on="feature", how="left")
+    big = float(ctx.cfg["differential"].get("large_effect_log2fc", 0.2))
+    R["large_effect"] = R["log2fc"].abs() >= big
+    R.to_csv(ctx.out("results", "09_differential", mode, "reaction_tests.csv"), index=False)
+    S.p("Each ratio is product / precursor with the same ceramide backbone (same chains), within the same "
+        "animal and region, so it indexes one enzyme step; comparing log ratios between genotypes cancels "
+        "the two lipids' different ionization. Steps and regions were set in config before running. "
+        "q_bh is over this table only.")
+    show = ["unit", "feature", "enzyme", "log2fc", "pct_change", "ci_low", "ci_high", "n_pairs_up", "n_pairs",
+            "p_ttest", "q_bh", "large_effect", "p_gradient_corrected"]
+    S.table(R.sort_values("p_ttest")[[c for c in show if c in R]].round(4), max_rows=40)
+    alpha = float(ctx.cfg["differential"]["fdr_alpha"])
+    S.kv({"ratios tested": int(R["p_ttest"].notna().sum()), f"q < {alpha}": int((R["q_bh"] < alpha).sum())})
+
+
 def region_qc(ctx, obs, units, core, animals, S, log):
     """Per section: share of its pixels in each atlas region vs the median section. A region share
     far from the others usually means the registration is off for that section. Warn, and leave
@@ -285,16 +353,22 @@ def main():
         obs, var = a.obs, a.var
         iso = var.get("is_isotope", pd.Series(False, index=var.index)).fillna(False).astype(bool).to_numpy()
         test_cols = np.flatnonzero(~iso)
-        family = D.get("untargeted_peaks", "annotated_or_structured")
+        family = D.get("untargeted_peaks", "lamanno")
+        annotated = var.get("annotation", pd.Series("", index=var.index)).fillna("").astype(str) != ""
+        mp = ctx.output_root / "results" / "08_explore" / mode / "morans_i.csv"
+        structured = np.zeros(len(var), bool)
+        if mp.exists():
+            mor = pd.read_csv(mp)
+            structured = var.index.isin(mor.loc[mor["selected"], "peak"])
+        elif family != "all":
+            S.warn("no 08 Moran's I results: no peak counts as spatially structured", log)
+        # feature QC (Lipid Brain Atlas rules); decides the untargeted family when family = lamanno
+        FQ = D.get("feature_qc") or {}
+        add = featureqc.adduct_choice(var, a.X, np.arange(len(var)), float(FQ.get("min_adduct_r", 0.5)),
+                                      int(FQ.get("max_pixels_for_r", 50000)))
+        QC = featureqc.table(var, pd.Series(structured, index=var.index), add, float(FQ.get("max_off_on_ratio", 1.0)))
+        QC.to_csv(ctx.out("results", "09_differential", mode, "feature_qc.csv"))
         if family != "all":
-            annotated = var.get("annotation", pd.Series("", index=var.index)).fillna("").astype(str) != ""
-            mp = ctx.output_root / "results" / "08_explore" / mode / "morans_i.csv"
-            structured = pd.Series(False, index=var.index)
-            if mp.exists():
-                mor = pd.read_csv(mp)
-                structured = var.index.isin(mor.loc[mor["selected"], "peak"])
-            else:
-                S.warn("no 08 Moran's I results: the untargeted family is the annotated peaks only", log)
             keep = (~iso) & (annotated.to_numpy() | np.asarray(structured))
             log.info(f"{mode}: untargeted family = {int(keep.sum())} peaks "
                      f"({int((annotated & ~pd.Series(iso, index=var.index)).sum())} annotated, "
@@ -378,7 +452,8 @@ def main():
             continue
         R = pd.concat(results, ignore_index=True)
         ann_cols = [c for c in ("mz", "label", "annotation", "adduct", "lipid_class", "tag", "hypothesis",
-                                "ambiguous", "typeII_flag", "candidates") if c in var]
+                                "ambiguous", "typeII_flag", "confidence_tier", "evidence_score", "candidates")
+                    if c in var]
         R = R.join(var[ann_cols], on="peak")
         R["targeted"] = R.get("hypothesis", pd.Series("", index=R.index)).fillna("").astype(str) != ""
         # the p-value that decides significance: the moderated t (default) or the plain paired t
@@ -387,9 +462,13 @@ def main():
         R["q_all"] = np.nan
         R["q_targeted"] = np.nan
         R["q_all_ttest"] = np.nan
+        R["in_untargeted_family"] = R["peak"].map(QC["qc_pass"]).fillna(False).astype(bool) \
+            if family == "lamanno" else True
         for _, idx in R.groupby("unit").groups.items():
-            R.loc[idx, "q_all"] = stats.bh(R.loc[idx, "p_primary"])
-            R.loc[idx, "q_all_ttest"] = stats.bh(R.loc[idx, "p_ttest"])
+            f_idx = [i for i in idx if R.loc[i, "in_untargeted_family"]]
+            if f_idx:
+                R.loc[f_idx, "q_all"] = stats.bh(R.loc[f_idx, "p_primary"])
+                R.loc[f_idx, "q_all_ttest"] = stats.bh(R.loc[f_idx, "p_ttest"])
             t_idx = [i for i in idx if R.loc[i, "targeted"]]
             if t_idx:
                 R.loc[t_idx, "q_targeted"] = stats.bh(R.loc[t_idx, "p_primary"])
@@ -404,6 +483,8 @@ def main():
         else:
             R["could_be_position"] = np.nan
         R["significant"] = (np.where(R["targeted"], R["q_targeted"], R["q_all"]) < alpha)
+        big = float(D.get("large_effect_log2fc", 0.2))
+        R["large_effect"] = R["log2fc"].abs() >= big
         R = R.sort_values(["unit_kind", "unit", "p_primary"])
         R.to_csv(ctx.out("results", "09_differential", mode, "differential.csv"), index=False)
         ML = pd.concat(means_long, ignore_index=True)
@@ -461,22 +542,36 @@ def main():
         # effect and interval first; Wilcoxon/sign stay in the CSV (their 0.031 floor makes them
         # uninformative in a table with n = 6)
         show = ["unit", "label", "hypothesis", "log2fc", "ci_low", "ci_high", "n_pairs_up", "n_pairs",
-                "p_primary", "q_targeted", "p_ttest", "p_gradient_corrected", "matches_hypothesis",
-                "could_be_position", "ambiguous"]
+                "p_primary", "q_targeted", "large_effect", "p_ttest", "p_gradient_corrected", "matches_hypothesis",
+                "could_be_position", "ambiguous", "confidence_tier"]
         show = [c for c in show if c in R]
         S.h("1. Hypothesis classes (targeted, BH within region over tagged peaks)")
         T = R[R["targeted"]].sort_values(["p_primary"])
         S.table(T[show], max_rows=40)
         S.h("2. Untargeted: top hits per region (BH over all peaks in the region)")
-        U = R[R.unit_kind == "region"].sort_values("p_primary").groupby("unit").head(5)
+        U = R[(R.unit_kind == "region") & R["in_untargeted_family"]].sort_values("p_primary").groupby("unit").head(5)
         S.table(U[[c if c != "q_targeted" else "q_all" for c in show]], max_rows=60)
         if (R.unit_kind == "territory").any():
             S.h("3. Territories: top hits")
             Tt = R[R.unit_kind == "territory"].sort_values("p_primary").head(15)
             S.table(Tt[[c if c != "q_targeted" else "q_all" for c in show]])
+        S.h("Feature QC (Lipid Brain Atlas rules) and the untargeted family")
+        S.p("Rules: monoisotopic, annotated, spatially structured (Moran's I >= "
+            f"{float(ctx.get('explore.morans_i.min_I', 0.4)):g} in at least half the sections), more signal on tissue "
+            f"than on bare glass (off/on < {float(FQ.get('max_off_on_ratio', 1.0)):g}), one adduct per lipid. "
+            + ("Only peaks passing all of them get a q_all; hypothesis-class peaks keep their own family."
+               if family == "lamanno" else f"untargeted_peaks = {family}: the QC is reported but not used."))
+        mono = QC[QC["monoisotopic"]]
+        S.kv({"monoisotopic peaks": len(mono), "annotated": int(mono["annotated"].sum()),
+              "spatially structured": int(mono["spatially_structured"].sum()),
+              "tissue over matrix": int(mono["tissue_over_matrix"].sum()),
+              "redundant adducts dropped": int((mono["adduct_status"] == "redundant").sum()),
+              "adducts kept although not correlated with their partner": int((mono["adduct_status"] == "kept, not correlated").sum()),
+              "pass all (untargeted family)": int(mono["qc_pass"].sum())})
         S.h("Counts")
         sig = R[R["significant"]]
         S.kv({"tests": len(R), f"significant (q < {alpha})": len(sig),
+              f"significant and |log2FC| >= {big:g} (large_effect)": int((sig["large_effect"]).sum()),
               "of which flagged could_be_position": int(sig["could_be_position"].fillna(False).astype(bool).sum()),
               "units": R.unit.nunique()})
         if "p_sex_difference_exploratory" in R:
@@ -488,7 +583,7 @@ def main():
             S.table(Sx[[c for c in ("label", "log2fc", "log2fc_Female", "log2fc_Male",
                                      "p_sex_difference_exploratory") if c in Sx]].round(4))
         ML_alt = {m: pd.concat(v, ignore_index=True) for m, v in alt_long.items() if v}
-        class_level(ctx, mode, ML, animals, ctl, mut, S, log, offsets=offsets, ML_alt=ML_alt)
+        class_level(ctx, mode, ML, animals, ctl, mut, S, log, offsets=offsets, ML_alt=ML_alt, QC=QC)
         log.info(f"summary: {S.write()}")
     cli.finish(log, t0)
 

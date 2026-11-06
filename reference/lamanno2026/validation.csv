@@ -1,0 +1,825 @@
+mz,annotation,score,status,name,our_score,our_tier,their_high,our_high
+820.606336,HexCer 40:2;O2,20.5,measured,HexCer 40:2;O2,12,high,True,True
+828.492369,PE 40:7,17.5,measured,PE 40:7,12,high,True,True
+870.540956,PC 40:7,17.5,measured,PC 40:7,12,high,True,True
+822.622222,HexCer 40:1;O2,17.5,measured,HexCer 40:1;O2,12,high,True,True
+744.493893,PC 30:0,17.0,measured,PC 30:0,12,high,True,True
+797.593647,SM 38:1;O2,14.5,measured,SM 38:1;O2,12,high,True,True
+834.540804,PE 40:4,14.5,measured,PE 40:4,12,high,True,True
+802.478167,PE 38:6,14.5,measured,PE 38:6,12,high,True,True
+568.279922,LPE 22:4,14.5,measured,LPE 22:4,12,high,True,True
+830.509578,PE 40:6,14.5,measured,PE 40:6,12,high,True,True
+564.248635,LPE 22:6,14.5,measured,LPE 22:6,12,high,True,True
+882.634629,PC 40:1,14.5,measured,PC 40:1,12,high,True,True
+853.655598,SM 42:1;O2,14.5,measured,SM 42:1;O2,12,high,True,True
+648.628816,Cer 42:2;O2,14.5,measured,Cer 42:2;O2,12,high,True,True
+872.556604,PC 40:6,14.5,measured,PC 40:6,12,high,True,True
+741.530795,SM 34:1;O2,14.5,measured,SM 34:1;O2,12,high,True,True
+769.562128,SM 36:1;O2,14.5,measured,SM 36:1;O2,12,high,True,True
+620.597541,Cer 40:2;O2,14.0,measured,Cer 40:2;O2,12,high,True,True
+848.637557,HexCer 42:2;O2,14.0,measured,HexCer 42:2;O2,12,high,True,True
+850.653752,HexCer 42:1;O2,14.0,measured,HexCer 42:1;O2,12,high,True,True
+897.48511,PI 36:4,11.5,measured,PI 36:4,11,high,True,True
+845.528672,PG 40:6,11.5,measured,PG 40:6,10,high,True,True
+844.525236,PC 38:6,11.5,measured,PC 38:6,12,high,True,True
+828.515096,PS 36:1,11.5,measured,PS 36:1,11,high,True,True
+796.525363,PC 34:2,11.5,measured,PC 34:2,12,high,True,True
+801.559766,PG 36:0,11.5,measured,PG 36:0,9,high,True,True
+910.66622,PC 42:1,8.5,measured,PC 42:1,4,medium,True,False
+852.491497,PE 42:9,8.5,measured,PE 42:9,8,high,True,True
+866.648228,HexCer 42:1;O3_db,8.0,measured,HexCer 42:1;O3,4,medium,True,False
+864.632521,HexCer 42:2;O3_db,8.0,measured,HexCer 42:2;O3,4,medium,True,False
+797.528819,PG 36:2,8.0,measured,PG 36:2,11,high,True,True
+836.637639,HexCer 41:1;O2,8.0,measured,HexCer 41:1;O2,8,high,True,True
+807.512778,PG 37:4,8.0,measured,PG 37:4,8,high,True,True
+713.451739,PA 34:1,5.5,measured,PA 34:1,3,medium,True,False
+765.483172,PA 38:3,4.5,measured,PA 38:3,3,medium,True,False
+787.467499,PA 40:6,4.5,measured,PA 40:6,3,medium,True,False
+741.482989,PA 36:1,4.5,measured,PA 36:1,3,medium,True,False
+782.555146,HexCer 36:1:O2,4.0,measured,HexCer 36:1,12,high,False,True
+824.460378,PE 40:9_db,2.5,measured,PE 40:9,2,medium,False,False
+811.467041,PA 42:8_db,2.5,measured,PA 42:8,2,medium,False,False
+873.559917,PG 42:6_db,2.0,measured,PG 42:6,2,medium,False,False
+794.687034,HexCer 37:2_db,2.0,measured,HexCer 37:2,2,medium,False,False
+784.561467,CerP t42:1_db,2.0,measured,CerP t42:1,2,medium,False,False
+848.658077,HexCer t42:2_db,2.0,measured,HexCer t42:2,4,medium,False,False
+840.632891,HexCer t40:0_db,2.0,measured,HexCer t40:0,3,medium,False,False
+868.655085,PC O-40:1_db,1.5,measured,PC O-40:1,0,database only,False,False
+737.45166,PA 36:3_db,1.5,measured,PA 36:3,2,medium,False,False
+711.49188,PA 35:1_db,1.5,measured,PA 35:1,0,database only,False,False
+785.451652,PA 40:7_db,1.5,measured,PA 40:7,2,medium,False,False
+867.651478,TG 54:12_db,1.0,measured,TG 54:12,0,database only,False,False
+790.486506,PI-Cer t32:1_db_db,0.0,measured,PI-Cer t32:1_db,0,not covered,False,False
+759.512965,PI-Cer t30:0_db_db,0.0,measured,PI-Cer t30:0_db,0,not covered,False,False
+734.569413,PC 32:0,20.5,restored,PC 32:0,12,high,True,True
+762.600715,PC 34:0,20.5,restored,PC 34:0,12,high,True,True
+702.543149,PE O-34:2,20.5,restored,PE O-34:2,12,high,True,True
+496.339878,LPC 16:0,20.5,restored,LPC 16:0,12,high,True,True
+830.567086,PC 38:5,17.5,restored,PC 38:5,12,high,True,True
+854.603416,PC 38:1,17.5,restored,PC 38:1,12,high,True,True
+748.584987,PE 36:0,17.5,restored,PE 36:0,11,high,True,True
+746.569414,PE 36:1,17.5,restored,PE 36:1,12,high,True,True
+800.460854,PE 38:7,17.5,restored,PE 38:7,12,high,True,True
+762.482729,PE O-36:5,17.5,restored,PE O-36:5,12,high,True,True
+758.605925,PE O-38:2,17.5,restored,PE O-38:2,12,high,True,True
+518.264437,LPE 18:1,17.5,restored,LPE 18:1,12,high,True,True
+760.585008,PC 34:1,17.5,restored,PC 34:1,12,high,True,True
+788.49891,PE O-38:6,17.5,restored,PE O-38:6,12,high,True,True
+818.590628,PS 38:1,17.5,restored,PS 38:1,11,high,True,True
+732.553783,PC 32:1,17.5,restored,PC 32:1,12,high,True,True
+876.587845,PC 40:4,17.5,restored,PC 40:4,12,high,True,True
+822.541192,PC 36:3,17.5,restored,PC 36:3,12,high,True,True
+842.509565,PC 38:7,17.5,restored,PC 38:7,12,high,True,True
+798.596246,PC 35:0,14.5,restored,PC 35:0,11,high,True,True
+520.280074,LPE 18:0,14.5,restored,LPE 18:0,12,high,True,True
+826.499487,PS 36:2,14.5,restored,PS 36:2,11,high,True,True
+813.684243,SM 42:2;O2,14.5,restored,SM 42:2;O2,12,high,True,True
+814.514684,PE O-40:7,14.5,restored,PE O-40:7,12,high,True,True
+824.556614,PC 36:2,14.5,restored,PC 36:2,12,high,True,True
+548.311355,LPE 20:0,14.5,restored,LPE 20:0,12,high,True,True
+821.528703,PG 38:4,14.5,restored,PG 38:4,11,high,True,True
+562.32691,LPC 18:0,14.5,restored,LPC 18:0,12,high,True,True
+560.311275,LPC 18:1,14.5,restored,LPC 18:1,12,high,True,True
+806.509342,PE 38:4,14.5,restored,PE 38:4,12,high,True,True
+750.585227,HexCer 36:1;O2,14.5,restored,HexCer 36:1;O2,12,high,True,True
+880.618648,PC 40:2,14.5,restored,PC 40:2,12,high,True,True
+768.530366,PE O-36:2,14.5,restored,PE O-36:2,12,high,True,True
+852.587719,PC 38:2,14.5,restored,PC 38:2,12,high,True,True
+622.613163,Cer 40:1;O2,14.5,restored,Cer 40:1;O2,12,high,True,True
+766.51472,PE O-36:3,14.5,restored,PE O-36:3,12,high,True,True
+767.54671,SM 36:2;O2,14.5,restored,SM 36:2;O2,12,high,True,True
+650.644457,Cer 42:1;O2,14.5,restored,Cer 42:1;O2,12,high,True,True
+726.587817,HexCer 36:2;O2,14.5,restored,HexCer 36:2;O2,12,high,True,True
+745.497359,PG 32:0,14.5,restored,PG 32:0,11,high,True,True
+848.556599,PC 38:4,14.5,restored,PC 38:4,12,high,True,True
+604.506565,Cer 36:1;O2,14.5,restored,Cer 36:1;O2,12,high,True,True
+786.483302,PE O-38:7,14.5,restored,PE O-38:7,12,high,True,True
+824.637838,HexCer 40:0;O2,14.0,restored,HexCer 40:0;O2,12,high,True,True
+876.668815,HexCer 44:2;O2,14.0,restored,HexCer 44:2;O2,10,high,True,True
+758.546237,PC O-32:0,14.0,restored,PC O-32:0,12,high,True,True
+925.520038,PI 38:4,11.5,restored,PI 38:4,11,high,True,True
+876.515274,PS 40:5,11.5,restored,PS 40:5,11,high,True,True
+877.518561,PI 34:0,11.5,restored,PI 34:0,11,high,True,True
+922.499356,PS 44:10,11.5,restored,PS 44:10,9,high,True,True
+923.503817,PI 38:5,11.5,restored,PI 38:5,11,high,True,True
+823.544538,PG 38:3,11.5,restored,PG 38:3,10,high,True,True
+849.559984,PG 40:4,11.5,restored,PG 40:4,10,high,True,True
+847.544416,PG 40:5,11.5,restored,PG 40:5,10,high,True,True
+506.360583,LPC O-18:2,11.5,restored,LPC O-18:2,10,high,True,True
+874.499357,PS 40:6,11.5,restored,PS 40:6,11,high,True,True
+826.572184,PC 36:1,11.5,restored,PC 36:1,12,high,True,True
+832.507097,PS 38:5,11.5,restored,PS 38:5,11,high,True,True
+858.54082,PE 42:6,11.5,restored,PE 42:6,10,high,True,True
+812.592569,PC O-36:1,11.5,restored,PC O-36:1,11,high,True,True
+646.613192,Cer 40:0;O2,11.5,restored,Cer 40:0;O2,11,high,True,True
+649.51885,DG 35:0,11.5,restored,DG 35:0,9,high,True,True
+787.487102,PG 34:1,11.5,restored,PG 34:1,9,high,True,True
+606.295512,LPC 22:6,11.5,restored,LPC 22:6,11,high,True,True
+582.295614,LPC 20:4,11.5,restored,LPC 20:4,11,high,True,True
+803.5576,PS 36:3,11.5,restored,PS 36:3,11,high,True,True
+801.541731,PS 36:4,11.5,restored,PS 36:4,11,high,True,True
+800.483681,PS 34:1,11.5,restored,PS 34:1,11,high,True,True
+770.546286,PE O-36:1,11.5,restored,PE O-36:1,12,high,True,True
+746.605655,PC O-34:1,11.5,restored,PC O-34:1,4,medium,True,False
+945.486439,PI 40:8,11.0,restored,PI 40:8,9,high,True,True
+866.590672,PS 40:2,11.0,restored,PS 40:2,11,high,True,True
+875.502707,PI 34:1,11.0,restored,PI 34:1,11,high,True,True
+951.534508,PI 40:5,11.0,restored,PI 40:5,9,high,True,True
+903.534518,PI 36:1,11.0,restored,PI 36:1,11,high,True,True
+899.501733,PI 36:3,11.0,restored,PI 36:3,11,high,True,True
+828.692271,SM 42:3;O2,11.0,restored,SM 42:3;O2,11,high,True,True
+947.502401,PI 40:7,11.0,restored,PI 40:7,9,high,True,True
+532.376231,LPC O-18:0,8.5,restored,LPC O-18:0,8,high,True,True
+984.674739,Hex2Cer 40:1;O2,8.5,restored,Hex2Cer 40:1;O2,10,high,True,True
+821.649156,SM 41:2;O2,8.5,restored,SM 41:2;O2,8,high,True,True
+815.518091,PG 36:1,8.5,restored,PG 36:1,10,high,True,True
+830.530539,PS 36:0,8.5,restored,PS 36:0,10,high,True,True
+789.502142,PG 34:0,8.5,restored,PG 34:0,10,high,True,True
+634.613206,Cer 41:2;O2,8.0,restored,Cer 41:2;O2,8,high,True,True
+1143.001197,TG 72:9,8.0,restored,TG 72:9,8,high,True,True
+751.524844,PS 32:1,8.0,restored,PS 32:1,10,high,True,True
+919.470299,PI 38:7,8.0,restored,PI 38:7,8,high,True,True
+699.484368,SM 31:1;O2,8.0,restored,SM 31:1;O2,8,high,True,True
+921.544834,PI 39:5,8.0,restored,PI 39:5,8,high,True,True
+905.550089,PI 36:0,8.0,restored,PI 36:0,10,high,True,True
+908.541445,PS 44:9,8.0,restored,PS 44:9,8,high,True,True
+805.496884,PG 37:5,8.0,restored,PG 37:5,8,high,True,True
+833.528742,PG 39:5,8.0,restored,PG 39:5,8,high,True,True
+835.544184,PG 39:4,8.0,restored,PG 39:4,8,high,True,True
+787.544315,PG 35:0,8.0,restored,PG 35:0,8,high,True,True
+520.262651,LPS 16:0,8.0,restored,LPS 16:0,8,high,True,True
+821.630669,PG 39:0,8.0,restored,PG 39:0,8,high,True,True
+952.592427,PI 42:8,8.0,restored,PI 42:8,8,high,True,True
+819.513275,PG 38:5,8.0,restored,PG 38:5,9,high,True,True
+1087.034884,TG 67:2,8.0,restored,TG 67:2,8,high,True,True
+813.559849,PG 37:1,8.0,restored,PG 37:1,8,high,True,True
+811.544298,PG 37:2,8.0,restored,PG 37:2,8,high,True,True
+561.314673,LPG 20:1,8.0,restored,LPG 20:1,8,high,True,True
+504.344854,LPC O-16:0,8.0,restored,LPC O-16:0,8,high,True,True
+755.546756,SM 35:1;O2,8.0,restored,SM 35:1;O2,8,high,True,True
+754.622302,HexCer 38:2;O2,8.0,restored,HexCer 38:2;O2,10,high,True,True
+574.326876,LPE 22:1,7.5,restored,LPE 22:1,12,high,True,True
+800.660773,HexCer 40:1;O3_db,7.0,restored,HexCer 40:1;O3,4,medium,True,False
+820.627223,HexCer 40:2;O3_db,7.0,restored,HexCer 40:2;O3,4,medium,True,False
+640.623698,Cer 40:0;O3_db,7.0,restored,Cer 40:0;O3,2,medium,True,False
+775.525848,PA 40:4,6.0,restored,PA 40:4,3,medium,True,False
+745.477595,PA 38:5,6.0,restored,PA 38:5,3,medium,True,False
+735.433933,PA 36:4,5.5,restored,PA 36:4,3,medium,True,False
+478.329239,LPC O-16:2,5.0,restored,LPC O-16:2,3,medium,True,False
+726.447053,PE 32:2,4.5,restored,PE 32:2,3,medium,True,False
+902.530616,PS 42:6,4.5,restored,PS 42:6,3,medium,True,False
+687.436024,PA 32:0,4.5,restored,PA 32:0,1,low,True,False
+763.466601,PA 38:4,4.5,restored,PA 38:4,3,medium,True,False
+739.467329,PA 36:2,4.5,restored,PA 36:2,3,medium,True,False
+685.420373,PA 32:1,4.5,restored,PA 32:1,1,low,True,False
+880.507642,PS 42:9,4.5,restored,PS 42:9,1,low,True,False
+459.248227,LPA 18:1,4.5,restored,LPA 18:1,1,low,True,False
+852.690404,HexCer 42:0;O3_db,4.0,restored,HexCer 42:0;O3,3,medium,False,False
+824.659145,HexCer 40:0;O3_db,4.0,restored,HexCer 40:0;O3,3,medium,False,False
+862.65324,PS 41:0,4.0,restored,PS 41:0,1,low,False,False
+882.622052,PS 41:1,4.0,restored,PS 41:1,1,low,False,False
+602.321794,LPC 20:1,4.0,restored,LPC 20:1,11,high,False,True
+986.690342,Hex2Cer 40:0;O2,4.0,restored,Hex2Cer 40:0;O2,3,medium,False,False
+759.435978,PA 38:6_db,2.5,restored,PA 38:6,2,medium,False,False
+789.483073,PA 40:5_db,2.5,restored,PA 40:5,2,medium,False,False
+700.431232,PE 30:1_db,2.5,restored,PE 30:1,2,medium,False,False
+793.514455,PA 40:3_db,2.5,restored,PA 40:3,2,medium,False,False
+854.659085,PE 42:0_db,2.5,restored,PE 42:0,2,medium,False,False
+867.453397,PGP 34:1_db,2.5,restored,PGP 34:1,2,medium,False,False
+820.465641,PE O-41:11_db,2.0,restored,PE O-41:11,2,medium,False,False
+877.591318,PG 42:4_db,2.0,restored,PG 42:4,2,medium,False,False
+869.649307,SM t42:1_db,2.0,restored,SM t42:1,2,medium,False,False
+787.507619,HexCer 38:2;O2_db,2.0,restored,HexCer 38:2;O2,10,high,False,True
+823.741796,SM 40:2_db,2.0,restored,SM 40:2,12,high,False,True
+725.488271,PA O-36:2_db,2.0,restored,PA O-36:2,2,medium,False,False
+822.506674,HexCer 40:1; O2_db,2.0,restored,HexCer 40:1,12,high,False,True
+794.611804,HexCer 38:1_db,2.0,restored,HexCer 38:1,12,high,False,True
+797.392118,PG 36:2_db,2.0,restored,PG 36:2,11,high,False,True
+883.638226,PG 42:1_db,2.0,restored,PG 42:1,2,medium,False,False
+793.557201,PG 36:1 OH_db,2.0,restored,PG 36:1,10,high,False,True
+761.58843,PA 38:5_db,2.0,restored,PA 38:5,3,medium,False,False
+846.67765,PC 38:5_db,2.0,restored,PC 38:5,12,high,False,True
+835.520994,PS O-39:1_db,2.0,restored,PS O-39:1,2,medium,False,False
+849.757345,SM d42:3_db,2.0,restored,SM d42:3,11,high,False,True
+847.664639,PE-Cer d46:3_db,2.0,restored,PE-Cer d46:3,2,medium,False,False
+841.61781,SM t40:1_db,2.0,restored,SM t40:1,2,medium,False,False
+766.580557,HexCer t36:1_db,2.0,restored,HexCer t36:1,3,medium,False,False
+940.534809,PIP O-36:5_db,2.0,restored,PIP O-36:5,2,medium,False,False
+837.640988,PG 38:4_db,2.0,restored,PG 38:4,11,high,False,True
+941.491648,PIP O-34:1_db,2.0,restored,PIP O-34:1,2,medium,False,False
+779.421272,PA 42:5_db,2.0,restored,PA 42:5,2,medium,False,False
+780.538873,HexCer 36:2;O2_db,2.0,restored,HexCer 36:2;O2,12,high,False,True
+746.481119,SM d36:2_db,2.0,restored,SM d36:2,12,high,False,True
+858.588701,Hex2Cer 32:0_db,2.0,restored,Hex2Cer 32:0,2,medium,False,False
+797.56516,PA 40:1 OH_db,2.0,restored,PA 40:1,1,low,False,False
+863.656889,PG 40:5_db,2.0,restored,PG 40:5,10,high,False,True
+851.773075,SM 42:2_db,2.0,restored,SM 42:2,12,high,False,True
+753.405707,PA 38:1_db,2.0,restored,PA 38:1,3,medium,False,False
+752.507543,HexCer t34:2_db,2.0,restored,HexCer t34:2,2,medium,False,False
+853.591134,PG 40:2_db,2.0,restored,PG 40:2,2,medium,False,False
+852.680417,CerP t48:1_db,2.0,restored,CerP t48:1,2,medium,False,False
+963.476348,CL 36:4_db,2.0,restored,CL 36:4,2,medium,False,False
+802.54506,SM d40:2 HexCer t40:0_db,2.0,restored,SM d40:2 HexCer t40:0,12,high,False,True
+787.604119,PA 40:6_db,2.0,restored,PA 40:6,3,medium,False,False
+683.460571,PA 33:1_db,1.5,restored,PA 33:1,0,database only,False,False
+831.434156,PA 44:12_db,1.5,restored,PA 44:12,0,database only,False,False
+904.54656,PS 42:5_db,1.5,restored,PS 42:5,2,medium,False,False
+426.357733,CAR 18:1_db,1.5,restored,CAR 18:1,0,not covered,False,False
+809.449463,PA 42:9_db,1.5,restored,PA 42:9,0,database only,False,False
+672.400048,PE 28:1_db,1.5,restored,PE 28:1,0,database only,False,False
+742.468805,PS 33:4_db,1.0,restored,PS 33:4,0,database only,False,False
+930.562101,PS 44:6_db,1.0,restored,PS 44:6,2,medium,False,False
+783.43447,PA 40:8_db,1.0,restored,PA 40:8,0,database only,False,False
+709.476423,PA 35:2_db,1.0,restored,PA 35:2,0,database only,False,False
+709.418635,PA 34:3_db,1.0,restored,PA 34:3,0,database only,False,False
+733.612753,DG 41:0_db,1.0,restored,DG 41:0,0,database only,False,False
+479.332584,ST 30:3;O2_db,1.0,restored,ST 30:3;O2,0,not covered,False,False
+749.448678,PA 37:4_db,1.0,restored,PA 37:4,0,database only,False,False
+842.63954,PC O-38:0_db,1.0,restored,PC O-38:0,0,database only,False,False
+698.415591,PE 30:2_db,1.0,restored,PE 30:2,0,database only,False,False
+809.469334,PG 36:4_db,1.0,restored,PG 36:4,9,high,False,True
+740.470757,PI-Cer t30:1_db_db,0.0,restored,PI-Cer t30:1_db,0,not covered,False,False
+738.455103,PI-Cer t30:2_db_db,0.0,restored,PI-Cer t30:2_db,0,not covered,False,False
+788.470942,PI-Cer t32:2_db_db,0.0,restored,PI-Cer t32:2_db,0,not covered,False,False
+736.437192,PI-Cer t28:0_db_db,0.0,restored,PI-Cer t28:0_db,0,not covered,False,False
+892.663729,PI-Cer d42:1_db_db,0.0,restored,PI-Cer d42:1_db,0,not covered,False,False
+836.496635,SHexCer t34:0_db_db,0.0,restored,SHexCer t34:0_db,0,not covered,False,False
+862.616935,PI-Cer d40:2_db_db,0.0,restored,PI-Cer d40:2_db,0,not covered,False,False
+946.602037,SHexCer 42:1;O3_db_db_db,0.0,restored,SHexCer 42:1;O3,2,medium,False,False
+908.650479,SHexCer 41:1;O2_db_db,0.0,restored,SHexCer 41:1;O2,0,database only,False,False
+814.631941,PC 38:2,20.5,unusable,PC 38:2,12,high,True,True
+716.522444,PE 34:2,20.5,unusable,PE 34:2,12,high,True,True
+786.600581,PC 36:2,20.5,unusable,PC 36:2,12,high,True,True
+546.353132,LPC 18:0,20.5,unusable,LPC 18:0,12,high,True,True
+842.663262,PC 40:2,20.5,unusable,PC 40:2,12,high,True,True
+524.371152,LPC 18:0,20.5,unusable,LPC 18:0,12,high,True,True
+816.647727,PC 38:1,20.5,unusable,PC 38:1,12,high,True,True
+788.616346,PC 36:1,20.5,unusable,PC 36:1,12,high,True,True
+730.57458,PE O-36:2,20.5,unusable,PE O-36:2,12,high,True,True
+522.355521,LPC 18:1,20.5,unusable,LPC 18:1,12,high,True,True
+844.678951,PC 40:1,20.5,unusable,PC 40:1,12,high,True,True
+720.589979,PC O-32:0,20.0,unusable,PC O-32:0,12,high,True,True
+496.339662,LPC 16:0,20.0,unusable,LPC 16:0,12,high,True,True
+814.535679,PE 40:6,18.0,unusable,PE 40:6,12,high,True,True
+846.621997,PS 40:1,17.5,unusable,PS 40:1,11,high,True,True
+794.546023,PE O-38:3,17.5,unusable,PE O-38:3,12,high,True,True
+856.582593,PC 40:6,17.5,unusable,PC 40:6,12,high,True,True
+858.598946,PC 40:5,17.5,unusable,PC 40:5,12,high,True,True
+860.614234,PC 40:4,17.5,unusable,PC 40:4,12,high,True,True
+744.553757,PE 36:2,17.5,unusable,PE 36:2,12,high,True,True
+776.462175,PE 36:5,17.5,unusable,PE 36:5,12,high,True,True
+850.572852,PC 38:3,17.5,unusable,PC 38:3,12,high,True,True
+764.522459,PE 38:6,17.5,unusable,PE 38:6,12,high,True,True
+764.498659,PE O-36:4,17.5,unusable,PE O-36:4,12,high,True,True
+762.504223,PE 36:4,17.5,unusable,PE 36:4,12,high,True,True
+832.582876,PC 38:4,17.5,unusable,PC 38:4,12,high,True,True
+756.551346,PC 32:0,17.5,unusable,PC 32:0,12,high,True,True
+518.321818,LPC 16:0,17.5,unusable,LPC 16:0,12,high,True,True
+758.569322,PC 34:2,17.5,unusable,PC 34:2,12,high,True,True
+804.551267,PC 36:4,17.5,unusable,PC 36:4,12,high,True,True
+482.324173,LPE 18:0,17.5,unusable,LPE 18:0,12,high,True,True
+806.569006,PC 38:6,17.5,unusable,PC 38:6,12,high,True,True
+826.476385,PE 40:8,17.5,unusable,PE 40:8,12,high,True,True
+510.355468,LPE 20:0,17.5,unusable,LPE 20:0,12,high,True,True
+818.567304,PE 40:4,17.5,unusable,PE 40:4,12,high,True,True
+784.582831,PC 34:0,17.5,unusable,PC 34:0,12,high,True,True
+790.535967,PE 38:4,17.5,unusable,PE 38:4,12,high,True,True
+818.545926,PE O-40:5,17.5,unusable,PE O-40:5,12,high,True,True
+792.55383,PE 40:6,17.5,unusable,PE 40:6,12,high,True,True
+742.514534,PE O-34:1,17.5,unusable,PE O-34:1,12,high,True,True
+544.337559,LPC 18:1,17.5,unusable,LPC 18:1,12,high,True,True
+704.558752,PE O-34:1,17.5,unusable,PE O-34:1,12,high,True,True
+786.504327,PE 38:6,17.5,unusable,PE 38:6,12,high,True,True
+508.339875,LPE 20:1,17.5,unusable,LPE 20:1,12,high,True,True
+706.538096,PC 30:0,17.5,unusable,PC 30:0,12,high,True,True
+812.519639,PE 40:7,17.5,unusable,PE 40:7,12,high,True,True
+712.486593,PE 32:1,17.5,unusable,PE 32:1,12,high,True,True
+780.551501,PC 34:2,17.5,unusable,PC 34:2,12,high,True,True
+790.632562,PC 36:0,17.5,unusable,PC 36:0,12,high,True,True
+851.627085,PC 40:6,17.0,unusable,PC 40:6,12,high,True,True
+831.658394,PC 38:2,17.0,unusable,PC 38:2,12,high,True,True
+805.642917,PC 36:1,17.0,unusable,PC 36:1,12,high,True,True
+816.530469,PE O-40:6,17.0,unusable,PE O-40:6,12,high,True,True
+827.62708,PC 38:4,17.0,unusable,PC 38:4,12,high,True,True
+480.308562,LPE 18:1,17.0,unusable,LPE 18:1,12,high,True,True
+707.500918,DG 40:6,15.0,unusable,DG 40:6,11,high,True,True
+812.541089,PS 36:1,15.0,unusable,PS 36:1,11,high,True,True
+788.52013,PE 38:5,15.0,unusable,PE 38:5,12,high,True,True
+810.503605,PE 40:8,15.0,unusable,PE 40:8,12,high,True,True
+810.525573,PS 36:2,15.0,unusable,PS 36:2,11,high,True,True
+792.575459,PS 36:0,14.5,unusable,PS 36:0,10,high,True,True
+792.530596,PE O-38:4,14.5,unusable,PE O-38:4,12,high,True,True
+798.540901,PC 34:1,14.5,unusable,PC 34:1,12,high,True,True
+837.682201,SM 42:1;O2,14.5,unusable,SM 42:1;O2,12,high,True,True
+835.666216,SM 42:2;O2,14.5,unusable,SM 42:2;O2,12,high,True,True
+793.502392,PG 36:4,14.5,unusable,PG 36:4,9,high,True,True
+787.66876,SM 40:1;O2,14.5,unusable,SM 40:1;O2,12,high,True,True
+838.572418,PE 40:2,14.5,unusable,PE 40:2,12,high,True,True
+588.532586,Cer 36:1;O2,14.5,unusable,Cer 36:1;O2,12,high,True,True
+790.559299,PS 36:1,14.5,unusable,PS 36:1,11,high,True,True
+836.543747,PS 40:6,14.5,unusable,PS 40:6,11,high,True,True
+790.514716,PE O-38:5,14.5,unusable,PE O-38:5,12,high,True,True
+788.540879,PS 36:2,14.5,unusable,PS 36:2,11,high,True,True
+836.54371,PS 40:6,14.5,unusable,PS 40:6,11,high,True,True
+839.562541,PI 34:0,14.5,unusable,PI 34:0,11,high,True,True
+590.321702,LPC 22:6,14.5,unusable,LPC 22:6,11,high,True,True
+813.501759,PG 36:2,14.5,unusable,PG 36:2,11,high,True,True
+552.306221,LPE 22:4,14.5,unusable,LPE 22:4,12,high,True,True
+815.7003,SM 42:1;O2,14.5,unusable,SM 42:1;O2,12,high,True,True
+550.386763,LPC 20:1,14.5,unusable,LPC 20:1,11,high,True,True
+550.290501,LPE 22:5,14.5,unusable,LPE 22:5,12,high,True,True
+816.573626,PS 38:2,14.5,unusable,PS 38:2,11,high,True,True
+540.24889,LPE 20:4,14.5,unusable,LPE 20:4,12,high,True,True
+548.274851,LPE 22:6,14.5,unusable,LPE 22:6,12,high,True,True
+818.509303,PC 36:5,14.5,unusable,PC 36:5,11,high,True,True
+546.295745,LPE 20:1,14.5,unusable,LPE 20:1,12,high,True,True
+546.295721,LPE 20:1,14.5,unusable,LPE 20:1,12,high,True,True
+820.525269,PC 36:4,14.5,unusable,PC 36:4,12,high,True,True
+822.601331,PE 40:2,14.5,unusable,PE 40:2,12,high,True,True
+822.60103,PE 40:2,14.5,unusable,PE 40:2,12,high,True,True
+544.280548,LPE 20:2,14.5,unusable,LPE 20:2,12,high,True,True
+834.523853,PS 38:4,14.5,unusable,PS 38:4,11,high,True,True
+800.61603,PE 40:2,14.5,unusable,PE 40:2,12,high,True,True
+832.663491,HexCer 42:2;O2,14.5,unusable,HexCer 42:2;O2,12,high,True,True
+524.274672,LPE 20:4,14.5,unusable,LPE 20:4,12,high,True,True
+524.275132,LPE 20:4,14.5,unusable,LPE 20:4,12,high,True,True
+804.493609,PE 38:5,14.5,unusable,PE 38:5,12,high,True,True
+526.292745,LPE 22:6,14.5,unusable,LPE 22:6,12,high,True,True
+566.321643,LPC 20:4,14.5,unusable,LPC 20:4,11,high,True,True
+566.264258,LPE 22:5,14.5,unusable,LPE 22:5,12,high,True,True
+812.498428,PE O-40:8,14.5,unusable,PE O-40:8,10,high,True,True
+526.293057,LPE 22:6,14.5,unusable,LPE 22:6,12,high,True,True
+807.633871,SM 40:2;O2,14.5,unusable,SM 40:2;O2,12,high,True,True
+564.534981,Cer 36:2;O2,14.5,unusable,Cer 36:2;O2,12,high,True,True
+808.516228,PS 38:6,14.5,unusable,PS 38:6,11,high,True,True
+828.551461,PC 38:6,14.5,unusable,PC 38:6,12,high,True,True
+809.650753,SM 40:1;O2,14.5,unusable,SM 40:1;O2,12,high,True,True
+810.681691,HexCer 42:2;O2,14.5,unusable,HexCer 42:2;O2,12,high,True,True
+878.530469,PS 40:4,14.5,unusable,PS 40:4,11,high,True,True
+751.572493,SM 36:2;O2,14.5,unusable,SM 36:2;O2,12,high,True,True
+753.588104,SM 36:1;O2,14.5,unusable,SM 36:1;O2,12,high,True,True
+754.478379,PE 34:2,14.5,unusable,PE 34:2,12,high,True,True
+754.535711,PC 32:1,14.5,unusable,PC 32:1,12,high,True,True
+854.566914,PC 40:7,14.5,unusable,PC 40:7,12,high,True,True
+854.508087,PE 42:8,14.5,unusable,PE 42:8,12,high,True,True
+756.530765,PC O-32:1,14.5,unusable,PC O-32:1,12,high,True,True
+851.639943,SM 42:2;O2,14.5,unusable,SM 42:2;O2,12,high,True,True
+764.543807,PS 34:0,14.5,unusable,PS 34:0,11,high,True,True
+768.493467,PC 32:2,14.5,unusable,PC 32:2,12,high,True,True
+768.493798,PC 32:2,14.5,unusable,PC 32:2,12,high,True,True
+874.572687,PC 40:5,14.5,unusable,PC 40:5,12,high,True,True
+731.606162,SM 36:1;O2,14.5,unusable,SM 36:1;O2,12,high,True,True
+729.590602,SM 36:2;O2,14.5,unusable,SM 36:2;O2,12,high,True,True
+738.505397,PE 34:2,14.5,unusable,PE 34:2,12,high,True,True
+874.478595,PE 44:12,14.5,unusable,PE 44:12,10,high,True,True
+728.519929,PC 30:0,14.5,unusable,PC 30:0,12,high,True,True
+728.462458,PE 32:1,14.5,unusable,PE 32:1,12,high,True,True
+750.542508,PE O-38:6,14.5,unusable,PE O-38:6,12,high,True,True
+725.55678,SM 34:1;O2,14.5,unusable,SM 34:1;O2,12,high,True,True
+862.557182,PS 40:4,14.5,unusable,PS 40:4,11,high,True,True
+746.509954,PE O-36:5,14.5,unusable,PE O-36:5,12,high,True,True
+860.54211,PS 40:5,14.5,unusable,PS 40:5,11,high,True,True
+748.527463,PE O-36:4,14.5,unusable,PE O-36:4,12,high,True,True
+740.498694,PE O-34:2,14.5,unusable,PE O-34:2,12,high,True,True
+544.279917,LPE 20:2,14.5,unusable,LPE 20:2,12,high,True,True
+784.515458,PS 36:4,14.5,unusable,PS 36:4,11,high,True,True
+772.525228,PC 32:0,14.5,unusable,PC 32:0,12,high,True,True
+774.54246,PE O-38:5,14.5,unusable,PE O-38:5,12,high,True,True
+782.509839,PE 36:2,14.5,unusable,PE 36:2,12,high,True,True
+781.619322,SM 38:1;O2,14.5,unusable,SM 38:1;O2,12,high,True,True
+703.574806,SM 34:1;O2,14.5,unusable,SM 34:1;O2,12,high,True,True
+686.584682,Cer 42:2;O2,14.5,unusable,Cer 42:2;O2,12,high,True,True
+776.558558,PE O-38:4,14.5,unusable,PE O-38:4,12,high,True,True
+602.490932,Cer 36:2;O2,14.5,unusable,Cer 36:2;O2,12,high,True,True
+780.492413,PE 36:3,14.5,unusable,PE 36:3,12,high,True,True
+778.477655,PE 36:4,14.5,unusable,PE 36:4,12,high,True,True
+759.637466,SM 38:1;O2,14.5,unusable,SM 38:1;O2,12,high,True,True
+784.666451,HexCer 40:1;O2,14.5,unusable,HexCer 40:1;O2,12,high,True,True
+504.306055,LPE 18:0,14.5,unusable,LPE 18:0,12,high,True,True
+785.65292,SM 40:2;O2,14.5,unusable,SM 40:2;O2,12,high,True,True
+842.567038,PE 42:6,14.5,unusable,PE 42:6,10,high,True,True
+502.290491,LPE 18:1,14.5,unusable,LPE 18:1,12,high,True,True
+494.324311,LPC 16:1,14.5,unusable,LPC 16:1,11,high,True,True
+770.509713,PC 32:1,14.5,unusable,PC 32:1,12,high,True,True
+692.522328,PE 32:0,14.5,unusable,PE 32:0,12,high,True,True
+786.54097,PE 36:0,14.5,unusable,PE 36:0,11,high,True,True
+786.53185,PS 36:3,14.0,unusable,PS 36:3,11,high,True,True
+813.608529,PE 40:4,14.0,unusable,PE 40:4,12,high,True,True
+812.697709,HexCer 42:1;O2,14.0,unusable,HexCer 42:1;O2,12,high,True,True
+829.573192,PS 38:4,14.0,unusable,PS 38:4,11,high,True,True
+759.561067,PE 36:3,14.0,unusable,PE 36:3,12,high,True,True
+852.669044,HexCer 42:0;O2,14.0,unusable,HexCer 42:0;O2,12,high,True,True
+804.632118,HexCer 40:2;O2,14.0,unusable,HexCer 40:2;O2,12,high,True,True
+853.646098,PC 40:5,14.0,unusable,PC 40:5,12,high,True,True
+763.594655,PE 36:1,14.0,unusable,PE 36:1,12,high,True,True
+800.556439,PC 34:0,14.0,unusable,PC 34:0,12,high,True,True
+820.561519,PE O-40:4,14.0,unusable,PE O-40:4,12,high,True,True
+837.546779,PI 34:1,14.0,unusable,PI 34:1,11,high,True,True
+494.323916,LPC 16:1,14.0,unusable,LPC 16:1,11,high,True,True
+778.574018,PE O-40:6,14.0,unusable,PE O-40:6,12,high,True,True
+829.573502,PS 38:4,14.0,unusable,PS 38:4,11,high,True,True
+834.679528,HexCer 42:1;O2,14.0,unusable,HexCer 42:1;O2,12,high,True,True
+683.500763,DG 38:4,12.0,unusable,DG 38:4,9,high,True,True
+858.525586,PS 40:6,12.0,unusable,PS 40:6,11,high,True,True
+888.574122,PS 44:8,11.5,unusable,PS 44:8,10,high,True,True
+902.575406,PI 38:5,11.5,unusable,PI 38:5,11,high,True,True
+892.525649,PC 42:10,11.5,unusable,PC 42:10,10,high,True,True
+887.562939,PI 38:4,11.5,unusable,PI 38:4,11,high,True,True
+878.509271,PE 44:10,11.5,unusable,PE 44:10,9,high,True,True
+881.511485,PI 36:4,11.5,unusable,PI 36:4,11,high,True,True
+898.572274,PC 42:7,11.5,unusable,PC 42:7,10,high,True,True
+542.262403,LPE 20:3,11.5,unusable,LPE 20:3,11,high,True,True
+542.264446,LPE 20:3,11.5,unusable,LPE 20:3,11,high,True,True
+852.515025,PS 38:3,11.5,unusable,PS 38:3,11,high,True,True
+492.248728,LPE 16:0,11.5,unusable,LPE 16:0,11,high,True,True
+520.339862,LPC 18:2,11.5,unusable,LPC 18:2,10,high,True,True
+850.497669,PS 38:4,11.5,unusable,PS 38:4,11,high,True,True
+848.481638,PS 38:5,11.5,unusable,PS 38:5,11,high,True,True
+906.525611,PS 44:10,11.5,unusable,PS 44:10,9,high,True,True
+846.47213,PS 38:6,11.5,unusable,PS 38:6,11,high,True,True
+502.329246,LPC O-16:1,11.5,unusable,LPC O-16:1,10,high,True,True
+516.24873,LPE 18:2,11.5,unusable,LPE 18:2,11,high,True,True
+825.560055,PG 38:2,11.5,unusable,PG 38:2,10,high,True,True
+872.710259,PC 42:1,11.5,unusable,PC 42:1,4,medium,True,False
+872.484256,PS 40:7,11.5,unusable,PS 40:7,11,high,True,True
+872.48153,PS 40:7,11.5,unusable,PS 40:7,11,high,True,True
+532.280896,LPC 16:1,11.5,unusable,LPC 16:1,11,high,True,True
+872.481174,PS 40:7,11.5,unusable,PS 40:7,11,high,True,True
+532.279977,LPC 16:1,11.5,unusable,LPC 16:1,11,high,True,True
+476.274826,LPE 16:0,11.5,unusable,LPE 16:0,11,high,True,True
+480.3449,LPC O-16:1,11.5,unusable,LPC O-16:1,10,high,True,True
+528.342597,LPC O-18:2,11.5,unusable,LPC O-18:2,10,high,True,True
+854.530604,PS 38:2,11.5,unusable,PS 38:2,11,high,True,True
+870.694484,PC 42:2,11.5,unusable,PC 42:2,4,medium,True,False
+775.545453,PG 36:2,11.5,unusable,PG 36:2,11,high,True,True
+605.509921,DG 33:0,11.5,unusable,DG 33:0,9,high,True,True
+777.562152,PG 36:1,11.5,unusable,PG 36:1,10,high,True,True
+779.577253,PG 36:0,11.5,unusable,PG 36:0,9,high,True,True
+810.540883,PE 38:2,11.5,unusable,PE 38:2,12,high,True,True
+786.522913,PS 34:0,11.5,unusable,PS 34:0,11,high,True,True
+733.62203,SM 36:0;O2,11.5,unusable,SM 36:0;O2,11,high,True,True
+808.52548,PE 38:3,11.5,unusable,PE 38:3,11,high,True,True
+808.506815,PS 36:3,11.5,unusable,PS 36:3,11,high,True,True
+792.493468,PE 37:4,11.5,unusable,PE 37:4,9,high,True,True
+794.506768,PC 34:3,11.5,unusable,PC 34:3,11,high,True,True
+802.499083,PS 34:0,11.5,unusable,PS 34:0,11,high,True,True
+796.561774,PE O-38:2,11.5,unusable,PE O-38:2,12,high,True,True
+799.544246,PG 36:1,11.5,unusable,PG 36:1,10,high,True,True
+679.473803,DG 38:6,11.5,unusable,DG 38:6,9,high,True,True
+661.516796,DG 36:1,11.5,unusable,DG 36:1,9,high,True,True
+817.533744,PG 36:0,11.5,unusable,PG 36:0,9,high,True,True
+633.485418,DG 34:1,11.5,unusable,DG 34:1,9,high,True,True
+749.530869,PG 34:1,11.5,unusable,PG 34:1,9,high,True,True
+816.493676,PE 39:6,11.5,unusable,PE 39:6,9,high,True,True
+751.545562,PG 34:0,11.5,unusable,PG 34:0,10,high,True,True
+769.49677,PG 34:2,11.5,unusable,PG 34:2,9,high,True,True
+773.528602,PG 34:0,11.5,unusable,PG 34:0,10,high,True,True
+918.464419,PS 44:12,11.5,unusable,PS 44:12,9,high,True,True
+755.604468,SM 36:0;O2,11.5,unusable,SM 36:0;O2,11,high,True,True
+815.480636,PG 38:7,11.5,unusable,PG 38:7,10,high,True,True
+814.499165,PS 35:1,11.5,unusable,PS 35:1,9,high,True,True
+771.578018,SM 36:0;O2,11.5,unusable,SM 36:0;O2,11,high,True,True
+851.575974,PG 40:3,11.0,unusable,PG 40:3,10,high,True,True
+935.560414,PI 40:5,11.0,unusable,PI 40:5,9,high,True,True
+851.557675,PS 40:7,11.0,unusable,PS 40:7,11,high,True,True
+768.587629,PC O-36:4,11.0,unusable,PC O-36:4,11,high,True,True
+859.528953,PI 34:1,11.0,unusable,PI 34:1,11,high,True,True
+926.57567,PI 40:7,11.0,unusable,PI 40:7,9,high,True,True
+793.570081,PS 35:1,11.0,unusable,PS 35:1,9,high,True,True
+772.563108,PE O-36:0,11.0,unusable,PE O-36:0,10,high,True,True
+846.472893,PS 38:6,11.0,unusable,PS 38:6,11,high,True,True
+867.594251,PI 36:0,11.0,unusable,PI 36:0,10,high,True,True
+742.572221,PC O-32:0,11.0,unusable,PC O-32:0,12,high,True,True
+937.577013,PI 40:4,11.0,unusable,PI 40:4,9,high,True,True
+842.5896,PS 38:0,11.0,unusable,PS 38:0,10,high,True,True
+833.648658,SM 42:3;O2,11.0,unusable,SM 42:3;O2,11,high,True,True
+842.531405,PS 37:1,11.0,unusable,PS 37:1,9,high,True,True
+771.51302,PG 34:1,11.0,unusable,PG 34:1,9,high,True,True
+928.612206,Hex2Cer 36:1;O2,11.0,unusable,Hex2Cer 36:1;O2,11,high,True,True
+928.59037,PI 40:6,11.0,unusable,PI 40:6,9,high,True,True
+849.485448,PI 32:0,11.0,unusable,PI 32:0,11,high,True,True
+931.528539,PI 40:7,11.0,unusable,PI 40:7,9,high,True,True
+931.566202,PI 38:1,11.0,unusable,PI 38:1,11,high,True,True
+592.267141,LPS 22:6,11.0,unusable,LPS 22:6,9,high,True,True
+595.242963,LPG 22:6,11.0,unusable,LPG 22:6,9,high,True,True
+802.676725,SM 40:2;O2,11.0,unusable,SM 40:2;O2,12,high,True,True
+895.529138,PI 37:4,11.0,unusable,PI 37:4,9,high,True,True
+824.488186,PS 36:3,11.0,unusable,PS 36:3,11,high,True,True
+548.294253,LPS 18:0,11.0,unusable,LPS 18:0,9,high,True,True
+811.668361,SM 42:3;O2,11.0,unusable,SM 42:3;O2,11,high,True,True
+564.269426,LPS 18:0,11.0,unusable,LPS 18:0,9,high,True,True
+901.517021,PI 36:2,11.0,unusable,PI 36:2,11,high,True,True
+830.498917,PS 38:6,11.0,unusable,PS 38:6,11,high,True,True
+949.519633,PI 40:6,11.0,unusable,PI 40:6,9,high,True,True
+533.284096,LPG 18:1,11.0,unusable,LPG 18:1,9,high,True,True
+833.648617,SM 42:3;O2,11.0,unusable,SM 42:3;O2,11,high,True,True
+953.550042,PI 40:4,11.0,unusable,PI 40:4,9,high,True,True
+795.574773,SM 38:2;O2,11.0,unusable,SM 38:2;O2,11,high,True,True
+894.692567,PC 44:4,11.0,unusable,PC 44:4,10,high,True,True
+924.560833,PI 40:8,11.0,unusable,PI 40:8,9,high,True,True
+884.543112,PS 44:10,9.0,unusable,PS 44:10,9,high,True,True
+742.477422,PC 30:1,8.5,unusable,PC 30:1,10,high,True,True
+740.462204,PC 30:2,8.5,unusable,PC 30:2,10,high,True,True
+751.551525,PG 34:0,8.5,unusable,PG 34:0,10,high,True,True
+900.551638,PC 44:12,8.5,unusable,PC 44:12,8,high,True,True
+900.513406,PS 42:7,8.5,unusable,PS 42:7,10,high,True,True
+828.570031,PS 37:0,8.5,unusable,PS 37:0,8,high,True,True
+828.569643,PS 37:0,8.5,unusable,PS 37:0,8,high,True,True
+916.525271,PC 44:12,8.5,unusable,PC 44:12,8,high,True,True
+558.295609,LPC 18:2,8.5,unusable,LPC 18:2,10,high,True,True
+618.581933,Cer 38:0;O2,8.5,unusable,Cer 38:0;O2,10,high,True,True
+743.480997,PG 32:1,8.5,unusable,PG 32:1,8,high,True,True
+909.545492,PI 38:4,8.5,unusable,PI 38:4,11,high,True,True
+544.316464,LPC O-18:2,8.5,unusable,LPC O-18:2,10,high,True,True
+490.233074,LPE 16:1,8.5,unusable,LPE 16:1,10,high,True,True
+858.562027,PS O-41:6,8.5,unusable,PS O-41:6,8,high,True,True
+836.517926,PE 42:9,8.5,unusable,PE 42:9,8,high,True,True
+716.461689,PE 31:0,8.5,unusable,PE 31:0,8,high,True,True
+926.530681,PS 44:8,8.5,unusable,PS 44:8,10,high,True,True
+898.498347,PS 42:8,8.5,unusable,PS 42:8,10,high,True,True
+879.651643,Hex2Cer 34:1;O2,8.5,unusable,Hex2Cer 34:1;O2,10,high,True,True
+518.300817,LPC O-16:1,8.5,unusable,LPC O-16:1,10,high,True,True
+878.568761,PC 44:12,8.5,unusable,PC 44:12,8,high,True,True
+669.545363,DG 38:3,8.5,unusable,DG 38:3,9,high,True,True
+714.446733,PC 28:1,8.5,unusable,PC 28:1,8,high,True,True
+791.480791,PG 36:5,8.5,unusable,PG 36:5,8,high,True,True
+588.342547,LPC 20:1,8.5,unusable,LPC 20:1,11,high,True,True
+828.588411,PC 36:0,8.5,unusable,PC 36:0,12,high,True,True
+755.499087,DG 44:10,8.5,unusable,DG 44:10,8,high,True,True
+800.521048,PE 39:6,8.5,unusable,PE 39:6,9,high,True,True
+894.466,PS 42:10,8.5,unusable,PS 42:10,8,high,True,True
+834.504028,PE 42:10,8.5,unusable,PE 42:10,8,high,True,True
+839.638896,SM 41:1;O2,8.5,unusable,SM 41:1;O2,10,high,True,True
+1145.01923,TG 72:8,8.0,unusable,TG 72:8,8,high,True,True
+753.530863,SM 35:2;O2,8.0,unusable,SM 35:2;O2,8,high,True,True
+1166.999618,TG 74:11,8.0,unusable,TG 74:11,8,high,True,True
+474.261808,LPE 16:1,8.0,unusable,LPE 16:1,10,high,True,True
+754.619326,HexCer 38:2;O2,8.0,unusable,HexCer 38:2;O2,10,high,True,True
+1161.975896,TG 73:9,8.0,unusable,TG 73:9,8,high,True,True
+924.514881,PS 44:9,8.0,unusable,PS 44:9,8,high,True,True
+919.529392,PI 39:6,8.0,unusable,PI 39:6,8,high,True,True
+886.558472,PS 44:9,8.0,unusable,PS 44:9,8,high,True,True
+894.606727,PI 37:2,8.0,unusable,PI 37:2,8,high,True,True
+1167.001037,TG 74:11,8.0,unusable,TG 74:11,8,high,True,True
+898.6373,PI 37:0,8.0,unusable,PI 37:0,8,high,True,True
+727.467473,DG 42:10,8.0,unusable,DG 42:10,8,high,True,True
+725.499945,SM 33:2;O2,8.0,unusable,SM 33:2;O2,10,high,True,True
+874.535933,PS O-41:6,8.0,unusable,PS O-41:6,8,high,True,True
+877.638909,PC 42:7,8.0,unusable,PC 42:7,10,high,True,True
+739.572503,SM 35:1;O2,8.0,unusable,SM 35:1;O2,8,high,True,True
+927.534145,PI 38:3,8.0,unusable,PI 38:3,10,high,True,True
+684.556018,DG 40:7,8.0,unusable,DG 40:7,8,high,True,True
+893.513533,PI 37:5,8.0,unusable,PI 37:5,8,high,True,True
+907.530046,PI 38:5,8.0,unusable,PI 38:5,11,high,True,True
+717.590543,SM 35:1;O2,8.0,unusable,SM 35:1;O2,8,high,True,True
+1140.985036,TG 72:10,8.0,unusable,TG 72:10,8,high,True,True
+1145.02163,TG 72:8,8.0,unusable,TG 72:8,8,high,True,True
+1174.077062,TG 75:6,8.0,unusable,TG 75:6,8,high,True,True
+1172.057836,TG 73:4,8.0,unusable,TG 73:4,8,high,True,True
+1184.061362,TG 76:8,8.0,unusable,TG 76:8,8,high,True,True
+573.258859,LPG 20:3,8.0,unusable,LPG 20:3,8,high,True,True
+573.260029,LPG 20:3,8.0,unusable,LPG 20:3,8,high,True,True
+946.637443,PI 41:4,8.0,unusable,PI 41:4,8,high,True,True
+521.284104,LPG 17:0,8.0,unusable,LPG 17:0,8,high,True,True
+1111.034561,TG 69:4,8.0,unusable,TG 69:4,8,high,True,True
+836.601224,HexCer 40:2;O3_db,8.0,unusable,HexCer 40:2;O3,4,medium,True,False
+583.299069,LPG 22:4,8.0,unusable,LPG 22:4,8,high,True,True
+838.499956,PS 37:3,8.0,unusable,PS 37:3,8,high,True,True
+509.285318,LPG 18:2,8.0,unusable,LPG 18:2,8,high,True,True
+822.522927,PS 37:3,8.0,unusable,PS 37:3,8,high,True,True
+822.523049,PS 37:3,8.0,unusable,PS 37:3,8,high,True,True
+816.695042,SM 41:2;O2,8.0,unusable,SM 41:2;O2,8,high,True,True
+824.545663,PS 37:2,8.0,unusable,PS 37:2,8,high,True,True
+535.299071,LPG 18:0,8.0,unusable,LPG 18:0,8,high,True,True
+826.56283,PS 39:4,8.0,unusable,PS 39:4,8,high,True,True
+563.330309,LPG 20:0,8.0,unusable,LPG 20:0,8,high,True,True
+808.573045,HexCer 38:2;O3_db,8.0,unusable,HexCer 38:2;O3,4,medium,True,False
+808.570151,HexCer 38:2;O3_db,8.0,unusable,HexCer 38:2;O3,4,medium,True,False
+1063.036808,TG 65:0,8.0,unusable,TG 65:0,8,high,True,True
+1089.053288,TG 67:1,8.0,unusable,TG 67:1,8,high,True,True
+973.516948,PI 42:8,8.0,unusable,PI 42:8,8,high,True,True
+848.538828,PS 39:4,8.0,unusable,PS 39:4,8,high,True,True
+848.616394,PC 41:6,8.0,unusable,PC 41:6,8,high,True,True
+1121.018698,TG 70:6,8.0,unusable,TG 70:6,8,high,True,True
+785.528612,PG 35:1,8.0,unusable,PG 35:1,8,high,True,True
+849.620992,SM 42:3;O2,8.0,unusable,SM 42:3;O2,11,high,True,True
+851.566735,PI 35:1,8.0,unusable,PI 35:1,8,high,True,True
+851.620692,Hex2Cer 32:1;O2,8.0,unusable,Hex2Cer 32:1;O2,10,high,True,True
+843.513577,PG 40:7,8.0,unusable,PG 40:7,8,high,True,True
+780.635018,HexCer 38:0;O2,8.0,unusable,HexCer 38:0;O2,10,high,True,True
+757.497489,PG 33:1,8.0,unusable,PG 33:1,8,high,True,True
+918.541817,PC 44:11,8.0,unusable,PC 44:11,8,high,True,True
+850.673878,HexCer 42:1;O3_db,7.0,unusable,HexCer 42:1;O3,4,medium,True,False
+504.285137,LPE O-18:1,7.0,unusable,LPE O-18:1,2,medium,True,False
+771.493738,PA 40:6,6.0,unusable,PA 40:6,3,medium,True,False
+747.493315,PA 38:4,6.0,unusable,PA 38:4,3,medium,True,False
+864.574639,PS 42:6,5.5,unusable,PS 42:6,3,medium,True,False
+711.436086,PA 34:2,5.5,unusable,PA 34:2,3,medium,True,False
+892.606186,PS 44:6,5.5,unusable,PS 44:6,2,medium,True,False
+832.516358,PS 40:8,5.0,unusable,PS 40:8,2,medium,True,False
+824.649155,PC O-40:4,5.0,unusable,PC O-40:4,2,medium,True,False
+500.311179,LPC O-16:2,5.0,unusable,LPC O-16:2,3,medium,True,False
+906.56191,PS 42:4,4.5,unusable,PS 42:4,3,medium,True,False
+695.461989,PA 34:2,4.5,unusable,PA 34:2,3,medium,True,False
+791.499203,PA 40:4,4.5,unusable,PA 40:4,3,medium,True,False
+767.498948,PA 38:2,4.5,unusable,PA 38:2,3,medium,True,False
+827.640217,SM 40:0;O2,4.5,unusable,SM 40:0;O2,11,high,True,True
+823.560941,PA 42:2,4.5,unusable,PA 42:2,1,low,True,False
+761.451415,PA 38:5,4.5,unusable,PA 38:5,3,medium,True,False
+880.546093,PS 40:3,4.5,unusable,PS 40:3,3,medium,True,False
+719.459951,PA 36:4,4.5,unusable,PA 36:4,3,medium,True,False
+786.577704,PC O-34:0,4.5,unusable,PC O-34:0,1,low,True,False
+795.529829,PA 40:2,4.5,unusable,PA 40:2,1,low,True,False
+715.467297,PA 34:0,4.5,unusable,PA 34:0,1,low,True,False
+840.623311,PE O-41:1,4.0,unusable,PE O-41:1,1,low,False,False
+822.531824,PS 39:6,4.0,unusable,PS 39:6,1,low,False,False
+843.635018,SM 40:0;O3_db,4.0,unusable,SM 40:0;O3,1,low,False,False
+586.347938,LPC 20:1,4.0,unusable,LPC 20:1,11,high,False,True
+873.750052,HexCer 44:1;O2,4.0,unusable,HexCer 44:1;O2,9,high,False,True
+472.246133,LPE 16:2,4.0,unusable,LPE 16:2,3,medium,False,False
+564.365948,LPC 20:1,4.0,unusable,LPC 20:1,11,high,False,True
+516.285003,LPC O-16:2,4.0,unusable,LPC O-16:2,3,medium,False,False
+894.679666,HexCer 44:1;O3_db,4.0,unusable,HexCer 44:1;O3,1,low,False,False
+785.576319,PE 38:4,4.0,unusable,PE 38:4,12,high,False,True
+817.514766,PA 42:5_db,2.5,unusable,PA 42:5,2,medium,False,False
+813.483101,PA 42:7_db,2.5,unusable,PA 42:7,2,medium,False,False
+852.643513,PE 42:1_db,2.5,unusable,PE 42:1,2,medium,False,False
+721.477703,PA 36:3_db,2.5,unusable,PA 36:3,2,medium,False,False
+728.471124,LPI 26:1_db,2.0,unusable,LPI 26:1,2,medium,False,False
+820.489621,HexCer 40:2;O2_db,2.0,unusable,HexCer 40:2;O2,12,high,False,True
+822.464166,PE 40:2_db,2.0,unusable,PE 40:2,12,high,False,True
+819.570831,HexCer t40:0_db,2.0,unusable,HexCer t40:0,3,medium,False,False
+784.657094,PE 36:1_db,2.0,unusable,PE 36:1,12,high,False,True
+740.411243,PS 30:3 OH_db,2.0,unusable,PS 30:3,0,database only,False,False
+825.757776,SM d40:1 SM 40:1_db,2.0,unusable,SM 40:1,12,high,False,True
+739.523216,PA 37:1_db,2.0,unusable,PA 37:1,2,medium,False,False
+825.50867,SM t40:1_db,2.0,unusable,SM t40:1,2,medium,False,False
+787.449768,TG 46:7_db,2.0,unusable,TG 46:7,2,medium,False,False
+733.424927,LPI 26:1_db,2.0,unusable,LPI 26:1,2,medium,False,False
+868.664285,HexCer t42:0_db,2.0,unusable,HexCer t42:0,3,medium,False,False
+890.60775,PE 44:12 OH_db,2.0,unusable,PE 44:12,10,high,False,True
+814.653093,PE O-40:7_db,2.0,unusable,PE O-40:7,12,high,False,True
+673.347326,PA 34:2_db,2.0,unusable,PA 34:2,3,medium,False,False
+723.473151,PA O-36:3_db,2.0,unusable,PA O-36:3,2,medium,False,False
+795.710608,SM 38:2_db,2.0,unusable,SM 38:2,11,high,False,True
+796.448337,PE 40:4_db,2.0,unusable,PE 40:4,12,high,False,True
+796.666335,HexCer 41:2_db,2.0,unusable,HexCer 41:2,2,medium,False,False
+673.347964,PA 34:2_db,2.0,unusable,PA 34:2,3,medium,False,False
+818.647712,HexCer 41:2_db,2.0,unusable,HexCer 41:2,2,medium,False,False
+662.342887,PE 30:1_db,2.0,unusable,PE 30:1,2,medium,False,False
+724.476298,HexCer t32:2_db,2.0,unusable,HexCer t32:2,2,medium,False,False
+723.433697,PC 30:0_db,2.0,unusable,PC 30:0,12,high,False,True
+793.454593,PE P-40:6_db,2.0,unusable,PE P-40:6,12,high,False,True
+889.604117,PC 42:1_db,2.0,unusable,PC 42:1,4,medium,False,False
+817.554924,HexCer 40:1; O3_db_db,2.0,unusable,HexCer 40:1,12,high,False,True
+793.534026,PA 42:6 OH_db,2.0,unusable,PA 42:6,0,database only,False,False
+816.512709,PC 38:1_db,2.0,unusable,PC 38:1,12,high,False,True
+794.582181,CerP d44:2_db,2.0,unusable,CerP d44:2,2,medium,False,False
+793.4761,PC 34:1 OH_db,2.0,unusable,PC 34:1,12,high,False,True
+836.606653,Hex2Cer 32:0_db,2.0,unusable,Hex2Cer 32:0,2,medium,False,False
+760.4526,PC 34.1_db,2.0,unusable,PC 34.1,12,high,False,True
+847.690159,PE 42:1_db,2.0,unusable,PE 42:1,2,medium,False,False
+850.635085,PS 38:4_db,2.0,unusable,PS 38:4,11,high,False,True
+768.421403,PA 40:5_db,2.0,unusable,PA 40:5,2,medium,False,False
+767.554332,PA 39:1_db,2.0,unusable,PA 39:1,2,medium,False,False
+767.439275,PE O-38:6_db,2.0,unusable,PE O-38:6,12,high,False,True
+766.580182,HexCer t36:1_db,2.0,unusable,HexCer t36:1,3,medium,False,False
+769.478109,PA 40:7_db,2.0,unusable,PA 40:7,2,medium,False,False
+769.533911,PA 38:1 OH_db,2.0,unusable,PA 38:1,3,medium,False,False
+770.481666,HexCer 38:2;O3_db_db,2.0,unusable,HexCer 38:2;O3,4,medium,False,False
+763.604138,PA 38:4_db,2.0,unusable,PA 38:4,3,medium,False,False
+830.647859,PE 40:6_db,2.0,unusable,PE 40:6,12,high,False,True
+854.62947,PC 38:1 OH_db,2.0,unusable,PC 38:1,12,high,False,True
+854.639302,PE O-42:1_db,2.0,unusable,PE O-42:1,2,medium,False,False
+830.627033,PC 38:2 OH_db,2.0,unusable,PC 38:2,12,high,False,True
+830.557087,LacCer d30:0_db,2.0,unusable,LacCer d30:0,2,medium,False,False
+745.621645,PE-Cer d40:1_db,2.0,unusable,PE-Cer d40:1,2,medium,False,False
+826.676642,HexCer t42:2_db,2.0,unusable,HexCer t42:2,4,medium,False,False
+829.361243,PGP 34:1_db,2.0,unusable,PGP 34:1,2,medium,False,False
+833.629776,PG 40:1_db,2.0,unusable,PG 40:1,2,medium,False,False
+833.50543,PE 40:2 OH_db,2.0,unusable,PE 40:2,12,high,False,True
+776.592769,CerP d44:3_db,2.0,unusable,CerP d44:3,2,medium,False,False
+753.483454,PA O-40:8_db,2.0,unusable,PA O-40:8,2,medium,False,False
+832.643012,PC 38:1 OH_db,2.0,unusable,PC 38:1,12,high,False,True
+852.605485,PC 38:2 OH_db,2.0,unusable,PC 38:2,12,high,False,True
+831.651126,PG 36:1 OH_db,2.0,unusable,PG 36:1,10,high,False,True
+831.630815,PA 42:6 OH_db,2.0,unusable,PA 42:6,0,database only,False,False
+831.630497,PA 42:6 OH_db,2.0,unusable,PA 42:6,0,database only,False,False
+804.611362,PC 36:1 OH_db,2.0,unusable,PC 36:1,12,high,False,True
+799.407667,PE O-41:11_db,2.0,unusable,PE O-41:11,2,medium,False,False
+690.374284,PA 34:2_db,2.0,unusable,PA 34:2,3,medium,False,False
+687.418892,HexCer d32:2_db,2.0,unusable,HexCer d32:2,2,medium,False,False
+810.585948,PG 36:1 OH_db,2.0,unusable,PG 36:1,10,high,False,True
+706.454884,SM 33:1_db,2.0,unusable,SM 33:1,10,high,False,True
+810.576446,PC O- 36:2_db,2.0,unusable,O- 36:2,0,not covered,False,False
+807.433608,PE 40:7_db,2.0,unusable,PE 40:7,12,high,False,True
+692.389928,PA 34:1_db,2.0,unusable,PA 34:1,3,medium,False,False
+797.726263,SM d38:1 SM 38:1_db,2.0,unusable,SM 38:1,12,high,False,True
+685.384052,PA O-36:3_db,2.0,unusable,PA O-36:3,2,medium,False,False
+808.574955,LacCer d30:0_db,2.0,unusable,LacCer d30:0,2,medium,False,False
+702.411573,PA O-36:3_db,2.0,unusable,PA O-36:3,2,medium,False,False
+803.481553,PG 34:1 OH_db,2.0,unusable,PG 34:1,9,high,False,True
+800.539162,PS 35:0_db,1.5,unusable,PS 35:0,8,high,False,True
+487.279553,LPA 20:1_db,1.5,unusable,LPA 20:1,0,database only,False,False
+415.148176,ST 21:4;O6_db,1.5,unusable,ST 21:4;O6,0,not covered,False,False
+670.384376,PE 28:2_db,1.5,unusable,PE 28:2,0,database only,False,False
+503.20134,ST 19:2;O2;GlcA_db,1.5,unusable,ST 19:2;O2,0,not covered,False,False
+695.44117,PA O-34:3_db,1.5,unusable,PA O-34:3,0,database only,False,False
+797.509607,PA 42:7_db,1.5,unusable,PA 42:7,2,medium,False,False
+521.212099,ST 19:1;O3;GlcA_db_db,1.5,unusable,ST 19:1;O3,0,not covered,False,False
+732.421286,PS 29:0_db,1.5,unusable,PS 29:0,0,database only,False,False
+473.302838,ST 27:1;O4_db,1.5,unusable,ST 27:1;O4,0,not covered,False,False
+936.678095,PC 44:2_db,1.0,unusable,PC 44:2,2,medium,False,False
+457.328954,ST 27:1;O4_db,1.0,unusable,ST 27:1;O4,0,not covered,False,False
+852.140811,CoA 4:1;O_db,1.0,unusable,CoA 4:1;O,0,not covered,False,False
+804.475906,PS 36:5_db,1.0,unusable,PS 36:5,2,medium,False,False
+869.755143,TG 51:1_db,1.0,unusable,TG 51:1,0,database only,False,False
+823.526543,PA 44:8_db,1.0,unusable,PA 44:8,0,database only,False,False
+782.440322,PS 33:3_db,1.0,unusable,PS 33:3,0,database only,False,False
+682.441685,PE 30:2_db,1.0,unusable,PE 30:2,0,database only,False,False
+763.433316,PA 40:10_db,1.0,unusable,PA 40:10,0,database only,False,False
+576.30618,LPE 24:6_db,1.0,unusable,LPE 24:6,0,database only,False,False
+701.4517,PA 33:0_db,1.0,unusable,PA 33:0,0,database only,False,False
+681.445533,PA 33:2_db,1.0,unusable,PA 33:2,0,database only,False,False
+681.388993,PA 32:3_db,1.0,unusable,PA 32:3,0,database only,False,False
+503.253464,LPA 20:1_db,1.0,unusable,LPA 20:1,0,database only,False,False
+514.230704,LPE 18:3_db,1.0,unusable,LPE 18:3,2,medium,False,False
+648.459805,PE 29:1_db,1.0,unusable,PE 29:1,0,database only,False,False
+695.404756,PA 33:3_db,1.0,unusable,PA 33:3,0,database only,False,False
+725.451879,PA 35:2_db,1.0,unusable,PA 35:2,0,database only,False,False
+789.46602,PG 36:6_db,1.0,unusable,PG 36:6,0,database only,False,False
+655.373511,PA 30:2_db,1.0,unusable,PA 30:2,0,database only,False,False
+694.465399,PS 29:0_db,1.0,unusable,PS 29:0,0,database only,False,False
+656.426068,PE 28:1_db,1.0,unusable,PE 28:1,0,database only,False,False
+497.204288,LPA 20:4_db,1.0,unusable,LPA 20:4,0,database only,False,False
+497.206593,LPA 20:4_db,1.0,unusable,LPA 20:4,0,database only,False,False
+473.323976,ST 27:1;O5_db,1.0,unusable,ST 27:1;O5,0,not covered,False,False
+629.357877,PA 28:1_db,1.0,unusable,PA 28:1,0,database only,False,False
+835.465367,PA 44:10_db,1.0,unusable,PA 44:10,0,database only,False,False
+851.592627,PA 44:2_db,1.0,unusable,PA 44:2,0,database only,False,False
+808.486469,PE 40:9_db,1.0,unusable,PE 40:9,2,medium,False,False
+848.522195,PC 40:10_db,1.0,unusable,PC 40:10,0,database only,False,False
+489.243362,ST 19:1;O2;GlcA_db,1.0,unusable,ST 19:1;O2,0,not covered,False,False
+545.212069,ST 21:3;O2;GlcA_db,1.0,unusable,ST 21:3;O2,0,not covered,False,False
+441.333995,ST 27:1;O2_db,1.0,unusable,ST 27:1;O2,0,not covered,False,False
+441.237725,MG 22:6_db,1.0,unusable,MG 22:6,0,not covered,False,False
+683.404775,PA 32:2_db,1.0,unusable,PA 32:2,0,database only,False,False
+741.465448,PG 32:2_db,1.0,unusable,PG 32:2,0,database only,False,False
+757.418757,PA 38:7_db,1.0,unusable,PA 38:7,0,database only,False,False
+699.436088,PA 33:1_db,1.0,unusable,PA 33:1,0,database only,False,False
+781.418474,PA 40:9_db,1.0,unusable,PA 40:9,0,database only,False,False
+505.217123,ST 19:1;O2;GlcA_db,1.0,unusable,ST 19:1;O2,0,not covered,False,False
+892.65832,PC O-42:3_db,1.0,unusable,PC O-42:3,0,database only,False,False
+796.491137,PC 36:8_db,1.0,unusable,PC 36:8,0,database only,False,False
+795.493608,PA 42:8_db,1.0,unusable,PA 42:8,2,medium,False,False
+419.255684,FOH 23:4;O2_db,1.0,unusable,FOH 23:4;O2,0,not covered,False,False
+481.232623,LPA 20:4_db,1.0,unusable,LPA 20:4,0,database only,False,False
+686.415586,PE 29:1_db,1.0,unusable,PE 29:1,0,database only,False,False
+713.507387,PA 35:0_db,1.0,unusable,PA 35:0,0,database only,False,False
+712.431195,PC 28:2_db,1.0,unusable,PC 28:2,0,database only,False,False
+634.444188,PE 28:1_db,1.0,unusable,PE 28:1,0,database only,False,False
+839.499258,PA 44:8_db,1.0,unusable,PA 44:8,0,database only,False,False
+421.158961,FA 20:5;O5_db,1.0,unusable,FA 20:5;O5,0,not covered,False,False
+842.440713,PS 38:8_db,1.0,unusable,PS 38:8,0,database only,False,False
+842.440323,PS 38:8_db,1.0,unusable,PS 38:8,0,database only,False,False
+688.43124,PE 29:0_db,1.0,unusable,PE 29:0,0,database only,False,False
+815.499304,PA 42:6_db,1.0,unusable,PA 42:6,0,database only,False,False
+670.441791,PE 29:1_db,1.0,unusable,PE 29:1,0,database only,False,False
+854.498071,PS 42:11_db,1.0,unusable,PS 42:11,0,database only,False,False
+780.424456,PS 33:4_db,1.0,unusable,PS 33:4,0,database only,False,False
+813.4144,SHexCer 34:1;O2_db_db,0.0,unusable,SHexCer 34:1;O2,0,database only,False,False
+884.601311,PI-Cer d40:2_db_db,0.0,unusable,PI-Cer d40:2_db,0,not covered,False,False
+794.518087,PI-Cer t34:2_db_db,0.0,unusable,PI-Cer t34:2_db,0,not covered,False,False
+925.539587,SHexCer 42:1;O2_db_db,0.0,unusable,SHexCer 42:1;O2,0,database only,False,False
+834.481012,SHexCer 34:1;O3_db_db_db,0.0,unusable,SHexCer 34:1;O3,2,medium,False,False
+755.481817,PI-Cer t30:2_db_db,0.0,unusable,PI-Cer t30:2_db,0,not covered,False,False
+764.469859,PI-Cer t30:0_db_db,0.0,unusable,PI-Cer t30:0_db,0,not covered,False,False
+783.513031,PI-Cer t32:2_db_db,0.0,unusable,PI-Cer t32:2_db,0,not covered,False,False
+778.565427,PI-Cer t30:1_db_db,0.0,unusable,PI-Cer t30:1_db,0,not covered,False,False
+778.559325,PI-Cer t30:1_db_db,0.0,unusable,PI-Cer t30:1_db,0,not covered,False,False
+908.51396,SHexCer 42:1;O3_db_db_db,0.0,unusable,SHexCer 42:1;O3,2,medium,False,False
+846.54127,PC 38:5,17.5,,PC 38:5,12,high,True,True
+770.565568,PE 36:0,17.5,,PE 36:0,11,high,True,True
+534.295716,LPC 16:0,14.5,,LPC 16:0,12,high,True,True
+806.647903,HexCer 40:1;O2,14.5,,HexCer 40:1;O2,12,high,True,True
+776.616349,PC 35:0,14.5,,PC 35:0,11,high,True,True
+784.525292,PE 36:1,14.5,,PE 36:1,12,high,True,True
+808.665916,HexCer 40:0;O2,14.0,,HexCer 40:0;O2,12,high,True,True
+782.650382,HexCer 40:2;O2,14.0,,HexCer 40:2;O2,12,high,True,True
+856.546598,PS 38:1,11.5,,PS 38:1,11,high,True,True
+837.624206,SM 41:2;O2,8.5,,SM 41:2;O2,8,high,True,True
+820.662439,HexCer 41:1;O2,8.0,,HexCer 41:1;O2,8,high,True,True
+822.642878,HexCer 40:1;O3_db,7.0,,HexCer 40:1;O3,4,medium,True,False
+896.481529,PS 42:9,4.5,,PS 42:9,1,low,True,False
+875.557866,PS 42:9,4.0,,PS 42:9,1,low,False,False
+475.222207,LPA 18:1,4.0,,LPA 18:1,1,low,False,False
+516.285576,LPC O-16:2,4.0,,LPC O-16:2,3,medium,False,False
+773.509366,PA 40:5_db,2.0,,PA 40:5,2,medium,False,False
+853.635943,Hex2Cer 32:0_db,2.0,,Hex2Cer 32:0,2,medium,False,False
+810.586304,PG 36:1 OH_db,2.0,,PG 36:1,10,high,False,True
+829.495804,PGP 34:1_db,1.0,,PGP 34:1,2,medium,False,False
+714.455086,PI-Cer t28:0_db_db,0.0,,PI-Cer t28:0_db,0,not covered,False,False
+762.454854,PI-Cer t30:1_db_db,0.0,,PI-Cer t30:1_db,0,not covered,False,False
+768.502393,PI-Cer t32:1_db_db,0.0,,PI-Cer t32:1_db,0,not covered,False,False
+766.486571,PI-Cer t32:2_db_db,0.0,,PI-Cer t32:2_db,0,not covered,False,False
+742.486383,PI-Cer t30:0_db_db,0.0,,PI-Cer t30:0_db,0,not covered,False,False

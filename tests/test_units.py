@@ -367,3 +367,81 @@ def test_gradient_correction_and_i2():
     assert np.isfinite(r["I2_sex"]) or np.isnan(r["I2_sex"])
     g = [np.array([0.5, 0.55, 0.45]), np.array([0.0, 0.05, -0.05])]
     assert st.i_squared(g) > 0.9 and st.i_squared([g[0], g[0] + 0.001]) < 0.1
+
+
+# ---- brain evidence (Lipid Brain Atlas reference) ------------------------------------------
+@pytest.mark.parametrize("name,expected", [
+    ("Cer d18:1/24:1", "Cer 42:2;O2"),
+    ("Hex1Cer d18:1/24:1", "HexCer 42:2;O2"),
+    ("HexCer(t42:2)", "HexCer 42:2;O3"),
+    ("SHexCer 36:1;3", "SHexCer 36:1;O3"),
+    ("SM 34:1", "SM 34:1;O2"),
+    ("SM t38:5", "SM 38:5;O3"),
+    ("PE 18:1_22:6", "PE 40:7"),
+    ("PE(O-16:1/20:4) &/or PE(P-16:0/20:4)", "PE O-36:5"),
+    ("PE(P-16:0/20:4)", "PE O-36:5"),
+    ("PC O- 36:2", "PC O-36:2"),
+    ("PC 34.1", "PC 34:1"),
+    ("LacCer(d30:0)", "Hex2Cer 30:0;O2"),
+    ("LBPA(34:1)", "BMP 34:1"),
+    ("CL 72:8_20:4", "CL 72:8"),
+    ("PS(30:3(OH))", None),
+    ("PC 38:6;O", None),
+    ("Taurine", None),
+])
+def test_canonical_names(name, expected):
+    from cln3msi import evidence
+    assert evidence.canonical(name) == expected
+
+
+def test_evidence_scoring_tiers_and_molar_fraction():
+    from cln3msi import evidence
+    R = evidence.Reference(
+        species={"msms": {"HexCer 42:2;O2", "PC 34:1", "PE 36:1"}, "lcms": {"SHexCer 42:2;O2", "PG 36:1"},
+                 "fitzner": {"HexCer 42:2;O2"}, "vandenbosch": set()},
+        covered={"HexCer", "PC", "PE", "SHexCer", "PG"},
+        quant={"PC 34:1": 9.0, "PE 36:1": 1.0, "PC 36:4": 0.5}, quant_classes={"PC", "PE"})
+    assert R.score("HexCer 42:2;O2")["evidence_score"] == 9
+    assert R.score("HexCer 42:2;O2")["confidence_tier"] == "high"
+    assert R.score("SHexCer 42:2;O2")["confidence_tier"] == "medium"
+    assert R.score("BMP/PG 36:1")["evidence_score"] == 2              # looked up as PG 36:1 too
+    assert R.score("PC 38:9")["confidence_tier"] == "database only"
+    assert R.score("GM1 36:1;O2")["confidence_tier"] == "not covered"
+    assert R.score("Herbacetin")["confidence_tier"] == "not covered"
+    assert R.resolve(["PE 36:1", "PC 34:1"]) == "PC 34:1"             # 9 / 10 = 90% > 80%
+    assert R.resolve(["PC 34:1", "PE 36:1"], fraction=0.95) is None
+    assert R.resolve(["PC 34:1", "PC 99:9"]) == "PC 34:1"             # measured class, not detected = 0
+    assert R.resolve(["PC 34:1", "SHexCer 42:2;O2"]) is None          # SHexCer not quantified
+
+
+def test_reference_folder_loads_and_validates():
+    from cln3msi import evidence
+    R = evidence.load(REPO / "reference" / "lamanno2026")
+    assert R is not None and "HexCer 42:2;O2" in R.species["msms"]
+    V = pd.read_csv(REPO / "reference" / "lamanno2026" / "validation.csv")
+    assert (V["their_high"] == V["our_high"]).mean() > 0.8
+
+
+def test_adduct_choice_keeps_one_correlated_ion():
+    from cln3msi import featureqc
+    rng = np.random.default_rng(1)
+    base = rng.gamma(2.0, 1.0, 3000) * (rng.random(3000) > 0.1)
+    X = np.column_stack([base, base * 0.3 * (rng.random(3000) > 0.4), rng.gamma(2.0, 1.0, 3000), base * 2])
+    var = pd.DataFrame({"annotation": ["PC 34:1", "PC 34:1", "PC 34:1", "PE 38:4"],
+                        "is_isotope": [False] * 4}, index=["a", "b", "c", "d"])
+    A = featureqc.adduct_choice(var, X, np.arange(4))
+    assert A.loc["a", "adduct_status"] == "chosen"            # fewest zero pixels
+    assert A.loc["b", "adduct_status"] == "redundant" and not A.loc["b", "adduct_keep"]
+    assert A.loc["c", "adduct_status"] == "kept, not correlated" and A.loc["c", "adduct_keep"]
+    assert A.loc["d", "adduct_status"] == "single"
+
+
+def test_reaction_ratios_pair_same_backbone_only():
+    from cln3msi import classes
+    ann = pd.DataFrame({"peak_id": ["p1", "p2", "p3", "p4"],
+                        "annotation": ["HexCer 42:2;O2", "Cer 42:2;O2", "HexCer 40:1;O2", "Cer 36:1;O2"]})
+    ML = pd.DataFrame([{"unit": "whole_section", "animal_id": a, "peak": p, "mean_norm_intensity": v}
+                       for a in ("x", "y") for p, v in zip(["p1", "p2", "p3", "p4"], [4.0, 2.0, 1.0, 1.0])])
+    vals, pairs = classes.reaction_ratios(ML, ann, [{"product": "HexCer", "precursor": "Cer"}], ["whole_section"])
+    assert list(pairs["feature"]) == ["HexCer/Cer 42:2;O2"]
+    assert np.allclose(vals["value"], 2.0)

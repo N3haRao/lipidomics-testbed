@@ -12,6 +12,12 @@ ppm tolerance, in order of preference:
   3. 02's suggestion
   4. annotation.ppm_fallback
 
+Brain evidence (annotation.brain_evidence, see src/cln3msi/evidence.py): every name is
+scored against the Lipid Brain Atlas tables in reference/lamanno2026 (LC-MS/MS 8 points,
+LC-MS 2, each published dataset 1, database only 0), giving evidence_score and
+confidence_tier. Ambiguous peaks whose candidates are all measured by their quantitative
+whole-brain LC-MS/MS take the candidate with > 80% of the summed abundance (resolved_by).
+
 Writes processed/<mode>/annotations.csv (one row per peak in matrix_raw.h5ad),
 results/05_annotate/<mode>/hypothesis_peaks.csv, figures, summary.
 """
@@ -27,7 +33,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from cln3msi import annotate, cli, refdb  # noqa: E402
+from cln3msi import annotate, cli, evidence, refdb  # noqa: E402
 from cln3msi.report import Summary, plt  # noqa: E402
 
 
@@ -62,6 +68,17 @@ def main():
             log.warning("second pass on, but neither LIPID MAPS nor SwissLipids is cached: skipped")
             ext_lib = None
 
+    BE = A.get("brain_evidence") or {}
+    ref = None
+    if BE.get("enabled", False):
+        ref = evidence.load(annotate.REF / str(BE.get("reference_dir", "lamanno2026")))
+        if ref is None:
+            log.warning("annotation.brain_evidence is on but the reference folder is missing: no evidence columns")
+    resolver = None
+    if ref is not None and BE.get("resolve_ambiguous", True):
+        frac = float(BE.get("molar_fraction", 0.8))
+        resolver = lambda names: ref.resolve(names, frac)  # noqa: E731
+
     for mode in modes:
         S = Summary(ctx, "05_annotate", mode, f"Annotation, {mode}")
         p = ctx.out("processed", mode, "matrix_raw.h5ad", mkdir=False)
@@ -84,7 +101,7 @@ def main():
 
         peaks = var[["mz"]].copy()
         ann = annotate.match_peaks(peaks, ions, tol, bool(A.get("lipidmaps_filter", True)) and lmsd is not None,
-                                   int(A.get("max_candidates_reported", 5)))
+                                   int(A.get("max_candidates_reported", 5)), resolver=resolver)
         n_first = int((ann["annotation"] != "").sum())
         n_second = 0
         if ext_lib is not None:
@@ -94,7 +111,7 @@ def main():
             if len(todo):
                 ext_ions = annotate.ion_table(ext_lib, d["polarity"], A["adducts"])
                 ann2 = annotate.match_peaks(peaks.loc[todo], ext_ions, tol, False,
-                                            int(A.get("max_candidates_reported", 5)))
+                                            int(A.get("max_candidates_reported", 5)), resolver=resolver)
                 hit = ann2.index[ann2["annotation"] != ""]
                 ann.loc[hit, ann2.columns] = ann2.loc[hit].to_numpy()
                 n_second = len(hit)
@@ -104,6 +121,12 @@ def main():
         iso.index = var.index
         out = pd.concat([var[["mz", "median_height", "n_sections"]], ann, iso], axis=1)
         out["hypothesis"] = [annotate.hypothesis_direction(t, ctx.cfg.get("hypotheses", {})) for t in out["tag"]]
+        if ref is not None:
+            ev = pd.DataFrame([ref.score(n, mz, float(BE.get("maldi_match_ppm", 5)), float(BE.get("maldi_min_score", 4)),
+                                         d["polarity"]) if n else
+                               {"evidence_score": np.nan, "confidence_tier": "", "evidence_sources": "", "evidence_note": ""}
+                               for n, mz in zip(out["annotation"], out["mz"])], index=out.index)
+            out = pd.concat([out, ev], axis=1)
         # Names for the plots. A peak that looks like an isotope keeps its candidate list, but
         # it's labelled after its monoisotopic peak (we follow M+2 -> M+1 -> M back down).
         base = np.where(out["annotation"] != "", out["annotation"] + " " + out["adduct"],
@@ -154,12 +177,31 @@ def main():
               "look like M+1 isotopes": int(out["is_isotope"].sum()),
               "type II overlap risk (>10% of signal)": int(out["typeII_flag"].sum()),
               "hypothesis-class peaks": len(hyp)})
+        if ref is not None:
+            S.h("Brain evidence (Lipid Brain Atlas LC-MS/MS and published data)")
+            S.p("Each name is scored the way the Lipid Brain Atlas paper scored theirs: seen by LC-MS/MS in "
+                "mouse brain 8 points, by LC-MS 2, in each published brain dataset 1, database only 0 "
+                "(their METASPACE term is left out). high = score > 4. 'not covered' = no reference table "
+                "covers that lipid class (gangliosides, LSM, small metabolites), so there is no verdict. "
+                "The evidence says the lipid exists in mouse brain, not that our peak is that lipid.")
+            nm = out[(out["annotation"] != "") & ~out["is_isotope"]]
+            tiers = ["high", "medium", "low", "database only", "not covered"]
+            T = pd.crosstab(nm["annotation_source"].replace("", "unknown"), nm["confidence_tier"]).reindex(columns=tiers, fill_value=0)
+            T["total"] = T.sum(axis=1)
+            S.table(T.reset_index())
+            if "resolved_by" in out:
+                rv = out[out["resolved_by"] == "molar_fraction"]
+                S.p(f"Ambiguous peaks decided by whole-brain abundance (> {float(BE.get('molar_fraction', 0.8)):g} "
+                    f"of the candidates' summed nmol%): {int(out['resolved_by'].astype(str).str.startswith('molar').sum())}, "
+                    f"of which {len(rv)} changed the name the ranking had picked.")
+                if len(rv):
+                    S.table(rv[["mz", "annotation", "adduct", "candidates"]].round(4), max_rows=40)
         S.h("Hypothesis classes found")
-        S.table(hyp[["mz", "label", "tag", "hypothesis", "ppm_error", "n_candidates", "typeII_flag", "candidates"]]
-                .round(4), max_rows=60)
+        S.table(hyp[[c for c in ["mz", "label", "tag", "hypothesis", "ppm_error", "n_candidates", "typeII_flag",
+                                 "confidence_tier", "candidates"] if c in hyp]].round(4), max_rows=60)
         S.h("All peaks")
-        S.table(out[["mz", "label", "lipid_class", "ppm_error", "is_isotope", "typeII_fraction", "candidates"]]
-                .round(4), max_rows=80)
+        S.table(out[[c for c in ["mz", "label", "lipid_class", "ppm_error", "is_isotope", "typeII_fraction",
+                                 "confidence_tier", "candidates"] if c in out]].round(4), max_rows=80)
         S.p("\n`*` = ambiguous: more than one composition fits; see `candidates`. BMP and PG have identical "
             "formulas, so they're always reported together as BMP/PG. GalCer and GlcCer are HexCer.")
         log.info(f"summary: {S.write()}")

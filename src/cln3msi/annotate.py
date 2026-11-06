@@ -191,8 +191,11 @@ def ion_table(lib: pd.DataFrame, polarity: str, adducts_cfg: dict) -> pd.DataFra
 
 
 def match_peaks(peaks: pd.DataFrame, ions: pd.DataFrame, tol_ppm: float, use_lmsd_filter: bool,
-                max_report: int) -> pd.DataFrame:
-    """For each peak (column 'mz'), list candidates within tol_ppm and pick a best one."""
+                max_report: int, resolver=None) -> pd.DataFrame:
+    """For each peak (column 'mz'), list candidates within tol_ppm and pick a best one.
+
+    resolver: optional function(list of candidate compositions) -> the composition to report,
+    or None to keep the ranking's choice (used for the brain-abundance rule, evidence.py)."""
     ions_mz = ions["ion_mz"].to_numpy()
     out = []
     for mz in peaks["mz"].to_numpy():
@@ -212,6 +215,15 @@ def match_peaks(peaks: pd.DataFrame, ions: pd.DataFrame, tol_ppm: float, use_lms
         cand = cand.sort_values("rank_key")
         if len(cand):
             best = cand.iloc[0].copy()
+            resolved = ""
+            pool = cand
+            if (cand["adduct_kind"] == "default").any() and (cand["adduct_kind"] != "default").any():
+                pool = cand[cand["adduct_kind"] == "default"]       # same ionization regime only
+            if resolver is not None and pool["name"].nunique() > 1:
+                pick = resolver(list(pool["name"].unique()))
+                if pick is not None:
+                    resolved = "molar_fraction" if pick != best["name"] else "molar_fraction (same as ranking)"
+                    best = cand[cand["name"] == pick].iloc[0].copy()
             if not (isinstance(best["tag"], str) and best["tag"]):
                 # e.g. an HMDB entry won the ranking but a curated entry with the SAME formula has a tag
                 same = cand[(cand["formula"] == best["formula"]) & cand["tag"].apply(lambda t: isinstance(t, str) and t != "")]
@@ -227,12 +239,13 @@ def match_peaks(peaks: pd.DataFrame, ions: pd.DataFrame, tol_ppm: float, use_lms
                 "ambiguous": len(comps) > 1, "candidate_tags": ";".join(tags),
                 "candidates": " | ".join(names[:max_report]) + (" | ..." if len(names) > max_report else ""),
                 "total_c": best["total_c"], "total_db": best["total_db"],
-                "annotation_source": best.get("source", ""),
+                "annotation_source": best.get("source", ""), "resolved_by": resolved,
             })
         else:
             out.append({"annotation": "", "adduct": "", "formula": "", "lipid_class": "", "tag": "",
                         "ppm_error": np.nan, "n_candidates": 0, "ambiguous": False, "candidate_tags": "",
-                        "candidates": "", "total_c": None, "total_db": None, "annotation_source": ""})
+                        "candidates": "", "total_c": None, "total_db": None, "annotation_source": "",
+                        "resolved_by": ""})
     return pd.DataFrame(out, index=peaks.index)
 
 

@@ -98,6 +98,36 @@ def main():
     check("04 matrix filter ran (off/on-tissue ratio per peak)", "off_on_ratio" in pk and pk["off_on_ratio"].notna().any(),
           f"{int(pk['matrix_like'].sum()) if 'matrix_like' in pk else 0} removed (filter off by default)")
 
+    # brain evidence, feature QC, effect flag, reaction ratios
+    ann = pd.read_csv(ctx.output_root / "processed" / "lip_neg" / "annotations.csv")
+    r = ann[ann["annotation"] == "HexCer 42:2;O2"]
+    check("05 brain evidence: HexCer 42:2;O2 is high tier (LC-MS/MS in mouse brain)",
+          "confidence_tier" in ann and len(r) and (r["confidence_tier"] == "high").any(),
+          ", ".join(sorted(set(ann.get("confidence_tier", pd.Series(dtype=str)).fillna("").astype(str)) - {""})))
+    from cln3msi import evidence
+    from cln3msi.annotate import REF
+    tier = evidence.load(REF / "lamanno2026").score("GM1 36:1;O2")["confidence_tier"]
+    check("05 gangliosides are 'not covered' by the reference", tier == "not covered", tier)
+    fq = R / "09_differential" / "lip_neg" / "feature_qc.csv"
+    ok = fq.exists()
+    if ok:
+        F = pd.read_csv(fq)
+        ok = F["qc_pass"].sum() > 0 and F["qc_pass"].sum() < F["monoisotopic"].sum()
+    check("09 feature QC written, some peaks pass and some don't", ok,
+          f"{int(F['qc_pass'].sum())} of {int(F['monoisotopic'].sum())} pass" if fq.exists() else "missing")
+    d = pd.read_csv(R / "09_differential" / "lip_neg" / "differential.csv")
+    check("09 q_all only inside the untargeted family, large_effect flagged",
+          "large_effect" in d and d.loc[~d["in_untargeted_family"].astype(bool), "q_all"].isna().all())
+    rt = R / "09_differential" / "lip_neg" / "reaction_tests.csv"
+    ok = rt.exists()
+    if ok:
+        T = pd.read_csv(rt).set_index(["unit", "feature"])
+        # planted: Cer up everywhere, HexCer up in white matter, sulfatide down in white matter
+        k = ("white_matter", "SHexCer/HexCer 42:2;O2")
+        ok = k in T.index and T.loc[k, "log2fc"] < -0.2
+    check("09 reaction ratio SHexCer/HexCer 42:2;O2 down in white matter (planted)", ok,
+          f"log2FC {T.loc[k, 'log2fc']:+.2f}" if ok else "missing")
+
     # provenance: every phase recorded, all with the same code and config
     from cln3msi import provenance
     recs = [r for r in provenance.read_all(ctx) if r.get("phase") != "10_report"]

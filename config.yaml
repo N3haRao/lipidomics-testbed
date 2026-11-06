@@ -151,11 +151,28 @@ annotation:
   second_pass: true
   metabolite_db: "hmdb"              # hmdb (cached in 00) or curated (reference/metabolites_curated.csv)
   max_candidates_reported: 5
+  # Evidence that a named lipid exists in mouse brain, from the Lipid Brain Atlas paper
+  # (Nature 2026, doi:10.1038/s41586-026-11050-0, CC BY 4.0), reference/lamanno2026/.
+  # Scored as in the paper: LC-MS/MS 8, LC-MS 2, each published dataset 1, database only 0
+  # (their METASPACE term left out). Gives evidence_score / confidence_tier (high = score > 4).
+  # resolve_ambiguous: for a peak with several candidate compositions, all in classes their
+  # quantitative whole-brain LC-MS/MS measures, report the one holding > molar_fraction of the
+  # candidates' summed abundance (resolved_by = molar_fraction). Otherwise leave it as ranked.
+  brain_evidence:
+    enabled: true
+    reference_dir: lamanno2026        # under reference/
+    resolve_ambiguous: true
+    molar_fraction: 0.8
+    maldi_match_ppm: 5                # their MALDI peaks (positive mode) count only within this
+    maldi_min_score: 4                # and only if they scored the name above this
 
 normalization:
   methods: [tic, rms, median]
   for_stats: "tic"                   # decided up front; statistics only ever use this layer
-  umaia: {enabled: false, num_steps: 2000}   # needs the optional uMAIA env
+  # Keep off. It needs its own environment, and as written it passes no covariate, so it would
+  # align every section's intensity distributions and remove the genotype difference along
+  # with the batch effects (each section is one animal here).
+  umaia: {enabled: false, num_steps: 2000}
   embedding_batch_correction: "none" # none | harmony. Only for plots, never for statistics
 
 registration:
@@ -190,7 +207,9 @@ registration:
 
 explore:
   mode: null                         # null means every mode in modes.run
-  morans_i: {k_neighbors: 6, n_perm: 199, min_I: 0.3, min_section_fraction: 0.5}   # smallest possible p = 1/(n_perm+1)
+  # min_I 0.4 as in the Lipid Brain Atlas feature QC (was 0.3); a peak counts as spatially
+  # structured if I >= min_I in at least min_section_fraction of the sections (6 of 12).
+  morans_i: {k_neighbors: 6, n_perm: 199, min_I: 0.4, min_section_fraction: 0.5}   # smallest possible p = 1/(n_perm+1)
   nmf: {k: "auto", k_grid: [4, 6, 8, 10, 12], pixel_subsample: 50000, max_iter: 400}
   territories: {resolution: 0.5, k_neighbors: 15, pixel_subsample: 30000}   # Leiden; KMeans if leidenalg is missing
   # Divide each lipid by its per-slide median before NMF/territories, so the clustering follows
@@ -210,11 +229,27 @@ differential:
   run_mixedlm: false
   fdr_alpha: 0.05
   run_territories: true
-  # Which peaks enter the untargeted family (decided before looking at results):
-  #   annotated_or_structured = annotated (not isotopes) or spatially structured in 08 (Moran)
-  #   all                     = every non-isotope peak (~1500 of them, mostly noise, so the FDR
-  #                             correction gets very strict)
-  untargeted_peaks: annotated_or_structured
+  # Which peaks enter the untargeted family (q_all):
+  #   lamanno                 = the Lipid Brain Atlas feature QC: annotated (any database) AND
+  #                             spatially structured in 08 (Moran's I) AND brighter on tissue than
+  #                             on bare glass (off/on ratio < feature_qc.max_off_on_ratio) AND one
+  #                             adduct per lipid (feature_qc). Peaks failing it are still tested
+  #                             and reported, but get no q_all. Hypothesis-class peaks always keep
+  #                             their own family (q_targeted), whatever the QC says.
+  #   annotated_or_structured = annotated (not isotopes) or spatially structured (the old default)
+  #   all                     = every non-isotope peak (strict FDR: mostly noise)
+  untargeted_peaks: lamanno
+  feature_qc:
+    max_off_on_ratio: 1.0             # their rule: more signal on tissue than on the matrix
+    # One adduct per lipid: when several ions carry the same name (e.g. [M+H]+, [M+Na]+, [M+K]+)
+    # and their pixel intensities correlate (Pearson r of log intensities >= min_adduct_r), keep
+    # the one with the fewest zero pixels, then the most signal. Ions that don't correlate are
+    # all kept and flagged: one of them is probably a different compound.
+    min_adduct_r: 0.5
+    max_pixels_for_r: 50000
+  # |log2FC| at or above this is flagged large_effect (a flag next to q, not a filter). The
+  # Lipid Brain Atlas used 0.2 for its log fold changes; 0.2 in log2 is about 15%.
+  large_effect_log2fc: 0.2
   # The lipid-only white/grey split (07 fallback) is unstable; use it only if no atlas
   # regions exist for this mode. "always" tests it anyway.
   lipid_wm_gm: fallback_only
@@ -324,6 +359,19 @@ class_tests:
       - ["GPI", "LPI"]
       - ["GPE", "Phosphoethanolamine"]
       - ["GPD sum", "N-acetylaspartate"]
+  # Precursor -> product ratios for sphingolipid steps that keep the ceramide backbone (same
+  # chains), one ratio per backbone we detect, e.g. HexCer 42:2;O2 / Cer 42:2;O2. In a KO vs
+  # Control comparison of log ratios the lipids' different ionization efficiencies cancel, so
+  # these index one enzyme step each. Lyso/diacyl phospholipid steps are left out on purpose:
+  # one sum composition maps to many lyso species, and MALDI in-source fragments of PC look
+  # like LPC. Exploratory; their own BH family per mode (reaction_tests.csv).
+  reactions:
+    regions: [whole_section, white_matter]
+    steps:
+      - {product: HexCer, precursor: Cer, enzyme: "Ugt8 (GalCer synthase) / Ugcg"}
+      - {product: SHexCer, precursor: HexCer, enzyme: "Gal3st1 (cerebroside sulfotransferase)"}
+      - {product: Hex2Cer, precursor: HexCer, enzyme: "B4galt5/6 (LacCer synthase)"}
+      - {product: SM, precursor: Cer, enzyme: "Sgms1/2 (SM synthase)"}
   # Primary endpoints: a short list named in advance from the hypotheses (myelin lipids in white
   # matter; storage lipids and BMP across the section; glycerophosphodiesters from the CLN3
   # literature). They get their own BH family (q_primary), the one with real power at n = 6.

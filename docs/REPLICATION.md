@@ -249,6 +249,9 @@ descendants are included), for example `striatum: ["STR"]`, and rerun from 07.
 | `could_be_position` | smaller than 2 × the position gradient, same sign (warning) |
 | `log2fc_Female`, `log2fc_Male`, `p_sex_difference_exploratory` | effect per sex and the exploratory sex × genotype test |
 | `ambiguous`, `typeII_flag`, `candidates` | annotation caveats |
+| `confidence_tier`, `evidence_score` | Lipid Brain Atlas evidence for the name (phase 05) |
+| `in_untargeted_family` | passes the feature QC, so it is in the `q_all` family |
+| `large_effect` | abs(log2FC) at or above `differential.large_effect_log2fc` (0.2) |
 
 ### `results/09_differential/<mode>/class_tests.csv` (one row per class or ratio and region)
 
@@ -258,6 +261,21 @@ difference). If a slide was flagged by the consistency check, extra columns
 `without_<slide>_*` and `flipped_<slide>_*` give the exploratory sensitivity analysis.
 `class_members.csv` lists the species in each class, and `class_values_per_animal.csv` the
 per-animal values that were tested.
+
+`n_species_high_evidence` counts members with Lipid Brain Atlas evidence above 4, and
+`log2fc_featureqc`, `p_featureqc`, `n_species_featureqc` repeat the test with feature-QC
+species only (a sensitivity check).
+
+### `results/09_differential/<mode>/reaction_tests.csv`
+
+Product / precursor ratio per ceramide backbone (`feature` such as `HexCer/Cer 42:2;O2`,
+with `product`, `precursor`, `enzyme`), the same test columns, and `q_bh` over this table.
+
+### `results/09_differential/<mode>/feature_qc.csv`
+
+One row per peak: `monoisotopic`, `annotated`, `spatially_structured`, `off_on_ratio`,
+`tissue_over_matrix`, `adduct_status` (single, chosen, redundant, kept not correlated),
+`adduct_r` and `qc_pass`.
 
 ### `results/09_differential/<mode>/pair_consistency.csv`
 

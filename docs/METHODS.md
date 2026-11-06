@@ -132,6 +132,31 @@ leave unnamed are matched against every LIPID MAPS structure and every SwissLipi
 These names are marked in `annotation_source`, are never tagged as hypothesis classes, and
 should be treated as leads.
 
+**Brain evidence (Lipid Brain Atlas).** Every name is also scored against the mouse-brain
+lipid tables published with the Lipid Brain Atlas ("The lipidomic architecture of the mouse
+brain", Nature 2026, doi:10.1038/s41586-026-11050-0, CC BY 4.0; stored in
+`reference/lamanno2026/`, built by `scripts/tools/build_lamanno_reference.py`). The score
+follows the paper: seen by LC-MS/MS in mouse brain 8 points (their tandem MS table or their
+quantitative whole-brain HILIC-MS/MS), by LC-MS 2 (their HILIC and reverse-phase lists), in
+each published brain dataset 1 (Fitzner et al. LC-MS; Vandenbosch et al. MALDI-MSI), in their
+own MALDI peaks (positive mode, within 5 ppm, their score > 4) 1, database only 0. Their
+METASPACE term is left out, because that FDR describes their data. `confidence_tier` is
+high (score > 4), medium (2 to 4), low (1), database only (0, but the class is covered by
+their tables), or not covered (no table covers the class: gangliosides, LSM, metabolites; no
+verdict either way). Applied to the paper's own MALDI peaks, this scoring makes the same call
+(score > 4 or not) as theirs for 721 of 824 single-name peaks; the rest differ where their
+METASPACE term or per-adduct counting tipped the balance. The evidence shows that a lipid
+exists in mouse brain, not that our peak is that lipid.
+
+**Ambiguous peaks.** When several compositions fit a peak, all in classes that the paper's
+quantitative whole-brain LC-MS/MS measures, the one holding more than 80% of the candidates'
+summed abundance (nmol%, mean of 8 mice) is reported, as in the paper (`resolved_by =
+molar_fraction`); a candidate of a measured class that was not detected counts as 0. Only
+candidates in the same ionization regime are compared: if a default adduct ([M−H]⁻) competes
+with a class-specific one ([M−CH3]⁻ of a choline lipid), only the default ones count, since
+abundance says nothing about how poorly PC ionizes in negative mode. Otherwise the ranking's
+choice stays and the peak keeps all its candidates.
+
 A peak matches a candidate if the ppm error of some (candidate, adduct) is within the
 tolerance from phase 03. Adducts follow ion chemistry:
 
@@ -188,7 +213,8 @@ This phase describes spatial structure. It does not test genotype.
 
 * **Moran's I** per peak and section, on a 6-nearest-neighbour graph of pixel positions,
   with a permutation p-value (199 permutations). A peak counts as spatially structured if
-  I ≥ 0.3 in at least half of the sections.
+  I ≥ 0.4 in at least half of the sections (0.4 is the Lipid Brain Atlas threshold; it was
+  0.3 before).
 * **Lipid programs.** Non-negative matrix factorization (NMF) of the structured peaks,
   trained on control pixels only, with the number of programs chosen at the elbow of the
   reconstruction-error curve. Before NMF, each peak is divided by its per-slide median so
@@ -281,13 +307,23 @@ corrected value is the q-value, and q < 0.05 (`fdr_alpha`) is called significant
 all set before looking at results:
 
 * **single peaks, targeted**: within each region, only the peaks with a hypothesis tag;
-* **single peaks, untargeted**: within each region, every tested peak. Tested peaks are those
-  that are annotated or spatially structured (`untargeted_peaks: annotated_or_structured`), so
-  that hundreds of unstructured noise peaks do not dilute the correction;
+* **single peaks, untargeted**: within each region, the peaks that pass the Lipid Brain
+  Atlas feature QC (`untargeted_peaks: lamanno`, `src/cln3msi/featureqc.py`): monoisotopic,
+  annotated in some database, spatially structured (Moran's I above), more signal on tissue
+  than on bare glass (off/on-tissue ratio < 1), and one adduct per lipid. For the last rule,
+  ions with the same name whose pixel intensities correlate (r ≥ 0.5) are one lipid; the
+  ion with the fewest zero pixels (then the most signal) is kept. Ions that do not correlate
+  are all kept and flagged, since one is probably a different compound. None of these rules
+  looks at genotype. Peaks that fail are still tested and reported, without a `q_all`, and
+  the matrix itself is not changed (normalization is unaffected). Per-peak flags are in
+  `feature_qc.csv`. Before this, the family was "annotated or structured";
 * **class-level and ratio tests**: one family per mode (Section 4.5);
 * **primary endpoints**: a short list of class-level outcomes named in advance
   (`class_tests.primary`), corrected only among themselves (`q_primary`). This is the family with
   real power at n = 6; everything else is exploratory.
+
+Every result also carries `large_effect` = |log2FC| ≥ 0.2 (about 15%), the effect-size
+threshold the Lipid Brain Atlas used. It is a flag next to the q-value, not a filter.
 
 ### 4.5 Class-level and ratio tests
 
@@ -303,6 +339,24 @@ ratio. The list of classes and ratios is in `config.yaml` (`class_tests`) and wa
 the genotype results were examined. Species with ambiguous class assignments, isotope peaks and
 species detected in fewer than `min_sections` = 10 sections are excluded; the members of every
 class are listed in `class_members.csv`.
+
+Two additions report on the same tests without changing them. `n_species_high_evidence`
+counts the members with Lipid Brain Atlas evidence above 4. The feature-QC sensitivity
+(`log2fc_featureqc`, `p_featureqc`, `n_species_featureqc`) repeats every class and ratio
+test using only species that pass the feature QC of Section 4.4; in positive mode this also
+stops one lipid being counted once per adduct. The class definitions and primary endpoints
+themselves stay as fixed in advance.
+
+**Precursor-to-product ratios** (`reaction_tests.csv`, exploratory, own BH family per mode).
+For sphingolipid steps that keep the ceramide backbone, the product / precursor ratio of the
+same backbone is tested per animal, for example HexCer 42:2;O2 / Cer 42:2;O2 (Ugt8, the
+galactosylceramide synthase of myelin), SHexCer / HexCer (Gal3st1, sulfatide synthesis),
+Hex2Cer / HexCer and SM / Cer. Two lipids ionize differently, but in a comparison of log
+ratios between genotypes that constant cancels, so each ratio indexes one enzyme step. Steps
+and regions (whole section, white matter) are set in `class_tests.reactions`; only backbones
+with both species among the usable species are tested. Lyso / diacyl glycerophospholipid
+steps are left out on purpose: one sum composition maps to many lyso species, and in MALDI
+the in-source loss of a chain from PC produces LPC-like ions.
 
 ### 4.6 Sex
 

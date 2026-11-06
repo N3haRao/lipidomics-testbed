@@ -1,0 +1,5799 @@
+mz,annotation,score,status
+820.606336,HexCer 40:2;O2,20.5,measured
+828.492369,PE 40:7,17.5,measured
+870.540956,PC 40:7,17.5,measured
+782.567078,PC 34:1 PC 36:4 PE 37:1 PE 39:4,17.5,measured
+822.622222,HexCer 40:1;O2,17.5,measured
+744.493893,PC 30:0,17.0,measured
+797.593647,SM 38:1;O2,14.5,measured
+834.540804,PE 40:4,14.5,measured
+802.478167,PE 38:6,14.5,measured
+568.279922,LPE 22:4,14.5,measured
+830.509578,PE 40:6,14.5,measured
+564.248635,LPE 22:6,14.5,measured
+882.634629,PC 40:1,14.5,measured
+853.655598,SM 42:1;O2,14.5,measured
+648.628816,Cer 42:2;O2,14.5,measured
+872.556604,PC 40:6,14.5,measured
+741.530795,SM 34:1;O2,14.5,measured
+769.562128,SM 36:1;O2,14.5,measured
+620.597541,Cer 40:2;O2,14.0,measured
+848.637557,HexCer 42:2;O2,14.0,measured
+850.653752,HexCer 42:1;O2,14.0,measured
+897.48511,PI 36:4,11.5,measured
+845.528672,PG 40:6,11.5,measured
+844.525236,PC 38:6,11.5,measured
+828.515096,PS 36:1,11.5,measured
+796.525363,PC 34:2,11.5,measured
+801.559766,PG 36:0,11.5,measured
+812.55653,PC 35:1 PC O-38:7 PE 38:1 PE O-41:7,11.0,measured
+910.66622,PC 42:1,8.5,measured
+852.491497,PE 42:9,8.5,measured
+866.648228,HexCer 42:1;O3_db,8.0,measured
+864.632521,HexCer 42:2;O3_db,8.0,measured
+797.528819,PG 36:2,8.0,measured
+836.637639,HexCer 41:1;O2,8.0,measured
+807.512778,PG 37:4,8.0,measured
+713.451739,PA 34:1,5.5,measured
+765.483172,PA 38:3,4.5,measured
+787.467499,PA 40:6,4.5,measured
+741.482989,PA 36:1,4.5,measured
+782.555146,HexCer 36:1:O2,4.0,measured
+824.460378,PE 40:9_db,2.5,measured
+811.467041,PA 42:8_db,2.5,measured
+873.559917,PG 42:6_db,2.0,measured
+815.539001,PG 36:1 OH HexCer 40:2;O2_db,2.0,measured
+794.687034,HexCer 37:2_db,2.0,measured
+784.561467,CerP t42:1_db,2.0,measured
+848.658077,HexCer t42:2_db,2.0,measured
+840.632891,HexCer t40:0_db,2.0,measured
+868.655085,PC O-40:1_db,1.5,measured
+737.45166,PA 36:3_db,1.5,measured
+711.49188,PA 35:1_db,1.5,measured
+785.451652,PA 40:7_db,1.5,measured
+867.651478,TG 54:12_db,1.0,measured
+790.486506,PI-Cer t32:1_db_db,0.0,measured
+759.512965,PI-Cer t30:0_db_db,0.0,measured
+838.616824,HexCer 40:1; O2 HexCer 43:6 PI-Cer d38:0_db_db,0.0,measured
+734.569413,PC 32:0,20.5,restored
+762.600715,PC 34:0,20.5,restored
+702.543149,PE O-34:2,20.5,restored
+496.339878,LPC 16:0,20.5,restored
+830.567086,PC 38:5,17.5,restored
+854.603416,PC 38:1,17.5,restored
+774.600517,PC 35:1 PE 38:1,17.5,restored
+794.569735,PC 37:5 PE 38:2 PE 40:5,17.5,restored
+748.584987,PE 36:0,17.5,restored
+746.569414,PE 36:1,17.5,restored
+800.460854,PE 38:7,17.5,restored
+762.482729,PE O-36:5,17.5,restored
+802.631909,PC 37:1 PE 40:1,17.5,restored
+758.605925,PE O-38:2,17.5,restored
+518.264437,LPE 18:1,17.5,restored
+756.590079,PE O-36:0 PE O-38:3,17.5,restored
+742.535332,PC 31:0 PE 34:0 PE 36:3,17.5,restored
+794.591018,HexCer 38:1;O2 PG 36:1,17.5,restored
+760.585008,PC 34:1,17.5,restored
+788.49891,PE O-38:6,17.5,restored
+818.590628,PS 38:1,17.5,restored
+732.553783,PC 32:1,17.5,restored
+876.587845,PC 40:4,17.5,restored
+720.553659,PC 31:0 PE 34:0,17.5,restored
+822.541192,PC 36:3,17.5,restored
+842.509565,PC 38:7,17.5,restored
+820.585042,PC 39:6 PE 40:3 PE 42:6,17.5,restored
+798.596246,PC 35:0,14.5,restored
+520.280074,LPE 18:0,14.5,restored
+826.499487,PS 36:2,14.5,restored
+813.684243,SM 42:2;O2,14.5,restored
+814.514684,PE O-40:7,14.5,restored
+824.556614,PC 36:2,14.5,restored
+548.311355,LPE 20:0,14.5,restored
+821.528703,PG 38:4,14.5,restored
+562.32691,LPC 18:0,14.5,restored
+560.311275,LPC 18:1,14.5,restored
+806.509342,PE 38:4,14.5,restored
+750.585227,HexCer 36:1;O2,14.5,restored
+880.618648,PC 40:2,14.5,restored
+768.530366,PE O-36:2,14.5,restored
+756.494045,PC 31:1 PE 34:1,14.5,restored
+852.587719,PC 38:2,14.5,restored
+622.613163,Cer 40:1;O2,14.5,restored
+766.51472,PE O-36:3,14.5,restored
+767.54671,SM 36:2;O2,14.5,restored
+650.644457,Cer 42:1;O2,14.5,restored
+726.587817,HexCer 36:2;O2,14.5,restored
+745.497359,PG 32:0,14.5,restored
+848.556599,PC 38:4,14.5,restored
+604.506565,Cer 36:1;O2,14.5,restored
+786.483302,PE O-38:7,14.5,restored
+824.637838,HexCer 40:0;O2,14.0,restored
+876.668815,HexCer 44:2;O2,14.0,restored
+758.546237,PC O-32:0,14.0,restored
+925.520038,PI 38:4,11.5,restored
+876.515274,PS 40:5,11.5,restored
+877.518561,PI 34:0,11.5,restored
+922.499356,PS 44:10,11.5,restored
+923.503817,PI 38:5,11.5,restored
+823.544538,PG 38:3,11.5,restored
+849.559984,PG 40:4,11.5,restored
+847.544416,PG 40:5,11.5,restored
+506.360583,LPC O-18:2,11.5,restored
+874.499357,PS 40:6,11.5,restored
+826.572184,PC 36:1,11.5,restored
+832.507097,PS 38:5,11.5,restored
+858.54082,PE 42:6,11.5,restored
+812.592569,PC O-36:1,11.5,restored
+646.613192,Cer 40:0;O2,11.5,restored
+649.51885,DG 35:0,11.5,restored
+787.487102,PG 34:1,11.5,restored
+606.295512,LPC 22:6,11.5,restored
+582.295614,LPC 20:4,11.5,restored
+803.5576,PS 36:3,11.5,restored
+801.541731,PS 36:4,11.5,restored
+800.483681,PS 34:1,11.5,restored
+770.546286,PE O-36:1,11.5,restored
+746.605655,PC O-34:1,11.5,restored
+945.486439,PI 40:8,11.0,restored
+866.590672,PS 40:2,11.0,restored
+875.502707,PI 34:1,11.0,restored
+951.534508,PI 40:5,11.0,restored
+903.534518,PI 36:1,11.0,restored
+827.575619,PG 38:1 PG 40:4,11.0,restored
+899.501733,PI 36:3,11.0,restored
+828.692271,SM 42:3;O2,11.0,restored
+947.502401,PI 40:7,11.0,restored
+532.376231,LPC O-18:0,8.5,restored
+984.674739,Hex2Cer 40:1;O2,8.5,restored
+821.649156,SM 41:2;O2,8.5,restored
+815.518091,PG 36:1,8.5,restored
+830.530539,PS 36:0,8.5,restored
+789.502142,PG 34:0,8.5,restored
+634.613206,Cer 41:2;O2,8.0,restored
+1143.001197,TG 72:9,8.0,restored
+751.524844,PS 32:1,8.0,restored
+919.470299,PI 38:7,8.0,restored
+699.484368,SM 31:1;O2,8.0,restored
+921.544834,PI 39:5,8.0,restored
+905.550089,PI 36:0,8.0,restored
+908.541445,PS 44:9,8.0,restored
+805.496884,PG 37:5,8.0,restored
+833.528742,PG 39:5,8.0,restored
+835.544184,PG 39:4,8.0,restored
+787.544315,PG 35:0,8.0,restored
+520.262651,LPS 16:0,8.0,restored
+821.630669,PG 39:0,8.0,restored
+952.592427,PI 42:8,8.0,restored
+819.513275,PG 38:5,8.0,restored
+1087.034884,TG 67:2,8.0,restored
+813.559849,PG 37:1,8.0,restored
+811.544298,PG 37:2,8.0,restored
+561.314673,LPG 20:1,8.0,restored
+504.344854,LPC O-16:0,8.0,restored
+755.546756,SM 35:1;O2,8.0,restored
+754.622302,HexCer 38:2;O2,8.0,restored
+574.326876,LPE 22:1,7.5,restored
+800.660773,HexCer 40:1;O3_db,7.0,restored
+820.627223,HexCer 40:2;O3_db,7.0,restored
+640.623698,Cer 40:0;O3_db,7.0,restored
+775.525848,PA 40:4,6.0,restored
+745.477595,PA 38:5,6.0,restored
+735.433933,PA 36:4,5.5,restored
+478.329239,LPC O-16:2,5.0,restored
+726.447053,PE 32:2,4.5,restored
+902.530616,PS 42:6,4.5,restored
+687.436024,PA 32:0,4.5,restored
+763.466601,PA 38:4,4.5,restored
+739.467329,PA 36:2,4.5,restored
+685.420373,PA 32:1,4.5,restored
+880.507642,PS 42:9,4.5,restored
+459.248227,LPA 18:1,4.5,restored
+852.690404,HexCer 42:0;O3_db,4.0,restored
+824.659145,HexCer 40:0;O3_db,4.0,restored
+862.65324,PS 41:0,4.0,restored
+882.622052,PS 41:1,4.0,restored
+602.321794,LPC 20:1,4.0,restored
+986.690342,Hex2Cer 40:0;O2,4.0,restored
+725.509133,PA 36:1 PA 38:4,3.0,restored
+759.435978,PA 38:6_db,2.5,restored
+789.483073,PA 40:5_db,2.5,restored
+700.431232,PE 30:1_db,2.5,restored
+793.514455,PA 40:3_db,2.5,restored
+854.659085,PE 42:0_db,2.5,restored
+867.453397,PGP 34:1_db,2.5,restored
+723.493456,PA 36:2 PA 38:5_db,2.5,restored
+820.465641,PE O-41:11_db,2.0,restored
+877.591318,PG 42:4_db,2.0,restored
+869.649307,SM t42:1_db,2.0,restored
+787.507619,HexCer 38:2;O2_db,2.0,restored
+823.741796,SM 40:2_db,2.0,restored
+725.488271,PA O-36:2_db,2.0,restored
+822.506674,HexCer 40:1; O2_db,2.0,restored
+794.611804,HexCer 38:1_db,2.0,restored
+797.392118,PG 36:2_db,2.0,restored
+883.638226,PG 42:1_db,2.0,restored
+793.557201,PG 36:1 OH_db,2.0,restored
+761.58843,PA 38:5_db,2.0,restored
+846.67765,PC 38:5_db,2.0,restored
+835.520994,PS O-39:1_db,2.0,restored
+849.757345,SM d42:3_db,2.0,restored
+847.664639,PE-Cer d46:3_db,2.0,restored
+841.61781,SM t40:1_db,2.0,restored
+766.580557,HexCer t36:1_db,2.0,restored
+940.534809,PIP O-36:5_db,2.0,restored
+837.640988,PG 38:4_db,2.0,restored
+941.491648,PIP O-34:1_db,2.0,restored
+779.421272,PA 42:5_db,2.0,restored
+780.538873,HexCer 36:2;O2_db,2.0,restored
+746.481119,SM d36:2_db,2.0,restored
+858.588701,Hex2Cer 32:0_db,2.0,restored
+797.56516,PA 40:1 OH_db,2.0,restored
+863.656889,PG 40:5_db,2.0,restored
+851.773075,SM 42:2_db,2.0,restored
+753.405707,PA 38:1_db,2.0,restored
+752.507543,HexCer t34:2_db,2.0,restored
+853.591134,PG 40:2_db,2.0,restored
+526.329258,LPC O- 18:3 LPC O-18:3_db,2.0,restored
+852.680417,CerP t48:1_db,2.0,restored
+963.476348,CL 36:4_db,2.0,restored
+802.54506,SM d40:2 HexCer t40:0_db,2.0,restored
+787.604119,PA 40:6_db,2.0,restored
+683.460571,PA 33:1_db,1.5,restored
+831.434156,PA 44:12_db,1.5,restored
+904.54656,PS 42:5_db,1.5,restored
+426.357733,CAR 18:1_db,1.5,restored
+809.449463,PA 42:9_db,1.5,restored
+672.400048,PE 28:1_db,1.5,restored
+742.468805,PS 33:4_db,1.0,restored
+930.562101,PS 44:6_db,1.0,restored
+783.43447,PA 40:8_db,1.0,restored
+709.476423,PA 35:2_db,1.0,restored
+709.418635,PA 34:3_db,1.0,restored
+733.612753,DG 41:0_db,1.0,restored
+479.332584,ST 30:3;O2_db,1.0,restored
+749.448678,PA 37:4_db,1.0,restored
+842.63954,PC O-38:0_db,1.0,restored
+698.415591,PE 30:2_db,1.0,restored
+809.469334,PG 36:4_db,1.0,restored
+923.483541,_db,0.5,restored
+740.470757,PI-Cer t30:1_db_db,0.0,restored
+738.455103,PI-Cer t30:2_db_db,0.0,restored
+788.470942,PI-Cer t32:2_db_db,0.0,restored
+736.437192,PI-Cer t28:0_db_db,0.0,restored
+892.663729,PI-Cer d42:1_db_db,0.0,restored
+836.496635,SHexCer t34:0_db_db,0.0,restored
+862.616935,PI-Cer d40:2_db_db,0.0,restored
+946.602037,SHexCer 42:1;O3_db_db_db,0.0,restored
+908.650479,SHexCer 41:1;O2_db_db,0.0,restored
+814.631941,PC 38:2,20.5,unusable
+716.522444,PE 34:2,20.5,unusable
+786.600581,PC 36:2,20.5,unusable
+546.353132,LPC 18:0,20.5,unusable
+842.663262,PC 40:2,20.5,unusable
+524.371152,LPC 18:0,20.5,unusable
+816.647727,PC 38:1,20.5,unusable
+788.616346,PC 36:1,20.5,unusable
+730.57458,PE O-36:2,20.5,unusable
+522.355521,LPC 18:1,20.5,unusable
+844.678951,PC 40:1,20.5,unusable
+720.589979,PC O-32:0,20.0,unusable
+496.339662,LPC 16:0,20.0,unusable
+814.535679,PE 40:6,18.0,unusable
+836.614226,PC 38:2 PC 40:5,17.5,unusable
+846.621997,PS 40:1,17.5,unusable
+794.546023,PE O-38:3,17.5,unusable
+856.582593,PC 40:6,17.5,unusable
+836.615998,PC 38:2 PC 40:5,17.5,unusable
+808.583568,PC 36:2 PC 38:5,17.5,unusable
+858.598946,PC 40:5,17.5,unusable
+860.614234,PC 40:4,17.5,unusable
+744.553757,PE 36:2,17.5,unusable
+776.462175,PE 36:5,17.5,unusable
+834.600523,PC 38:3 PC 40:6,17.5,unusable
+850.572852,PC 38:3,17.5,unusable
+766.537396,PE 36:2 PE 38:5,17.5,unusable
+796.584544,PC 35:1 PC 37:4 PE 38:1 PE 40:4,17.5,unusable
+764.522459,PE 38:6,17.5,unusable
+764.498659,PE O-36:4,17.5,unusable
+762.504223,PE 36:4,17.5,unusable
+832.582876,PC 38:4,17.5,unusable
+756.551346,PC 32:0,17.5,unusable
+518.321818,LPC 16:0,17.5,unusable
+758.569322,PC 34:2,17.5,unusable
+804.551267,PC 36:4,17.5,unusable
+568.339699,LPC 20:3 LPC 22:6,17.5,unusable
+482.324173,LPE 18:0,17.5,unusable
+806.569006,PC 38:6,17.5,unusable
+826.476385,PE 40:8,17.5,unusable
+510.355468,LPE 20:0,17.5,unusable
+824.61736,PC 37:1 PC 39:4 PE 40:1 PE 42:4,17.5,unusable
+818.567304,PE 40:4,17.5,unusable
+784.582831,PC 34:0,17.5,unusable
+728.558847,PE O-34:0 PE O-36:3,17.5,unusable
+790.535967,PE 38:4,17.5,unusable
+818.545926,PE O-40:5,17.5,unusable
+792.55383,PE 40:6,17.5,unusable
+718.538,PC 31:1 PE 34:1,17.5,unusable
+824.616164,PC 37:1 PC 39:4 PE 40:1 PE 42:4,17.5,unusable
+742.514534,PE O-34:1,17.5,unusable
+544.337559,LPC 18:1,17.5,unusable
+810.598816,PC 36:1 PC 38:4 PE 39:1,17.5,unusable
+704.558752,PE O-34:1,17.5,unusable
+786.504327,PE 38:6,17.5,unusable
+508.339875,LPE 20:1,17.5,unusable
+740.520887,PC 31:1 PE 34:1 PE 36:4,17.5,unusable
+706.538096,PC 30:0,17.5,unusable
+812.519639,PE 40:7,17.5,unusable
+712.486593,PE 32:1,17.5,unusable
+838.629349,PC 38:1 PC 40:4,17.5,unusable
+780.551501,PC 34:2,17.5,unusable
+790.632562,PC 36:0,17.5,unusable
+851.627085,PC 40:6,17.0,unusable
+831.658394,PC 38:2,17.0,unusable
+805.642917,PC 36:1,17.0,unusable
+816.530469,PE O-40:6,17.0,unusable
+827.62708,PC 38:4,17.0,unusable
+480.308562,LPE 18:1,17.0,unusable
+707.500918,DG 40:6,15.0,unusable
+812.541089,PS 36:1,15.0,unusable
+788.52013,PE 38:5,15.0,unusable
+810.503605,PE 40:8,15.0,unusable
+810.525573,PS 36:2,15.0,unusable
+792.575459,PS 36:0,14.5,unusable
+792.530596,PE O-38:4,14.5,unusable
+798.540901,PC 34:1,14.5,unusable
+837.682201,SM 42:1;O2,14.5,unusable
+835.666216,SM 42:2;O2,14.5,unusable
+793.502392,PG 36:4,14.5,unusable
+787.66876,SM 40:1;O2,14.5,unusable
+838.572418,PE 40:2,14.5,unusable
+588.532586,Cer 36:1;O2,14.5,unusable
+790.559299,PS 36:1,14.5,unusable
+836.543747,PS 40:6,14.5,unusable
+790.514716,PE O-38:5,14.5,unusable
+788.540879,PS 36:2,14.5,unusable
+836.54371,PS 40:6,14.5,unusable
+839.562541,PI 34:0,14.5,unusable
+590.321702,LPC 22:6,14.5,unusable
+840.57422,PG 40:6 PS 38:1 PS 40:4,14.5,unusable
+812.616071,PC 36:0 PC 38:3,14.5,unusable
+813.501759,PG 36:2,14.5,unusable
+552.306221,LPE 22:4,14.5,unusable
+815.7003,SM 42:1;O2,14.5,unusable
+550.386763,LPC 20:1,14.5,unusable
+550.290501,LPE 22:5,14.5,unusable
+816.573626,PS 38:2,14.5,unusable
+540.24889,LPE 20:4,14.5,unusable
+548.274851,LPE 22:6,14.5,unusable
+818.509303,PC 36:5,14.5,unusable
+546.295745,LPE 20:1,14.5,unusable
+546.295721,LPE 20:1,14.5,unusable
+820.525269,PC 36:4,14.5,unusable
+822.601331,PE 40:2,14.5,unusable
+822.60103,PE 40:2,14.5,unusable
+544.280548,LPE 20:2,14.5,unusable
+816.551711,PC 37:5 PE 40:5 PE 42:8,14.5,unusable
+834.523853,PS 38:4,14.5,unusable
+800.61603,PE 40:2,14.5,unusable
+832.663491,HexCer 42:2;O2,14.5,unusable
+524.274672,LPE 20:4,14.5,unusable
+524.275132,LPE 20:4,14.5,unusable
+804.493609,PE 38:5,14.5,unusable
+526.292745,LPE 22:6,14.5,unusable
+566.321643,LPC 20:4,14.5,unusable
+566.264258,LPE 22:5,14.5,unusable
+812.498428,PE O-40:8,14.5,unusable
+526.293057,LPE 22:6,14.5,unusable
+807.633871,SM 40:2;O2,14.5,unusable
+564.534981,Cer 36:2;O2,14.5,unusable
+808.516228,PS 38:6,14.5,unusable
+530.32183,LPE 20:1 LPE 22:4,14.5,unusable
+828.551461,PC 38:6,14.5,unusable
+809.650753,SM 40:1;O2,14.5,unusable
+810.681691,HexCer 42:2;O2,14.5,unusable
+878.530469,PS 40:4,14.5,unusable
+751.572493,SM 36:2;O2,14.5,unusable
+753.588104,SM 36:1;O2,14.5,unusable
+754.478379,PE 34:2,14.5,unusable
+754.535711,PC 32:1,14.5,unusable
+754.574459,PE O-36:1 PE O-38:4,14.5,unusable
+854.566914,PC 40:7,14.5,unusable
+854.508087,PE 42:8,14.5,unusable
+756.530765,PC O-32:1,14.5,unusable
+851.639943,SM 42:2;O2,14.5,unusable
+764.543807,PS 34:0,14.5,unusable
+768.493467,PC 32:2,14.5,unusable
+768.493798,PC 32:2,14.5,unusable
+874.572687,PC 40:5,14.5,unusable
+731.606162,SM 36:1;O2,14.5,unusable
+729.590602,SM 36:2;O2,14.5,unusable
+738.505397,PE 34:2,14.5,unusable
+874.478595,PE 44:12,14.5,unusable
+728.519929,PC 30:0,14.5,unusable
+728.462458,PE 32:1,14.5,unusable
+750.542508,PE O-38:6,14.5,unusable
+726.542765,PE O-34:1 PE O-36:4,14.5,unusable
+725.55678,SM 34:1;O2,14.5,unusable
+862.557182,PS 40:4,14.5,unusable
+746.509954,PE O-36:5,14.5,unusable
+860.54211,PS 40:5,14.5,unusable
+724.527337,PE O-34:2 PE O-36:5,14.5,unusable
+748.527463,PE O-36:4,14.5,unusable
+724.525405,PE O-34:2 PE O-36:5,14.5,unusable
+740.498694,PE O-34:2,14.5,unusable
+544.279917,LPE 20:2,14.5,unusable
+784.515458,PS 36:4,14.5,unusable
+772.525228,PC 32:0,14.5,unusable
+774.54246,PE O-38:5,14.5,unusable
+782.509839,PE 36:2,14.5,unusable
+781.619322,SM 38:1;O2,14.5,unusable
+703.574806,SM 34:1;O2,14.5,unusable
+686.584682,Cer 42:2;O2,14.5,unusable
+776.558558,PE O-38:4,14.5,unusable
+602.490932,Cer 36:2;O2,14.5,unusable
+780.492413,PE 36:3,14.5,unusable
+778.477655,PE 36:4,14.5,unusable
+759.637466,SM 38:1;O2,14.5,unusable
+780.589546,PC O-37:5 PE O-38:2 PE O-40:5,14.5,unusable
+784.666451,HexCer 40:1;O2,14.5,unusable
+504.306055,LPE 18:0,14.5,unusable
+785.65292,SM 40:2;O2,14.5,unusable
+842.567038,PE 42:6,14.5,unusable
+502.290491,LPE 18:1,14.5,unusable
+494.324311,LPC 16:1,14.5,unusable
+770.509713,PC 32:1,14.5,unusable
+692.522328,PE 32:0,14.5,unusable
+786.54097,PE 36:0,14.5,unusable
+791.626221,PC 35:1 PE 38:1,14.0,unusable
+786.53185,PS 36:3,14.0,unusable
+813.608529,PE 40:4,14.0,unusable
+737.57905,PC 31:0 PE 34:0,14.0,unusable
+812.697709,HexCer 42:1;O2,14.0,unusable
+829.573192,PS 38:4,14.0,unusable
+759.561067,PE 36:3,14.0,unusable
+852.669044,HexCer 42:0;O2,14.0,unusable
+804.632118,HexCer 40:2;O2,14.0,unusable
+853.646098,PC 40:5,14.0,unusable
+763.594655,PE 36:1,14.0,unusable
+800.556439,PC 34:0,14.0,unusable
+820.561519,PE O-40:4,14.0,unusable
+837.546779,PI 34:1,14.0,unusable
+494.323916,LPC 16:1,14.0,unusable
+778.574018,PE O-40:6,14.0,unusable
+829.573502,PS 38:4,14.0,unusable
+834.679528,HexCer 42:1;O2,14.0,unusable
+683.500763,DG 38:4,12.0,unusable
+858.525586,PS 40:6,12.0,unusable
+888.574122,PS 44:8,11.5,unusable
+902.575406,PI 38:5,11.5,unusable
+892.525649,PC 42:10,11.5,unusable
+887.562939,PI 38:4,11.5,unusable
+878.509271,PE 44:10,11.5,unusable
+881.511485,PI 36:4,11.5,unusable
+898.572274,PC 42:7,11.5,unusable
+542.262403,LPE 20:3,11.5,unusable
+542.264446,LPE 20:3,11.5,unusable
+832.525686,PC 37:5 PE 40:5,11.5,unusable
+852.515025,PS 38:3,11.5,unusable
+492.248728,LPE 16:0,11.5,unusable
+520.339862,LPC 18:2,11.5,unusable
+850.497669,PS 38:4,11.5,unusable
+848.481638,PS 38:5,11.5,unusable
+906.525611,PS 44:10,11.5,unusable
+846.47213,PS 38:6,11.5,unusable
+838.559485,PG 40:7 PS 38:2 PS 40:5,11.5,unusable
+502.329246,LPC O-16:1,11.5,unusable
+840.551945,PC 39:7 PE 42:7 PE 44:10,11.5,unusable
+840.587888,PC 37:1 PC O-40:7 PE 40:1,11.5,unusable
+516.24873,LPE 18:2,11.5,unusable
+825.560055,PG 38:2,11.5,unusable
+872.710259,PC 42:1,11.5,unusable
+872.484256,PS 40:7,11.5,unusable
+872.48153,PS 40:7,11.5,unusable
+532.280896,LPC 16:1,11.5,unusable
+872.481174,PS 40:7,11.5,unusable
+532.279977,LPC 16:1,11.5,unusable
+476.274826,LPE 16:0,11.5,unusable
+480.3449,LPC O-16:1,11.5,unusable
+528.342597,LPC O-18:2,11.5,unusable
+854.530604,PS 38:2,11.5,unusable
+870.694484,PC 42:2,11.5,unusable
+775.545453,PG 36:2,11.5,unusable
+605.509921,DG 33:0,11.5,unusable
+777.562152,PG 36:1,11.5,unusable
+779.577253,PG 36:0,11.5,unusable
+810.540883,PE 38:2,11.5,unusable
+786.522913,PS 34:0,11.5,unusable
+733.62203,SM 36:0;O2,11.5,unusable
+808.52548,PE 38:3,11.5,unusable
+808.506815,PS 36:3,11.5,unusable
+792.493468,PE 37:4,11.5,unusable
+794.506768,PC 34:3,11.5,unusable
+794.573208,PC 37:5 PE 40:5,11.5,unusable
+802.499083,PS 34:0,11.5,unusable
+796.561774,PE O-38:2,11.5,unusable
+799.544246,PG 36:1,11.5,unusable
+679.473803,DG 38:6,11.5,unusable
+661.516796,DG 36:1,11.5,unusable
+817.533744,PG 36:0,11.5,unusable
+766.559536,HexCer 36:1;O2 PG 34:1,11.5,unusable
+633.485418,DG 34:1,11.5,unusable
+749.530869,PG 34:1,11.5,unusable
+816.493676,PE 39:6,11.5,unusable
+751.545562,PG 34:0,11.5,unusable
+769.49677,PG 34:2,11.5,unusable
+773.528602,PG 34:0,11.5,unusable
+918.464419,PS 44:12,11.5,unusable
+814.555965,PG 38:5 PS 36:0 PS 38:3,11.5,unusable
+755.604468,SM 36:0;O2,11.5,unusable
+815.480636,PG 38:7,11.5,unusable
+814.499165,PS 35:1,11.5,unusable
+771.578018,SM 36:0;O2,11.5,unusable
+885.546748,PI 36:2 PI 38:5,11.0,unusable
+889.577892,PI 36:0 PI 38:3,11.0,unusable
+851.575974,PG 40:3,11.0,unusable
+935.560414,PI 40:5,11.0,unusable
+851.557675,PS 40:7,11.0,unusable
+768.587629,PC O-36:4,11.0,unusable
+859.528953,PI 34:1,11.0,unusable
+926.57567,PI 40:7,11.0,unusable
+793.570081,PS 35:1,11.0,unusable
+772.563108,PE O-36:0,11.0,unusable
+846.472893,PS 38:6,11.0,unusable
+867.594251,PI 36:0,11.0,unusable
+742.572221,PC O-32:0,11.0,unusable
+937.577013,PI 40:4,11.0,unusable
+842.5896,PS 38:0,11.0,unusable
+833.648658,SM 42:3;O2,11.0,unusable
+842.531405,PS 37:1,11.0,unusable
+771.51302,PG 34:1,11.0,unusable
+928.612206,Hex2Cer 36:1;O2,11.0,unusable
+928.59037,PI 40:6,11.0,unusable
+849.485448,PI 32:0,11.0,unusable
+931.528539,PI 40:7,11.0,unusable
+931.566202,PI 38:1,11.0,unusable
+592.267141,LPS 22:6,11.0,unusable
+595.242963,LPG 22:6,11.0,unusable
+913.578332,PI 38:2 PI 40:5,11.0,unusable
+802.676725,SM 40:2;O2,11.0,unusable
+895.529138,PI 37:4,11.0,unusable
+824.488186,PS 36:3,11.0,unusable
+548.294253,LPS 18:0,11.0,unusable
+811.668361,SM 42:3;O2,11.0,unusable
+564.269426,LPS 18:0,11.0,unusable
+901.517021,PI 36:2,11.0,unusable
+830.498917,PS 38:6,11.0,unusable
+949.519633,PI 40:6,11.0,unusable
+533.284096,LPG 18:1,11.0,unusable
+833.648617,SM 42:3;O2,11.0,unusable
+953.550042,PI 40:4,11.0,unusable
+795.574773,SM 38:2;O2,11.0,unusable
+894.692567,PC 44:4,11.0,unusable
+924.560833,PI 40:8,11.0,unusable
+884.543112,PS 44:10,9.0,unusable
+742.477422,PC 30:1,8.5,unusable
+740.462204,PC 30:2,8.5,unusable
+751.551525,PG 34:0,8.5,unusable
+900.551638,PC 44:12,8.5,unusable
+900.513406,PS 42:7,8.5,unusable
+828.570031,PS 37:0,8.5,unusable
+828.569643,PS 37:0,8.5,unusable
+916.525271,PC 44:12,8.5,unusable
+856.523562,PC 39:7 PE 42:7,8.5,unusable
+558.295609,LPC 18:2,8.5,unusable
+618.581933,Cer 38:0;O2,8.5,unusable
+743.480997,PG 32:1,8.5,unusable
+909.545492,PI 38:4,8.5,unusable
+544.316464,LPC O-18:2,8.5,unusable
+490.233074,LPE 16:1,8.5,unusable
+858.562027,PS O-41:6,8.5,unusable
+836.517926,PE 42:9,8.5,unusable
+716.461689,PE 31:0,8.5,unusable
+926.530681,PS 44:8,8.5,unusable
+898.498347,PS 42:8,8.5,unusable
+879.651643,Hex2Cer 34:1;O2,8.5,unusable
+518.300817,LPC O-16:1,8.5,unusable
+878.568761,PC 44:12,8.5,unusable
+669.545363,DG 38:3,8.5,unusable
+714.446733,PC 28:1,8.5,unusable
+791.480791,PG 36:5,8.5,unusable
+588.342547,LPC 20:1,8.5,unusable
+828.588411,PC 36:0,8.5,unusable
+755.499087,DG 44:10,8.5,unusable
+800.521048,PE 39:6,8.5,unusable
+894.466,PS 42:10,8.5,unusable
+834.504028,PE 42:10,8.5,unusable
+839.638896,SM 41:1;O2,8.5,unusable
+1145.01923,TG 72:8,8.0,unusable
+753.530863,SM 35:2;O2,8.0,unusable
+1166.999618,TG 74:11,8.0,unusable
+474.261808,LPE 16:1,8.0,unusable
+754.619326,HexCer 38:2;O2,8.0,unusable
+1161.975896,TG 73:9,8.0,unusable
+924.514881,PS 44:9,8.0,unusable
+919.529392,PI 39:6,8.0,unusable
+1160.055387,TG 72:3 TG 74:6,8.0,unusable
+886.558472,PS 44:9,8.0,unusable
+894.606727,PI 37:2,8.0,unusable
+1167.001037,TG 74:11,8.0,unusable
+898.6373,PI 37:0,8.0,unusable
+727.467473,DG 42:10,8.0,unusable
+725.499945,SM 33:2;O2,8.0,unusable
+874.535933,PS O-41:6,8.0,unusable
+877.638909,PC 42:7,8.0,unusable
+739.572503,SM 35:1;O2,8.0,unusable
+927.534145,PI 38:3,8.0,unusable
+684.556018,DG 40:7,8.0,unusable
+893.513533,PI 37:5,8.0,unusable
+907.530046,PI 38:5,8.0,unusable
+717.590543,SM 35:1;O2,8.0,unusable
+1140.985036,TG 72:10,8.0,unusable
+1145.02163,TG 72:8,8.0,unusable
+1174.077062,TG 75:6,8.0,unusable
+1172.057836,TG 73:4,8.0,unusable
+1184.061362,TG 76:8,8.0,unusable
+573.258859,LPG 20:3,8.0,unusable
+573.260029,LPG 20:3,8.0,unusable
+946.637443,PI 41:4,8.0,unusable
+521.284104,LPG 17:0,8.0,unusable
+800.547363,PG 37:5 PS 37:3,8.0,unusable
+800.540045,PG 37:5 PS 37:3,8.0,unusable
+834.621838,PG 39:2 PS 39:0,8.0,unusable
+1111.034561,TG 69:4,8.0,unusable
+836.601224,HexCer 40:2;O3_db,8.0,unusable
+1106.010172,TG 68:2 TG 70:5,8.0,unusable
+583.299069,LPG 22:4,8.0,unusable
+838.499956,PS 37:3,8.0,unusable
+509.285318,LPG 18:2,8.0,unusable
+822.522927,PS 37:3,8.0,unusable
+822.523049,PS 37:3,8.0,unusable
+816.695042,SM 41:2;O2,8.0,unusable
+824.545663,PS 37:2,8.0,unusable
+535.299071,LPG 18:0,8.0,unusable
+826.56283,PS 39:4,8.0,unusable
+563.330309,LPG 20:0,8.0,unusable
+808.573045,HexCer 38:2;O3_db,8.0,unusable
+808.570151,HexCer 38:2;O3_db,8.0,unusable
+1063.036808,TG 65:0,8.0,unusable
+1089.053288,TG 67:1,8.0,unusable
+973.516948,PI 42:8,8.0,unusable
+848.538828,PS 39:4,8.0,unusable
+848.616394,PC 41:6,8.0,unusable
+1121.018698,TG 70:6,8.0,unusable
+785.528612,PG 35:1,8.0,unusable
+849.620992,SM 42:3;O2,8.0,unusable
+851.566735,PI 35:1,8.0,unusable
+851.620692,Hex2Cer 32:1;O2,8.0,unusable
+843.513577,PG 40:7,8.0,unusable
+780.635018,HexCer 38:0;O2,8.0,unusable
+757.497489,PG 33:1,8.0,unusable
+918.541817,PC 44:11,8.0,unusable
+850.673878,HexCer 42:1;O3_db,7.0,unusable
+504.285137,LPE O-18:1,7.0,unusable
+771.493738,PA 40:6,6.0,unusable
+747.493315,PA 38:4,6.0,unusable
+864.574639,PS 42:6,5.5,unusable
+711.436086,PA 34:2,5.5,unusable
+892.606186,PS 44:6,5.5,unusable
+832.516358,PS 40:8,5.0,unusable
+824.649155,PC O-40:4,5.0,unusable
+500.311179,LPC O-16:2,5.0,unusable
+906.56191,PS 42:4,4.5,unusable
+695.461989,PA 34:2,4.5,unusable
+791.499203,PA 40:4,4.5,unusable
+767.498948,PA 38:2,4.5,unusable
+827.640217,SM 40:0;O2,4.5,unusable
+823.560941,PA 42:2,4.5,unusable
+761.451415,PA 38:5,4.5,unusable
+880.546093,PS 40:3,4.5,unusable
+719.459951,PA 36:4,4.5,unusable
+786.577704,PC O-34:0,4.5,unusable
+795.529829,PA 40:2,4.5,unusable
+715.467297,PA 34:0,4.5,unusable
+840.623311,PE O-41:1,4.0,unusable
+822.531824,PS 39:6,4.0,unusable
+843.635018,SM 40:0;O3_db,4.0,unusable
+748.621828,Cer 44:1;O4 PC O-34:0,4.0,unusable
+586.347938,LPC 20:1,4.0,unusable
+873.750052,HexCer 44:1;O2,4.0,unusable
+472.246133,LPE 16:2,4.0,unusable
+564.365948,LPC 20:1,4.0,unusable
+516.285003,LPC O-16:2,4.0,unusable
+894.679666,HexCer 44:1;O3_db,4.0,unusable
+785.576319,PE 38:4,4.0,unusable
+697.477794,PA 34:1 PA 36:4,4.0,unusable
+817.514766,PA 42:5_db,2.5,unusable
+749.50917,PA 38:3 PA 40:6_db,2.5,unusable
+813.483101,PA 42:7_db,2.5,unusable
+852.643513,PE 42:1_db,2.5,unusable
+721.477703,PA 36:3_db,2.5,unusable
+728.471124,LPI 26:1_db,2.0,unusable
+820.489621,HexCer 40:2;O2_db,2.0,unusable
+822.464166,PE 40:2_db,2.0,unusable
+819.570831,HexCer t40:0_db,2.0,unusable
+784.657094,PE 36:1_db,2.0,unusable
+740.411243,PS 30:3 OH_db,2.0,unusable
+825.757776,SM d40:1 SM 40:1_db,2.0,unusable
+739.523216,PA 37:1_db,2.0,unusable
+825.50867,SM t40:1_db,2.0,unusable
+787.449768,TG 46:7_db,2.0,unusable
+733.424927,LPI 26:1_db,2.0,unusable
+868.664285,HexCer t42:0_db,2.0,unusable
+890.60775,PE 44:12 OH_db,2.0,unusable
+814.653093,PE O-40:7_db,2.0,unusable
+673.347326,PA 34:2_db,2.0,unusable
+723.473151,PA O-36:3_db,2.0,unusable
+795.710608,SM 38:2_db,2.0,unusable
+796.448337,PE 40:4_db,2.0,unusable
+796.666335,HexCer 41:2_db,2.0,unusable
+715.449724,PG 30:1 HexCer 34:2_db,2.0,unusable
+812.687954,PC 35:1 PE 38:1_db,2.0,unusable
+673.347964,PA 34:2_db,2.0,unusable
+818.647712,HexCer 41:2_db,2.0,unusable
+662.342887,PE 30:1_db,2.0,unusable
+724.476298,HexCer t32:2_db,2.0,unusable
+723.433697,PC 30:0_db,2.0,unusable
+793.454593,PE P-40:6_db,2.0,unusable
+889.604117,PC 42:1_db,2.0,unusable
+817.554924,HexCer 40:1; O3_db_db,2.0,unusable
+793.534026,PA 42:6 OH_db,2.0,unusable
+816.512709,PC 38:1_db,2.0,unusable
+794.582181,CerP d44:2_db,2.0,unusable
+793.4761,PC 34:1 OH_db,2.0,unusable
+836.606653,Hex2Cer 32:0_db,2.0,unusable
+760.4526,PC 34.1_db,2.0,unusable
+847.690159,PE 42:1_db,2.0,unusable
+850.635085,PS 38:4_db,2.0,unusable
+768.421403,PA 40:5_db,2.0,unusable
+767.554332,PA 39:1_db,2.0,unusable
+767.439275,PE O-38:6_db,2.0,unusable
+766.580182,HexCer t36:1_db,2.0,unusable
+769.478109,PA 40:7_db,2.0,unusable
+769.533911,PA 38:1 OH_db,2.0,unusable
+770.481666,HexCer 38:2;O3_db_db,2.0,unusable
+763.604138,PA 38:4_db,2.0,unusable
+830.647859,PE 40:6_db,2.0,unusable
+854.62947,PC 38:1 OH_db,2.0,unusable
+854.639302,PE O-42:1_db,2.0,unusable
+830.627033,PC 38:2 OH_db,2.0,unusable
+830.557087,LacCer d30:0_db,2.0,unusable
+855.606862,PG 40:1 PG 42:4_db,2.0,unusable
+745.621645,PE-Cer d40:1_db,2.0,unusable
+826.676642,HexCer t42:2_db,2.0,unusable
+829.361243,PGP 34:1_db,2.0,unusable
+833.629776,PG 40:1_db,2.0,unusable
+833.50543,PE 40:2 OH_db,2.0,unusable
+776.592769,CerP d44:3_db,2.0,unusable
+753.483454,PA O-40:8_db,2.0,unusable
+832.643012,PC 38:1 OH_db,2.0,unusable
+852.605485,PC 38:2 OH_db,2.0,unusable
+831.651126,PG 36:1 OH_db,2.0,unusable
+831.630815,PA 42:6 OH_db,2.0,unusable
+831.630497,PA 42:6 OH_db,2.0,unusable
+804.611362,PC 36:1 OH_db,2.0,unusable
+799.407667,PE O-41:11_db,2.0,unusable
+690.374284,PA 34:2_db,2.0,unusable
+687.418892,HexCer d32:2_db,2.0,unusable
+810.585948,PG 36:1 OH_db,2.0,unusable
+706.454884,SM 33:1_db,2.0,unusable
+810.576446,PC O- 36:2_db,2.0,unusable
+807.433608,PE 40:7_db,2.0,unusable
+692.389928,PA 34:1_db,2.0,unusable
+797.726263,SM d38:1 SM 38:1_db,2.0,unusable
+685.384052,PA O-36:3_db,2.0,unusable
+808.574955,LacCer d30:0_db,2.0,unusable
+702.411573,PA O-36:3_db,2.0,unusable
+803.481553,PG 34:1 OH_db,2.0,unusable
+800.539162,PS 35:0_db,1.5,unusable
+487.279553,LPA 20:1_db,1.5,unusable
+415.148176,ST 21:4;O6_db,1.5,unusable
+670.384376,PE 28:2_db,1.5,unusable
+503.20134,ST 19:2;O2;GlcA_db,1.5,unusable
+695.44117,PA O-34:3_db,1.5,unusable
+797.509607,PA 42:7_db,1.5,unusable
+521.212099,ST 19:1;O3;GlcA_db_db,1.5,unusable
+732.421286,PS 29:0_db,1.5,unusable
+473.302838,ST 27:1;O4_db,1.5,unusable
+936.678095,PC 44:2_db,1.0,unusable
+457.328954,ST 27:1;O4_db,1.0,unusable
+852.140811,CoA 4:1;O_db,1.0,unusable
+804.475906,PS 36:5_db,1.0,unusable
+869.755143,TG 51:1_db,1.0,unusable
+823.526543,PA 44:8_db,1.0,unusable
+782.440322,PS 33:3_db,1.0,unusable
+682.441685,PE 30:2_db,1.0,unusable
+763.433316,PA 40:10_db,1.0,unusable
+576.30618,LPE 24:6_db,1.0,unusable
+701.4517,PA 33:0_db,1.0,unusable
+681.445533,PA 33:2_db,1.0,unusable
+681.388993,PA 32:3_db,1.0,unusable
+503.253464,LPA 20:1_db,1.0,unusable
+514.230704,LPE 18:3_db,1.0,unusable
+648.459805,PE 29:1_db,1.0,unusable
+695.404756,PA 33:3_db,1.0,unusable
+725.451879,PA 35:2_db,1.0,unusable
+789.46602,PG 36:6_db,1.0,unusable
+655.373511,PA 30:2_db,1.0,unusable
+694.465399,PS 29:0_db,1.0,unusable
+656.426068,PE 28:1_db,1.0,unusable
+497.204288,LPA 20:4_db,1.0,unusable
+497.206593,LPA 20:4_db,1.0,unusable
+473.323976,ST 27:1;O5_db,1.0,unusable
+629.357877,PA 28:1_db,1.0,unusable
+835.465367,PA 44:10_db,1.0,unusable
+851.592627,PA 44:2_db,1.0,unusable
+808.486469,PE 40:9_db,1.0,unusable
+848.522195,PC 40:10_db,1.0,unusable
+489.243362,ST 19:1;O2;GlcA_db,1.0,unusable
+545.212069,ST 21:3;O2;GlcA_db,1.0,unusable
+441.333995,ST 27:1;O2_db,1.0,unusable
+441.237725,MG 22:6_db,1.0,unusable
+683.404775,PA 32:2_db,1.0,unusable
+741.465448,PG 32:2_db,1.0,unusable
+757.418757,PA 38:7_db,1.0,unusable
+699.436088,PA 33:1_db,1.0,unusable
+781.418474,PA 40:9_db,1.0,unusable
+505.217123,ST 19:1;O2;GlcA_db,1.0,unusable
+892.65832,PC O-42:3_db,1.0,unusable
+796.491137,PC 36:8_db,1.0,unusable
+795.493608,PA 42:8_db,1.0,unusable
+419.255684,FOH 23:4;O2_db,1.0,unusable
+481.232623,LPA 20:4_db,1.0,unusable
+686.415586,PE 29:1_db,1.0,unusable
+713.507387,PA 35:0_db,1.0,unusable
+712.431195,PC 28:2_db,1.0,unusable
+634.444188,PE 28:1_db,1.0,unusable
+839.499258,PA 44:8_db,1.0,unusable
+421.158961,FA 20:5;O5_db,1.0,unusable
+842.440713,PS 38:8_db,1.0,unusable
+842.440323,PS 38:8_db,1.0,unusable
+688.43124,PE 29:0_db,1.0,unusable
+815.499304,PA 42:6_db,1.0,unusable
+670.441791,PE 29:1_db,1.0,unusable
+854.498071,PS 42:11_db,1.0,unusable
+780.424456,PS 33:4_db,1.0,unusable
+511.096383,_db,0.5,unusable
+409.055522,_db,0.5,unusable
+511.162647,_db,0.5,unusable
+496.135137,_db,0.5,unusable
+453.167636,_db,0.5,unusable
+591.386857,_db,0.5,unusable
+473.206576,_db,0.5,unusable
+608.090551,_db,0.5,unusable
+653.357798,_db,0.5,unusable
+995.464753,_db,0.5,unusable
+766.550638,_db,0.5,unusable
+410.995457,_db,0.5,unusable
+489.114117,_db,0.5,unusable
+543.232964,_db,0.5,unusable
+543.210986,_db,0.5,unusable
+655.565898,_db,0.5,unusable
+655.525414,_db,0.5,unusable
+871.449988,_db,0.5,unusable
+543.179828,_db,0.5,unusable
+604.337528,_db,0.5,unusable
+543.174469,_db,0.5,unusable
+717.369479,_db,0.5,unusable
+519.196653,_db,0.5,unusable
+873.466253,_db,0.5,unusable
+527.332603,_db,0.5,unusable
+497.132724,_db,0.5,unusable
+450.018678,_db,0.5,unusable
+638.402867,_db,0.5,unusable
+717.127957,_db,0.5,unusable
+873.724612,_db,0.5,unusable
+869.468918,_db,0.5,unusable
+787.241865,_db,0.5,unusable
+405.127496,_db,0.5,unusable
+459.30835,_db,0.5,unusable
+715.35325,_db,0.5,unusable
+648.290743,_db,0.5,unusable
+403.144057,_db,0.5,unusable
+403.111127,_db,0.5,unusable
+704.087832,_db,0.5,unusable
+492.183018,_db,0.5,unusable
+651.442638,_db,0.5,unusable
+464.081379,_db,0.5,unusable
+861.40812,_db,0.5,unusable
+630.077296,_db,0.5,unusable
+827.439339,_db,0.5,unusable
+402.0212,_db,0.5,unusable
+1094.675022,_db,0.5,unusable
+825.42338,_db,0.5,unusable
+1122.404,_db,0.5,unusable
+463.148267,_db,0.5,unusable
+481.188259,_db,0.5,unusable
+744.083152,_db,0.5,unusable
+702.072317,_db,0.5,unusable
+592.121362,_db,0.5,unusable
+592.121558,_db,0.5,unusable
+651.115042,_db,0.5,unusable
+1045.477602,_db,0.5,unusable
+859.392477,_db,0.5,unusable
+849.467893,_db,0.5,unusable
+406.131203,_db,0.5,unusable
+641.383825,_db,0.5,unusable
+489.978873,_db,0.5,unusable
+1002.581042,_db,0.5,unusable
+713.338267,_db,0.5,unusable
+480.221921,_db,0.5,unusable
+641.383656,_db,0.5,unusable
+767.539792,_db,0.5,unusable
+406.135512,_db,0.5,unusable
+607.063677,_db,0.5,unusable
+1010.515579,_db,0.5,unusable
+565.238336,_db,0.5,unusable
+1095.595696,_db,0.5,unusable
+478.206342,_db,0.5,unusable
+1067.466085,_db,0.5,unusable
+560.078892,_db,0.5,unusable
+560.079554,_db,0.5,unusable
+837.284155,_db,0.5,unusable
+664.116334,_db,0.5,unusable
+431.142316,_db,0.5,unusable
+431.143235,_db,0.5,unusable
+431.196016,_db,0.5,unusable
+529.977432,_db,0.5,unusable
+792.566622,_db,0.5,unusable
+891.456521,_db,0.5,unusable
+433.101119,_db,0.5,unusable
+515.201379,_db,0.5,unusable
+417.163881,_db,0.5,unusable
+915.497034,_db,0.5,unusable
+836.658411,_db,0.5,unusable
+503.143118,_db,0.5,unusable
+467.143046,_db,0.5,unusable
+598.034855,_db,0.5,unusable
+504.981598,_db,0.5,unusable
+981.485073,_db,0.5,unusable
+619.163826,_db,0.5,unusable
+965.511505,_db,0.5,unusable
+635.14118,_db,0.5,unusable
+635.235625,_db,0.5,unusable
+1106.427331,_db,0.5,unusable
+550.172318,_db,0.5,unusable
+550.167005,_db,0.5,unusable
+1049.553209,_db,0.5,unusable
+681.06425,_db,0.5,unusable
+503.98116,_db,0.5,unusable
+612.187743,_db,0.5,unusable
+635.413086,_db,0.5,unusable
+421.12244,_db,0.5,unusable
+681.087494,_db,0.5,unusable
+666.131976,_db,0.5,unusable
+585.02556,_db,0.5,unusable
+428.036738,_db,0.5,unusable
+1067.465964,_db,0.5,unusable
+887.423816,_db,0.5,unusable
+545.958952,_db,0.5,unusable
+928.201817,_db,0.5,unusable
+441.163892,_db,0.5,unusable
+489.114722,_db,0.5,unusable
+1051.49203,_db,0.5,unusable
+443.052778,_db,0.5,unusable
+443.060049,_db,0.5,unusable
+535.227814,_db,0.5,unusable
+443.179716,_db,0.5,unusable
+505.952886,_db,0.5,unusable
+465.235277,_db,0.5,unusable
+673.194289,_db,0.5,unusable
+945.506757,_db,0.5,unusable
+953.453863,_db,0.5,unusable
+953.120019,_db,0.5,unusable
+875.483526,_db,0.5,unusable
+530.972595,_db,0.5,unusable
+443.143165,_db,0.5,unusable
+417.126923,_db,0.5,unusable
+466.012367,_db,0.5,unusable
+435.117028,_db,0.5,unusable
+502.037291,_db,0.5,unusable
+1005.485083,_db,0.5,unusable
+437.190724,_db,0.5,unusable
+613.159019,_db,0.5,unusable
+746.098947,_db,0.5,unusable
+637.07435,_db,0.5,unusable
+1122.706159,_db,0.5,unusable
+613.326511,_db,0.5,unusable
+878.502639,_db,0.5,unusable
+903.514852,_db,0.5,unusable
+465.992662,_db,0.5,unusable
+546.075134,_db,0.5,unusable
+927.641862,_db,0.5,unusable
+1143.482839,_db,0.5,unusable
+439.977107,_db,0.5,unusable
+877.499385,_db,0.5,unusable
+974.549745,_db,0.5,unusable
+813.4144,SHexCer 34:1;O2_db_db,0.0,unusable
+884.601311,PI-Cer d40:2_db_db,0.0,unusable
+794.518087,PI-Cer t34:2_db_db,0.0,unusable
+925.539587,SHexCer 42:1;O2_db_db,0.0,unusable
+834.481012,SHexCer 34:1;O3_db_db_db,0.0,unusable
+755.481817,PI-Cer t30:2_db_db,0.0,unusable
+764.469859,PI-Cer t30:0_db_db,0.0,unusable
+783.513031,PI-Cer t32:2_db_db,0.0,unusable
+778.565427,PI-Cer t30:1_db_db,0.0,unusable
+778.559325,PI-Cer t30:1_db_db,0.0,unusable
+908.51396,SHexCer 42:1;O3_db_db_db,0.0,unusable
+778.814662,_db,0.0,unusable
+966.157717,_db,0.0,unusable
+976.021826,_db,0.0,unusable
+778.426588,_db,0.0,unusable
+778.273126,_db,0.0,unusable
+778.212944,_db,0.0,unusable
+802.554059,_db,0.0,unusable
+778.020107,_db,0.0,unusable
+778.011062,_db,0.0,unusable
+777.619797,_db,0.0,unusable
+777.596254,_db,0.0,unusable
+966.099933,_db,0.0,unusable
+965.633389,_db,0.0,unusable
+976.328074,_db,0.0,unusable
+802.96731,_db,0.0,unusable
+777.529104,_db,0.0,unusable
+802.967793,_db,0.0,unusable
+976.450311,_db,0.0,unusable
+777.278229,_db,0.0,unusable
+777.016386,_db,0.0,unusable
+802.981071,_db,0.0,unusable
+803.091395,_db,0.0,unusable
+777.007259,_db,0.0,unusable
+776.924162,_db,0.0,unusable
+976.505911,_db,0.0,unusable
+776.606791,_db,0.0,unusable
+777.5833,_db,0.0,unusable
+965.491523,_db,0.0,unusable
+770.460423,_db,0.0,unusable
+770.500244,_db,0.0,unusable
+978.9904,_db,0.0,unusable
+804.484436,_db,0.0,unusable
+770.526442,_db,0.0,unusable
+770.526681,_db,0.0,unusable
+978.976218,_db,0.0,unusable
+978.679462,_db,0.0,unusable
+771.012569,_db,0.0,unusable
+771.210903,_db,0.0,unusable
+771.456505,_db,0.0,unusable
+771.45738,_db,0.0,unusable
+978.583526,_db,0.0,unusable
+978.521584,_db,0.0,unusable
+771.559862,_db,0.0,unusable
+978.487073,_db,0.0,unusable
+771.900986,_db,0.0,unusable
+772.006742,_db,0.0,unusable
+772.078378,_db,0.0,unusable
+771.074807,_db,0.0,unusable
+964.9768,_db,0.0,unusable
+980.481296,_db,0.0,unusable
+979.971122,_db,0.0,unusable
+805.47375,_db,0.0,unusable
+979.471137,_db,0.0,unusable
+768.565882,_db,0.0,unusable
+979.470227,_db,0.0,unusable
+768.996842,_db,0.0,unusable
+805.309173,_db,0.0,unusable
+769.170686,_db,0.0,unusable
+770.0166,_db,0.0,unusable
+805.195077,_db,0.0,unusable
+804.96508,_db,0.0,unusable
+965.096529,_db,0.0,unusable
+769.215519,_db,0.0,unusable
+769.375649,_db,0.0,unusable
+965.47251,_db,0.0,unusable
+965.483982,_db,0.0,unusable
+979.451098,_db,0.0,unusable
+769.523001,_db,0.0,unusable
+979.075575,_db,0.0,unusable
+769.19513,_db,0.0,unusable
+977.453852,_db,0.0,unusable
+774.926674,_db,0.0,unusable
+774.945648,_db,0.0,unusable
+775.178495,_db,0.0,unusable
+977.433935,_db,0.0,unusable
+775.282844,_db,0.0,unusable
+775.374109,_db,0.0,unusable
+775.407715,_db,0.0,unusable
+976.649525,_db,0.0,unusable
+976.649338,_db,0.0,unusable
+804.442353,_db,0.0,unusable
+976.638843,_db,0.0,unusable
+803.420666,_db,0.0,unusable
+803.404167,_db,0.0,unusable
+775.930067,_db,0.0,unusable
+775.980103,_db,0.0,unusable
+776.01314,_db,0.0,unusable
+776.20001,_db,0.0,unusable
+976.566118,_db,0.0,unusable
+776.529568,_db,0.0,unusable
+976.555281,_db,0.0,unusable
+776.580172,_db,0.0,unusable
+775.604015,_db,0.0,unusable
+978.466147,_db,0.0,unusable
+977.9732,_db,0.0,unusable
+772.848558,_db,0.0,unusable
+803.984507,_db,0.0,unusable
+772.92975,_db,0.0,unusable
+772.952313,_db,0.0,unusable
+772.994047,_db,0.0,unusable
+773.090433,_db,0.0,unusable
+803.961928,_db,0.0,unusable
+803.635292,_db,0.0,unusable
+977.652403,_db,0.0,unusable
+774.563942,_db,0.0,unusable
+774.002114,_db,0.0,unusable
+803.566902,_db,0.0,unusable
+774.09397,_db,0.0,unusable
+774.174952,_db,0.0,unusable
+774.322607,_db,0.0,unusable
+965.534869,_db,0.0,unusable
+774.394655,_db,0.0,unusable
+774.395357,_db,0.0,unusable
+774.512325,_db,0.0,unusable
+977.569114,_db,0.0,unusable
+773.588111,_db,0.0,unusable
+969.544929,_db,0.0,unusable
+791.562921,_db,0.0,unusable
+969.527134,_db,0.0,unusable
+791.922721,_db,0.0,unusable
+792.008221,_db,0.0,unusable
+969.524003,_db,0.0,unusable
+792.289343,_db,0.0,unusable
+792.434242,_db,0.0,unusable
+969.510051,_db,0.0,unusable
+800.439418,_db,0.0,unusable
+792.5213,_db,0.0,unusable
+792.542955,_db,0.0,unusable
+969.429169,_db,0.0,unusable
+800.410869,_db,0.0,unusable
+969.406219,_db,0.0,unusable
+792.67124,_db,0.0,unusable
+792.917436,_db,0.0,unusable
+800.132235,_db,0.0,unusable
+793.020626,_db,0.0,unusable
+793.188893,_db,0.0,unusable
+800.074584,_db,0.0,unusable
+967.55337,_db,0.0,unusable
+969.000478,_db,0.0,unusable
+793.57903,_db,0.0,unusable
+969.479861,_db,0.0,unusable
+788.90351,_db,0.0,unusable
+789.049059,_db,0.0,unusable
+789.364259,_db,0.0,unusable
+789.473714,_db,0.0,unusable
+966.992573,_db,0.0,unusable
+970.515101,_db,0.0,unusable
+789.523371,_db,0.0,unusable
+789.544625,_db,0.0,unusable
+790.148837,_db,0.0,unusable
+790.296392,_db,0.0,unusable
+967.102855,_db,0.0,unusable
+970.496992,_db,0.0,unusable
+791.489658,_db,0.0,unusable
+969.604457,_db,0.0,unusable
+969.569433,_db,0.0,unusable
+969.551608,_db,0.0,unusable
+790.919282,_db,0.0,unusable
+790.942488,_db,0.0,unusable
+791.004841,_db,0.0,unusable
+791.152416,_db,0.0,unusable
+967.508737,_db,0.0,unusable
+791.178656,_db,0.0,unusable
+969.547281,_db,0.0,unusable
+969.994159,_db,0.0,unusable
+795.572324,_db,0.0,unusable
+968.541959,_db,0.0,unusable
+795.585806,_db,0.0,unusable
+798.395615,_db,0.0,unusable
+797.995494,_db,0.0,unusable
+795.594452,_db,0.0,unusable
+795.615268,_db,0.0,unusable
+795.690318,_db,0.0,unusable
+797.911971,_db,0.0,unusable
+795.9841,_db,0.0,unusable
+796.306299,_db,0.0,unusable
+796.4658,_db,0.0,unusable
+968.531925,_db,0.0,unusable
+796.543248,_db,0.0,unusable
+968.518485,_db,0.0,unusable
+968.477029,_db,0.0,unusable
+796.714097,_db,0.0,unusable
+796.908566,_db,0.0,unusable
+797.150374,_db,0.0,unusable
+967.995944,_db,0.0,unusable
+968.046061,_db,0.0,unusable
+797.58812,_db,0.0,unusable
+797.587517,_db,0.0,unusable
+793.988669,_db,0.0,unusable
+794.023926,_db,0.0,unusable
+794.074469,_db,0.0,unusable
+794.186835,_db,0.0,unusable
+794.38786,_db,0.0,unusable
+794.449882,_db,0.0,unusable
+794.478234,_db,0.0,unusable
+968.990158,_db,0.0,unusable
+968.679802,_db,0.0,unusable
+799.069531,_db,0.0,unusable
+968.600768,_db,0.0,unusable
+794.55897,_db,0.0,unusable
+794.560183,_db,0.0,unusable
+968.547259,_db,0.0,unusable
+799.008943,_db,0.0,unusable
+798.906257,_db,0.0,unusable
+968.54282,_db,0.0,unusable
+798.729028,_db,0.0,unusable
+794.677476,_db,0.0,unusable
+967.575266,_db,0.0,unusable
+794.871741,_db,0.0,unusable
+794.892845,_db,0.0,unusable
+795.111236,_db,0.0,unusable
+967.613069,_db,0.0,unusable
+968.587018,_db,0.0,unusable
+781.436835,_db,0.0,unusable
+781.446031,_db,0.0,unusable
+781.495546,_db,0.0,unusable
+781.554799,_db,0.0,unusable
+781.593254,_db,0.0,unusable
+973.678184,_db,0.0,unusable
+781.638404,_db,0.0,unusable
+781.937898,_db,0.0,unusable
+973.657348,_db,0.0,unusable
+973.622438,_db,0.0,unusable
+973.568616,_db,0.0,unusable
+966.514098,_db,0.0,unusable
+783.558172,_db,0.0,unusable
+783.870422,_db,0.0,unusable
+784.151091,_db,0.0,unusable
+784.437799,_db,0.0,unusable
+784.465713,_db,0.0,unusable
+973.564366,_db,0.0,unusable
+973.562702,_db,0.0,unusable
+784.573467,_db,0.0,unusable
+973.300402,_db,0.0,unusable
+783.074564,_db,0.0,unusable
+966.477157,_db,0.0,unusable
+802.353944,_db,0.0,unusable
+778.897859,_db,0.0,unusable
+779.014387,_db,0.0,unusable
+802.0887,_db,0.0,unusable
+801.964128,_db,0.0,unusable
+801.923102,_db,0.0,unusable
+779.42988,_db,0.0,unusable
+779.458425,_db,0.0,unusable
+779.564368,_db,0.0,unusable
+801.61982,_db,0.0,unusable
+780.442272,_db,0.0,unusable
+780.470998,_db,0.0,unusable
+780.471005,_db,0.0,unusable
+975.489781,_db,0.0,unusable
+975.01852,_db,0.0,unusable
+974.647754,_db,0.0,unusable
+974.633037,_db,0.0,unusable
+780.567218,_db,0.0,unusable
+966.504317,_db,0.0,unusable
+966.513368,_db,0.0,unusable
+974.490092,_db,0.0,unusable
+780.93448,_db,0.0,unusable
+781.331862,_db,0.0,unusable
+975.553135,_db,0.0,unusable
+787.408047,_db,0.0,unusable
+801.085282,_db,0.0,unusable
+971.620367,_db,0.0,unusable
+800.965076,_db,0.0,unusable
+966.571725,_db,0.0,unusable
+971.561072,_db,0.0,unusable
+966.643194,_db,0.0,unusable
+787.526782,_db,0.0,unusable
+971.560157,_db,0.0,unusable
+971.502944,_db,0.0,unusable
+966.928373,_db,0.0,unusable
+784.65635,_db,0.0,unusable
+787.988128,_db,0.0,unusable
+788.011074,_db,0.0,unusable
+788.134633,_db,0.0,unusable
+966.951361,_db,0.0,unusable
+788.49007,_db,0.0,unusable
+971.501653,_db,0.0,unusable
+970.695865,_db,0.0,unusable
+970.616975,_db,0.0,unusable
+788.591669,_db,0.0,unusable
+970.557168,_db,0.0,unusable
+788.606587,_db,0.0,unusable
+788.606869,_db,0.0,unusable
+970.54403,_db,0.0,unusable
+768.371877,_db,0.0,unusable
+966.526014,_db,0.0,unusable
+972.917359,_db,0.0,unusable
+801.463794,_db,0.0,unusable
+784.970218,_db,0.0,unusable
+785.210021,_db,0.0,unusable
+801.443093,_db,0.0,unusable
+785.564908,_db,0.0,unusable
+972.653694,_db,0.0,unusable
+785.586251,_db,0.0,unusable
+972.622713,_db,0.0,unusable
+972.617584,_db,0.0,unusable
+801.443037,_db,0.0,unusable
+787.13123,_db,0.0,unusable
+785.990241,_db,0.0,unusable
+972.559964,_db,0.0,unusable
+972.558856,_db,0.0,unusable
+972.534165,_db,0.0,unusable
+972.512739,_db,0.0,unusable
+972.474539,_db,0.0,unusable
+972.296995,_db,0.0,unusable
+786.589564,_db,0.0,unusable
+971.699093,_db,0.0,unusable
+786.994074,_db,0.0,unusable
+801.389175,_db,0.0,unusable
+787.007563,_db,0.0,unusable
+785.669842,_db,0.0,unusable
+721.050127,_db,0.0,unusable
+721.059265,_db,0.0,unusable
+721.079794,_db,0.0,unusable
+721.195002,_db,0.0,unusable
+721.270853,_db,0.0,unusable
+721.91507,_db,0.0,unusable
+721.95641,_db,0.0,unusable
+721.960433,_db,0.0,unusable
+721.978085,_db,0.0,unusable
+722.062814,_db,0.0,unusable
+722.083303,_db,0.0,unusable
+722.246694,_db,0.0,unusable
+722.428798,_db,0.0,unusable
+722.517895,_db,0.0,unusable
+756.874237,_db,0.0,unusable
+724.947108,_db,0.0,unusable
+724.884825,_db,0.0,unusable
+993.029514,_db,0.0,unusable
+993.090603,_db,0.0,unusable
+724.496879,_db,0.0,unusable
+724.468551,_db,0.0,unusable
+724.21429,_db,0.0,unusable
+722.545763,_db,0.0,unusable
+724.129809,_db,0.0,unusable
+723.465346,_db,0.0,unusable
+723.376359,_db,0.0,unusable
+723.210683,_db,0.0,unusable
+723.086359,_db,0.0,unusable
+722.913356,_db,0.0,unusable
+722.84803,_db,0.0,unusable
+724.197969,_db,0.0,unusable
+717.932401,_db,0.0,unusable
+717.945466,_db,0.0,unusable
+717.967065,_db,0.0,unusable
+718.130886,_db,0.0,unusable
+718.328559,_db,0.0,unusable
+718.424253,_db,0.0,unusable
+718.433102,_db,0.0,unusable
+993.947363,_db,0.0,unusable
+718.876769,_db,0.0,unusable
+718.918024,_db,0.0,unusable
+718.92646,_db,0.0,unusable
+718.960059,_db,0.0,unusable
+719.01993,_db,0.0,unusable
+719.0434,_db,0.0,unusable
+719.235986,_db,0.0,unusable
+721.041677,_db,0.0,unusable
+720.983914,_db,0.0,unusable
+720.957256,_db,0.0,unusable
+720.915127,_db,0.0,unusable
+993.480347,_db,0.0,unusable
+993.524331,_db,0.0,unusable
+720.267482,_db,0.0,unusable
+720.230978,_db,0.0,unusable
+993.566071,_db,0.0,unusable
+720.023283,_db,0.0,unusable
+993.542696,_db,0.0,unusable
+719.980705,_db,0.0,unusable
+719.963542,_db,0.0,unusable
+719.963104,_db,0.0,unusable
+719.921246,_db,0.0,unusable
+719.916591,_db,0.0,unusable
+719.541361,_db,0.0,unusable
+720.0468,_db,0.0,unusable
+729.00425,_db,0.0,unusable
+729.100323,_db,0.0,unusable
+729.141078,_db,0.0,unusable
+729.243452,_db,0.0,unusable
+729.465859,_db,0.0,unusable
+729.523403,_db,0.0,unusable
+991.527045,_db,0.0,unusable
+729.940742,_db,0.0,unusable
+730.024066,_db,0.0,unusable
+991.507838,_db,0.0,unusable
+730.936729,_db,0.0,unusable
+731.020043,_db,0.0,unusable
+731.179526,_db,0.0,unusable
+724.968081,_db,0.0,unusable
+991.052064,_db,0.0,unusable
+733.474275,_db,0.0,unusable
+733.251625,_db,0.0,unusable
+733.195247,_db,0.0,unusable
+732.937038,_db,0.0,unusable
+731.259187,_db,0.0,unusable
+732.470663,_db,0.0,unusable
+732.344037,_db,0.0,unusable
+732.340516,_db,0.0,unusable
+732.023451,_db,0.0,unusable
+731.908358,_db,0.0,unusable
+991.462569,_db,0.0,unusable
+731.324229,_db,0.0,unusable
+991.075587,_db,0.0,unusable
+726.560177,_db,0.0,unusable
+992.539465,_db,0.0,unusable
+726.512565,_db,0.0,unusable
+726.371929,_db,0.0,unusable
+726.277986,_db,0.0,unusable
+728.920942,_db,0.0,unusable
+725.971389,_db,0.0,unusable
+992.947184,_db,0.0,unusable
+725.530176,_db,0.0,unusable
+992.989473,_db,0.0,unusable
+725.471908,_db,0.0,unusable
+725.392027,_db,0.0,unusable
+725.226363,_db,0.0,unusable
+725.10554,_db,0.0,unusable
+726.229558,_db,0.0,unusable
+991.952945,_db,0.0,unusable
+991.995839,_db,0.0,unusable
+992.055803,_db,0.0,unusable
+728.259927,_db,0.0,unusable
+728.201061,_db,0.0,unusable
+728.137608,_db,0.0,unusable
+727.903956,_db,0.0,unusable
+992.519962,_db,0.0,unusable
+992.07916,_db,0.0,unusable
+727.450271,_db,0.0,unusable
+727.431437,_db,0.0,unusable
+727.390087,_db,0.0,unusable
+727.281248,_db,0.0,unusable
+727.242294,_db,0.0,unusable
+727.084865,_db,0.0,unusable
+727.026878,_db,0.0,unusable
+727.591271,_db,0.0,unusable
+703.025,_db,0.0,unusable
+703.204672,_db,0.0,unusable
+703.227923,_db,0.0,unusable
+703.242041,_db,0.0,unusable
+997.537981,_db,0.0,unusable
+703.904217,_db,0.0,unusable
+703.989255,_db,0.0,unusable
+704.114085,_db,0.0,unusable
+704.257448,_db,0.0,unusable
+704.295584,_db,0.0,unusable
+704.356345,_db,0.0,unusable
+704.389883,_db,0.0,unusable
+704.41804,_db,0.0,unusable
+997.424148,_db,0.0,unusable
+717.918373,_db,0.0,unusable
+708.042098,_db,0.0,unusable
+707.541463,_db,0.0,unusable
+996.413968,_db,0.0,unusable
+707.179492,_db,0.0,unusable
+706.874055,_db,0.0,unusable
+996.473809,_db,0.0,unusable
+996.533885,_db,0.0,unusable
+705.983031,_db,0.0,unusable
+996.475404,_db,0.0,unusable
+705.940731,_db,0.0,unusable
+705.39323,_db,0.0,unusable
+705.22038,_db,0.0,unusable
+704.754096,_db,0.0,unusable
+704.578248,_db,0.0,unusable
+706.272727,_db,0.0,unusable
+697.306876,_db,0.0,unusable
+697.961641,_db,0.0,unusable
+698.01211,_db,0.0,unusable
+698.114037,_db,0.0,unusable
+698.19831,_db,0.0,unusable
+698.246633,_db,0.0,unusable
+698.342869,_db,0.0,unusable
+698.481181,_db,0.0,unusable
+698.848259,_db,0.0,unusable
+698.955429,_db,0.0,unusable
+699.089888,_db,0.0,unusable
+998.551253,_db,0.0,unusable
+699.117631,_db,0.0,unusable
+699.210315,_db,0.0,unusable
+699.25,_db,0.0,unusable
+702.986086,_db,0.0,unusable
+702.913625,_db,0.0,unusable
+702.903048,_db,0.0,unusable
+702.896197,_db,0.0,unusable
+998.427845,_db,0.0,unusable
+701.952747,_db,0.0,unusable
+998.490527,_db,0.0,unusable
+701.267882,_db,0.0,unusable
+998.515407,_db,0.0,unusable
+701.009353,_db,0.0,unusable
+700.949291,_db,0.0,unusable
+700.91553,_db,0.0,unusable
+700.884912,_db,0.0,unusable
+700.866173,_db,0.0,unusable
+700.264593,_db,0.0,unusable
+700.214115,_db,0.0,unusable
+699.994323,_db,0.0,unusable
+701.226382,_db,0.0,unusable
+713.30213,_db,0.0,unusable
+994.949852,_db,0.0,unusable
+713.595418,_db,0.0,unusable
+714.410657,_db,0.0,unusable
+994.947679,_db,0.0,unusable
+714.598844,_db,0.0,unusable
+714.926368,_db,0.0,unusable
+714.96268,_db,0.0,unusable
+715.084841,_db,0.0,unusable
+715.242358,_db,0.0,unusable
+994.541795,_db,0.0,unusable
+994.094422,_db,0.0,unusable
+717.429716,_db,0.0,unusable
+717.30859,_db,0.0,unusable
+717.100673,_db,0.0,unusable
+717.004193,_db,0.0,unusable
+716.942272,_db,0.0,unusable
+716.929733,_db,0.0,unusable
+715.968268,_db,0.0,unusable
+994.278796,_db,0.0,unusable
+994.460863,_db,0.0,unusable
+716.426315,_db,0.0,unusable
+716.218638,_db,0.0,unusable
+716.124575,_db,0.0,unusable
+716.088291,_db,0.0,unusable
+716.040236,_db,0.0,unusable
+716.858902,_db,0.0,unusable
+710.955235,_db,0.0,unusable
+710.892976,_db,0.0,unusable
+710.592895,_db,0.0,unusable
+710.460461,_db,0.0,unusable
+710.453046,_db,0.0,unusable
+710.422298,_db,0.0,unusable
+713.226455,_db,0.0,unusable
+710.198778,_db,0.0,unusable
+995.570811,_db,0.0,unusable
+710.062451,_db,0.0,unusable
+709.449804,_db,0.0,unusable
+709.19499,_db,0.0,unusable
+995.9457,_db,0.0,unusable
+708.939604,_db,0.0,unusable
+710.304269,_db,0.0,unusable
+713.105469,_db,0.0,unusable
+712.947221,_db,0.0,unusable
+712.925798,_db,0.0,unusable
+712.504123,_db,0.0,unusable
+995.52567,_db,0.0,unusable
+711.052929,_db,0.0,unusable
+712.00915,_db,0.0,unusable
+711.929951,_db,0.0,unusable
+995.544893,_db,0.0,unusable
+711.322643,_db,0.0,unusable
+711.210754,_db,0.0,unusable
+711.089528,_db,0.0,unusable
+711.065548,_db,0.0,unusable
+711.057031,_db,0.0,unusable
+712.335513,_db,0.0,unusable
+985.404554,_db,0.0,unusable
+755.594639,_db,0.0,unusable
+756.118548,_db,0.0,unusable
+756.465815,_db,0.0,unusable
+984.591879,_db,0.0,unusable
+984.573043,_db,0.0,unusable
+984.560966,_db,0.0,unusable
+984.536328,_db,0.0,unusable
+756.613658,_db,0.0,unusable
+756.832714,_db,0.0,unusable
+756.91602,_db,0.0,unusable
+756.934576,_db,0.0,unusable
+733.906336,_db,0.0,unusable
+983.642882,_db,0.0,unusable
+984.498603,_db,0.0,unusable
+984.513153,_db,0.0,unusable
+758.500679,_db,0.0,unusable
+758.171633,_db,0.0,unusable
+758.002786,_db,0.0,unusable
+756.978033,_db,0.0,unusable
+984.533055,_db,0.0,unusable
+757.362735,_db,0.0,unusable
+757.195133,_db,0.0,unusable
+757.122163,_db,0.0,unusable
+757.095405,_db,0.0,unusable
+756.999208,_db,0.0,unusable
+757.919289,_db,0.0,unusable
+751.930178,_db,0.0,unusable
+751.980713,_db,0.0,unusable
+752.41102,_db,0.0,unusable
+752.528333,_db,0.0,unusable
+752.606706,_db,0.0,unusable
+752.924969,_db,0.0,unusable
+752.953891,_db,0.0,unusable
+753.048933,_db,0.0,unusable
+753.337123,_db,0.0,unusable
+753.414381,_db,0.0,unusable
+753.446618,_db,0.0,unusable
+753.4758,_db,0.0,unusable
+986.471236,_db,0.0,unusable
+985.484075,_db,0.0,unusable
+755.490248,_db,0.0,unusable
+755.462455,_db,0.0,unusable
+755.064673,_db,0.0,unusable
+985.501347,_db,0.0,unusable
+985.564338,_db,0.0,unusable
+754.591491,_db,0.0,unusable
+985.596668,_db,0.0,unusable
+754.48686,_db,0.0,unusable
+754.427082,_db,0.0,unusable
+754.408782,_db,0.0,unusable
+754.408723,_db,0.0,unusable
+754.214416,_db,0.0,unusable
+753.996199,_db,0.0,unusable
+986.408732,_db,0.0,unusable
+763.507965,_db,0.0,unusable
+982.094846,_db,0.0,unusable
+764.008651,_db,0.0,unusable
+981.606909,_db,0.0,unusable
+981.450518,_db,0.0,unusable
+764.535283,_db,0.0,unusable
+981.091424,_db,0.0,unusable
+765.175181,_db,0.0,unusable
+980.695171,_db,0.0,unusable
+766.093487,_db,0.0,unusable
+766.215687,_db,0.0,unusable
+766.426901,_db,0.0,unusable
+983.54882,_db,0.0,unusable
+768.167457,_db,0.0,unusable
+767.896484,_db,0.0,unusable
+767.65896,_db,0.0,unusable
+767.583585,_db,0.0,unusable
+767.562799,_db,0.0,unusable
+980.482055,_db,0.0,unusable
+980.56068,_db,0.0,unusable
+767.491077,_db,0.0,unusable
+767.489493,_db,0.0,unusable
+767.096776,_db,0.0,unusable
+766.655592,_db,0.0,unusable
+766.634439,_db,0.0,unusable
+980.541099,_db,0.0,unusable
+980.560214,_db,0.0,unusable
+766.528608,_db,0.0,unusable
+980.503489,_db,0.0,unusable
+982.901788,_db,0.0,unusable
+760.516775,_db,0.0,unusable
+760.50755,_db,0.0,unusable
+760.079904,_db,0.0,unusable
+760.018143,_db,0.0,unusable
+759.955916,_db,0.0,unusable
+982.92498,_db,0.0,unusable
+983.483133,_db,0.0,unusable
+759.549702,_db,0.0,unusable
+983.52419,_db,0.0,unusable
+759.015043,_db,0.0,unusable
+758.952749,_db,0.0,unusable
+758.913975,_db,0.0,unusable
+758.870979,_db,0.0,unusable
+982.45442,_db,0.0,unusable
+763.457922,_db,0.0,unusable
+763.349093,_db,0.0,unusable
+763.347976,_db,0.0,unusable
+763.242143,_db,0.0,unusable
+762.923843,_db,0.0,unusable
+760.640742,_db,0.0,unusable
+762.59147,_db,0.0,unusable
+982.48858,_db,0.0,unusable
+982.520527,_db,0.0,unusable
+762.00206,_db,0.0,unusable
+761.907241,_db,0.0,unusable
+761.053205,_db,0.0,unusable
+982.479139,_db,0.0,unusable
+739.242433,_db,0.0,unusable
+989.977876,_db,0.0,unusable
+739.494642,_db,0.0,unusable
+740.054918,_db,0.0,unusable
+740.063441,_db,0.0,unusable
+740.218473,_db,0.0,unusable
+740.227388,_db,0.0,unusable
+740.236446,_db,0.0,unusable
+989.542765,_db,0.0,unusable
+989.511993,_db,0.0,unusable
+989.51129,_db,0.0,unusable
+751.588871,_db,0.0,unusable
+988.697136,_db,0.0,unusable
+742.215641,_db,0.0,unusable
+742.043697,_db,0.0,unusable
+741.945229,_db,0.0,unusable
+988.89115,_db,0.0,unusable
+741.523682,_db,0.0,unusable
+740.858816,_db,0.0,unusable
+989.490419,_db,0.0,unusable
+741.222004,_db,0.0,unusable
+741.184029,_db,0.0,unusable
+741.100044,_db,0.0,unusable
+741.05773,_db,0.0,unusable
+740.941921,_db,0.0,unusable
+740.920878,_db,0.0,unusable
+741.492677,_db,0.0,unusable
+736.006831,_db,0.0,unusable
+990.545782,_db,0.0,unusable
+735.956172,_db,0.0,unusable
+990.655212,_db,0.0,unusable
+735.231096,_db,0.0,unusable
+735.210714,_db,0.0,unusable
+739.051709,_db,0.0,unusable
+735.038511,_db,0.0,unusable
+734.975714,_db,0.0,unusable
+734.952801,_db,0.0,unusable
+734.943345,_db,0.0,unusable
+990.992419,_db,0.0,unusable
+734.199363,_db,0.0,unusable
+734.050807,_db,0.0,unusable
+733.919665,_db,0.0,unusable
+990.950277,_db,0.0,unusable
+990.491833,_db,0.0,unusable
+738.924814,_db,0.0,unusable
+738.822224,_db,0.0,unusable
+738.519823,_db,0.0,unusable
+990.502811,_db,0.0,unusable
+738.057357,_db,0.0,unusable
+737.963498,_db,0.0,unusable
+990.503466,_db,0.0,unusable
+737.481113,_db,0.0,unusable
+737.226484,_db,0.0,unusable
+737.212637,_db,0.0,unusable
+990.523787,_db,0.0,unusable
+737.053948,_db,0.0,unusable
+736.951081,_db,0.0,unusable
+738.02285,_db,0.0,unusable
+748.034552,_db,0.0,unusable
+748.444318,_db,0.0,unusable
+987.499175,_db,0.0,unusable
+987.476209,_db,0.0,unusable
+748.548688,_db,0.0,unusable
+748.575809,_db,0.0,unusable
+987.441933,_db,0.0,unusable
+987.432144,_db,0.0,unusable
+748.910939,_db,0.0,unusable
+749.012944,_db,0.0,unusable
+986.670031,_db,0.0,unusable
+749.588364,_db,0.0,unusable
+750.119637,_db,0.0,unusable
+750.241875,_db,0.0,unusable
+986.488673,_db,0.0,unusable
+986.514362,_db,0.0,unusable
+986.528876,_db,0.0,unusable
+986.607282,_db,0.0,unusable
+751.407636,_db,0.0,unusable
+751.242858,_db,0.0,unusable
+751.225998,_db,0.0,unusable
+750.395651,_db,0.0,unusable
+750.926654,_db,0.0,unusable
+750.917648,_db,0.0,unusable
+750.885168,_db,0.0,unusable
+750.591523,_db,0.0,unusable
+986.633,_db,0.0,unusable
+986.669366,_db,0.0,unusable
+750.51268,_db,0.0,unusable
+750.45241,_db,0.0,unusable
+751.121484,_db,0.0,unusable
+745.095331,_db,0.0,unusable
+745.05863,_db,0.0,unusable
+744.998893,_db,0.0,unusable
+987.966569,_db,0.0,unusable
+988.473105,_db,0.0,unusable
+744.4575,_db,0.0,unusable
+743.538775,_db,0.0,unusable
+748.018313,_db,0.0,unusable
+988.486677,_db,0.0,unusable
+743.471937,_db,0.0,unusable
+743.25515,_db,0.0,unusable
+743.079627,_db,0.0,unusable
+742.939705,_db,0.0,unusable
+988.50765,_db,0.0,unusable
+988.648511,_db,0.0,unusable
+988.675688,_db,0.0,unusable
+743.489725,_db,0.0,unusable
+747.60909,_db,0.0,unusable
+747.572871,_db,0.0,unusable
+987.517558,_db,0.0,unusable
+747.000998,_db,0.0,unusable
+746.625433,_db,0.0,unusable
+987.610197,_db,0.0,unusable
+987.611935,_db,0.0,unusable
+745.252289,_db,0.0,unusable
+746.007144,_db,0.0,unusable
+745.997794,_db,0.0,unusable
+745.933284,_db,0.0,unusable
+745.914614,_db,0.0,unusable
+745.557165,_db,0.0,unusable
+987.67292,_db,0.0,unusable
+745.45682,_db,0.0,unusable
+987.656254,_db,0.0,unusable
+930.544688,_db,0.0,unusable
+867.633304,_db,0.0,unusable
+867.924367,_db,0.0,unusable
+868.039469,_db,0.0,unusable
+868.244907,_db,0.0,unusable
+868.43187,_db,0.0,unusable
+868.465526,_db,0.0,unusable
+868.477522,_db,0.0,unusable
+868.490514,_db,0.0,unusable
+868.498017,_db,0.0,unusable
+868.625324,_db,0.0,unusable
+868.625925,_db,0.0,unusable
+813.88582,_db,0.0,unusable
+870.47295,_db,0.0,unusable
+870.472559,_db,0.0,unusable
+870.463221,_db,0.0,unusable
+870.462896,_db,0.0,unusable
+870.430352,_db,0.0,unusable
+869.93539,_db,0.0,unusable
+869.73004,_db,0.0,unusable
+930.465921,_db,0.0,unusable
+869.628918,_db,0.0,unusable
+869.494413,_db,0.0,unusable
+869.493595,_db,0.0,unusable
+869.435094,_db,0.0,unusable
+868.953227,_db,0.0,unusable
+868.848776,_db,0.0,unusable
+865.020026,_db,0.0,unusable
+930.585755,_db,0.0,unusable
+930.600062,_db,0.0,unusable
+864.455429,_db,0.0,unusable
+864.401128,_db,0.0,unusable
+864.153615,_db,0.0,unusable
+863.483523,_db,0.0,unusable
+863.405471,_db,0.0,unusable
+863.379554,_db,0.0,unusable
+931.033953,_db,0.0,unusable
+931.043767,_db,0.0,unusable
+862.499438,_db,0.0,unusable
+862.411406,_db,0.0,unusable
+867.035928,_db,0.0,unusable
+866.621306,_db,0.0,unusable
+930.575853,_db,0.0,unusable
+866.471088,_db,0.0,unusable
+866.450122,_db,0.0,unusable
+866.416222,_db,0.0,unusable
+866.398833,_db,0.0,unusable
+865.157008,_db,0.0,unusable
+865.701217,_db,0.0,unusable
+865.691532,_db,0.0,unusable
+865.635975,_db,0.0,unusable
+865.617773,_db,0.0,unusable
+865.606525,_db,0.0,unusable
+865.403897,_db,0.0,unusable
+866.040297,_db,0.0,unusable
+875.077851,_db,0.0,unusable
+875.067029,_db,0.0,unusable
+874.838077,_db,0.0,unusable
+874.708771,_db,0.0,unusable
+929.036613,_db,0.0,unusable
+874.563112,_db,0.0,unusable
+874.55399,_db,0.0,unusable
+870.481821,_db,0.0,unusable
+929.205052,_db,0.0,unusable
+874.520252,_db,0.0,unusable
+929.49168,_db,0.0,unusable
+929.573293,_db,0.0,unusable
+874.236589,_db,0.0,unusable
+874.073461,_db,0.0,unusable
+929.586333,_db,0.0,unusable
+873.705313,_db,0.0,unusable
+874.5537,_db,0.0,unusable
+877.440138,_db,0.0,unusable
+876.958003,_db,0.0,unusable
+876.874709,_db,0.0,unusable
+876.537545,_db,0.0,unusable
+928.582868,_db,0.0,unusable
+876.505758,_db,0.0,unusable
+875.460693,_db,0.0,unusable
+876.456627,_db,0.0,unusable
+876.435939,_db,0.0,unusable
+876.079939,_db,0.0,unusable
+876.071118,_db,0.0,unusable
+875.695927,_db,0.0,unusable
+875.575863,_db,0.0,unusable
+928.687151,_db,0.0,unusable
+928.933078,_db,0.0,unusable
+876.486712,_db,0.0,unusable
+871.484842,_db,0.0,unusable
+871.46716,_db,0.0,unusable
+871.466587,_db,0.0,unusable
+871.430196,_db,0.0,unusable
+871.054518,_db,0.0,unusable
+873.594664,_db,0.0,unusable
+870.957233,_db,0.0,unusable
+870.928761,_db,0.0,unusable
+930.202837,_db,0.0,unusable
+870.652465,_db,0.0,unusable
+930.203596,_db,0.0,unusable
+870.506104,_db,0.0,unusable
+870.489735,_db,0.0,unusable
+870.968904,_db,0.0,unusable
+873.525863,_db,0.0,unusable
+873.484964,_db,0.0,unusable
+873.070014,_db,0.0,unusable
+872.986686,_db,0.0,unusable
+872.966653,_db,0.0,unusable
+929.596328,_db,0.0,unusable
+871.972291,_db,0.0,unusable
+872.522471,_db,0.0,unusable
+930.004814,_db,0.0,unusable
+930.039956,_db,0.0,unusable
+930.090304,_db,0.0,unusable
+872.453095,_db,0.0,unusable
+872.022864,_db,0.0,unusable
+872.591757,_db,0.0,unusable
+935.47909,_db,0.0,unusable
+935.476926,_db,0.0,unusable
+852.536672,_db,0.0,unusable
+935.424037,_db,0.0,unusable
+935.085661,_db,0.0,unusable
+935.02538,_db,0.0,unusable
+852.776323,_db,0.0,unusable
+852.874861,_db,0.0,unusable
+853.020254,_db,0.0,unusable
+853.144196,_db,0.0,unusable
+853.474197,_db,0.0,unusable
+934.922398,_db,0.0,unusable
+934.578287,_db,0.0,unusable
+862.294127,_db,0.0,unusable
+933.60535,_db,0.0,unusable
+854.648749,_db,0.0,unusable
+933.928133,_db,0.0,unusable
+934.411609,_db,0.0,unusable
+934.437444,_db,0.0,unusable
+854.554205,_db,0.0,unusable
+934.473875,_db,0.0,unusable
+854.476367,_db,0.0,unusable
+934.556914,_db,0.0,unusable
+854.468394,_db,0.0,unusable
+853.961554,_db,0.0,unusable
+853.934733,_db,0.0,unusable
+853.779762,_db,0.0,unusable
+853.769919,_db,0.0,unusable
+934.515893,_db,0.0,unusable
+851.438917,_db,0.0,unusable
+851.387378,_db,0.0,unusable
+936.447965,_db,0.0,unusable
+851.239851,_db,0.0,unusable
+850.760624,_db,0.0,unusable
+936.455382,_db,0.0,unusable
+850.643759,_db,0.0,unusable
+936.476872,_db,0.0,unusable
+850.56361,_db,0.0,unusable
+850.554059,_db,0.0,unusable
+850.553799,_db,0.0,unusable
+936.499506,_db,0.0,unusable
+936.572961,_db,0.0,unusable
+850.473109,_db,0.0,unusable
+852.458087,_db,0.0,unusable
+852.442461,_db,0.0,unusable
+852.439453,_db,0.0,unusable
+851.95048,_db,0.0,unusable
+851.763367,_db,0.0,unusable
+851.458724,_db,0.0,unusable
+935.519143,_db,0.0,unusable
+936.090358,_db,0.0,unusable
+851.602014,_db,0.0,unusable
+936.420798,_db,0.0,unusable
+936.427266,_db,0.0,unusable
+851.54143,_db,0.0,unusable
+851.515746,_db,0.0,unusable
+851.500826,_db,0.0,unusable
+858.9296,_db,0.0,unusable
+858.864197,_db,0.0,unusable
+932.037984,_db,0.0,unusable
+932.531889,_db,0.0,unusable
+932.560128,_db,0.0,unusable
+932.600903,_db,0.0,unusable
+858.444703,_db,0.0,unusable
+854.933891,_db,0.0,unusable
+858.078916,_db,0.0,unusable
+857.931096,_db,0.0,unusable
+857.573647,_db,0.0,unusable
+932.733855,_db,0.0,unusable
+857.549919,_db,0.0,unusable
+857.526458,_db,0.0,unusable
+857.505173,_db,0.0,unusable
+858.262644,_db,0.0,unusable
+861.617989,_db,0.0,unusable
+860.737807,_db,0.0,unusable
+931.449906,_db,0.0,unusable
+931.469317,_db,0.0,unusable
+860.531807,_db,0.0,unusable
+860.145784,_db,0.0,unusable
+859.929423,_db,0.0,unusable
+858.934204,_db,0.0,unusable
+859.709043,_db,0.0,unusable
+859.565474,_db,0.0,unusable
+931.588893,_db,0.0,unusable
+931.730331,_db,0.0,unusable
+859.509578,_db,0.0,unusable
+859.448134,_db,0.0,unusable
+859.266134,_db,0.0,unusable
+856.039197,_db,0.0,unusable
+855.979384,_db,0.0,unusable
+855.935967,_db,0.0,unusable
+855.652124,_db,0.0,unusable
+855.633372,_db,0.0,unusable
+933.60478,_db,0.0,unusable
+855.570316,_db,0.0,unusable
+857.492427,_db,0.0,unusable
+855.511078,_db,0.0,unusable
+855.490227,_db,0.0,unusable
+855.476662,_db,0.0,unusable
+855.471892,_db,0.0,unusable
+855.059417,_db,0.0,unusable
+855.036016,_db,0.0,unusable
+854.976063,_db,0.0,unusable
+854.943296,_db,0.0,unusable
+855.544108,_db,0.0,unusable
+857.451224,_db,0.0,unusable
+857.075315,_db,0.0,unusable
+857.065148,_db,0.0,unusable
+932.924618,_db,0.0,unusable
+857.01279,_db,0.0,unusable
+856.973128,_db,0.0,unusable
+856.931044,_db,0.0,unusable
+856.06296,_db,0.0,unusable
+856.609873,_db,0.0,unusable
+933.00782,_db,0.0,unusable
+856.489021,_db,0.0,unusable
+856.636708,_db,0.0,unusable
+922.469902,_db,0.0,unusable
+902.553469,_db,0.0,unusable
+922.006468,_db,0.0,unusable
+921.605209,_db,0.0,unusable
+903.557703,_db,0.0,unusable
+903.578907,_db,0.0,unusable
+903.912711,_db,0.0,unusable
+904.183531,_db,0.0,unusable
+904.388338,_db,0.0,unusable
+904.426867,_db,0.0,unusable
+904.518596,_db,0.0,unusable
+905.186764,_db,0.0,unusable
+905.432643,_db,0.0,unusable
+905.4933,_db,0.0,unusable
+877.46007,_db,0.0,unusable
+908.562369,_db,0.0,unusable
+920.541447,_db,0.0,unusable
+908.500301,_db,0.0,unusable
+908.458491,_db,0.0,unusable
+920.591145,_db,0.0,unusable
+907.509684,_db,0.0,unusable
+907.090771,_db,0.0,unusable
+905.53711,_db,0.0,unusable
+906.575905,_db,0.0,unusable
+920.601619,_db,0.0,unusable
+920.986061,_db,0.0,unusable
+906.033068,_db,0.0,unusable
+905.577554,_db,0.0,unusable
+905.573376,_db,0.0,unusable
+921.46614,_db,0.0,unusable
+921.573077,_db,0.0,unusable
+906.581609,_db,0.0,unusable
+899.609401,_db,0.0,unusable
+899.570369,_db,0.0,unusable
+899.523721,_db,0.0,unusable
+923.010123,_db,0.0,unusable
+899.025707,_db,0.0,unusable
+923.023742,_db,0.0,unusable
+902.437893,_db,0.0,unusable
+898.617529,_db,0.0,unusable
+898.6168,_db,0.0,unusable
+898.606849,_db,0.0,unusable
+898.605866,_db,0.0,unusable
+898.520523,_db,0.0,unusable
+923.524052,_db,0.0,unusable
+898.488471,_db,0.0,unusable
+898.468711,_db,0.0,unusable
+898.618672,_db,0.0,unusable
+902.109229,_db,0.0,unusable
+902.044889,_db,0.0,unusable
+901.756308,_db,0.0,unusable
+901.541819,_db,0.0,unusable
+922.520479,_db,0.0,unusable
+901.192522,_db,0.0,unusable
+901.041512,_db,0.0,unusable
+900.623943,_db,0.0,unusable
+922.557524,_db,0.0,unusable
+900.538386,_db,0.0,unusable
+922.616909,_db,0.0,unusable
+900.484947,_db,0.0,unusable
+900.466739,_db,0.0,unusable
+900.024664,_db,0.0,unusable
+899.76596,_db,0.0,unusable
+901.027959,_db,0.0,unusable
+915.475402,_db,0.0,unusable
+915.030658,_db,0.0,unusable
+914.830679,_db,0.0,unusable
+914.611962,_db,0.0,unusable
+914.493544,_db,0.0,unusable
+914.471416,_db,0.0,unusable
+908.924864,_db,0.0,unusable
+914.452955,_db,0.0,unusable
+914.442239,_db,0.0,unusable
+914.378352,_db,0.0,unusable
+914.229221,_db,0.0,unusable
+914.027416,_db,0.0,unusable
+919.669968,_db,0.0,unusable
+913.700741,_db,0.0,unusable
+914.462734,_db,0.0,unusable
+918.52572,_db,0.0,unusable
+918.49993,_db,0.0,unusable
+917.95426,_db,0.0,unusable
+917.52882,_db,0.0,unusable
+917.490293,_db,0.0,unusable
+919.521662,_db,0.0,unusable
+917.452318,_db,0.0,unusable
+917.434252,_db,0.0,unusable
+916.950735,_db,0.0,unusable
+919.450157,_db,0.0,unusable
+916.509979,_db,0.0,unusable
+916.458489,_db,0.0,unusable
+915.772179,_db,0.0,unusable
+917.462358,_db,0.0,unusable
+910.942767,_db,0.0,unusable
+910.900407,_db,0.0,unusable
+919.8866,_db,0.0,unusable
+910.548957,_db,0.0,unusable
+910.439639,_db,0.0,unusable
+920.473893,_db,0.0,unusable
+913.637517,_db,0.0,unusable
+910.339282,_db,0.0,unusable
+909.669288,_db,0.0,unusable
+909.606679,_db,0.0,unusable
+920.525426,_db,0.0,unusable
+909.503756,_db,0.0,unusable
+909.408191,_db,0.0,unusable
+909.010302,_db,0.0,unusable
+910.411523,_db,0.0,unusable
+913.599601,_db,0.0,unusable
+919.686221,_db,0.0,unusable
+913.458776,_db,0.0,unusable
+913.439264,_db,0.0,unusable
+913.033326,_db,0.0,unusable
+913.023355,_db,0.0,unusable
+912.595925,_db,0.0,unusable
+911.025948,_db,0.0,unusable
+912.455353,_db,0.0,unusable
+912.434705,_db,0.0,unusable
+912.029373,_db,0.0,unusable
+911.946187,_db,0.0,unusable
+911.620422,_db,0.0,unusable
+911.442992,_db,0.0,unusable
+919.689167,_db,0.0,unusable
+885.669357,_db,0.0,unusable
+926.471075,_db,0.0,unusable
+885.475533,_db,0.0,unusable
+885.408108,_db,0.0,unusable
+885.04687,_db,0.0,unusable
+884.927036,_db,0.0,unusable
+926.522903,_db,0.0,unusable
+898.437843,_db,0.0,unusable
+884.460331,_db,0.0,unusable
+884.424365,_db,0.0,unusable
+884.218761,_db,0.0,unusable
+884.05074,_db,0.0,unusable
+884.034464,_db,0.0,unusable
+883.745735,_db,0.0,unusable
+883.626235,_db,0.0,unusable
+884.472028,_db,0.0,unusable
+888.769164,_db,0.0,unusable
+888.744118,_db,0.0,unusable
+888.454742,_db,0.0,unusable
+888.427036,_db,0.0,unusable
+887.996699,_db,0.0,unusable
+887.94625,_db,0.0,unusable
+885.750248,_db,0.0,unusable
+926.165092,_db,0.0,unusable
+887.443463,_db,0.0,unusable
+886.942809,_db,0.0,unusable
+886.90139,_db,0.0,unusable
+886.5804,_db,0.0,unusable
+926.312529,_db,0.0,unusable
+886.438849,_db,0.0,unusable
+887.765833,_db,0.0,unusable
+927.020852,_db,0.0,unusable
+880.099608,_db,0.0,unusable
+879.804441,_db,0.0,unusable
+927.316015,_db,0.0,unusable
+879.533755,_db,0.0,unusable
+879.095986,_db,0.0,unusable
+878.648194,_db,0.0,unusable
+883.030863,_db,0.0,unusable
+927.416658,_db,0.0,unusable
+927.527324,_db,0.0,unusable
+927.555834,_db,0.0,unusable
+878.453211,_db,0.0,unusable
+878.267878,_db,0.0,unusable
+877.961508,_db,0.0,unusable
+877.788561,_db,0.0,unusable
+927.938803,_db,0.0,unusable
+878.647744,_db,0.0,unusable
+926.523638,_db,0.0,unusable
+926.552296,_db,0.0,unusable
+882.230052,_db,0.0,unusable
+882.014006,_db,0.0,unusable
+881.949591,_db,0.0,unusable
+881.93067,_db,0.0,unusable
+926.958381,_db,0.0,unusable
+881.63816,_db,0.0,unusable
+881.015111,_db,0.0,unusable
+880.663775,_db,0.0,unusable
+880.636851,_db,0.0,unusable
+926.935304,_db,0.0,unusable
+880.569592,_db,0.0,unusable
+895.653575,_db,0.0,unusable
+895.617118,_db,0.0,unusable
+924.47402,_db,0.0,unusable
+895.431356,_db,0.0,unusable
+895.030956,_db,0.0,unusable
+888.94071,_db,0.0,unusable
+894.930658,_db,0.0,unusable
+894.929192,_db,0.0,unusable
+924.487013,_db,0.0,unusable
+924.632618,_db,0.0,unusable
+894.525844,_db,0.0,unusable
+894.503747,_db,0.0,unusable
+894.968752,_db,0.0,unusable
+897.923499,_db,0.0,unusable
+897.761428,_db,0.0,unusable
+897.525923,_db,0.0,unusable
+897.466165,_db,0.0,unusable
+897.444566,_db,0.0,unusable
+895.690016,_db,0.0,unusable
+896.522007,_db,0.0,unusable
+896.497166,_db,0.0,unusable
+896.495453,_db,0.0,unusable
+924.027368,_db,0.0,unusable
+896.46147,_db,0.0,unusable
+896.034341,_db,0.0,unusable
+895.972203,_db,0.0,unusable
+897.070093,_db,0.0,unusable
+892.483592,_db,0.0,unusable
+892.43193,_db,0.0,unusable
+892.431668,_db,0.0,unusable
+892.134794,_db,0.0,unusable
+891.716253,_db,0.0,unusable
+891.655157,_db,0.0,unusable
+891.478348,_db,0.0,unusable
+894.502527,_db,0.0,unusable
+890.44307,_db,0.0,unusable
+890.425073,_db,0.0,unusable
+890.41538,_db,0.0,unusable
+889.458486,_db,0.0,unusable
+889.439895,_db,0.0,unusable
+889.421066,_db,0.0,unusable
+889.065088,_db,0.0,unusable
+889.002421,_db,0.0,unusable
+891.080898,_db,0.0,unusable
+894.481155,_db,0.0,unusable
+924.919707,_db,0.0,unusable
+894.429506,_db,0.0,unusable
+894.187729,_db,0.0,unusable
+894.018887,_db,0.0,unusable
+893.935564,_db,0.0,unusable
+893.667073,_db,0.0,unusable
+892.51003,_db,0.0,unusable
+893.529248,_db,0.0,unusable
+925.477303,_db,0.0,unusable
+893.434715,_db,0.0,unusable
+893.014869,_db,0.0,unusable
+892.932009,_db,0.0,unusable
+892.719791,_db,0.0,unusable
+892.567375,_db,0.0,unusable
+925.499454,_db,0.0,unusable
+893.571173,_db,0.0,unusable
+818.890555,_db,0.0,unusable
+819.110046,_db,0.0,unusable
+956.503661,_db,0.0,unusable
+956.481686,_db,0.0,unusable
+956.423961,_db,0.0,unusable
+819.331294,_db,0.0,unusable
+956.323124,_db,0.0,unusable
+819.549299,_db,0.0,unusable
+819.633465,_db,0.0,unusable
+955.590055,_db,0.0,unusable
+819.71045,_db,0.0,unusable
+820.307053,_db,0.0,unusable
+954.562269,_db,0.0,unusable
+954.344105,_db,0.0,unusable
+954.039807,_db,0.0,unusable
+850.471905,_db,0.0,unusable
+952.568279,_db,0.0,unusable
+822.481335,_db,0.0,unusable
+822.059737,_db,0.0,unusable
+821.726046,_db,0.0,unusable
+821.666418,_db,0.0,unusable
+952.663835,_db,0.0,unusable
+953.025672,_db,0.0,unusable
+953.66746,_db,0.0,unusable
+821.588662,_db,0.0,unusable
+953.036866,_db,0.0,unusable
+953.096638,_db,0.0,unusable
+953.432835,_db,0.0,unusable
+821.46912,_db,0.0,unusable
+820.908294,_db,0.0,unusable
+953.571736,_db,0.0,unusable
+953.595661,_db,0.0,unusable
+817.395567,_db,0.0,unusable
+817.194923,_db,0.0,unusable
+817.103737,_db,0.0,unusable
+817.0806,_db,0.0,unusable
+817.020127,_db,0.0,unusable
+817.009497,_db,0.0,unusable
+816.703643,_db,0.0,unusable
+956.504777,_db,0.0,unusable
+958.07587,_db,0.0,unusable
+958.497517,_db,0.0,unusable
+958.521408,_db,0.0,unusable
+958.522094,_db,0.0,unusable
+958.575847,_db,0.0,unusable
+816.521068,_db,0.0,unusable
+957.746256,_db,0.0,unusable
+956.52952,_db,0.0,unusable
+956.541451,_db,0.0,unusable
+956.560534,_db,0.0,unusable
+818.473363,_db,0.0,unusable
+818.450181,_db,0.0,unusable
+818.327679,_db,0.0,unusable
+818.107104,_db,0.0,unusable
+818.023718,_db,0.0,unusable
+818.004004,_db,0.0,unusable
+817.897126,_db,0.0,unusable
+817.69856,_db,0.0,unusable
+957.485498,_db,0.0,unusable
+957.626103,_db,0.0,unusable
+818.083922,_db,0.0,unusable
+825.620028,_db,0.0,unusable
+825.482736,_db,0.0,unusable
+825.463643,_db,0.0,unusable
+825.389289,_db,0.0,unusable
+825.181684,_db,0.0,unusable
+952.558289,_db,0.0,unusable
+824.963246,_db,0.0,unusable
+824.745143,_db,0.0,unusable
+950.646942,_db,0.0,unusable
+950.648303,_db,0.0,unusable
+824.628364,_db,0.0,unusable
+950.935789,_db,0.0,unusable
+951.005836,_db,0.0,unusable
+825.086322,_db,0.0,unusable
+827.156647,_db,0.0,unusable
+827.064613,_db,0.0,unusable
+826.760778,_db,0.0,unusable
+950.47096,_db,0.0,unusable
+950.489982,_db,0.0,unusable
+950.503049,_db,0.0,unusable
+950.540597,_db,0.0,unusable
+826.446109,_db,0.0,unusable
+826.426897,_db,0.0,unusable
+825.983121,_db,0.0,unusable
+825.748187,_db,0.0,unusable
+950.530731,_db,0.0,unusable
+823.510034,_db,0.0,unusable
+823.484583,_db,0.0,unusable
+823.467144,_db,0.0,unusable
+823.45227,_db,0.0,unusable
+823.105957,_db,0.0,unusable
+823.063645,_db,0.0,unusable
+822.729456,_db,0.0,unusable
+951.652894,_db,0.0,unusable
+952.008874,_db,0.0,unusable
+952.022147,_db,0.0,unusable
+952.450238,_db,0.0,unusable
+952.4507,_db,0.0,unusable
+952.487157,_db,0.0,unusable
+952.507067,_db,0.0,unusable
+952.546502,_db,0.0,unusable
+822.652762,_db,0.0,unusable
+951.018719,_db,0.0,unusable
+951.415185,_db,0.0,unusable
+824.505614,_db,0.0,unusable
+824.49697,_db,0.0,unusable
+951.493173,_db,0.0,unusable
+824.479079,_db,0.0,unusable
+823.5352,_db,0.0,unusable
+824.411014,_db,0.0,unusable
+823.946316,_db,0.0,unusable
+823.863124,_db,0.0,unusable
+823.570272,_db,0.0,unusable
+951.579854,_db,0.0,unusable
+951.652102,_db,0.0,unusable
+951.555434,_db,0.0,unusable
+809.489094,_db,0.0,unusable
+963.002235,_db,0.0,unusable
+809.41665,_db,0.0,unusable
+809.207877,_db,0.0,unusable
+808.771248,_db,0.0,unusable
+963.080581,_db,0.0,unusable
+808.63742,_db,0.0,unusable
+963.436447,_db,0.0,unusable
+963.437435,_db,0.0,unusable
+963.446523,_db,0.0,unusable
+808.54865,_db,0.0,unusable
+963.456584,_db,0.0,unusable
+963.518219,_db,0.0,unusable
+963.51943,_db,0.0,unusable
+963.172876,_db,0.0,unusable
+962.492323,_db,0.0,unusable
+962.515373,_db,0.0,unusable
+962.547803,_db,0.0,unusable
+810.48127,_db,0.0,unusable
+810.45283,_db,0.0,unusable
+962.588268,_db,0.0,unusable
+810.166106,_db,0.0,unusable
+809.51041,_db,0.0,unusable
+809.726124,_db,0.0,unusable
+809.669256,_db,0.0,unusable
+809.669147,_db,0.0,unusable
+962.610665,_db,0.0,unusable
+809.586888,_db,0.0,unusable
+809.573727,_db,0.0,unusable
+809.528663,_db,0.0,unusable
+809.510863,_db,0.0,unusable
+809.96239,_db,0.0,unusable
+964.459433,_db,0.0,unusable
+964.479388,_db,0.0,unusable
+806.557845,_db,0.0,unusable
+964.508233,_db,0.0,unusable
+964.708566,_db,0.0,unusable
+806.486313,_db,0.0,unusable
+963.551142,_db,0.0,unusable
+806.327212,_db,0.0,unusable
+806.122913,_db,0.0,unusable
+806.085783,_db,0.0,unusable
+805.752263,_db,0.0,unusable
+964.935065,_db,0.0,unusable
+805.635584,_db,0.0,unusable
+805.616234,_db,0.0,unusable
+806.458019,_db,0.0,unusable
+963.591964,_db,0.0,unusable
+964.085557,_db,0.0,unusable
+808.484339,_db,0.0,unusable
+808.474209,_db,0.0,unusable
+808.437178,_db,0.0,unusable
+808.159428,_db,0.0,unusable
+806.892896,_db,0.0,unusable
+807.651388,_db,0.0,unusable
+964.268616,_db,0.0,unusable
+807.572542,_db,0.0,unusable
+964.44093,_db,0.0,unusable
+807.489654,_db,0.0,unusable
+807.470585,_db,0.0,unusable
+807.452319,_db,0.0,unusable
+807.210727,_db,0.0,unusable
+807.76796,_db,0.0,unusable
+814.919332,_db,0.0,unusable
+814.880503,_db,0.0,unusable
+814.67678,_db,0.0,unusable
+959.579358,_db,0.0,unusable
+962.471428,_db,0.0,unusable
+960.427777,_db,0.0,unusable
+814.028422,_db,0.0,unusable
+813.969253,_db,0.0,unusable
+960.455461,_db,0.0,unusable
+960.534887,_db,0.0,unusable
+813.606973,_db,0.0,unusable
+959.761961,_db,0.0,unusable
+816.434082,_db,0.0,unusable
+816.056311,_db,0.0,unusable
+816.005814,_db,0.0,unusable
+815.993925,_db,0.0,unusable
+959.423774,_db,0.0,unusable
+815.690561,_db,0.0,unusable
+814.990878,_db,0.0,unusable
+959.445244,_db,0.0,unusable
+959.468574,_db,0.0,unusable
+815.438717,_db,0.0,unusable
+815.345773,_db,0.0,unusable
+815.064462,_db,0.0,unusable
+815.00242,_db,0.0,unusable
+815.560133,_db,0.0,unusable
+812.280066,_db,0.0,unusable
+961.999329,_db,0.0,unusable
+812.156993,_db,0.0,unusable
+812.131047,_db,0.0,unusable
+811.95788,_db,0.0,unusable
+960.535837,_db,0.0,unusable
+811.589156,_db,0.0,unusable
+811.517984,_db,0.0,unusable
+811.48459,_db,0.0,unusable
+811.407786,_db,0.0,unusable
+810.986335,_db,0.0,unusable
+962.463802,_db,0.0,unusable
+811.589354,_db,0.0,unusable
+813.544847,_db,0.0,unusable
+960.591987,_db,0.0,unusable
+813.283672,_db,0.0,unusable
+813.160462,_db,0.0,unusable
+812.986689,_db,0.0,unusable
+812.944712,_db,0.0,unusable
+812.411181,_db,0.0,unusable
+960.765262,_db,0.0,unusable
+812.605443,_db,0.0,unusable
+961.460229,_db,0.0,unusable
+961.479792,_db,0.0,unusable
+961.544233,_db,0.0,unusable
+961.578988,_db,0.0,unusable
+812.470442,_db,0.0,unusable
+812.882358,_db,0.0,unusable
+942.909271,_db,0.0,unusable
+942.754771,_db,0.0,unusable
+942.664476,_db,0.0,unusable
+841.314901,_db,0.0,unusable
+841.43752,_db,0.0,unusable
+841.529203,_db,0.0,unusable
+841.956931,_db,0.0,unusable
+942.585579,_db,0.0,unusable
+842.471064,_db,0.0,unusable
+942.525849,_db,0.0,unusable
+942.502594,_db,0.0,unusable
+827.429924,_db,0.0,unusable
+843.954601,_db,0.0,unusable
+940.555741,_db,0.0,unusable
+940.62753,_db,0.0,unusable
+941.470986,_db,0.0,unusable
+941.513595,_db,0.0,unusable
+843.474234,_db,0.0,unusable
+842.554274,_db,0.0,unusable
+843.059549,_db,0.0,unusable
+842.97392,_db,0.0,unusable
+842.960314,_db,0.0,unusable
+842.8903,_db,0.0,unusable
+941.53824,_db,0.0,unusable
+842.620927,_db,0.0,unusable
+942.101865,_db,0.0,unusable
+843.435209,_db,0.0,unusable
+838.685471,_db,0.0,unusable
+838.672852,_db,0.0,unusable
+943.554534,_db,0.0,unusable
+943.588894,_db,0.0,unusable
+838.512454,_db,0.0,unusable
+943.651147,_db,0.0,unusable
+838.439688,_db,0.0,unusable
+943.39066,_db,0.0,unusable
+837.805721,_db,0.0,unusable
+837.757385,_db,0.0,unusable
+837.669718,_db,0.0,unusable
+837.669359,_db,0.0,unusable
+944.481554,_db,0.0,unusable
+837.619383,_db,0.0,unusable
+838.088233,_db,0.0,unusable
+840.52809,_db,0.0,unusable
+943.428703,_db,0.0,unusable
+840.406111,_db,0.0,unusable
+840.401374,_db,0.0,unusable
+840.311783,_db,0.0,unusable
+840.005406,_db,0.0,unusable
+838.760766,_db,0.0,unusable
+943.449812,_db,0.0,unusable
+839.633062,_db,0.0,unusable
+943.471222,_db,0.0,unusable
+943.506706,_db,0.0,unusable
+839.439613,_db,0.0,unusable
+839.002151,_db,0.0,unusable
+839.920128,_db,0.0,unusable
+938.442938,_db,0.0,unusable
+938.494377,_db,0.0,unusable
+848.511562,_db,0.0,unusable
+848.496916,_db,0.0,unusable
+938.518911,_db,0.0,unusable
+848.410038,_db,0.0,unusable
+848.406173,_db,0.0,unusable
+844.432379,_db,0.0,unusable
+847.680624,_db,0.0,unusable
+938.983316,_db,0.0,unusable
+847.526878,_db,0.0,unusable
+847.467006,_db,0.0,unusable
+847.466741,_db,0.0,unusable
+847.429655,_db,0.0,unusable
+847.741801,_db,0.0,unusable
+850.421165,_db,0.0,unusable
+850.236679,_db,0.0,unusable
+849.661615,_db,0.0,unusable
+936.981033,_db,0.0,unusable
+937.10144,_db,0.0,unusable
+938.420471,_db,0.0,unusable
+849.500487,_db,0.0,unusable
+849.38846,_db,0.0,unusable
+848.668304,_db,0.0,unusable
+937.459781,_db,0.0,unusable
+937.980474,_db,0.0,unusable
+938.104838,_db,0.0,unusable
+937.425004,_db,0.0,unusable
+846.115283,_db,0.0,unusable
+846.078672,_db,0.0,unusable
+939.977789,_db,0.0,unusable
+940.000828,_db,0.0,unusable
+845.726334,_db,0.0,unusable
+940.486854,_db,0.0,unusable
+847.406187,_db,0.0,unusable
+845.434338,_db,0.0,unusable
+845.22613,_db,0.0,unusable
+845.075322,_db,0.0,unusable
+940.510026,_db,0.0,unusable
+844.489627,_db,0.0,unusable
+844.465618,_db,0.0,unusable
+844.447973,_db,0.0,unusable
+845.49335,_db,0.0,unusable
+847.081673,_db,0.0,unusable
+846.908979,_db,0.0,unusable
+846.642904,_db,0.0,unusable
+938.983924,_db,0.0,unusable
+938.997435,_db,0.0,unusable
+939.421019,_db,0.0,unusable
+846.531574,_db,0.0,unusable
+846.320433,_db,0.0,unusable
+846.504777,_db,0.0,unusable
+846.489734,_db,0.0,unusable
+846.481953,_db,0.0,unusable
+939.476774,_db,0.0,unusable
+846.447481,_db,0.0,unusable
+846.437602,_db,0.0,unusable
+846.531562,_db,0.0,unusable
+831.210257,_db,0.0,unusable
+831.144824,_db,0.0,unusable
+831.086744,_db,0.0,unusable
+830.976318,_db,0.0,unusable
+830.935163,_db,0.0,unusable
+830.576974,_db,0.0,unusable
+948.515216,_db,0.0,unusable
+837.618008,_db,0.0,unusable
+948.623132,_db,0.0,unusable
+830.486663,_db,0.0,unusable
+830.475915,_db,0.0,unusable
+830.141415,_db,0.0,unusable
+830.083721,_db,0.0,unusable
+948.534092,_db,0.0,unusable
+947.560849,_db,0.0,unusable
+832.546475,_db,0.0,unusable
+947.620328,_db,0.0,unusable
+832.501916,_db,0.0,unusable
+831.979662,_db,0.0,unusable
+831.968792,_db,0.0,unusable
+831.938559,_db,0.0,unusable
+831.767911,_db,0.0,unusable
+948.296576,_db,0.0,unusable
+948.475155,_db,0.0,unusable
+831.570419,_db,0.0,unusable
+832.030095,_db,0.0,unusable
+949.49831,_db,0.0,unusable
+949.537431,_db,0.0,unusable
+949.561932,_db,0.0,unusable
+828.424471,_db,0.0,unusable
+828.252321,_db,0.0,unusable
+827.680054,_db,0.0,unusable
+829.582633,_db,0.0,unusable
+949.700716,_db,0.0,unusable
+949.902139,_db,0.0,unusable
+949.985407,_db,0.0,unusable
+827.601562,_db,0.0,unusable
+950.411453,_db,0.0,unusable
+949.57648,_db,0.0,unusable
+948.898738,_db,0.0,unusable
+948.960858,_db,0.0,unusable
+829.474868,_db,0.0,unusable
+829.454843,_db,0.0,unusable
+949.47624,_db,0.0,unusable
+829.255623,_db,0.0,unusable
+829.080444,_db,0.0,unusable
+828.960622,_db,0.0,unusable
+828.919041,_db,0.0,unusable
+949.003,_db,0.0,unusable
+949.176754,_db,0.0,unusable
+828.579683,_db,0.0,unusable
+949.300213,_db,0.0,unusable
+948.981613,_db,0.0,unusable
+945.179022,_db,0.0,unusable
+836.280687,_db,0.0,unusable
+836.084519,_db,0.0,unusable
+835.799247,_db,0.0,unusable
+945.537457,_db,0.0,unusable
+945.537564,_db,0.0,unusable
+947.48264,_db,0.0,unusable
+945.571405,_db,0.0,unusable
+835.62545,_db,0.0,unusable
+945.590902,_db,0.0,unusable
+835.527569,_db,0.0,unusable
+835.133591,_db,0.0,unusable
+834.864375,_db,0.0,unusable
+835.74171,_db,0.0,unusable
+837.521098,_db,0.0,unusable
+837.500173,_db,0.0,unusable
+837.467887,_db,0.0,unusable
+836.965417,_db,0.0,unusable
+836.901089,_db,0.0,unusable
+836.882197,_db,0.0,unusable
+944.601507,_db,0.0,unusable
+836.685544,_db,0.0,unusable
+944.5024,_db,0.0,unusable
+944.532184,_db,0.0,unusable
+944.54214,_db,0.0,unusable
+944.563148,_db,0.0,unusable
+944.587122,_db,0.0,unusable
+944.59028,_db,0.0,unusable
+836.80249,_db,0.0,unusable
+834.106543,_db,0.0,unusable
+833.977746,_db,0.0,unusable
+833.783484,_db,0.0,unusable
+833.666901,_db,0.0,unusable
+946.575556,_db,0.0,unusable
+946.616991,_db,0.0,unusable
+834.786904,_db,0.0,unusable
+833.494026,_db,0.0,unusable
+833.485866,_db,0.0,unusable
+833.450252,_db,0.0,unusable
+833.035697,_db,0.0,unusable
+832.983747,_db,0.0,unusable
+832.973891,_db,0.0,unusable
+947.462692,_db,0.0,unusable
+947.472281,_db,0.0,unusable
+834.705869,_db,0.0,unusable
+945.604981,_db,0.0,unusable
+834.669495,_db,0.0,unusable
+945.686065,_db,0.0,unusable
+834.652886,_db,0.0,unusable
+945.978526,_db,0.0,unusable
+946.469079,_db,0.0,unusable
+834.130161,_db,0.0,unusable
+946.490039,_db,0.0,unusable
+946.497267,_db,0.0,unusable
+946.51837,_db,0.0,unusable
+946.541282,_db,0.0,unusable
+946.557182,_db,0.0,unusable
+946.573944,_db,0.0,unusable
+834.262906,_db,0.0,unusable
+834.642656,_db,0.0,unusable
+446.987999,_db,0.0,unusable
+446.948133,_db,0.0,unusable
+446.928113,_db,0.0,unusable
+446.180136,_db,0.0,unusable
+446.109129,_db,0.0,unusable
+446.074351,_db,0.0,unusable
+445.985047,_db,0.0,unusable
+445.970942,_db,0.0,unusable
+445.96419,_db,0.0,unusable
+676.358605,_db,0.0,unusable
+445.158889,_db,0.0,unusable
+445.158483,_db,0.0,unusable
+445.032207,_db,0.0,unusable
+444.97232,_db,0.0,unusable
+444.897668,_db,0.0,unusable
+444.89746,_db,0.0,unusable
+444.182915,_db,0.0,unusable
+443.253305,_db,0.0,unusable
+442.873524,_db,0.0,unusable
+442.167215,_db,0.0,unusable
+445.195327,_db,0.0,unusable
+450.135811,_db,0.0,unusable
+449.946135,_db,0.0,unusable
+449.289782,_db,0.0,unusable
+449.190798,_db,0.0,unusable
+449.1542,_db,0.0,unusable
+449.027103,_db,0.0,unusable
+449.00957,_db,0.0,unusable
+448.951416,_db,0.0,unusable
+448.779609,_db,0.0,unusable
+447.011471,_db,0.0,unusable
+448.195749,_db,0.0,unusable
+448.124775,_db,0.0,unusable
+448.120282,_db,0.0,unusable
+448.014805,_db,0.0,unusable
+447.962223,_db,0.0,unusable
+447.94808,_db,0.0,unusable
+447.196069,_db,0.0,unusable
+447.175042,_db,0.0,unusable
+447.174654,_db,0.0,unusable
+447.138246,_db,0.0,unusable
+448.696317,_db,0.0,unusable
+437.027054,_db,0.0,unusable
+436.195762,_db,0.0,unusable
+436.159351,_db,0.0,unusable
+436.120314,_db,0.0,unusable
+435.17501,_db,0.0,unusable
+435.138341,_db,0.0,unusable
+435.01159,_db,0.0,unusable
+434.842264,_db,0.0,unusable
+434.720462,_db,0.0,unusable
+441.975049,_db,0.0,unusable
+434.162187,_db,0.0,unusable
+433.972321,_db,0.0,unusable
+433.195156,_db,0.0,unusable
+433.158805,_db,0.0,unusable
+433.122397,_db,0.0,unusable
+432.722365,_db,0.0,unusable
+432.182871,_db,0.0,unusable
+432.164464,_db,0.0,unusable
+432.146463,_db,0.0,unusable
+432.08207,_db,0.0,unusable
+434.180086,_db,0.0,unusable
+441.148707,_db,0.0,unusable
+441.127481,_db,0.0,unusable
+441.090571,_db,0.0,unusable
+440.977331,_db,0.0,unusable
+440.947579,_db,0.0,unusable
+440.894151,_db,0.0,unusable
+439.89805,_db,0.0,unusable
+439.169528,_db,0.0,unusable
+439.148242,_db,0.0,unusable
+439.143891,_db,0.0,unusable
+437.132577,_db,0.0,unusable
+439.066058,_db,0.0,unusable
+438.730339,_db,0.0,unusable
+438.174945,_db,0.0,unusable
+438.13587,_db,0.0,unusable
+438.094925,_db,0.0,unusable
+438.094727,_db,0.0,unusable
+438.030414,_db,0.0,unusable
+437.977526,_db,0.0,unusable
+437.204138,_db,0.0,unusable
+437.154161,_db,0.0,unusable
+439.133082,_db,0.0,unusable
+462.211357,_db,0.0,unusable
+462.135896,_db,0.0,unusable
+461.959041,_db,0.0,unusable
+461.938177,_db,0.0,unusable
+461.938069,_db,0.0,unusable
+461.190736,_db,0.0,unusable
+461.153937,_db,0.0,unusable
+461.132577,_db,0.0,unusable
+450.140295,_db,0.0,unusable
+460.258934,_db,0.0,unusable
+460.251875,_db,0.0,unusable
+460.195767,_db,0.0,unusable
+460.120251,_db,0.0,unusable
+459.991153,_db,0.0,unusable
+459.990486,_db,0.0,unusable
+459.1747,_db,0.0,unusable
+459.174472,_db,0.0,unusable
+459.1381,_db,0.0,unusable
+461.027052,_db,0.0,unusable
+466.089286,_db,0.0,unusable
+466.025297,_db,0.0,unusable
+466.006699,_db,0.0,unusable
+465.222292,_db,0.0,unusable
+465.18577,_db,0.0,unusable
+465.163952,_db,0.0,unusable
+465.148966,_db,0.0,unusable
+465.127511,_db,0.0,unusable
+464.947296,_db,0.0,unusable
+462.342589,_db,0.0,unusable
+464.226691,_db,0.0,unusable
+464.190706,_db,0.0,unusable
+464.151107,_db,0.0,unusable
+463.942863,_db,0.0,unusable
+463.936206,_db,0.0,unusable
+463.206574,_db,0.0,unusable
+463.169952,_db,0.0,unusable
+463.006335,_db,0.0,unusable
+462.921975,_db,0.0,unusable
+462.876137,_db,0.0,unusable
+464.227261,_db,0.0,unusable
+454.704296,_db,0.0,unusable
+454.181267,_db,0.0,unusable
+454.17114,_db,0.0,unusable
+454.167024,_db,0.0,unusable
+453.148938,_db,0.0,unusable
+453.127493,_db,0.0,unusable
+452.936108,_db,0.0,unusable
+452.190635,_db,0.0,unusable
+459.116906,_db,0.0,unusable
+452.152638,_db,0.0,unusable
+452.150686,_db,0.0,unusable
+451.990975,_db,0.0,unusable
+451.20656,_db,0.0,unusable
+451.169981,_db,0.0,unusable
+451.133148,_db,0.0,unusable
+450.949574,_db,0.0,unusable
+450.816171,_db,0.0,unusable
+450.21135,_db,0.0,unusable
+450.174955,_db,0.0,unusable
+452.155941,_db,0.0,unusable
+458.995308,_db,0.0,unusable
+458.332353,_db,0.0,unusable
+457.991955,_db,0.0,unusable
+457.98015,_db,0.0,unusable
+457.975705,_db,0.0,unusable
+457.211798,_db,0.0,unusable
+457.211426,_db,0.0,unusable
+457.195552,_db,0.0,unusable
+457.195045,_db,0.0,unusable
+457.184472,_db,0.0,unusable
+455.052881,_db,0.0,unusable
+457.15856,_db,0.0,unusable
+457.101061,_db,0.0,unusable
+457.064392,_db,0.0,unusable
+456.824209,_db,0.0,unusable
+456.183107,_db,0.0,unusable
+456.105441,_db,0.0,unusable
+455.964502,_db,0.0,unusable
+455.872032,_db,0.0,unusable
+455.164957,_db,0.0,unusable
+455.143104,_db,0.0,unusable
+457.158756,_db,0.0,unusable
+400.982491,_db,0.0,unusable
+400.954919,_db,0.0,unusable
+400.774419,_db,0.0,unusable
+400.124659,_db,0.0,unusable
+1199.970565,_db,0.0,unusable
+1199.587916,_db,0.0,unusable
+1199.586832,_db,0.0,unusable
+1199.447672,_db,0.0,unusable
+1199.052485,_db,0.0,unusable
+431.974134,_db,0.0,unusable
+1198.583882,_db,0.0,unusable
+1198.583743,_db,0.0,unusable
+1198.555433,_db,0.0,unusable
+1197.666852,_db,0.0,unusable
+1197.553376,_db,0.0,unusable
+1197.551678,_db,0.0,unusable
+1197.551148,_db,0.0,unusable
+1197.469145,_db,0.0,unusable
+1197.467137,_db,0.0,unusable
+1196.664206,_db,0.0,unusable
+1198.967008,_db,0.0,unusable
+409.101198,_db,0.0,unusable
+409.011563,_db,0.0,unusable
+408.992206,_db,0.0,unusable
+408.164371,_db,0.0,unusable
+408.146458,_db,0.0,unusable
+408.008249,_db,0.0,unusable
+407.179511,_db,0.0,unusable
+406.915739,_db,0.0,unusable
+406.826268,_db,0.0,unusable
+406.167174,_db,0.0,unusable
+401.117359,_db,0.0,unusable
+405.984813,_db,0.0,unusable
+405.920904,_db,0.0,unusable
+405.111824,_db,0.0,unusable
+404.155955,_db,0.0,unusable
+403.909752,_db,0.0,unusable
+403.132965,_db,0.0,unusable
+402.938236,_db,0.0,unusable
+402.140335,_db,0.0,unusable
+401.153621,_db,0.0,unusable
+401.129263,_db,0.0,unusable
+406.148767,_db,0.0,unusable
+1192.572427,_db,0.0,unusable
+1191.56,_db,0.0,unusable
+1190.558603,_db,0.0,unusable
+1190.556725,_db,0.0,unusable
+1188.512862,_db,0.0,unusable
+1187.507654,_db,0.0,unusable
+1187.486722,_db,0.0,unusable
+1186.061838,_db,0.0,unusable
+1185.5848,_db,0.0,unusable
+1196.663007,_db,0.0,unusable
+1185.063829,_db,0.0,unusable
+1185.061887,_db,0.0,unusable
+1184.582418,_db,0.0,unusable
+1184.580523,_db,0.0,unusable
+1184.487746,_db,0.0,unusable
+1183.97792,_db,0.0,unusable
+1183.613396,_db,0.0,unusable
+1183.509605,_db,0.0,unusable
+1183.509133,_db,0.0,unusable
+1185.490745,_db,0.0,unusable
+1196.623812,_db,0.0,unusable
+1196.56735,_db,0.0,unusable
+1196.519687,_db,0.0,unusable
+1196.518217,_db,0.0,unusable
+1196.465671,_db,0.0,unusable
+1196.46375,_db,0.0,unusable
+1196.463493,_db,0.0,unusable
+1195.650436,_db,0.0,unusable
+1195.621139,_db,0.0,unusable
+1192.573946,_db,0.0,unusable
+1195.535182,_db,0.0,unusable
+1195.515935,_db,0.0,unusable
+1195.514496,_db,0.0,unusable
+1194.64741,_db,0.0,unusable
+1194.646787,_db,0.0,unusable
+1194.645465,_db,0.0,unusable
+1194.562002,_db,0.0,unusable
+1193.576817,_db,0.0,unusable
+1192.631531,_db,0.0,unusable
+1192.630128,_db,0.0,unusable
+1195.537703,_db,0.0,unusable
+425.980196,_db,0.0,unusable
+425.154227,_db,0.0,unusable
+425.153523,_db,0.0,unusable
+425.089218,_db,0.0,unusable
+424.9855,_db,0.0,unusable
+424.966102,_db,0.0,unusable
+424.124594,_db,0.0,unusable
+424.12026,_db,0.0,unusable
+424.003089,_db,0.0,unusable
+409.1224,_db,0.0,unusable
+423.956883,_db,0.0,unusable
+423.174889,_db,0.0,unusable
+423.138202,_db,0.0,unusable
+422.800222,_db,0.0,unusable
+422.179985,_db,0.0,unusable
+422.162128,_db,0.0,unusable
+422.109087,_db,0.0,unusable
+422.105788,_db,0.0,unusable
+421.958748,_db,0.0,unusable
+421.032113,_db,0.0,unusable
+423.982128,_db,0.0,unusable
+431.179651,_db,0.0,unusable
+430.993087,_db,0.0,unusable
+430.954131,_db,0.0,unusable
+430.915623,_db,0.0,unusable
+430.171603,_db,0.0,unusable
+430.167198,_db,0.0,unusable
+429.989957,_db,0.0,unusable
+429.920832,_db,0.0,unusable
+429.874015,_db,0.0,unusable
+429.127514,_db,0.0,unusable
+426.135875,_db,0.0,unusable
+428.91755,_db,0.0,unusable
+428.15598,_db,0.0,unusable
+427.99097,_db,0.0,unusable
+427.875793,_db,0.0,unusable
+427.169418,_db,0.0,unusable
+427.143938,_db,0.0,unusable
+427.133035,_db,0.0,unusable
+427.086243,_db,0.0,unusable
+426.816274,_db,0.0,unusable
+426.140287,_db,0.0,unusable
+428.977394,_db,0.0,unusable
+413.128387,_db,0.0,unusable
+413.117308,_db,0.0,unusable
+412.982419,_db,0.0,unusable
+412.943568,_db,0.0,unusable
+412.321092,_db,0.0,unusable
+412.120285,_db,0.0,unusable
+412.016963,_db,0.0,unusable
+411.990243,_db,0.0,unusable
+411.174599,_db,0.0,unusable
+420.91249,_db,0.0,unusable
+411.116892,_db,0.0,unusable
+411.073585,_db,0.0,unusable
+410.823624,_db,0.0,unusable
+410.740319,_db,0.0,unusable
+410.058848,_db,0.0,unusable
+410.006333,_db,0.0,unusable
+409.992102,_db,0.0,unusable
+409.980331,_db,0.0,unusable
+409.159096,_db,0.0,unusable
+409.158296,_db,0.0,unusable
+411.138007,_db,0.0,unusable
+420.200765,_db,0.0,unusable
+420.164348,_db,0.0,unusable
+420.146457,_db,0.0,unusable
+420.092697,_db,0.0,unusable
+419.179737,_db,0.0,unusable
+419.178921,_db,0.0,unusable
+419.016462,_db,0.0,unusable
+418.167157,_db,0.0,unusable
+418.135311,_db,0.0,unusable
+417.112067,_db,0.0,unusable
+413.132521,_db,0.0,unusable
+416.748363,_db,0.0,unusable
+416.727335,_db,0.0,unusable
+416.10801,_db,0.0,unusable
+416.027267,_db,0.0,unusable
+415.221987,_db,0.0,unusable
+415.143989,_db,0.0,unusable
+415.1329,_db,0.0,unusable
+415.11176,_db,0.0,unusable
+413.153661,_db,0.0,unusable
+416.977297,_db,0.0,unusable
+504.045006,_db,0.0,unusable
+503.968751,_db,0.0,unusable
+503.948468,_db,0.0,unusable
+503.237682,_db,0.0,unusable
+503.19595,_db,0.0,unusable
+503.164643,_db,0.0,unusable
+503.08929,_db,0.0,unusable
+466.167024,_db,0.0,unusable
+502.918428,_db,0.0,unusable
+502.903194,_db,0.0,unusable
+502.269557,_db,0.0,unusable
+502.241858,_db,0.0,unusable
+502.218219,_db,0.0,unusable
+502.171778,_db,0.0,unusable
+502.167131,_db,0.0,unusable
+502.061755,_db,0.0,unusable
+501.965346,_db,0.0,unusable
+501.237836,_db,0.0,unusable
+502.97777,_db,0.0,unusable
+505.984847,_db,0.0,unusable
+505.979317,_db,0.0,unusable
+505.946795,_db,0.0,unusable
+505.858122,_db,0.0,unusable
+505.348351,_db,0.0,unusable
+505.348216,_db,0.0,unusable
+505.340773,_db,0.0,unusable
+505.253458,_db,0.0,unusable
+504.182951,_db,0.0,unusable
+505.196319,_db,0.0,unusable
+505.195078,_db,0.0,unusable
+505.180524,_db,0.0,unusable
+505.158673,_db,0.0,unusable
+505.068367,_db,0.0,unusable
+504.98431,_db,0.0,unusable
+504.746037,_db,0.0,unusable
+504.3382,_db,0.0,unusable
+504.233676,_db,0.0,unusable
+504.197108,_db,0.0,unusable
+505.232603,_db,0.0,unusable
+497.153816,_db,0.0,unusable
+497.138305,_db,0.0,unusable
+497.063307,_db,0.0,unusable
+497.027085,_db,0.0,unusable
+496.965024,_db,0.0,unusable
+496.714755,_db,0.0,unusable
+496.17088,_db,0.0,unusable
+496.059519,_db,0.0,unusable
+495.947859,_db,0.0,unusable
+501.209884,_db,0.0,unusable
+495.4045,_db,0.0,unusable
+495.328864,_db,0.0,unusable
+495.196393,_db,0.0,unusable
+495.174469,_db,0.0,unusable
+495.116853,_db,0.0,unusable
+495.08426,_db,0.0,unusable
+495.047759,_db,0.0,unusable
+495.020325,_db,0.0,unusable
+494.67819,_db,0.0,unusable
+494.237535,_db,0.0,unusable
+495.864583,_db,0.0,unusable
+501.185588,_db,0.0,unusable
+501.178093,_db,0.0,unusable
+500.962149,_db,0.0,unusable
+500.920363,_db,0.0,unusable
+500.15629,_db,0.0,unusable
+500.151439,_db,0.0,unusable
+500.045936,_db,0.0,unusable
+499.186376,_db,0.0,unusable
+499.169733,_db,0.0,unusable
+497.165709,_db,0.0,unusable
+499.147646,_db,0.0,unusable
+499.079242,_db,0.0,unusable
+499.042718,_db,0.0,unusable
+498.983015,_db,0.0,unusable
+498.135687,_db,0.0,unusable
+497.343188,_db,0.0,unusable
+497.289827,_db,0.0,unusable
+497.190282,_db,0.0,unusable
+497.183185,_db,0.0,unusable
+499.150666,_db,0.0,unusable
+516.197006,_db,0.0,unusable
+516.183111,_db,0.0,unusable
+515.193804,_db,0.0,unusable
+515.179706,_db,0.0,unusable
+515.143173,_db,0.0,unusable
+515.037685,_db,0.0,unusable
+514.977832,_db,0.0,unusable
+514.891904,_db,0.0,unusable
+514.808685,_db,0.0,unusable
+506.212502,_db,0.0,unusable
+514.167106,_db,0.0,unusable
+514.061763,_db,0.0,unusable
+513.958382,_db,0.0,unusable
+513.258859,_db,0.0,unusable
+513.211103,_db,0.0,unusable
+513.185505,_db,0.0,unusable
+513.163993,_db,0.0,unusable
+513.159102,_db,0.0,unusable
+513.158177,_db,0.0,unusable
+514.181424,_db,0.0,unusable
+519.976207,_db,0.0,unusable
+519.943452,_db,0.0,unusable
+519.325141,_db,0.0,unusable
+519.232854,_db,0.0,unusable
+519.210531,_db,0.0,unusable
+519.174518,_db,0.0,unusable
+519.084182,_db,0.0,unusable
+518.9728,_db,0.0,unusable
+518.877196,_db,0.0,unusable
+516.95729,_db,0.0,unusable
+518.155291,_db,0.0,unusable
+517.232796,_db,0.0,unusable
+517.21715,_db,0.0,unusable
+517.195371,_db,0.0,unusable
+517.15876,_db,0.0,unusable
+517.0685,_db,0.0,unusable
+517.053321,_db,0.0,unusable
+517.017014,_db,0.0,unusable
+518.212553,_db,0.0,unusable
+509.024626,_db,0.0,unusable
+509.003629,_db,0.0,unusable
+508.864105,_db,0.0,unusable
+508.228114,_db,0.0,unusable
+508.191691,_db,0.0,unusable
+508.164171,_db,0.0,unusable
+507.248121,_db,0.0,unusable
+507.232789,_db,0.0,unusable
+513.058507,_db,0.0,unusable
+507.174498,_db,0.0,unusable
+507.117375,_db,0.0,unusable
+507.116646,_db,0.0,unusable
+507.084224,_db,0.0,unusable
+506.982632,_db,0.0,unusable
+506.974032,_db,0.0,unusable
+506.371021,_db,0.0,unusable
+506.351931,_db,0.0,unusable
+506.237129,_db,0.0,unusable
+507.196427,_db,0.0,unusable
+513.058054,_db,0.0,unusable
+512.938802,_db,0.0,unusable
+512.772021,_db,0.0,unusable
+512.688796,_db,0.0,unusable
+512.155527,_db,0.0,unusable
+512.045954,_db,0.0,unusable
+512.01371,_db,0.0,unusable
+511.921701,_db,0.0,unusable
+511.83857,_db,0.0,unusable
+509.063474,_db,0.0,unusable
+511.169609,_db,0.0,unusable
+511.0791,_db,0.0,unusable
+511.04271,_db,0.0,unusable
+510.652256,_db,0.0,unusable
+510.140636,_db,0.0,unusable
+510.135696,_db,0.0,unusable
+509.95656,_db,0.0,unusable
+509.212078,_db,0.0,unusable
+509.190246,_db,0.0,unusable
+509.132619,_db,0.0,unusable
+511.227735,_db,0.0,unusable
+477.022014,_db,0.0,unusable
+476.981719,_db,0.0,unusable
+476.980901,_db,0.0,unusable
+476.967346,_db,0.0,unusable
+476.313598,_db,0.0,unusable
+476.308847,_db,0.0,unusable
+476.226361,_db,0.0,unusable
+476.190719,_db,0.0,unusable
+476.156075,_db,0.0,unusable
+494.212494,_db,0.0,unusable
+475.986262,_db,0.0,unusable
+475.963948,_db,0.0,unusable
+475.255164,_db,0.0,unusable
+475.206534,_db,0.0,unusable
+475.169967,_db,0.0,unusable
+475.153078,_db,0.0,unusable
+475.091313,_db,0.0,unusable
+474.98289,_db,0.0,unusable
+474.969296,_db,0.0,unusable
+474.306267,_db,0.0,unusable
+476.151421,_db,0.0,unusable
+479.237944,_db,0.0,unusable
+479.201448,_db,0.0,unusable
+479.179811,_db,0.0,unusable
+479.164845,_db,0.0,unusable
+479.143119,_db,0.0,unusable
+479.090641,_db,0.0,unusable
+478.704313,_db,0.0,unusable
+478.242712,_db,0.0,unusable
+477.127518,_db,0.0,unusable
+478.169748,_db,0.0,unusable
+478.16704,_db,0.0,unusable
+478.087577,_db,0.0,unusable
+478.087368,_db,0.0,unusable
+478.007457,_db,0.0,unusable
+477.932948,_db,0.0,unusable
+477.222065,_db,0.0,unusable
+477.185709,_db,0.0,unusable
+477.164185,_db,0.0,unusable
+477.14889,_db,0.0,unusable
+478.181208,_db,0.0,unusable
+469.93006,_db,0.0,unusable
+469.913389,_db,0.0,unusable
+469.195248,_db,0.0,unusable
+469.158929,_db,0.0,unusable
+469.15138,_db,0.0,unusable
+469.068688,_db,0.0,unusable
+469.032168,_db,0.0,unusable
+468.910089,_db,0.0,unusable
+474.21138,_db,0.0,unusable
+468.023543,_db,0.0,unusable
+467.179642,_db,0.0,unusable
+467.164804,_db,0.0,unusable
+467.136274,_db,0.0,unusable
+467.052907,_db,0.0,unusable
+467.02883,_db,0.0,unusable
+466.89239,_db,0.0,unusable
+466.790214,_db,0.0,unusable
+466.206305,_db,0.0,unusable
+466.169576,_db,0.0,unusable
+468.183126,_db,0.0,unusable
+474.140518,_db,0.0,unusable
+474.135835,_db,0.0,unusable
+474.069344,_db,0.0,unusable
+473.996348,_db,0.0,unusable
+473.249353,_db,0.0,unusable
+473.190566,_db,0.0,unusable
+473.153909,_db,0.0,unusable
+473.063486,_db,0.0,unusable
+473.027098,_db,0.0,unusable
+472.967241,_db,0.0,unusable
+470.109385,_db,0.0,unusable
+472.798081,_db,0.0,unusable
+472.124754,_db,0.0,unusable
+472.051071,_db,0.0,unusable
+471.174594,_db,0.0,unusable
+471.149911,_db,0.0,unusable
+471.047717,_db,0.0,unusable
+470.908197,_db,0.0,unusable
+470.678269,_db,0.0,unusable
+472.958077,_db,0.0,unusable
+489.970292,_db,0.0,unusable
+489.958827,_db,0.0,unusable
+489.884141,_db,0.0,unusable
+489.380068,_db,0.0,unusable
+489.318944,_db,0.0,unusable
+489.222252,_db,0.0,unusable
+489.185624,_db,0.0,unusable
+489.16395,_db,0.0,unusable
+488.837214,_db,0.0,unusable
+479.890597,_db,0.0,unusable
+488.239038,_db,0.0,unusable
+488.152977,_db,0.0,unusable
+488.151045,_db,0.0,unusable
+487.986212,_db,0.0,unusable
+487.974904,_db,0.0,unusable
+487.974478,_db,0.0,unusable
+487.902159,_db,0.0,unusable
+487.169748,_db,0.0,unusable
+487.162464,_db,0.0,unusable
+487.148236,_db,0.0,unusable
+488.772114,_db,0.0,unusable
+494.061372,_db,0.0,unusable
+493.252953,_db,0.0,unusable
+493.21718,_db,0.0,unusable
+493.194907,_db,0.0,unusable
+493.180775,_db,0.0,unusable
+493.180648,_db,0.0,unusable
+493.158818,_db,0.0,unusable
+493.068473,_db,0.0,unusable
+492.196783,_db,0.0,unusable
+490.167582,_db,0.0,unusable
+491.201459,_db,0.0,unusable
+491.17969,_db,0.0,unusable
+491.164734,_db,0.0,unusable
+491.143076,_db,0.0,unusable
+491.089264,_db,0.0,unusable
+491.065084,_db,0.0,unusable
+490.770279,_db,0.0,unusable
+490.27499,_db,0.0,unusable
+490.242845,_db,0.0,unusable
+490.242229,_db,0.0,unusable
+491.237847,_db,0.0,unusable
+484.086274,_db,0.0,unusable
+483.833846,_db,0.0,unusable
+483.174598,_db,0.0,unusable
+483.116881,_db,0.0,unusable
+483.047735,_db,0.0,unusable
+482.988088,_db,0.0,unusable
+482.866437,_db,0.0,unusable
+482.212512,_db,0.0,unusable
+482.063089,_db,0.0,unusable
+487.132667,_db,0.0,unusable
+481.195158,_db,0.0,unusable
+481.180691,_db,0.0,unusable
+481.158909,_db,0.0,unusable
+481.068629,_db,0.0,unusable
+481.016828,_db,0.0,unusable
+480.921306,_db,0.0,unusable
+480.335994,_db,0.0,unusable
+480.196866,_db,0.0,unusable
+480.184091,_db,0.0,unusable
+482.001522,_db,0.0,unusable
+487.042688,_db,0.0,unusable
+486.982951,_db,0.0,unusable
+486.965398,_db,0.0,unusable
+486.959589,_db,0.0,unusable
+486.882077,_db,0.0,unusable
+486.838814,_db,0.0,unusable
+486.135854,_db,0.0,unusable
+485.970615,_db,0.0,unusable
+485.903996,_db,0.0,unusable
+485.887329,_db,0.0,unusable
+484.086876,_db,0.0,unusable
+485.242885,_db,0.0,unusable
+485.190539,_db,0.0,unusable
+485.15387,_db,0.0,unusable
+485.132663,_db,0.0,unusable
+485.063458,_db,0.0,unusable
+484.946653,_db,0.0,unusable
+484.946298,_db,0.0,unusable
+484.884002,_db,0.0,unusable
+484.850158,_db,0.0,unusable
+485.263902,_db,0.0,unusable
+1059.519983,_db,0.0,unusable
+1059.499561,_db,0.0,unusable
+1059.452585,_db,0.0,unusable
+1058.631854,_db,0.0,unusable
+1058.536494,_db,0.0,unusable
+1058.515223,_db,0.0,unusable
+1058.487323,_db,0.0,unusable
+1058.022985,_db,0.0,unusable
+1057.56095,_db,0.0,unusable
+1183.057811,_db,0.0,unusable
+1056.61465,_db,0.0,unusable
+1056.557326,_db,0.0,unusable
+1055.604767,_db,0.0,unusable
+1055.545364,_db,0.0,unusable
+1055.53811,_db,0.0,unusable
+1054.601002,_db,0.0,unusable
+1054.516128,_db,0.0,unusable
+1054.480135,_db,0.0,unusable
+1052.966865,_db,0.0,unusable
+1057.482651,_db,0.0,unusable
+1063.549032,_db,0.0,unusable
+1063.544015,_db,0.0,unusable
+1063.432378,_db,0.0,unusable
+1062.951232,_db,0.0,unusable
+1062.655101,_db,0.0,unusable
+1062.567866,_db,0.0,unusable
+1062.540788,_db,0.0,unusable
+1062.539626,_db,0.0,unusable
+1059.571473,_db,0.0,unusable
+1061.652031,_db,0.0,unusable
+1061.45156,_db,0.0,unusable
+1060.648419,_db,0.0,unusable
+1060.529292,_db,0.0,unusable
+1060.525011,_db,0.0,unusable
+1060.503199,_db,0.0,unusable
+1060.448019,_db,0.0,unusable
+1059.637487,_db,0.0,unusable
+1059.637143,_db,0.0,unusable
+1059.574031,_db,0.0,unusable
+1062.328534,_db,0.0,unusable
+1047.962465,_db,0.0,unusable
+1047.597765,_db,0.0,unusable
+1047.042028,_db,0.0,unusable
+1046.976805,_db,0.0,unusable
+1046.958892,_db,0.0,unusable
+1046.916362,_db,0.0,unusable
+1046.594163,_db,0.0,unusable
+1046.565691,_db,0.0,unusable
+1045.561761,_db,0.0,unusable
+1052.501015,_db,0.0,unusable
+1044.940831,_db,0.0,unusable
+1044.557219,_db,0.0,unusable
+1044.474073,_db,0.0,unusable
+1043.622435,_db,0.0,unusable
+1043.525444,_db,0.0,unusable
+1042.519881,_db,0.0,unusable
+1042.455373,_db,0.0,unusable
+1041.589637,_db,0.0,unusable
+1041.566181,_db,0.0,unusable
+1041.543616,_db,0.0,unusable
+1045.026124,_db,0.0,unusable
+1052.496015,_db,0.0,unusable
+1052.475504,_db,0.0,unusable
+1051.513269,_db,0.0,unusable
+1051.471348,_db,0.0,unusable
+1050.509665,_db,0.0,unusable
+1050.482942,_db,0.0,unusable
+1050.478475,_db,0.0,unusable
+1050.245175,_db,0.0,unusable
+1050.04504,_db,0.0,unusable
+1050.043459,_db,0.0,unusable
+1048.045525,_db,0.0,unusable
+1049.474923,_db,0.0,unusable
+1049.455449,_db,0.0,unusable
+1049.048615,_db,0.0,unusable
+1049.047998,_db,0.0,unusable
+1049.040007,_db,0.0,unusable
+1048.612043,_db,0.0,unusable
+1048.550047,_db,0.0,unusable
+1048.549317,_db,0.0,unusable
+1048.471424,_db,0.0,unusable
+1049.568902,_db,0.0,unusable
+1083.518392,_db,0.0,unusable
+1082.71383,_db,0.0,unusable
+1082.632758,_db,0.0,unusable
+1082.57227,_db,0.0,unusable
+1082.534209,_db,0.0,unusable
+1082.485445,_db,0.0,unusable
+1081.586503,_db,0.0,unusable
+1081.481647,_db,0.0,unusable
+1063.954814,_db,0.0,unusable
+1080.547922,_db,0.0,unusable
+1080.410079,_db,0.0,unusable
+1080.191681,_db,0.0,unusable
+1079.605209,_db,0.0,unusable
+1079.545274,_db,0.0,unusable
+1079.406222,_db,0.0,unusable
+1078.925058,_db,0.0,unusable
+1078.601324,_db,0.0,unusable
+1078.541805,_db,0.0,unusable
+1077.530178,_db,0.0,unusable
+1080.549509,_db,0.0,unusable
+1087.550791,_db,0.0,unusable
+1086.951581,_db,0.0,unusable
+1086.592663,_db,0.0,unusable
+1086.568465,_db,0.0,unusable
+1086.555427,_db,0.0,unusable
+1086.546897,_db,0.0,unusable
+1086.546718,_db,0.0,unusable
+1086.427392,_db,0.0,unusable
+1086.026194,_db,0.0,unusable
+1085.917984,_db,0.0,unusable
+1083.5392,_db,0.0,unusable
+1085.535761,_db,0.0,unusable
+1085.192916,_db,0.0,unusable
+1084.997091,_db,0.0,unusable
+1084.914599,_db,0.0,unusable
+1084.589111,_db,0.0,unusable
+1084.550005,_db,0.0,unusable
+1084.52271,_db,0.0,unusable
+1084.312452,_db,0.0,unusable
+1084.189415,_db,0.0,unusable
+1083.636369,_db,0.0,unusable
+1085.553449,_db,0.0,unusable
+1068.940742,_db,0.0,unusable
+1068.576376,_db,0.0,unusable
+1068.469887,_db,0.0,unusable
+1068.05419,_db,0.0,unusable
+1067.059526,_db,0.0,unusable
+1067.05825,_db,0.0,unusable
+1067.053539,_db,0.0,unusable
+1067.050551,_db,0.0,unusable
+1066.578286,_db,0.0,unusable
+1076.52577,_db,0.0,unusable
+1066.219251,_db,0.0,unusable
+1065.613072,_db,0.0,unusable
+1065.589212,_db,0.0,unusable
+1065.542795,_db,0.0,unusable
+1065.052626,_db,0.0,unusable
+1064.703331,_db,0.0,unusable
+1064.585919,_db,0.0,unusable
+1064.538386,_db,0.0,unusable
+1064.466462,_db,0.0,unusable
+1066.482091,_db,0.0,unusable
+1075.514138,_db,0.0,unusable
+1075.426236,_db,0.0,unusable
+1075.0136,_db,0.0,unusable
+1074.99875,_db,0.0,unusable
+1074.510542,_db,0.0,unusable
+1074.459635,_db,0.0,unusable
+1073.996796,_db,0.0,unusable
+1073.613439,_db,0.0,unusable
+1073.455556,_db,0.0,unusable
+1073.117083,_db,0.0,unusable
+1069.944337,_db,0.0,unusable
+1072.437619,_db,0.0,unusable
+1072.106241,_db,0.0,unusable
+1071.576664,_db,0.0,unusable
+1071.512319,_db,0.0,unusable
+1071.511419,_db,0.0,unusable
+1071.041703,_db,0.0,unusable
+1070.572821,_db,0.0,unusable
+1070.489922,_db,0.0,unusable
+1070.488611,_db,0.0,unusable
+1070.453287,_db,0.0,unusable
+1072.609845,_db,0.0,unusable
+1011.499561,_db,0.0,unusable
+1011.093463,_db,0.0,unusable
+1010.491271,_db,0.0,unusable
+1010.252805,_db,0.0,unusable
+1010.089699,_db,0.0,unusable
+1009.986752,_db,0.0,unusable
+1009.516505,_db,0.0,unusable
+1009.502452,_db,0.0,unusable
+1009.086221,_db,0.0,unusable
+1041.542483,_db,0.0,unusable
+1008.982868,_db,0.0,unusable
+1008.726545,_db,0.0,unusable
+1008.608059,_db,0.0,unusable
+1008.59182,_db,0.0,unusable
+1008.572507,_db,0.0,unusable
+1008.512902,_db,0.0,unusable
+1008.49861,_db,0.0,unusable
+1008.470153,_db,0.0,unusable
+1007.988424,_db,0.0,unusable
+1007.60503,_db,0.0,unusable
+1009.003273,_db,0.0,unusable
+1016.523668,_db,0.0,unusable
+1016.487182,_db,0.0,unusable
+1016.44294,_db,0.0,unusable
+1016.115823,_db,0.0,unusable
+1015.550227,_db,0.0,unusable
+1015.493121,_db,0.0,unusable
+1015.462361,_db,0.0,unusable
+1015.11162,_db,0.0,unusable
+1014.546581,_db,0.0,unusable
+1014.519209,_db,0.0,unusable
+1011.518908,_db,0.0,unusable
+1013.515033,_db,0.0,unusable
+1013.514504,_db,0.0,unusable
+1013.480669,_db,0.0,unusable
+1012.974227,_db,0.0,unusable
+1012.531264,_db,0.0,unusable
+1012.52223,_db,0.0,unusable
+1012.504481,_db,0.0,unusable
+1012.094892,_db,0.0,unusable
+1012.088612,_db,0.0,unusable
+1011.544334,_db,0.0,unusable
+1013.534677,_db,0.0,unusable
+1004.440847,_db,0.0,unusable
+1004.055376,_db,0.0,unusable
+1003.94032,_db,0.0,unusable
+1003.63825,_db,0.0,unusable
+1003.584472,_db,0.0,unusable
+1003.490631,_db,0.0,unusable
+1003.471297,_db,0.0,unusable
+1003.405331,_db,0.0,unusable
+1007.500783,_db,0.0,unusable
+1002.664614,_db,0.0,unusable
+1002.486982,_db,0.0,unusable
+1002.465864,_db,0.0,unusable
+1001.571021,_db,0.0,unusable
+1000.6487,_db,0.0,unusable
+1000.565785,_db,0.0,unusable
+1000.504701,_db,0.0,unusable
+1000.471015,_db,0.0,unusable
+1000.169719,_db,0.0,unusable
+1003.051852,_db,0.0,unusable
+1007.483139,_db,0.0,unusable
+1007.466694,_db,0.0,unusable
+1007.436176,_db,0.0,unusable
+1007.070473,_db,0.0,unusable
+1006.985047,_db,0.0,unusable
+1006.944415,_db,0.0,unusable
+1006.601643,_db,0.0,unusable
+1006.518258,_db,0.0,unusable
+1006.498326,_db,0.0,unusable
+1006.497541,_db,0.0,unusable
+1004.481671,_db,0.0,unusable
+1006.479653,_db,0.0,unusable
+1006.47856,_db,0.0,unusable
+1005.5685,_db,0.0,unusable
+1004.969318,_db,0.0,unusable
+1004.865032,_db,0.0,unusable
+1004.641764,_db,0.0,unusable
+1004.586517,_db,0.0,unusable
+1004.502115,_db,0.0,unusable
+1004.499598,_db,0.0,unusable
+1006.488553,_db,0.0,unusable
+1034.633973,_db,0.0,unusable
+1034.633441,_db,0.0,unusable
+1034.622913,_db,0.0,unusable
+1034.622909,_db,0.0,unusable
+1034.506932,_db,0.0,unusable
+1033.939577,_db,0.0,unusable
+1033.620616,_db,0.0,unusable
+1033.502148,_db,0.0,unusable
+1033.483273,_db,0.0,unusable
+1016.538931,_db,0.0,unusable
+1032.533834,_db,0.0,unusable
+1032.497415,_db,0.0,unusable
+1032.439575,_db,0.0,unusable
+1032.416376,_db,0.0,unusable
+1031.988274,_db,0.0,unusable
+1031.605256,_db,0.0,unusable
+1031.436114,_db,0.0,unusable
+1030.985339,_db,0.0,unusable
+1030.984427,_db,0.0,unusable
+1030.600085,_db,0.0,unusable
+1032.617222,_db,0.0,unusable
+1041.450282,_db,0.0,unusable
+1040.619692,_db,0.0,unusable
+1040.58475,_db,0.0,unusable
+1040.562634,_db,0.0,unusable
+1040.561935,_db,0.0,unusable
+1040.538421,_db,0.0,unusable
+1040.5384,_db,0.0,unusable
+1040.19963,_db,0.0,unusable
+1039.550852,_db,0.0,unusable
+1038.546612,_db,0.0,unusable
+1035.0418,_db,0.0,unusable
+1038.061129,_db,0.0,unusable
+1037.510913,_db,0.0,unusable
+1037.451902,_db,0.0,unusable
+1037.057724,_db,0.0,unusable
+1037.043377,_db,0.0,unusable
+1036.640336,_db,0.0,unusable
+1036.44805,_db,0.0,unusable
+1036.041008,_db,0.0,unusable
+1035.637151,_db,0.0,unusable
+1035.49912,_db,0.0,unusable
+1038.52299,_db,0.0,unusable
+1023.555506,_db,0.0,unusable
+1023.536569,_db,0.0,unusable
+1023.439805,_db,0.0,unusable
+1022.958899,_db,0.0,unusable
+1022.549688,_db,0.0,unusable
+1022.53423,_db,0.0,unusable
+1022.066402,_db,0.0,unusable
+1021.537359,_db,0.0,unusable
+1021.478634,_db,0.0,unusable
+1030.541858,_db,0.0,unusable
+1020.943134,_db,0.0,unusable
+1020.533458,_db,0.0,unusable
+1020.474973,_db,0.0,unusable
+1020.414471,_db,0.0,unusable
+1020.050654,_db,0.0,unusable
+1019.046971,_db,0.0,unusable
+1018.554671,_db,0.0,unusable
+1017.965779,_db,0.0,unusable
+1017.490018,_db,0.0,unusable
+1021.062827,_db,0.0,unusable
+1029.951798,_db,0.0,unusable
+1029.52957,_db,0.0,unusable
+1029.504302,_db,0.0,unusable
+1029.451058,_db,0.0,unusable
+1029.030296,_db,0.0,unusable
+1028.948141,_db,0.0,unusable
+1028.526041,_db,0.0,unusable
+1028.500155,_db,0.0,unusable
+1028.447372,_db,0.0,unusable
+1027.096756,_db,0.0,unusable
+1023.962278,_db,0.0,unusable
+1026.022095,_db,0.0,unusable
+1025.568913,_db,0.0,unusable
+1025.5383,_db,0.0,unusable
+1025.476157,_db,0.0,unusable
+1025.018341,_db,0.0,unusable
+1024.956598,_db,0.0,unusable
+1024.64596,_db,0.0,unusable
+1024.565391,_db,0.0,unusable
+1024.470428,_db,0.0,unusable
+1024.44338,_db,0.0,unusable
+1026.463333,_db,0.0,unusable
+1146.532418,_db,0.0,unusable
+1146.530848,_db,0.0,unusable
+1146.105722,_db,0.0,unusable
+1146.022879,_db,0.0,unusable
+1146.003207,_db,0.0,unusable
+1145.000876,_db,0.0,unusable
+1144.998985,_db,0.0,unusable
+1144.527659,_db,0.0,unusable
+1087.571847,_db,0.0,unusable
+1143.620875,_db,0.0,unusable
+1143.537475,_db,0.0,unusable
+1143.517698,_db,0.0,unusable
+1143.452588,_db,0.0,unusable
+1143.086223,_db,0.0,unusable
+1142.617398,_db,0.0,unusable
+1142.534102,_db,0.0,unusable
+1142.513038,_db,0.0,unusable
+1142.503275,_db,0.0,unusable
+1142.50322,_db,0.0,unusable
+1144.004434,_db,0.0,unusable
+1151.564715,_db,0.0,unusable
+1151.562225,_db,0.0,unusable
+1151.508572,_db,0.0,unusable
+1151.481566,_db,0.0,unusable
+1151.479443,_db,0.0,unusable
+1150.641487,_db,0.0,unusable
+1150.558926,_db,0.0,unusable
+1150.536122,_db,0.0,unusable
+1150.5047,_db,0.0,unusable
+1147.108822,_db,0.0,unusable
+1150.47931,_db,0.0,unusable
+1149.549674,_db,0.0,unusable
+1149.530239,_db,0.0,unusable
+1149.527812,_db,0.0,unusable
+1148.544493,_db,0.0,unusable
+1148.540316,_db,0.0,unusable
+1148.109229,_db,0.0,unusable
+1148.108889,_db,0.0,unusable
+1147.534888,_db,0.0,unusable
+1147.515114,_db,0.0,unusable
+1150.479946,_db,0.0,unusable
+1137.585722,_db,0.0,unusable
+1137.553082,_db,0.0,unusable
+1137.552304,_db,0.0,unusable
+1137.447936,_db,0.0,unusable
+1136.665355,_db,0.0,unusable
+1136.663997,_db,0.0,unusable
+1136.581604,_db,0.0,unusable
+1135.51041,_db,0.0,unusable
+1135.043469,_db,0.0,unusable
+1142.497181,_db,0.0,unusable
+1134.506765,_db,0.0,unusable
+1133.554234,_db,0.0,unusable
+1133.552918,_db,0.0,unusable
+1132.54944,_db,0.0,unusable
+1131.691507,_db,0.0,unusable
+1131.561625,_db,0.0,unusable
+1130.965593,_db,0.0,unusable
+1130.963057,_db,0.0,unusable
+1130.558146,_db,0.0,unusable
+1130.11042,_db,0.0,unusable
+1134.567044,_db,0.0,unusable
+1141.520024,_db,0.0,unusable
+1141.501035,_db,0.0,unusable
+1140.963576,_db,0.0,unusable
+1140.687784,_db,0.0,unusable
+1140.6856,_db,0.0,unusable
+1140.60325,_db,0.0,unusable
+1140.602703,_db,0.0,unusable
+1140.516223,_db,0.0,unusable
+1140.498247,_db,0.0,unusable
+1140.496732,_db,0.0,unusable
+1137.668214,_db,0.0,unusable
+1139.600683,_db,0.0,unusable
+1139.507713,_db,0.0,unusable
+1139.485152,_db,0.0,unusable
+1138.680558,_db,0.0,unusable
+1138.502118,_db,0.0,unusable
+1138.481267,_db,0.0,unusable
+1138.480133,_db,0.0,unusable
+1138.451744,_db,0.0,unusable
+1137.668436,_db,0.0,unusable
+1139.6838,_db,0.0,unusable
+1173.527795,_db,0.0,unusable
+1173.526367,_db,0.0,unusable
+1173.467478,_db,0.0,unusable
+1173.073529,_db,0.0,unusable
+1172.522693,_db,0.0,unusable
+1172.4648,_db,0.0,unusable
+1172.463345,_db,0.0,unusable
+1171.514642,_db,0.0,unusable
+1171.0576,_db,0.0,unusable
+1152.458463,_db,0.0,unusable
+1169.955425,_db,0.0,unusable
+1169.63693,_db,0.0,unusable
+1169.635456,_db,0.0,unusable
+1168.63341,_db,0.0,unusable
+1168.632347,_db,0.0,unusable
+1168.549684,_db,0.0,unusable
+1168.548296,_db,0.0,unusable
+1168.513354,_db,0.0,unusable
+1168.511144,_db,0.0,unusable
+1168.432428,_db,0.0,unusable
+1170.639909,_db,0.0,unusable
+1182.975779,_db,0.0,unusable
+1182.974132,_db,0.0,unusable
+1182.609933,_db,0.0,unusable
+1182.5051,_db,0.0,unusable
+1182.503653,_db,0.0,unusable
+1182.04922,_db,0.0,unusable
+1181.494153,_db,0.0,unusable
+1181.493837,_db,0.0,unusable
+1180.491158,_db,0.0,unusable
+1180.4911,_db,0.0,unusable
+1174.562025,_db,0.0,unusable
+1178.672486,_db,0.0,unusable
+1178.471502,_db,0.0,unusable
+1177.639515,_db,0.0,unusable
+1177.560195,_db,0.0,unusable
+1177.558103,_db,0.0,unusable
+1177.465995,_db,0.0,unusable
+1176.635929,_db,0.0,unusable
+1176.554918,_db,0.0,unusable
+1176.554631,_db,0.0,unusable
+1175.544291,_db,0.0,unusable
+1180.489332,_db,0.0,unusable
+1158.082281,_db,0.0,unusable
+1157.553257,_db,0.0,unusable
+1157.494157,_db,0.0,unusable
+1157.078662,_db,0.0,unusable
+1156.576543,_db,0.0,unusable
+1156.57478,_db,0.0,unusable
+1156.549558,_db,0.0,unusable
+1156.490299,_db,0.0,unusable
+1156.06638,_db,0.0,unusable
+1167.619217,_db,0.0,unusable
+1155.573685,_db,0.0,unusable
+1155.458366,_db,0.0,unusable
+1155.062756,_db,0.0,unusable
+1154.571748,_db,0.0,unusable
+1154.570143,_db,0.0,unusable
+1154.425458,_db,0.0,unusable
+1153.560076,_db,0.0,unusable
+1153.558521,_db,0.0,unusable
+1153.421689,_db,0.0,unusable
+1152.55508,_db,0.0,unusable
+1155.574663,_db,0.0,unusable
+1167.618669,_db,0.0,unusable
+1167.535284,_db,0.0,unusable
+1167.452107,_db,0.0,unusable
+1166.616265,_db,0.0,unusable
+1166.614627,_db,0.0,unusable
+1166.531269,_db,0.0,unusable
+1164.542235,_db,0.0,unusable
+1164.5419,_db,0.0,unusable
+1164.516005,_db,0.0,unusable
+1161.585006,_db,0.0,unusable
+1158.508247,_db,0.0,unusable
+1161.492028,_db,0.0,unusable
+1161.058921,_db,0.0,unusable
+1161.033841,_db,0.0,unusable
+1160.972549,_db,0.0,unusable
+1160.58199,_db,0.0,unusable
+1160.581036,_db,0.0,unusable
+1159.978044,_db,0.0,unusable
+1159.454886,_db,0.0,unusable
+1158.975046,_db,0.0,unusable
+1158.974153,_db,0.0,unusable
+1161.58488,_db,0.0,unusable
+1103.545398,_db,0.0,unusable
+1103.526387,_db,0.0,unusable
+1102.967122,_db,0.0,unusable
+1102.944214,_db,0.0,unusable
+1102.566757,_db,0.0,unusable
+1102.565677,_db,0.0,unusable
+1102.542295,_db,0.0,unusable
+1102.526123,_db,0.0,unusable
+1102.525563,_db,0.0,unusable
+1129.963381,_db,0.0,unusable
+1102.115879,_db,0.0,unusable
+1102.000617,_db,0.0,unusable
+1101.52754,_db,0.0,unusable
+1101.488938,_db,0.0,unusable
+1101.112236,_db,0.0,unusable
+1100.992422,_db,0.0,unusable
+1100.547685,_db,0.0,unusable
+1100.547048,_db,0.0,unusable
+1100.524041,_db,0.0,unusable
+1102.493459,_db,0.0,unusable
+1107.636364,_db,0.0,unusable
+1107.576769,_db,0.0,unusable
+1107.436961,_db,0.0,unusable
+1106.632604,_db,0.0,unusable
+1106.572996,_db,0.0,unusable
+1106.04841,_db,0.0,unusable
+1105.699533,_db,0.0,unusable
+1105.585055,_db,0.0,unusable
+1105.561409,_db,0.0,unusable
+1105.561161,_db,0.0,unusable
+1103.569559,_db,0.0,unusable
+1105.045097,_db,0.0,unusable
+1105.014324,_db,0.0,unusable
+1105.008894,_db,0.0,unusable
+1105.006312,_db,0.0,unusable
+1104.581356,_db,0.0,unusable
+1104.557529,_db,0.0,unusable
+1104.548982,_db,0.0,unusable
+1104.547346,_db,0.0,unusable
+1104.01197,_db,0.0,unusable
+1105.421923,_db,0.0,unusable
+1096.470438,_db,0.0,unusable
+1095.678562,_db,0.0,unusable
+1095.517052,_db,0.0,unusable
+1095.48376,_db,0.0,unusable
+1094.653989,_db,0.0,unusable
+1094.591992,_db,0.0,unusable
+1094.513246,_db,0.0,unusable
+1093.501679,_db,0.0,unusable
+1092.545801,_db,0.0,unusable
+1100.49628,_db,0.0,unusable
+1091.463807,_db,0.0,unusable
+1090.599294,_db,0.0,unusable
+1090.452304,_db,0.0,unusable
+1089.587219,_db,0.0,unusable
+1089.448819,_db,0.0,unusable
+1088.583789,_db,0.0,unusable
+1088.466202,_db,0.0,unusable
+1087.5969,_db,0.0,unusable
+1087.595359,_db,0.0,unusable
+1092.497575,_db,0.0,unusable
+1100.478625,_db,0.0,unusable
+1099.5971,_db,0.0,unusable
+1099.533537,_db,0.0,unusable
+1099.512543,_db,0.0,unusable
+1098.531595,_db,0.0,unusable
+1098.530503,_db,0.0,unusable
+1098.508042,_db,0.0,unusable
+1098.481518,_db,0.0,unusable
+1096.471473,_db,0.0,unusable
+1098.459167,_db,0.0,unusable
+1097.560135,_db,0.0,unusable
+1097.528553,_db,0.0,unusable
+1097.527757,_db,0.0,unusable
+1097.49598,_db,0.0,unusable
+1097.49436,_db,0.0,unusable
+1097.475868,_db,0.0,unusable
+1097.455572,_db,0.0,unusable
+1096.6078,_db,0.0,unusable
+1096.550505,_db,0.0,unusable
+1098.480905,_db,0.0,unusable
+1125.506909,_db,0.0,unusable
+1124.990029,_db,0.0,unusable
+1124.907017,_db,0.0,unusable
+1124.664517,_db,0.0,unusable
+1124.523441,_db,0.0,unusable
+1124.502706,_db,0.0,unusable
+1123.709711,_db,0.0,unusable
+1123.688801,_db,0.0,unusable
+1123.627183,_db,0.0,unusable
+1108.31275,_db,0.0,unusable
+1123.512275,_db,0.0,unusable
+1123.510032,_db,0.0,unusable
+1122.684857,_db,0.0,unusable
+1122.623752,_db,0.0,unusable
+1122.53042,_db,0.0,unusable
+1122.504109,_db,0.0,unusable
+1122.022648,_db,0.0,unusable
+1122.021372,_db,0.0,unusable
+1121.694069,_db,0.0,unusable
+1121.673929,_db,0.0,unusable
+1123.534562,_db,0.0,unusable
+1129.559559,_db,0.0,unusable
+1129.558329,_db,0.0,unusable
+1129.540969,_db,0.0,unusable
+1129.106471,_db,0.0,unusable
+1129.045638,_db,0.0,unusable
+1128.556455,_db,0.0,unusable
+1128.554832,_db,0.0,unusable
+1128.545288,_db,0.0,unusable
+1128.539739,_db,0.0,unusable
+1128.538249,_db,0.0,unusable
+1125.52769,_db,0.0,unusable
+1128.09509,_db,0.0,unusable
+1128.012099,_db,0.0,unusable
+1127.542989,_db,0.0,unusable
+1127.091431,_db,0.0,unusable
+1127.008452,_db,0.0,unusable
+1126.539582,_db,0.0,unusable
+1126.498313,_db,0.0,unusable
+1125.993785,_db,0.0,unusable
+1125.668027,_db,0.0,unusable
+1125.546288,_db,0.0,unusable
+1128.481523,_db,0.0,unusable
+1114.991381,_db,0.0,unusable
+1114.481634,_db,0.0,unusable
+1113.989305,_db,0.0,unusable
+1113.584993,_db,0.0,unusable
+1113.469862,_db,0.0,unusable
+1113.449441,_db,0.0,unusable
+1112.581825,_db,0.0,unusable
+1112.581314,_db,0.0,unusable
+1112.573127,_db,0.0,unusable
+1121.672704,_db,0.0,unusable
+1112.570923,_db,0.0,unusable
+1112.466295,_db,0.0,unusable
+1111.652425,_db,0.0,unusable
+1111.569104,_db,0.0,unusable
+1110.64902,_db,0.0,unusable
+1110.565723,_db,0.0,unusable
+1109.555217,_db,0.0,unusable
+1109.316483,_db,0.0,unusable
+1108.933356,_db,0.0,unusable
+1108.549959,_db,0.0,unusable
+1112.571739,_db,0.0,unusable
+1121.579006,_db,0.0,unusable
+1121.499829,_db,0.0,unusable
+1120.69017,_db,0.0,unusable
+1120.669741,_db,0.0,unusable
+1120.577342,_db,0.0,unusable
+1120.576129,_db,0.0,unusable
+1119.53965,_db,0.0,unusable
+1119.539545,_db,0.0,unusable
+1118.940454,_db,0.0,unusable
+1118.917665,_db,0.0,unusable
+1115.48614,_db,0.0,unusable
+1118.53562,_db,0.0,unusable
+1118.504786,_db,0.0,unusable
+1118.503517,_db,0.0,unusable
+1118.110914,_db,0.0,unusable
+1117.618784,_db,0.0,unusable
+1117.501055,_db,0.0,unusable
+1117.107343,_db,0.0,unusable
+1116.615405,_db,0.0,unusable
+1116.614564,_db,0.0,unusable
+1116.497493,_db,0.0,unusable
+1118.561431,_db,0.0,unusable
+630.32488,_db,0.0,unusable
+630.301103,_db,0.0,unusable
+629.550138,_db,0.0,unusable
+629.541274,_db,0.0,unusable
+629.521039,_db,0.0,unusable
+629.34181,_db,0.0,unusable
+629.321481,_db,0.0,unusable
+520.013153,_db,0.0,unusable
+629.226382,_db,0.0,unusable
+629.084324,_db,0.0,unusable
+628.517743,_db,0.0,unusable
+628.394764,_db,0.0,unusable
+628.345354,_db,0.0,unusable
+628.249146,_db,0.0,unusable
+628.213626,_db,0.0,unusable
+629.280811,_db,0.0,unusable
+632.198274,_db,0.0,unusable
+632.171816,_db,0.0,unusable
+632.151127,_db,0.0,unusable
+631.880447,_db,0.0,unusable
+631.621647,_db,0.0,unusable
+631.565955,_db,0.0,unusable
+631.356511,_db,0.0,unusable
+631.319676,_db,0.0,unusable
+630.533353,_db,0.0,unusable
+631.260393,_db,0.0,unusable
+631.26008,_db,0.0,unusable
+631.205355,_db,0.0,unusable
+631.203041,_db,0.0,unusable
+631.183469,_db,0.0,unusable
+631.113807,_db,0.0,unusable
+631.099982,_db,0.0,unusable
+631.080694,_db,0.0,unusable
+631.063705,_db,0.0,unusable
+631.29637,_db,0.0,unusable
+624.787914,_db,0.0,unusable
+624.38711,_db,0.0,unusable
+624.254477,_db,0.0,unusable
+624.187638,_db,0.0,unusable
+624.182149,_db,0.0,unusable
+624.00237,_db,0.0,unusable
+623.901335,_db,0.0,unusable
+628.168435,_db,0.0,unusable
+623.058405,_db,0.0,unusable
+622.999034,_db,0.0,unusable
+622.981609,_db,0.0,unusable
+622.936612,_db,0.0,unusable
+622.904898,_db,0.0,unusable
+622.89814,_db,0.0,unusable
+622.897876,_db,0.0,unusable
+622.85489,_db,0.0,unusable
+622.44435,_db,0.0,unusable
+622.40783,_db,0.0,unusable
+623.251085,_db,0.0,unusable
+627.534591,_db,0.0,unusable
+627.342164,_db,0.0,unusable
+627.305925,_db,0.0,unusable
+627.265158,_db,0.0,unusable
+627.210665,_db,0.0,unusable
+627.105056,_db,0.0,unusable
+626.907826,_db,0.0,unusable
+626.824517,_db,0.0,unusable
+626.522316,_db,0.0,unusable
+626.366429,_db,0.0,unusable
+624.853136,_db,0.0,unusable
+626.198165,_db,0.0,unusable
+626.170269,_db,0.0,unusable
+626.169922,_db,0.0,unusable
+625.986206,_db,0.0,unusable
+625.972086,_db,0.0,unusable
+625.510413,_db,0.0,unusable
+625.32646,_db,0.0,unusable
+625.037251,_db,0.0,unusable
+624.997019,_db,0.0,unusable
+626.270117,_db,0.0,unusable
+640.056473,_db,0.0,unusable
+639.997051,_db,0.0,unusable
+639.984597,_db,0.0,unusable
+639.962771,_db,0.0,unusable
+639.342156,_db,0.0,unusable
+639.265316,_db,0.0,unusable
+639.210918,_db,0.0,unusable
+639.166607,_db,0.0,unusable
+639.104905,_db,0.0,unusable
+632.316889,_db,0.0,unusable
+638.910776,_db,0.0,unusable
+638.307615,_db,0.0,unusable
+638.306505,_db,0.0,unusable
+638.270011,_db,0.0,unusable
+638.197939,_db,0.0,unusable
+638.077648,_db,0.0,unusable
+637.986188,_db,0.0,unusable
+637.953458,_db,0.0,unusable
+637.939871,_db,0.0,unusable
+637.555419,_db,0.0,unusable
+638.933998,_db,0.0,unusable
+642.410586,_db,0.0,unusable
+642.386831,_db,0.0,unusable
+642.353056,_db,0.0,unusable
+642.264781,_db,0.0,unusable
+642.256987,_db,0.0,unusable
+642.08419,_db,0.0,unusable
+642.002071,_db,0.0,unusable
+641.995124,_db,0.0,unusable
+641.94592,_db,0.0,unusable
+641.873911,_db,0.0,unusable
+640.184733,_db,0.0,unusable
+641.28091,_db,0.0,unusable
+641.261865,_db,0.0,unusable
+641.226361,_db,0.0,unusable
+641.08435,_db,0.0,unusable
+640.999586,_db,0.0,unusable
+640.382075,_db,0.0,unusable
+640.285485,_db,0.0,unusable
+640.2778,_db,0.0,unusable
+640.249229,_db,0.0,unusable
+640.213827,_db,0.0,unusable
+641.357845,_db,0.0,unusable
+634.171797,_db,0.0,unusable
+634.166524,_db,0.0,unusable
+634.000393,_db,0.0,unusable
+633.637323,_db,0.0,unusable
+633.581614,_db,0.0,unusable
+633.359124,_db,0.0,unusable
+633.335702,_db,0.0,unusable
+633.312129,_db,0.0,unusable
+633.275679,_db,0.0,unusable
+637.266829,_db,0.0,unusable
+633.199095,_db,0.0,unusable
+633.154632,_db,0.0,unusable
+633.079241,_db,0.0,unusable
+633.042965,_db,0.0,unusable
+632.980773,_db,0.0,unusable
+632.625293,_db,0.0,unusable
+632.569323,_db,0.0,unusable
+632.355683,_db,0.0,unusable
+632.332315,_db,0.0,unusable
+633.220289,_db,0.0,unusable
+636.978167,_db,0.0,unusable
+636.936353,_db,0.0,unusable
+636.893268,_db,0.0,unusable
+636.543069,_db,0.0,unusable
+636.4165,_db,0.0,unusable
+636.314196,_db,0.0,unusable
+636.312209,_db,0.0,unusable
+636.187635,_db,0.0,unusable
+636.182293,_db,0.0,unusable
+636.144762,_db,0.0,unusable
+634.230724,_db,0.0,unusable
+635.990697,_db,0.0,unusable
+635.884695,_db,0.0,unusable
+635.616584,_db,0.0,unusable
+635.291316,_db,0.0,unusable
+635.058666,_db,0.0,unusable
+634.9972,_db,0.0,unusable
+634.311709,_db,0.0,unusable
+634.310652,_db,0.0,unusable
+634.296241,_db,0.0,unusable
+636.061727,_db,0.0,unusable
+610.171968,_db,0.0,unusable
+610.082763,_db,0.0,unusable
+610.012222,_db,0.0,unusable
+609.991142,_db,0.0,unusable
+609.981652,_db,0.0,unusable
+609.898422,_db,0.0,unusable
+609.523997,_db,0.0,unusable
+609.31877,_db,0.0,unusable
+609.264831,_db,0.0,unusable
+622.400812,_db,0.0,unusable
+609.04298,_db,0.0,unusable
+608.983093,_db,0.0,unusable
+608.814047,_db,0.0,unusable
+608.392305,_db,0.0,unusable
+608.280525,_db,0.0,unusable
+608.262079,_db,0.0,unusable
+608.243917,_db,0.0,unusable
+608.233879,_db,0.0,unusable
+608.216723,_db,0.0,unusable
+609.235603,_db,0.0,unusable
+613.089402,_db,0.0,unusable
+613.037752,_db,0.0,unusable
+613.014559,_db,0.0,unusable
+613.004778,_db,0.0,unusable
+612.996926,_db,0.0,unusable
+612.607698,_db,0.0,unusable
+612.543255,_db,0.0,unusable
+612.282762,_db,0.0,unusable
+612.254101,_db,0.0,unusable
+612.246451,_db,0.0,unusable
+610.195886,_db,0.0,unusable
+611.979562,_db,0.0,unusable
+611.53965,_db,0.0,unusable
+611.310828,_db,0.0,unusable
+611.251079,_db,0.0,unusable
+610.985316,_db,0.0,unusable
+610.985022,_db,0.0,unusable
+610.371451,_db,0.0,unusable
+610.322156,_db,0.0,unusable
+610.238601,_db,0.0,unusable
+610.230771,_db,0.0,unusable
+612.002132,_db,0.0,unusable
+605.084354,_db,0.0,unusable
+605.048206,_db,0.0,unusable
+605.041606,_db,0.0,unusable
+604.988188,_db,0.0,unusable
+604.904992,_db,0.0,unusable
+604.842687,_db,0.0,unusable
+604.804343,_db,0.0,unusable
+604.803976,_db,0.0,unusable
+608.066947,_db,0.0,unusable
+604.321555,_db,0.0,unusable
+604.301161,_db,0.0,unusable
+604.285629,_db,0.0,unusable
+604.249257,_db,0.0,unusable
+604.220096,_db,0.0,unusable
+604.211639,_db,0.0,unusable
+604.211183,_db,0.0,unusable
+604.202651,_db,0.0,unusable
+604.16859,_db,0.0,unusable
+604.046076,_db,0.0,unusable
+607.556958,_db,0.0,unusable
+607.298412,_db,0.0,unusable
+607.260011,_db,0.0,unusable
+607.205038,_db,0.0,unusable
+607.203836,_db,0.0,unusable
+606.924076,_db,0.0,unusable
+606.412888,_db,0.0,unusable
+605.167794,_db,0.0,unusable
+606.264747,_db,0.0,unusable
+606.235807,_db,0.0,unusable
+606.199537,_db,0.0,unusable
+605.929331,_db,0.0,unusable
+605.606028,_db,0.0,unusable
+605.550271,_db,0.0,unusable
+605.2808,_db,0.0,unusable
+605.244428,_db,0.0,unusable
+605.205986,_db,0.0,unusable
+605.189919,_db,0.0,unusable
+606.264946,_db,0.0,unusable
+620.167073,_db,0.0,unusable
+620.156263,_db,0.0,unusable
+620.102516,_db,0.0,unusable
+620.066845,_db,0.0,unusable
+620.016737,_db,0.0,unusable
+619.978201,_db,0.0,unusable
+619.91087,_db,0.0,unusable
+619.858183,_db,0.0,unusable
+619.320342,_db,0.0,unusable
+613.249598,_db,0.0,unusable
+619.260133,_db,0.0,unusable
+619.063707,_db,0.0,unusable
+619.048517,_db,0.0,unusable
+618.983448,_db,0.0,unusable
+618.618288,_db,0.0,unusable
+618.337676,_db,0.0,unusable
+618.31679,_db,0.0,unusable
+618.301182,_db,0.0,unusable
+618.228878,_db,0.0,unusable
+618.199238,_db,0.0,unusable
+619.296399,_db,0.0,unusable
+622.296226,_db,0.0,unusable
+622.172107,_db,0.0,unusable
+622.166658,_db,0.0,unusable
+622.08263,_db,0.0,unusable
+621.986496,_db,0.0,unusable
+621.965696,_db,0.0,unusable
+621.903223,_db,0.0,unusable
+621.861095,_db,0.0,unusable
+621.856235,_db,0.0,unusable
+621.600915,_db,0.0,unusable
+620.280592,_db,0.0,unusable
+621.311981,_db,0.0,unusable
+621.275621,_db,0.0,unusable
+621.07939,_db,0.0,unusable
+620.983171,_db,0.0,unusable
+620.962352,_db,0.0,unusable
+620.918917,_db,0.0,unusable
+620.899939,_db,0.0,unusable
+620.857963,_db,0.0,unusable
+620.42855,_db,0.0,unusable
+620.295865,_db,0.0,unusable
+621.397434,_db,0.0,unusable
+615.305889,_db,0.0,unusable
+615.265129,_db,0.0,unusable
+615.228905,_db,0.0,unusable
+615.210442,_db,0.0,unusable
+615.168947,_db,0.0,unusable
+615.105956,_db,0.0,unusable
+615.06888,_db,0.0,unusable
+614.86565,_db,0.0,unusable
+614.559205,_db,0.0,unusable
+618.079022,_db,0.0,unusable
+614.329498,_db,0.0,unusable
+614.269961,_db,0.0,unusable
+614.233472,_db,0.0,unusable
+614.225583,_db,0.0,unusable
+614.198067,_db,0.0,unusable
+614.181516,_db,0.0,unusable
+614.103368,_db,0.0,unusable
+614.000311,_db,0.0,unusable
+613.61103,_db,0.0,unusable
+614.379103,_db,0.0,unusable
+617.980084,_db,0.0,unusable
+617.921798,_db,0.0,unusable
+617.921255,_db,0.0,unusable
+617.340847,_db,0.0,unusable
+617.280726,_db,0.0,unusable
+617.244671,_db,0.0,unusable
+617.225778,_db,0.0,unusable
+617.185087,_db,0.0,unusable
+617.183575,_db,0.0,unusable
+615.325161,_db,0.0,unusable
+617.08449,_db,0.0,unusable
+617.032833,_db,0.0,unusable
+616.60265,_db,0.0,unusable
+616.324483,_db,0.0,unusable
+616.321978,_db,0.0,unusable
+616.285649,_db,0.0,unusable
+616.21353,_db,0.0,unusable
+615.906315,_db,0.0,unusable
+617.179369,_db,0.0,unusable
+679.204625,_db,0.0,unusable
+679.04842,_db,0.0,unusable
+678.98623,_db,0.0,unusable
+678.973873,_db,0.0,unusable
+678.947454,_db,0.0,unusable
+678.864526,_db,0.0,unusable
+678.470477,_db,0.0,unusable
+678.084402,_db,0.0,unusable
+678.012347,_db,0.0,unusable
+642.798482,_db,0.0,unusable
+677.952998,_db,0.0,unusable
+677.920279,_db,0.0,unusable
+677.869603,_db,0.0,unusable
+677.338242,_db,0.0,unusable
+677.266777,_db,0.0,unusable
+677.246204,_db,0.0,unusable
+677.225719,_db,0.0,unusable
+677.189017,_db,0.0,unusable
+676.970543,_db,0.0,unusable
+677.973384,_db,0.0,unusable
+682.429009,_db,0.0,unusable
+682.311533,_db,0.0,unusable
+682.311343,_db,0.0,unusable
+682.273203,_db,0.0,unusable
+682.171432,_db,0.0,unusable
+682.090852,_db,0.0,unusable
+682.067515,_db,0.0,unusable
+681.987693,_db,0.0,unusable
+681.003989,_db,0.0,unusable
+679.313863,_db,0.0,unusable
+680.929753,_db,0.0,unusable
+680.442391,_db,0.0,unusable
+680.354421,_db,0.0,unusable
+680.051644,_db,0.0,unusable
+680.04012,_db,0.0,unusable
+679.989602,_db,0.0,unusable
+679.97697,_db,0.0,unusable
+679.901745,_db,0.0,unusable
+679.439184,_db,0.0,unusable
+679.317293,_db,0.0,unusable
+680.992355,_db,0.0,unusable
+673.282478,_db,0.0,unusable
+673.097039,_db,0.0,unusable
+673.01455,_db,0.0,unusable
+672.869255,_db,0.0,unusable
+672.363768,_db,0.0,unusable
+672.182343,_db,0.0,unusable
+672.143349,_db,0.0,unusable
+671.956344,_db,0.0,unusable
+671.315158,_db,0.0,unusable
+676.928656,_db,0.0,unusable
+671.178822,_db,0.0,unusable
+671.094912,_db,0.0,unusable
+671.073155,_db,0.0,unusable
+670.311754,_db,0.0,unusable
+670.311412,_db,0.0,unusable
+670.296266,_db,0.0,unusable
+670.272075,_db,0.0,unusable
+670.106939,_db,0.0,unusable
+670.069764,_db,0.0,unusable
+669.389119,_db,0.0,unusable
+671.291348,_db,0.0,unusable
+676.908341,_db,0.0,unusable
+676.866264,_db,0.0,unusable
+998.633028,_db,0.0,unusable
+676.317956,_db,0.0,unusable
+676.263772,_db,0.0,unusable
+676.213813,_db,0.0,unusable
+676.056832,_db,0.0,unusable
+676.008919,_db,0.0,unusable
+675.941784,_db,0.0,unusable
+673.306903,_db,0.0,unusable
+675.322723,_db,0.0,unusable
+675.210468,_db,0.0,unusable
+675.053366,_db,0.0,unusable
+675.013481,_db,0.0,unusable
+674.970173,_db,0.0,unusable
+674.379284,_db,0.0,unusable
+674.35108,_db,0.0,unusable
+674.00971,_db,0.0,unusable
+673.946482,_db,0.0,unusable
+673.403387,_db,0.0,unusable
+675.941775,_db,0.0,unusable
+694.234249,_db,0.0,unusable
+694.067552,_db,0.0,unusable
+693.239598,_db,0.0,unusable
+692.944515,_db,0.0,unusable
+692.902927,_db,0.0,unusable
+692.882293,_db,0.0,unusable
+692.498846,_db,0.0,unusable
+692.477881,_db,0.0,unusable
+692.236228,_db,0.0,unusable
+692.124583,_db,0.0,unusable
+692.05632,_db,0.0,unusable
+692.051205,_db,0.0,unusable
+691.317451,_db,0.0,unusable
+691.204748,_db,0.0,unusable
+691.140615,_db,0.0,unusable
+691.14024,_db,0.0,unusable
+690.988618,_db,0.0,unusable
+690.401609,_db,0.0,unusable
+692.308962,_db,0.0,unusable
+697.194935,_db,0.0,unusable
+697.018535,_db,0.0,unusable
+696.998315,_db,0.0,unusable
+696.966231,_db,0.0,unusable
+696.958239,_db,0.0,unusable
+696.521157,_db,0.0,unusable
+696.327142,_db,0.0,unusable
+696.181896,_db,0.0,unusable
+696.08532,_db,0.0,unusable
+694.251777,_db,0.0,unusable
+695.963551,_db,0.0,unusable
+695.308791,_db,0.0,unusable
+695.178596,_db,0.0,unusable
+695.16979,_db,0.0,unusable
+695.070505,_db,0.0,unusable
+694.960128,_db,0.0,unusable
+694.951582,_db,0.0,unusable
+694.918947,_db,0.0,unusable
+694.514528,_db,0.0,unusable
+696.014052,_db,0.0,unusable
+685.306956,_db,0.0,unusable
+685.29435,_db,0.0,unusable
+685.194853,_db,0.0,unusable
+685.11055,_db,0.0,unusable
+685.074239,_db,0.0,unusable
+684.975415,_db,0.0,unusable
+684.89214,_db,0.0,unusable
+684.472756,_db,0.0,unusable
+684.39998,_db,0.0,unusable
+690.393094,_db,0.0,unusable
+684.290538,_db,0.0,unusable
+684.182752,_db,0.0,unusable
+684.000423,_db,0.0,unusable
+683.31503,_db,0.0,unusable
+683.291314,_db,0.0,unusable
+683.272507,_db,0.0,unusable
+683.093874,_db,0.0,unusable
+682.874339,_db,0.0,unusable
+682.855465,_db,0.0,unusable
+682.7722,_db,0.0,unusable
+684.29062,_db,0.0,unusable
+690.07369,_db,0.0,unusable
+690.040562,_db,0.0,unusable
+689.966797,_db,0.0,unusable
+689.434735,_db,0.0,unusable
+689.398314,_db,0.0,unusable
+689.338378,_db,0.0,unusable
+689.2263,_db,0.0,unusable
+689.070417,_db,0.0,unusable
+688.439391,_db,0.0,unusable
+688.394949,_db,0.0,unusable
+685.559582,_db,0.0,unusable
+687.322537,_db,0.0,unusable
+687.298211,_db,0.0,unusable
+687.210622,_db,0.0,unusable
+687.0899,_db,0.0,unusable
+687.047277,_db,0.0,unusable
+686.922283,_db,0.0,unusable
+686.423729,_db,0.0,unusable
+686.379302,_db,0.0,unusable
+686.246666,_db,0.0,unusable
+686.043606,_db,0.0,unusable
+688.321895,_db,0.0,unusable
+653.541285,_db,0.0,unusable
+653.280859,_db,0.0,unusable
+653.226481,_db,0.0,unusable
+653.111578,_db,0.0,unusable
+653.069242,_db,0.0,unusable
+653.032909,_db,0.0,unusable
+652.974372,_db,0.0,unusable
+652.285735,_db,0.0,unusable
+669.293294,_db,0.0,unusable
+652.118455,_db,0.0,unusable
+652.057063,_db,0.0,unusable
+651.972156,_db,0.0,unusable
+651.28248,_db,0.0,unusable
+651.21009,_db,0.0,unusable
+651.200983,_db,0.0,unusable
+651.05353,_db,0.0,unusable
+650.991638,_db,0.0,unusable
+650.977781,_db,0.0,unusable
+652.21356,_db,0.0,unusable
+657.004324,_db,0.0,unusable
+656.569288,_db,0.0,unusable
+656.279991,_db,0.0,unusable
+656.272644,_db,0.0,unusable
+656.143722,_db,0.0,unusable
+656.034953,_db,0.0,unusable
+655.935999,_db,0.0,unusable
+655.296611,_db,0.0,unusable
+655.283871,_db,0.0,unusable
+653.550135,_db,0.0,unusable
+655.140473,_db,0.0,unusable
+655.09964,_db,0.0,unusable
+654.988658,_db,0.0,unusable
+654.926447,_db,0.0,unusable
+654.553628,_db,0.0,unusable
+654.33769,_db,0.0,unusable
+654.301128,_db,0.0,unusable
+654.280374,_db,0.0,unusable
+654.280266,_db,0.0,unusable
+655.260231,_db,0.0,unusable
+647.058536,_db,0.0,unusable
+646.348038,_db,0.0,unusable
+646.319699,_db,0.0,unusable
+646.171983,_db,0.0,unusable
+645.921793,_db,0.0,unusable
+645.37206,_db,0.0,unusable
+645.316416,_db,0.0,unusable
+645.275793,_db,0.0,unusable
+645.079384,_db,0.0,unusable
+644.918455,_db,0.0,unusable
+644.897723,_db,0.0,unusable
+644.332406,_db,0.0,unusable
+643.944014,_db,0.0,unusable
+643.260148,_db,0.0,unusable
+643.099886,_db,0.0,unusable
+642.99781,_db,0.0,unusable
+642.989694,_db,0.0,unusable
+642.94934,_db,0.0,unusable
+645.019414,_db,0.0,unusable
+650.439267,_db,0.0,unusable
+650.197687,_db,0.0,unusable
+650.077753,_db,0.0,unusable
+649.63223,_db,0.0,unusable
+649.306964,_db,0.0,unusable
+649.266764,_db,0.0,unusable
+649.074354,_db,0.0,unusable
+648.966612,_db,0.0,unusable
+648.954439,_db,0.0,unusable
+648.327313,_db,0.0,unusable
+647.095059,_db,0.0,unusable
+648.187649,_db,0.0,unusable
+648.182554,_db,0.0,unusable
+648.171169,_db,0.0,unusable
+648.134776,_db,0.0,unusable
+648.061558,_db,0.0,unusable
+647.958577,_db,0.0,unusable
+647.854357,_db,0.0,unusable
+647.616574,_db,0.0,unusable
+647.351415,_db,0.0,unusable
+647.291343,_db,0.0,unusable
+648.3266,_db,0.0,unusable
+666.158219,_db,0.0,unusable
+666.072604,_db,0.0,unusable
+665.948215,_db,0.0,unusable
+665.907008,_db,0.0,unusable
+665.423579,_db,0.0,unusable
+665.301933,_db,0.0,unusable
+665.226234,_db,0.0,unusable
+665.119886,_db,0.0,unusable
+664.957731,_db,0.0,unusable
+657.079393,_db,0.0,unusable
+664.455076,_db,0.0,unusable
+664.061472,_db,0.0,unusable
+664.056104,_db,0.0,unusable
+663.996871,_db,0.0,unusable
+663.932577,_db,0.0,unusable
+663.322649,_db,0.0,unusable
+663.210708,_db,0.0,unusable
+663.089659,_db,0.0,unusable
+663.086521,_db,0.0,unusable
+662.993439,_db,0.0,unusable
+664.949071,_db,0.0,unusable
+669.275814,_db,0.0,unusable
+669.079203,_db,0.0,unusable
+668.949513,_db,0.0,unusable
+668.413404,_db,0.0,unusable
+668.280566,_db,0.0,unusable
+667.953904,_db,0.0,unusable
+667.946088,_db,0.0,unusable
+667.437603,_db,0.0,unusable
+667.373487,_db,0.0,unusable
+667.296939,_db,0.0,unusable
+666.220546,_db,0.0,unusable
+667.075175,_db,0.0,unusable
+666.965153,_db,0.0,unusable
+666.951783,_db,0.0,unusable
+666.951406,_db,0.0,unusable
+666.881558,_db,0.0,unusable
+666.798268,_db,0.0,unusable
+666.483359,_db,0.0,unusable
+666.434119,_db,0.0,unusable
+666.426735,_db,0.0,unusable
+666.338589,_db,0.0,unusable
+667.277502,_db,0.0,unusable
+659.351014,_db,0.0,unusable
+659.291368,_db,0.0,unusable
+659.095072,_db,0.0,unusable
+658.996323,_db,0.0,unusable
+658.876387,_db,0.0,unusable
+658.855764,_db,0.0,unusable
+658.37123,_db,0.0,unusable
+658.35622,_db,0.0,unusable
+662.959854,_db,0.0,unusable
+658.25217,_db,0.0,unusable
+658.058236,_db,0.0,unusable
+657.972582,_db,0.0,unusable
+657.934003,_db,0.0,unusable
+657.372974,_db,0.0,unusable
+657.372628,_db,0.0,unusable
+657.352814,_db,0.0,unusable
+657.352666,_db,0.0,unusable
+657.275744,_db,0.0,unusable
+657.23496,_db,0.0,unusable
+658.348168,_db,0.0,unusable
+662.890574,_db,0.0,unusable
+662.309037,_db,0.0,unusable
+662.198305,_db,0.0,unusable
+662.0457,_db,0.0,unusable
+662.038513,_db,0.0,unusable
+661.979117,_db,0.0,unusable
+661.946307,_db,0.0,unusable
+661.895771,_db,0.0,unusable
+661.403511,_db,0.0,unusable
+661.307318,_db,0.0,unusable
+659.387724,_db,0.0,unusable
+661.074325,_db,0.0,unusable
+660.892449,_db,0.0,unusable
+660.400067,_db,0.0,unusable
+660.387042,_db,0.0,unusable
+660.385009,_db,0.0,unusable
+660.363701,_db,0.0,unusable
+660.289488,_db,0.0,unusable
+660.28897,_db,0.0,unusable
+660.182697,_db,0.0,unusable
+659.967959,_db,0.0,unusable
+661.19498,_db,0.0,unusable
+549.243485,_db,0.0,unusable
+549.0949,_db,0.0,unusable
+549.058348,_db,0.0,unusable
+549.052514,_db,0.0,unusable
+548.959693,_db,0.0,unusable
+548.938744,_db,0.0,unusable
+548.876409,_db,0.0,unusable
+548.837888,_db,0.0,unusable
+604.039366,_db,0.0,unusable
+548.259408,_db,0.0,unusable
+548.223158,_db,0.0,unusable
+548.156444,_db,0.0,unusable
+548.15131,_db,0.0,unusable
+547.843235,_db,0.0,unusable
+547.527852,_db,0.0,unusable
+547.355929,_db,0.0,unusable
+547.263605,_db,0.0,unusable
+547.263436,_db,0.0,unusable
+548.364188,_db,0.0,unusable
+552.187846,_db,0.0,unusable
+552.182719,_db,0.0,unusable
+552.12439,_db,0.0,unusable
+552.077543,_db,0.0,unusable
+551.332619,_db,0.0,unusable
+551.295233,_db,0.0,unusable
+551.259075,_db,0.0,unusable
+551.222692,_db,0.0,unusable
+551.074061,_db,0.0,unusable
+550.906467,_db,0.0,unusable
+550.546871,_db,0.0,unusable
+550.329269,_db,0.0,unusable
+550.329237,_db,0.0,unusable
+550.275136,_db,0.0,unusable
+550.238667,_db,0.0,unusable
+549.487801,_db,0.0,unusable
+551.214922,_db,0.0,unusable
+545.008495,_db,0.0,unusable
+544.988286,_db,0.0,unusable
+544.961679,_db,0.0,unusable
+544.252111,_db,0.0,unusable
+544.228304,_db,0.0,unusable
+544.124791,_db,0.0,unusable
+544.024337,_db,0.0,unusable
+543.935203,_db,0.0,unusable
+543.902514,_db,0.0,unusable
+547.227729,_db,0.0,unusable
+543.248559,_db,0.0,unusable
+543.188611,_db,0.0,unusable
+543.167595,_db,0.0,unusable
+543.150012,_db,0.0,unusable
+543.032618,_db,0.0,unusable
+542.970636,_db,0.0,unusable
+542.957881,_db,0.0,unusable
+542.957266,_db,0.0,unusable
+542.8427,_db,0.0,unusable
+543.248614,_db,0.0,unusable
+547.222152,_db,0.0,unusable
+547.078725,_db,0.0,unusable
+546.858478,_db,0.0,unusable
+546.839747,_db,0.0,unusable
+546.756628,_db,0.0,unusable
+546.259122,_db,0.0,unusable
+546.259039,_db,0.0,unusable
+546.24394,_db,0.0,unusable
+546.238224,_db,0.0,unusable
+545.027728,_db,0.0,unusable
+546.140673,_db,0.0,unusable
+546.05168,_db,0.0,unusable
+546.039968,_db,0.0,unusable
+545.340917,_db,0.0,unusable
+545.319826,_db,0.0,unusable
+545.248362,_db,0.0,unusable
+545.190226,_db,0.0,unusable
+545.183234,_db,0.0,unusable
+545.071818,_db,0.0,unusable
+545.0483,_db,0.0,unusable
+546.207447,_db,0.0,unusable
+560.156521,_db,0.0,unusable
+560.151081,_db,0.0,unusable
+560.019094,_db,0.0,unusable
+559.998163,_db,0.0,unusable
+559.946686,_db,0.0,unusable
+559.939862,_db,0.0,unusable
+559.263945,_db,0.0,unusable
+559.238966,_db,0.0,unusable
+559.227723,_db,0.0,unusable
+552.764578,_db,0.0,unusable
+559.162343,_db,0.0,unusable
+559.153696,_db,0.0,unusable
+559.079103,_db,0.0,unusable
+559.054669,_db,0.0,unusable
+558.944241,_db,0.0,unusable
+558.93526,_db,0.0,unusable
+558.267579,_db,0.0,unusable
+558.243624,_db,0.0,unusable
+558.226941,_db,0.0,unusable
+559.221741,_db,0.0,unusable
+562.317862,_db,0.0,unusable
+562.309499,_db,0.0,unusable
+562.290544,_db,0.0,unusable
+562.274991,_db,0.0,unusable
+562.238493,_db,0.0,unusable
+562.17209,_db,0.0,unusable
+562.166826,_db,0.0,unusable
+562.098045,_db,0.0,unusable
+562.013697,_db,0.0,unusable
+560.223005,_db,0.0,unusable
+561.975025,_db,0.0,unusable
+561.279637,_db,0.0,unusable
+561.243318,_db,0.0,unusable
+561.094623,_db,0.0,unusable
+561.058276,_db,0.0,unusable
+561.001579,_db,0.0,unusable
+560.982233,_db,0.0,unusable
+560.935568,_db,0.0,unusable
+560.259395,_db,0.0,unusable
+561.996308,_db,0.0,unusable
+555.210476,_db,0.0,unusable
+555.188567,_db,0.0,unusable
+555.174308,_db,0.0,unusable
+555.124541,_db,0.0,unusable
+555.06887,_db,0.0,unusable
+555.032512,_db,0.0,unusable
+555.008979,_db,0.0,unusable
+554.972669,_db,0.0,unusable
+554.8842,_db,0.0,unusable
+554.287783,_db,0.0,unusable
+554.19829,_db,0.0,unusable
+553.9122,_db,0.0,unusable
+553.510157,_db,0.0,unusable
+553.309462,_db,0.0,unusable
+553.158866,_db,0.0,unusable
+553.089748,_db,0.0,unusable
+553.053306,_db,0.0,unusable
+553.016973,_db,0.0,unusable
+552.993502,_db,0.0,unusable
+558.20743,_db,0.0,unusable
+558.140576,_db,0.0,unusable
+558.051521,_db,0.0,unusable
+557.97919,_db,0.0,unusable
+557.97461,_db,0.0,unusable
+557.248316,_db,0.0,unusable
+557.204286,_db,0.0,unusable
+557.190359,_db,0.0,unusable
+555.218842,_db,0.0,unusable
+557.094661,_db,0.0,unusable
+557.030786,_db,0.0,unusable
+556.928553,_db,0.0,unusable
+556.220212,_db,0.0,unusable
+556.191836,_db,0.0,unusable
+556.108469,_db,0.0,unusable
+556.040651,_db,0.0,unusable
+556.035128,_db,0.0,unusable
+555.248336,_db,0.0,unusable
+555.232691,_db,0.0,unusable
+557.132458,_db,0.0,unusable
+528.188507,_db,0.0,unusable
+528.183282,_db,0.0,unusable
+528.074099,_db,0.0,unusable
+528.05064,_db,0.0,unusable
+528.0406,_db,0.0,unusable
+527.977798,_db,0.0,unusable
+527.961421,_db,0.0,unusable
+527.934733,_db,0.0,unusable
+527.914998,_db,0.0,unusable
+542.248237,_db,0.0,unusable
+527.201305,_db,0.0,unusable
+527.143181,_db,0.0,unusable
+527.037687,_db,0.0,unusable
+526.977907,_db,0.0,unusable
+526.944033,_db,0.0,unusable
+526.181284,_db,0.0,unusable
+526.172108,_db,0.0,unusable
+526.167094,_db,0.0,unusable
+525.963252,_db,0.0,unusable
+525.950394,_db,0.0,unusable
+527.296201,_db,0.0,unusable
+530.884805,_db,0.0,unusable
+530.86582,_db,0.0,unusable
+530.782681,_db,0.0,unusable
+530.529628,_db,0.0,unusable
+530.236344,_db,0.0,unusable
+530.212534,_db,0.0,unusable
+530.142262,_db,0.0,unusable
+530.056692,_db,0.0,unusable
+530.001686,_db,0.0,unusable
+528.662861,_db,0.0,unusable
+529.912726,_db,0.0,unusable
+529.316806,_db,0.0,unusable
+529.232715,_db,0.0,unusable
+529.232698,_db,0.0,unusable
+529.217189,_db,0.0,unusable
+529.15886,_db,0.0,unusable
+529.053436,_db,0.0,unusable
+529.014483,_db,0.0,unusable
+528.974286,_db,0.0,unusable
+528.746018,_db,0.0,unusable
+529.932343,_db,0.0,unusable
+522.209225,_db,0.0,unusable
+522.207545,_db,0.0,unusable
+522.140658,_db,0.0,unusable
+522.135754,_db,0.0,unusable
+522.125757,_db,0.0,unusable
+522.042354,_db,0.0,unusable
+521.83214,_db,0.0,unusable
+521.248504,_db,0.0,unusable
+525.930516,_db,0.0,unusable
+521.190125,_db,0.0,unusable
+521.063574,_db,0.0,unusable
+520.988671,_db,0.0,unusable
+520.964903,_db,0.0,unusable
+520.943693,_db,0.0,unusable
+520.271133,_db,0.0,unusable
+520.228168,_db,0.0,unusable
+520.191853,_db,0.0,unusable
+520.124989,_db,0.0,unusable
+520.01891,_db,0.0,unusable
+521.206614,_db,0.0,unusable
+525.374538,_db,0.0,unusable
+525.278296,_db,0.0,unusable
+525.207127,_db,0.0,unusable
+525.185329,_db,0.0,unusable
+525.177982,_db,0.0,unusable
+525.058408,_db,0.0,unusable
+525.021965,_db,0.0,unusable
+524.998516,_db,0.0,unusable
+524.954903,_db,0.0,unusable
+524.156351,_db,0.0,unusable
+522.243823,_db,0.0,unusable
+524.057974,_db,0.0,unusable
+524.019184,_db,0.0,unusable
+523.952111,_db,0.0,unusable
+523.227757,_db,0.0,unusable
+523.222228,_db,0.0,unusable
+523.079151,_db,0.0,unusable
+522.980479,_db,0.0,unusable
+522.293161,_db,0.0,unusable
+524.151414,_db,0.0,unusable
+540.182763,_db,0.0,unusable
+540.111508,_db,0.0,unusable
+540.04084,_db,0.0,unusable
+539.993112,_db,0.0,unusable
+539.957744,_db,0.0,unusable
+539.925911,_db,0.0,unusable
+539.143178,_db,0.0,unusable
+539.074118,_db,0.0,unusable
+530.93555,_db,0.0,unusable
+539.014238,_db,0.0,unusable
+538.954338,_db,0.0,unusable
+538.238683,_db,0.0,unusable
+538.172161,_db,0.0,unusable
+538.167094,_db,0.0,unusable
+537.993704,_db,0.0,unusable
+537.24344,_db,0.0,unusable
+537.09488,_db,0.0,unusable
+537.058388,_db,0.0,unusable
+536.998587,_db,0.0,unusable
+539.037626,_db,0.0,unusable
+542.246776,_db,0.0,unusable
+542.230628,_db,0.0,unusable
+542.155387,_db,0.0,unusable
+542.15498,_db,0.0,unusable
+542.068484,_db,0.0,unusable
+542.001039,_db,0.0,unusable
+542.001013,_db,0.0,unusable
+541.937112,_db,0.0,unusable
+541.924287,_db,0.0,unusable
+541.904429,_db,0.0,unusable
+540.187812,_db,0.0,unusable
+541.25193,_db,0.0,unusable
+541.217137,_db,0.0,unusable
+541.173078,_db,0.0,unusable
+541.158658,_db,0.0,unusable
+541.12835,_db,0.0,unusable
+541.053342,_db,0.0,unusable
+540.954819,_db,0.0,unusable
+540.92863,_db,0.0,unusable
+541.252308,_db,0.0,unusable
+533.212126,_db,0.0,unusable
+533.190162,_db,0.0,unusable
+533.174764,_db,0.0,unusable
+533.132662,_db,0.0,unusable
+533.078547,_db,0.0,unusable
+533.063561,_db,0.0,unusable
+532.863988,_db,0.0,unusable
+532.228202,_db,0.0,unusable
+532.191918,_db,0.0,unusable
+536.971052,_db,0.0,unusable
+531.869253,_db,0.0,unusable
+531.532959,_db,0.0,unusable
+531.325554,_db,0.0,unusable
+531.248328,_db,0.0,unusable
+531.232585,_db,0.0,unusable
+531.207883,_db,0.0,unusable
+531.174525,_db,0.0,unusable
+531.159091,_db,0.0,unusable
+531.08429,_db,0.0,unusable
+530.935791,_db,0.0,unusable
+531.930369,_db,0.0,unusable
+536.938645,_db,0.0,unusable
+536.302169,_db,0.0,unusable
+536.293907,_db,0.0,unusable
+536.259469,_db,0.0,unusable
+536.223035,_db,0.0,unusable
+536.156412,_db,0.0,unusable
+536.151371,_db,0.0,unusable
+535.987505,_db,0.0,unusable
+535.986821,_db,0.0,unusable
+535.264173,_db,0.0,unusable
+533.248529,_db,0.0,unusable
+535.079182,_db,0.0,unusable
+534.932655,_db,0.0,unusable
+534.348359,_db,0.0,unusable
+534.243794,_db,0.0,unusable
+534.207425,_db,0.0,unusable
+534.140726,_db,0.0,unusable
+534.135706,_db,0.0,unusable
+534.091111,_db,0.0,unusable
+533.820597,_db,0.0,unusable
+533.345187,_db,0.0,unusable
+535.162366,_db,0.0,unusable
+590.198015,_db,0.0,unusable
+590.187,_db,0.0,unusable
+589.955479,_db,0.0,unusable
+589.926551,_db,0.0,unusable
+589.309677,_db,0.0,unusable
+589.249432,_db,0.0,unusable
+589.216707,_db,0.0,unusable
+589.089438,_db,0.0,unusable
+562.832276,_db,0.0,unusable
+589.037905,_db,0.0,unusable
+588.952096,_db,0.0,unusable
+588.931098,_db,0.0,unusable
+588.830259,_db,0.0,unusable
+588.543132,_db,0.0,unusable
+588.290841,_db,0.0,unusable
+588.254264,_db,0.0,unusable
+588.246317,_db,0.0,unusable
+588.228769,_db,0.0,unusable
+589.053075,_db,0.0,unusable
+593.048109,_db,0.0,unusable
+592.905198,_db,0.0,unusable
+592.891302,_db,0.0,unusable
+592.397187,_db,0.0,unusable
+592.390305,_db,0.0,unusable
+592.285643,_db,0.0,unusable
+592.249516,_db,0.0,unusable
+592.243525,_db,0.0,unusable
+592.21346,_db,0.0,unusable
+592.072173,_db,0.0,unusable
+590.225704,_db,0.0,unusable
+591.888001,_db,0.0,unusable
+591.325428,_db,0.0,unusable
+591.265219,_db,0.0,unusable
+591.210833,_db,0.0,unusable
+591.068833,_db,0.0,unusable
+590.305536,_db,0.0,unusable
+590.269838,_db,0.0,unusable
+590.261985,_db,0.0,unusable
+590.233563,_db,0.0,unusable
+591.980601,_db,0.0,unusable
+585.218275,_db,0.0,unusable
+585.09444,_db,0.0,unusable
+585.058385,_db,0.0,unusable
+585.043033,_db,0.0,unusable
+585.033684,_db,0.0,unusable
+584.967369,_db,0.0,unusable
+584.942091,_db,0.0,unusable
+584.712176,_db,0.0,unusable
+584.251505,_db,0.0,unusable
+588.214489,_db,0.0,unusable
+584.215115,_db,0.0,unusable
+584.157659,_db,0.0,unusable
+584.030713,_db,0.0,unusable
+584.00738,_db,0.0,unusable
+583.995623,_db,0.0,unusable
+583.947436,_db,0.0,unusable
+583.914747,_db,0.0,unusable
+583.900445,_db,0.0,unusable
+583.27961,_db,0.0,unusable
+583.239384,_db,0.0,unusable
+584.222958,_db,0.0,unusable
+588.187658,_db,0.0,unusable
+588.182408,_db,0.0,unusable
+588.113675,_db,0.0,unusable
+587.835415,_db,0.0,unusable
+587.110115,_db,0.0,unusable
+586.965536,_db,0.0,unusable
+586.952584,_db,0.0,unusable
+586.83213,_db,0.0,unusable
+586.29865,_db,0.0,unusable
+586.274937,_db,0.0,unusable
+586.267106,_db,0.0,unusable
+586.237803,_db,0.0,unusable
+586.230633,_db,0.0,unusable
+586.171945,_db,0.0,unusable
+586.046376,_db,0.0,unusable
+586.028862,_db,0.0,unusable
+585.962176,_db,0.0,unusable
+586.495955,_db,0.0,unusable
+602.225633,_db,0.0,unusable
+602.20452,_db,0.0,unusable
+602.197986,_db,0.0,unusable
+602.169814,_db,0.0,unusable
+602.10072,_db,0.0,unusable
+602.041295,_db,0.0,unusable
+602.028502,_db,0.0,unusable
+602.006326,_db,0.0,unusable
+593.080238,_db,0.0,unusable
+601.51899,_db,0.0,unusable
+601.326602,_db,0.0,unusable
+601.290243,_db,0.0,unusable
+601.089254,_db,0.0,unusable
+601.03794,_db,0.0,unusable
+600.506709,_db,0.0,unusable
+600.363619,_db,0.0,unusable
+600.314283,_db,0.0,unusable
+600.254326,_db,0.0,unusable
+600.247857,_db,0.0,unusable
+601.94761,_db,0.0,unusable
+603.918284,_db,0.0,unusable
+603.809397,_db,0.0,unusable
+603.590386,_db,0.0,unusable
+603.505367,_db,0.0,unusable
+603.325306,_db,0.0,unusable
+603.26514,_db,0.0,unusable
+603.228946,_db,0.0,unusable
+603.208209,_db,0.0,unusable
+603.207827,_db,0.0,unusable
+602.269909,_db,0.0,unusable
+603.143411,_db,0.0,unusable
+603.104944,_db,0.0,unusable
+603.068538,_db,0.0,unusable
+603.053527,_db,0.0,unusable
+603.043909,_db,0.0,unusable
+603.009532,_db,0.0,unusable
+602.909212,_db,0.0,unusable
+602.806083,_db,0.0,unusable
+603.174229,_db,0.0,unusable
+596.273862,_db,0.0,unusable
+596.223129,_db,0.0,unusable
+596.156212,_db,0.0,unusable
+596.007273,_db,0.0,unusable
+595.219899,_db,0.0,unusable
+595.063738,_db,0.0,unusable
+595.011029,_db,0.0,unusable
+594.884434,_db,0.0,unusable
+594.376684,_db,0.0,unusable
+600.218105,_db,0.0,unusable
+594.007821,_db,0.0,unusable
+593.996316,_db,0.0,unusable
+593.924655,_db,0.0,unusable
+593.886033,_db,0.0,unusable
+593.280886,_db,0.0,unusable
+593.247147,_db,0.0,unusable
+593.245111,_db,0.0,unusable
+593.226967,_db,0.0,unusable
+593.124896,_db,0.0,unusable
+593.084627,_db,0.0,unusable
+594.264894,_db,0.0,unusable
+600.188126,_db,0.0,unusable
+600.182605,_db,0.0,unusable
+599.96962,_db,0.0,unusable
+599.503319,_db,0.0,unusable
+599.31099,_db,0.0,unusable
+599.214893,_db,0.0,unusable
+599.110517,_db,0.0,unusable
+599.022355,_db,0.0,unusable
+598.960108,_db,0.0,unusable
+598.936826,_db,0.0,unusable
+596.355918,_db,0.0,unusable
+598.348015,_db,0.0,unusable
+598.238725,_db,0.0,unusable
+598.172178,_db,0.0,unusable
+598.166769,_db,0.0,unusable
+597.295285,_db,0.0,unusable
+597.235567,_db,0.0,unusable
+597.094504,_db,0.0,unusable
+597.002231,_db,0.0,unusable
+596.921125,_db,0.0,unusable
+596.900236,_db,0.0,unusable
+598.892105,_db,0.0,unusable
+569.343,_db,0.0,unusable
+569.32127,_db,0.0,unusable
+569.263988,_db,0.0,unusable
+569.247891,_db,0.0,unusable
+569.204199,_db,0.0,unusable
+569.188121,_db,0.0,unusable
+569.132422,_db,0.0,unusable
+569.100677,_db,0.0,unusable
+583.219943,_db,0.0,unusable
+568.24302,_db,0.0,unusable
+568.191802,_db,0.0,unusable
+568.098045,_db,0.0,unusable
+568.012402,_db,0.0,unusable
+567.973507,_db,0.0,unusable
+567.32497,_db,0.0,unusable
+567.267774,_db,0.0,unusable
+567.267588,_db,0.0,unusable
+567.211113,_db,0.0,unusable
+567.188551,_db,0.0,unusable
+568.738311,_db,0.0,unusable
+572.283059,_db,0.0,unusable
+572.223001,_db,0.0,unusable
+572.156345,_db,0.0,unusable
+572.151047,_db,0.0,unusable
+572.035394,_db,0.0,unusable
+572.02588,_db,0.0,unusable
+572.025651,_db,0.0,unusable
+571.259979,_db,0.0,unusable
+571.227665,_db,0.0,unusable
+571.078942,_db,0.0,unusable
+569.886146,_db,0.0,unusable
+570.978734,_db,0.0,unusable
+570.858224,_db,0.0,unusable
+570.837217,_db,0.0,unusable
+570.522034,_db,0.0,unusable
+570.27821,_db,0.0,unusable
+570.256711,_db,0.0,unusable
+570.207442,_db,0.0,unusable
+570.140461,_db,0.0,unusable
+570.019721,_db,0.0,unusable
+569.988344,_db,0.0,unusable
+571.00372,_db,0.0,unusable
+564.993407,_db,0.0,unusable
+564.939557,_db,0.0,unusable
+564.933511,_db,0.0,unusable
+564.850226,_db,0.0,unusable
+564.290577,_db,0.0,unusable
+564.25452,_db,0.0,unusable
+564.217738,_db,0.0,unusable
+564.187822,_db,0.0,unusable
+567.174321,_db,0.0,unusable
+564.077405,_db,0.0,unusable
+564.050382,_db,0.0,unusable
+564.006926,_db,0.0,unusable
+563.891763,_db,0.0,unusable
+563.539743,_db,0.0,unusable
+563.258969,_db,0.0,unusable
+563.233943,_db,0.0,unusable
+563.222536,_db,0.0,unusable
+563.101708,_db,0.0,unusable
+563.073937,_db,0.0,unusable
+564.182497,_db,0.0,unusable
+567.068739,_db,0.0,unusable
+567.024361,_db,0.0,unusable
+567.009089,_db,0.0,unusable
+566.970155,_db,0.0,unusable
+566.93163,_db,0.0,unusable
+566.897685,_db,0.0,unusable
+566.880326,_db,0.0,unusable
+566.25518,_db,0.0,unusable
+566.233534,_db,0.0,unusable
+565.053254,_db,0.0,unusable
+566.198166,_db,0.0,unusable
+566.148152,_db,0.0,unusable
+566.029635,_db,0.0,unusable
+565.936835,_db,0.0,unusable
+565.90287,_db,0.0,unusable
+565.870162,_db,0.0,unusable
+565.274433,_db,0.0,unusable
+565.158625,_db,0.0,unusable
+565.089621,_db,0.0,unusable
+566.212343,_db,0.0,unusable
+580.91367,_db,0.0,unusable
+580.538036,_db,0.0,unusable
+580.361023,_db,0.0,unusable
+580.249257,_db,0.0,unusable
+580.220138,_db,0.0,unusable
+580.212438,_db,0.0,unusable
+580.202673,_db,0.0,unusable
+580.185456,_db,0.0,unusable
+580.108709,_db,0.0,unusable
+572.332286,_db,0.0,unusable
+580.024265,_db,0.0,unusable
+579.534654,_db,0.0,unusable
+579.525713,_db,0.0,unusable
+579.174506,_db,0.0,unusable
+579.075909,_db,0.0,unusable
+578.910491,_db,0.0,unusable
+578.381595,_db,0.0,unusable
+578.374633,_db,0.0,unusable
+580.072141,_db,0.0,unusable
+583.004029,_db,0.0,unusable
+582.956193,_db,0.0,unusable
+582.901892,_db,0.0,unusable
+582.235902,_db,0.0,unusable
+582.207502,_db,0.0,unusable
+582.184241,_db,0.0,unusable
+582.141489,_db,0.0,unusable
+582.088553,_db,0.0,unusable
+582.051454,_db,0.0,unusable
+582.022317,_db,0.0,unusable
+580.926296,_db,0.0,unusable
+581.936218,_db,0.0,unusable
+581.929569,_db,0.0,unusable
+581.916525,_db,0.0,unusable
+581.902377,_db,0.0,unusable
+581.204641,_db,0.0,unusable
+581.189971,_db,0.0,unusable
+581.084525,_db,0.0,unusable
+581.048122,_db,0.0,unusable
+581.027636,_db,0.0,unusable
+580.988333,_db,0.0,unusable
+582.0195,_db,0.0,unusable
+575.91409,_db,0.0,unusable
+575.503374,_db,0.0,unusable
+575.294752,_db,0.0,unusable
+575.294691,_db,0.0,unusable
+575.148571,_db,0.0,unusable
+575.073927,_db,0.0,unusable
+575.058668,_db,0.0,unusable
+575.049308,_db,0.0,unusable
+575.041219,_db,0.0,unusable
+578.269925,_db,0.0,unusable
+574.275087,_db,0.0,unusable
+574.238628,_db,0.0,unusable
+574.172112,_db,0.0,unusable
+574.166747,_db,0.0,unusable
+574.110958,_db,0.0,unusable
+574.046396,_db,0.0,unusable
+573.952675,_db,0.0,unusable
+573.335738,_db,0.0,unusable
+573.279553,_db,0.0,unusable
+573.094664,_db,0.0,unusable
+574.290425,_db,0.0,unusable
+578.233575,_db,0.0,unusable
+578.204542,_db,0.0,unusable
+578.198336,_db,0.0,unusable
+578.092596,_db,0.0,unusable
+578.06123,_db,0.0,unusable
+577.949353,_db,0.0,unusable
+577.371115,_db,0.0,unusable
+577.329037,_db,0.0,unusable
+577.274395,_db,0.0,unusable
+577.249486,_db,0.0,unusable
+575.99306,_db,0.0,unusable
+577.08962,_db,0.0,unusable
+577.05315,_db,0.0,unusable
+576.993465,_db,0.0,unusable
+576.571403,_db,0.0,unusable
+576.36599,_db,0.0,unusable
+576.29061,_db,0.0,unusable
+576.269754,_db,0.0,unusable
+576.254274,_db,0.0,unusable
+576.188114,_db,0.0,unusable
+576.182537,_db,0.0,unusable
+577.164286,_db,0.0,unusable
+846.54127,PC 38:5,17.5,
+770.565568,PE 36:0,17.5,
+534.295716,LPC 16:0,14.5,
+806.647903,HexCer 40:1;O2,14.5,
+776.616349,PC 35:0,14.5,
+784.525292,PE 36:1,14.5,
+808.665916,HexCer 40:0;O2,14.0,
+782.650382,HexCer 40:2;O2,14.0,
+819.658633,PC 37:1 PE 40:1,14.0,
+856.546598,PS 38:1,11.5,
+758.509703,PC 31:0 PE 34:0,11.5,
+837.624206,SM 41:2;O2,8.5,
+820.662439,HexCer 41:1;O2,8.0,
+822.642878,HexCer 40:1;O3_db,7.0,
+896.481529,PS 42:9,4.5,
+875.557866,PS 42:9,4.0,
+475.222207,LPA 18:1,4.0,
+516.285576,LPC O-16:2,4.0,
+773.509366,PA 40:5_db,2.0,
+853.635943,Hex2Cer 32:0_db,2.0,
+810.586304,PG 36:1 OH_db,2.0,
+829.495804,PGP 34:1_db,1.0,
+828.470904,_db,0.5,
+577.519015,_db,0.5,
+528.293433,_db,0.5,
+918.666462,_db,0.5,
+823.407624,_db,0.5,
+943.529197,_db,0.5,
+777.423214,_db,0.5,
+932.577673,_db,0.5,
+563.26533,_db,0.5,
+850.538056,_db,0.5,
+557.263993,_db,0.5,
+961.439639,_db,0.5,
+833.586204,_db,0.5,
+465.02201,_db,0.5,
+495.167513,_db,0.5,
+541.151901,_db,0.5,
+495.064686,_db,0.5,
+956.622471,_db,0.5,
+635.539708,_db,0.5,
+857.638147,_db,0.5,
+899.481872,_db,0.5,
+571.279698,_db,0.5,
+853.494869,_db,0.5,
+586.249666,_db,0.5,
+484.32454,_db,0.5,
+551.503471,_db,0.5,
+945.465707,_db,0.5,
+414.336667,_db,0.5,
+475.305487,_db,0.5,
+527.070494,_db,0.5,
+499.181384,_db,0.5,
+831.513002,_db,0.5,
+875.239925,_db,0.5,
+967.529349,_db,0.5,
+939.497854,_db,0.5,
+879.633397,_db,0.5,
+915.455361,_db,0.5,
+500.298449,_db,0.5,
+714.455086,PI-Cer t28:0_db_db,0.0,
+762.454854,PI-Cer t30:1_db_db,0.0,
+768.502393,PI-Cer t32:1_db_db,0.0,
+766.486571,PI-Cer t32:2_db_db,0.0,
+742.486383,PI-Cer t30:0_db_db,0.0,
+778.454917,_db,0.0,
+802.563662,_db,0.0,
+804.515046,_db,0.0,
+975.636441,_db,0.0,
+771.569137,_db,0.0,
+804.47046,_db,0.0,
+805.454487,_db,0.0,
+769.457022,_db,0.0,
+769.505732,_db,0.0,
+775.535186,_db,0.0,
+803.438946,_db,0.0,
+773.391558,_db,0.0,
+774.52325,_db,0.0,
+774.53202,_db,0.0,
+791.518069,_db,0.0,
+791.539407,_db,0.0,
+801.550688,_db,0.0,
+789.619799,_db,0.0,
+969.683412,_db,0.0,
+790.622952,_db,0.0,
+791.29985,_db,0.0,
+793.674658,_db,0.0,
+797.669637,_db,0.0,
+797.469134,_db,0.0,
+797.554182,_db,0.0,
+796.542028,_db,0.0,
+795.549464,_db,0.0,
+968.566117,_db,0.0,
+795.453438,_db,0.0,
+795.538852,_db,0.0,
+973.621698,_db,0.0,
+782.622616,_db,0.0,
+788.6722,_db,0.0,
+783.570482,_db,0.0,
+783.653913,_db,0.0,
+784.644849,_db,0.0,
+802.426309,_db,0.0,
+779.438933,_db,0.0,
+779.481146,_db,0.0,
+801.66429,_db,0.0,
+787.458276,_db,0.0,
+966.549947,_db,0.0,
+972.674662,_db,0.0,
+786.45523,_db,0.0,
+801.423165,_db,0.0,
+721.557033,_db,0.0,
+723.250004,_db,0.0,
+729.562192,_db,0.0,
+730.593809,_db,0.0,
+733.557283,_db,0.0,
+732.60964,_db,0.0,
+731.578073,_db,0.0,
+992.562677,_db,0.0,
+726.39552,_db,0.0,
+703.546486,_db,0.0,
+707.043438,_db,0.0,
+705.298532,_db,0.0,
+713.490002,_db,0.0,
+714.220543,_db,0.0,
+715.223928,_db,0.0,
+715.458386,_db,0.0,
+708.472888,_db,0.0,
+716.453162,_db,0.0,
+710.488476,_db,0.0,
+709.059171,_db,0.0,
+712.495236,_db,0.0,
+712.43957,_db,0.0,
+755.538412,_db,0.0,
+984.653781,_db,0.0,
+805.518365,_db,0.0,
+758.557904,_db,0.0,
+757.593542,_db,0.0,
+757.554738,_db,0.0,
+752.575721,_db,0.0,
+753.423493,_db,0.0,
+753.561919,_db,0.0,
+985.678513,_db,0.0,
+985.657242,_db,0.0,
+764.607332,_db,0.0,
+765.423243,_db,0.0,
+765.525664,_db,0.0,
+767.518128,_db,0.0,
+763.486467,_db,0.0,
+759.572824,_db,0.0,
+759.609288,_db,0.0,
+763.449173,_db,0.0,
+982.545137,_db,0.0,
+982.638105,_db,0.0,
+739.060614,_db,0.0,
+739.223948,_db,0.0,
+739.407725,_db,0.0,
+989.652027,_db,0.0,
+741.502248,_db,0.0,
+741.473883,_db,0.0,
+735.572826,_db,0.0,
+738.491676,_db,0.0,
+736.575988,_db,0.0,
+749.392149,_db,0.0,
+742.251924,_db,0.0,
+987.693721,_db,0.0,
+867.622378,_db,0.0,
+868.569865,_db,0.0,
+868.64549,_db,0.0,
+869.628494,_db,0.0,
+869.573471,_db,0.0,
+869.667624,_db,0.0,
+864.688463,_db,0.0,
+867.47436,_db,0.0,
+863.620411,_db,0.0,
+863.684886,_db,0.0,
+865.63613,_db,0.0,
+865.459295,_db,0.0,
+928.56982,_db,0.0,
+871.588864,_db,0.0,
+871.544362,_db,0.0,
+870.585434,_db,0.0,
+873.500063,_db,0.0,
+929.69072,_db,0.0,
+872.496705,_db,0.0,
+852.632467,_db,0.0,
+852.6596,_db,0.0,
+853.672315,_db,0.0,
+854.487069,_db,0.0,
+852.470849,_db,0.0,
+850.51228,_db,0.0,
+850.616879,_db,0.0,
+851.677278,_db,0.0,
+851.65657,_db,0.0,
+935.495828,_db,0.0,
+857.585988,_db,0.0,
+859.54427,_db,0.0,
+859.734467,_db,0.0,
+856.57033,_db,0.0,
+933.408172,_db,0.0,
+933.563514,_db,0.0,
+856.501787,_db,0.0,
+856.283457,_db,0.0,
+904.569536,_db,0.0,
+899.575593,_db,0.0,
+899.620932,_db,0.0,
+919.573861,_db,0.0,
+919.588626,_db,0.0,
+918.570362,_db,0.0,
+918.585161,_db,0.0,
+916.486755,_db,0.0,
+910.616795,_db,0.0,
+909.653981,_db,0.0,
+911.669633,_db,0.0,
+912.574752,_db,0.0,
+883.588804,_db,0.0,
+925.635987,_db,0.0,
+887.740673,_db,0.0,
+882.585393,_db,0.0,
+881.622298,_db,0.0,
+926.638902,_db,0.0,
+881.667177,_db,0.0,
+895.590334,_db,0.0,
+895.505828,_db,0.0,
+924.536114,_db,0.0,
+894.585525,_db,0.0,
+897.604502,_db,0.0,
+923.621299,_db,0.0,
+896.60107,_db,0.0,
+821.609794,_db,0.0,
+816.541869,_db,0.0,
+958.638281,_db,0.0,
+817.437536,_db,0.0,
+817.651446,_db,0.0,
+957.533105,_db,0.0,
+950.576456,_db,0.0,
+825.443439,_db,0.0,
+950.704128,_db,0.0,
+827.420945,_db,0.0,
+825.641097,_db,0.0,
+826.455432,_db,0.0,
+950.552139,_db,0.0,
+825.662384,_db,0.0,
+824.601324,_db,0.0,
+824.439438,_db,0.0,
+823.646324,_db,0.0,
+823.625449,_db,0.0,
+809.162735,_db,0.0,
+958.659076,_db,0.0,
+964.531341,_db,0.0,
+805.554502,_db,0.0,
+808.465174,_db,0.0,
+814.687735,_db,0.0,
+959.641628,_db,0.0,
+959.662513,_db,0.0,
+814.486611,_db,0.0,
+813.700894,_db,0.0,
+815.635723,_db,0.0,
+815.489759,_db,0.0,
+959.50085,_db,0.0,
+811.68519,_db,0.0,
+811.602249,_db,0.0,
+962.442998,_db,0.0,
+810.653983,_db,0.0,
+813.522585,_db,0.0,
+961.511511,_db,0.0,
+840.614377,_db,0.0,
+841.636119,_db,0.0,
+842.431917,_db,0.0,
+842.450062,_db,0.0,
+843.453273,_db,0.0,
+941.751447,_db,0.0,
+944.175775,_db,0.0,
+837.661619,_db,0.0,
+840.434091,_db,0.0,
+839.620232,_db,0.0,
+943.486789,_db,0.0,
+847.625381,_db,0.0,
+847.508129,_db,0.0,
+850.454854,_db,0.0,
+849.640967,_db,0.0,
+937.43953,_db,0.0,
+848.745042,_db,0.0,
+845.674091,_db,0.0,
+845.468937,_db,0.0,
+846.523272,_db,0.0,
+846.463083,_db,0.0,
+948.558349,_db,0.0,
+948.572861,_db,0.0,
+829.695754,_db,0.0,
+947.605453,_db,0.0,
+947.701403,_db,0.0,
+948.173259,_db,0.0,
+831.534,_db,0.0,
+948.505417,_db,0.0,
+828.442517,_db,0.0,
+827.50276,_db,0.0,
+827.479675,_db,0.0,
+827.458725,_db,0.0,
+829.554838,_db,0.0,
+829.518426,_db,0.0,
+829.473945,_db,0.0,
+944.682052,_db,0.0,
+835.682648,_db,0.0,
+835.604029,_db,0.0,
+837.604691,_db,0.0,
+836.669618,_db,0.0,
+946.698013,_db,0.0,
+833.510737,_db,0.0,
+834.589222,_db,0.0,
+462.222641,_db,0.0,
+459.227261,_db,0.0,
+465.258659,_db,0.0,
+453.177924,_db,0.0,
+1184.486618,_db,0.0,
+1195.619676,_db,0.0,
+415.339978,_db,0.0,
+503.334582,_db,0.0,
+503.293823,_db,0.0,
+505.367623,_db,0.0,
+501.058291,_db,0.0,
+498.186489,_db,0.0,
+513.178133,_db,0.0,
+519.267892,_db,0.0,
+517.288547,_db,0.0,
+517.151909,_db,0.0,
+507.363879,_db,0.0,
+506.248895,_db,0.0,
+512.223007,_db,0.0,
+479.193618,_db,0.0,
+479.172578,_db,0.0,
+469.152013,_db,0.0,
+471.151632,_db,0.0,
+470.155254,_db,0.0,
+492.189914,_db,0.0,
+481.209214,_db,0.0,
+484.96725,_db,0.0,
+1054.541671,_db,0.0,
+1063.571492,_db,0.0,
+1048.565112,_db,0.0,
+1082.590315,_db,0.0,
+1066.056106,_db,0.0,
+1003.667804,_db,0.0,
+1001.652219,_db,0.0,
+1004.670867,_db,0.0,
+1019.558031,_db,0.0,
+1145.102251,_db,0.0,
+1138.597323,_db,0.0,
+1101.550917,_db,0.0,
+1104.695858,_db,0.0,
+1088.03827,_db,0.0,
+1099.49221,_db,0.0,
+1098.564273,_db,0.0,
+630.353061,_db,0.0,
+630.199493,_db,0.0,
+628.602656,_db,0.0,
+628.537947,_db,0.0,
+628.337437,_db,0.0,
+631.53675,_db,0.0,
+630.618257,_db,0.0,
+624.506669,_db,0.0,
+623.503285,_db,0.0,
+625.518909,_db,0.0,
+632.633929,_db,0.0,
+634.58498,_db,0.0,
+609.079368,_db,0.0,
+604.602675,_db,0.0,
+604.537992,_db,0.0,
+607.508404,_db,0.0,
+607.239177,_db,0.0,
+606.553625,_db,0.0,
+614.321754,_db,0.0,
+617.586684,_db,0.0,
+616.337405,_db,0.0,
+615.570959,_db,0.0,
+677.144235,_db,0.0,
+676.140873,_db,0.0,
+693.064337,_db,0.0,
+682.457099,_db,0.0,
+696.444625,_db,0.0,
+695.517919,_db,0.0,
+652.537955,_db,0.0,
+651.534596,_db,0.0,
+656.368733,_db,0.0,
+654.522016,_db,0.0,
+650.52226,_db,0.0,
+644.368678,_db,0.0,
+658.38434,_db,0.0,
+548.540189,_db,0.0,
+547.299167,_db,0.0,
+552.506817,_db,0.0,
+549.278422,_db,0.0,
+550.350429,_db,0.0,
+549.54353,_db,0.0,
+542.30079,_db,0.0,
+546.524551,_db,0.0,
+558.235904,_db,0.0,
+562.2307,_db,0.0,
+561.524114,_db,0.0,
+558.218352,_db,0.0,
+554.309068,_db,0.0,
+557.223514,_db,0.0,
+557.163545,_db,0.0,
+530.204654,_db,0.0,
+521.289836,_db,0.0,
+523.358866,_db,0.0,
+523.198803,_db,0.0,
+540.125011,_db,0.0,
+541.238375,_db,0.0,
+540.225526,_db,0.0,
+589.555394,_db,0.0,
+588.306155,_db,0.0,
+590.558772,_db,0.0,
+587.53973,_db,0.0,
+587.233949,_db,0.0,
+585.254759,_db,0.0,
+585.295302,_db,0.0,
+602.244803,_db,0.0,
+603.534652,_db,0.0,
+602.58702,_db,0.0,
+602.502079,_db,0.0,
+569.283315,_db,0.0,
+565.026343,_db,0.0,
+566.24682,_db,0.0,
+565.252016,_db,0.0,
+579.207926,_db,0.0,
+578.522346,_db,0.0,
